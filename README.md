@@ -174,6 +174,8 @@ The backend server configuration can be modified in `src/backend/server.js`.
 1. **Java Bridge Initialization Failure**
    - Ensure Java is installed and properly configured
    - Check that the MPXJ and POI JAR files are in the correct location
+   - https://github.com/joniles/mpxj
+   - https://poi.apache.org/download.html
 
 2. **File Upload Errors**
    - Verify that the file is a valid .mpp or .mpx format
