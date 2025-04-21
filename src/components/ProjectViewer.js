@@ -40,7 +40,16 @@ const ProjectViewer = ({ projectData }) => {
                 <td>{task.finish}</td>
                 <td>{task.duration}</td>
                 <td>{task.percentComplete}%</td>
-                <td>{task.predecessors}</td>
+                <td>
+                  {Array.isArray(task.predecessors) 
+                    ? task.predecessors.map((pred, i) => (
+                        <div key={i}>
+                          {pred.taskName} ({pred.type}{pred.lag !== "0d" ? ", " + pred.lag : ""})
+                          {i < task.predecessors.length - 1 ? ', ' : ''}
+                        </div>
+                      ))
+                    : ''}
+                </td>
               </tr>
             ))}
           </tbody>
