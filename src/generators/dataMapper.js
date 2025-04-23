@@ -2,11 +2,9 @@ const _ = require('lodash');
 
 /**
  * Convert project JSON into simple table arrays suitable for Power BI ingestion.
- * This does NOT attempt to replicate full PBIX data model; it simply prepares
- * flat arrays for Tasks, Resources, Assignments and Properties that can later
- * be turned into model tables.
+ * Accepts projectData that may be streaming iterators to avoid high memory usage.
  *
- * @param {object} projectData Validated project JSON
+ * @param {object} projectData
  * @returns {{tasks: object[], resources: object[], assignments: object[], properties: object[]}}
  */
 function mapProjectData(projectData) {
@@ -14,34 +12,46 @@ function mapProjectData(projectData) {
     throw new Error('No project data provided');
   }
 
-  const tasks = (projectData.tasks || []).map((t) => ({
-    id: t.id,
-    uniqueID: t.uniqueID,
-    name: t.name,
-    outlineNumber: t.outlineNumber,
-    outlineLevel: t.outlineLevel,
-    start: t.start,
-    finish: t.finish,
-    duration: t.duration,
-    work: t.work,
-    percentComplete: t.percentComplete,
-  }));
+  const tasks = [];
+  for (const t of projectData.tasks) {
+    tasks.push({
+      id: t.id,
+      uniqueID: t.uniqueID,
+      name: t.name,
+      outlineNumber: t.outlineNumber,
+      outlineLevel: t.outlineLevel,
+      start: t.start,
+      finish: t.finish,
+      duration: t.duration,
+      work: t.work,
+      percentComplete: t.percentComplete,
+      summary: t.summary,
+      type: t.type,
+      constraint: t.constraint,
+      predecessors: t.predecessors,
+    });
+  }
 
-  const resources = (projectData.resources || []).map((r) => ({
-    id: r.id,
-    uniqueID: r.uniqueID,
-    name: r.name,
-    type: r.type,
-    maxUnits: r.maxUnits,
-  }));
+  const resources = [];
+  for (const r of projectData.resources) {
+    resources.push({
+      id: r.id,
+      uniqueID: r.uniqueID,
+      name: r.name,
+      type: r.type,
+      maxUnits: r.maxUnits,
+    });
+  }
 
-  const assignments = (projectData.assignments || []).map((a) => ({
-    taskID: a.taskID,
-    resourceID: a.resourceID,
-    units: a.units,
-  }));
+  const assignments = [];
+  for (const a of projectData.assignments) {
+    assignments.push({
+      taskID: a.taskID,
+      resourceID: a.resourceID,
+      units: a.units,
+    });
+  }
 
-  // Flatten properties into key/value rows for easier consumption
   const propertiesArray = [];
   if (projectData.properties && typeof projectData.properties === 'object') {
     for (const [key, value] of Object.entries(projectData.properties)) {
