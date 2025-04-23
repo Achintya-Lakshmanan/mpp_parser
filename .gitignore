@@ -27,3 +27,7 @@ tasks.json
 tasks/ 
 # Template generator build
 /dist
+# Runtime data folders
+/input/
+/output/
+/assets/
