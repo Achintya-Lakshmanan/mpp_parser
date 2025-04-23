@@ -680,6 +680,28 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
   }
 });
 
+// Add mock mode env support
+const MOCK_MODE = process.env.MOCK_MODE === 'true';
+
+// Quick route to retrieve mock scenario list
+if (MOCK_MODE) {
+  // eslint-disable-next-line global-require
+  const { listScenarios, loadMock } = require('../mock/mockLoader');
+
+  app.get('/api/mock-scenarios', (req, res) => {
+    res.json({ scenarios: listScenarios() });
+  });
+
+  app.get('/api/mock/:name', (req, res) => {
+    try {
+      const data = loadMock(req.params.name);
+      res.json(data);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+  });
+}
+
 // --- Global error handler ---
 // Must be after all other middlewares/routes
 /* eslint-disable no-unused-vars */

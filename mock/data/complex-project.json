@@ -9,8 +9,7 @@
     "resourceCount": 5,
     "assignmentCount": 150
   },
-  "tasks": [
-    // Only outline first 5 tasks for brevity; tooling tests can expand programmatically
+  "tasks": [ 
     { "id": 1, "uniqueID": 1, "name": "Phase 1", "outlineNumber": "1", "outlineLevel": 1, "start": "2025-03-01", "finish": "2025-03-15", "duration": "10d", "work": 80, "percentComplete": 10 },
     { "id": 2, "uniqueID": 2, "name": "Task 1.1", "outlineNumber": "1.1", "outlineLevel": 2, "start": "2025-03-01", "finish": "2025-03-05", "duration": "4d", "work": 32, "percentComplete": 0 },
     { "id": 3, "uniqueID": 3, "name": "Task 1.2", "outlineNumber": "1.2", "outlineLevel": 2, "start": "2025-03-05", "finish": "2025-03-10", "duration": "4d", "work": 32, "percentComplete": 0 },
