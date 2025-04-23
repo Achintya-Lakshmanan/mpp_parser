@@ -1,0 +1,84 @@
+{
+  "pages": [
+    {
+      "name": "Tasks",
+      "slicers": [
+        {
+          "id": "taskStatusSlicer",
+          "type": "Dropdown",
+          "table": "tasks",
+          "field": "status"
+        },
+        {
+          "id": "taskStartDateSlicer",
+          "type": "DateBetween",
+          "table": "tasks",
+          "field": "start"
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "incompleteTasksBookmark",
+          "name": "Incomplete Tasks",
+          "filters": [
+            {
+              "table": "tasks",
+              "field": "percentComplete",
+              "operator": "<",
+              "value": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "slicers": [
+        {
+          "id": "resourceTypeSlicer",
+          "type": "Dropdown",
+          "table": "resources",
+          "field": "type"
+        }
+      ],
+      "bookmarks": []
+    },
+    {
+      "name": "Assignments",
+      "slicers": [
+        {
+          "id": "assignmentDateSlicer",
+          "type": "DateBetween",
+          "table": "assignments",
+          "field": "start"
+        }
+      ],
+      "bookmarks": []
+    },
+    {
+      "name": "Project Overview",
+      "slicers": [
+        {
+          "id": "overviewDateSlicer",
+          "type": "DateBetween",
+          "table": "tasks",
+          "field": "start"
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "highUtilBookmark",
+          "name": "High Resource Utilisation",
+          "filters": [
+            {
+              "table": "assignments",
+              "field": "units",
+              "operator": ">",
+              "value": 0.8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

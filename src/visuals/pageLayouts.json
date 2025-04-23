@@ -1,0 +1,36 @@
+{
+  "grid": {
+    "columns": 24,
+    "rowHeight": 40
+  },
+  "pages": [
+    {
+      "name": "Tasks",
+      "layout": [
+        { "visualId": "tasksTable", "x": 0, "y": 0, "w": 12, "h": 10 },
+        { "visualId": "tasksGantt", "x": 0, "y": 10, "w": 24, "h": 15 }
+      ]
+    },
+    {
+      "name": "Resources",
+      "layout": [
+        { "visualId": "resourceTable", "x": 0, "y": 0, "w": 14, "h": 15 },
+        { "visualId": "resourcePie", "x": 14, "y": 0, "w": 10, "h": 15 }
+      ]
+    },
+    {
+      "name": "Assignments",
+      "layout": [
+        { "visualId": "assignmentMatrix", "x": 0, "y": 0, "w": 24, "h": 20 }
+      ]
+    },
+    {
+      "name": "Project Overview",
+      "layout": [
+        { "visualId": "projectSummary", "x": 0, "y": 0, "w": 6, "h": 8 },
+        { "visualId": "tasksByStatus", "x": 6, "y": 0, "w": 10, "h": 15 },
+        { "visualId": "resourceUtilization", "x": 16, "y": 0, "w": 8, "h": 15 }
+      ]
+    }
+  ]
+}
