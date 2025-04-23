@@ -19,4 +19,30 @@ module.exports = [
     name: 'Total Units',
     expression: 'SUM(assignments[units])',
   },
+  // --- Added standard project management KPIs ---
+  {
+    table: 'tasks',
+    name: 'Total Duration Days',
+    expression: 'SUM(tasks[duration])',
+  },
+  {
+    table: 'tasks',
+    name: 'Project Completion %',
+    expression: 'DIVIDE(SUM(tasks[percentComplete]), COUNTROWS(tasks))',
+  },
+  {
+    table: 'resources',
+    name: 'Total Resource Cost',
+    expression: 'SUM(resources[cost])',
+  },
+  {
+    table: 'assignments',
+    name: 'Average Resource Utilization',
+    expression: 'AVERAGE(assignments[units])',
+  },
+  {
+    table: 'tasks',
+    name: 'Cost per Task',
+    expression: 'DIVIDE(SUM(resources[cost]), COUNTROWS(tasks))',
+  },
 ];
