@@ -32,6 +32,13 @@ async function generatePbit(projectData, outputPath) {
   // DAX measures
   zip.file('dax/measures.json', JSON.stringify(daxDefs));
 
+  // --- Minimal Power BI template structure placeholders ---
+  // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema and empty layout
+  zip.file('DataModelSchema', JSON.stringify({ tables: Object.keys(mapped) }));
+
+  // Empty report layout JSON placeholder – real templates contain visual config
+  zip.folder('Report').file('Layout', JSON.stringify({ sections: [] }));
+
   zip.file('README.txt', 'Auto‑generated minimal Power BI template. Replace with real model.');
 
   const buffer = await zip.generateAsync({ type: 'nodebuffer' });
