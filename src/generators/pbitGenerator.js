@@ -43,13 +43,22 @@ async function generatePbit(projectData, outputPath) {
       '<?xml version="1.0" encoding="UTF-8"?>\n' +
       '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>');
 
-    // Load external SecurityBindings file content instead of empty
-    const secBindingsPath = path.join(__dirname, 'SecurityBindings');
+    // Load SecurityBindings from baseTemplate.pbit if available
+    let securityBuf = null;
     try {
-      const secBuf = await fs.readFile(secBindingsPath);
-      zip.file('SecurityBindings', secBuf, { compression: 'STORE' });
-    } catch (e) {
-      // fallback to empty if file missing
+      const bpPath = path.join(__dirname, 'baseTemplate.pbit');
+      const bpData = await fs.readFile(bpPath);
+      const bpZip = await JSZip.loadAsync(bpData);
+      const secFile = bpZip.file('SecurityBindings');
+      if (secFile) {
+        securityBuf = await secFile.async('nodebuffer');
+      }
+    } catch (_) {
+      // ignore – we'll fallback below
+    }
+    if (securityBuf) {
+      zip.file('SecurityBindings', securityBuf, { compression: 'STORE' });
+    } else {
       zip.file('SecurityBindings', '');
     }
 
