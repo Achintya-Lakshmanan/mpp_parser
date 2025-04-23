@@ -682,6 +682,8 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
 
 // Add mock mode env support
 const MOCK_MODE = process.env.MOCK_MODE === 'true';
+const delay = require('../mock/delay');
+const mockDelayMs = parseInt(process.env.MOCK_DELAY_MS || '0', 10);
 
 // Quick route to retrieve mock scenario list
 if (MOCK_MODE) {
@@ -692,9 +694,10 @@ if (MOCK_MODE) {
     res.json({ scenarios: listScenarios() });
   });
 
-  app.get('/api/mock/:name', (req, res) => {
+  app.get('/api/mock/:name', async (req, res) => {
     try {
       const data = loadMock(req.params.name);
+      if (mockDelayMs) await delay(mockDelayMs);
       res.json(data);
     } catch (err) {
       res.status(404).json({ error: err.message });
