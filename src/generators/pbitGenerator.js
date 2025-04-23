@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const JSZip = require('jszip');
 const { mapProjectData } = require('./dataMapper');
+const daxDefs = require('./daxDefinitions');
 
 /**
  * Generate a basic .pbit (Power BI template) file from project data JSON.
@@ -27,6 +28,9 @@ async function generatePbit(projectData, outputPath) {
     { fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
   ];
   zip.file('relationships.json', JSON.stringify(relationships));
+
+  // DAX measures
+  zip.file('dax/measures.json', JSON.stringify(daxDefs));
 
   zip.file('README.txt', 'Auto‑generated minimal Power BI template. Replace with real model.');
 
