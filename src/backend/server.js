@@ -525,6 +525,17 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
     // Parse the project file using Java
     const projectData = await parseWithJava(req.file.path);
 
+    // NEW: Persist project data as JSON for generator usage
+    try {
+      const generatorDir = path.join(__dirname, '..', 'generator');
+      await fs.promises.mkdir(generatorDir, { recursive: true });
+      const outputPath = path.join(generatorDir, 'project-data.json');
+      await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
+      console.log(`Saved project data JSON to ${outputPath}`);
+    } catch (writeErr) {
+      console.error('Failed to write project data JSON:', writeErr);
+    }
+
     // Clean up the uploaded file
     fs.unlinkSync(req.file.path);
 
