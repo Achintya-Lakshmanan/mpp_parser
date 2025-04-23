@@ -18,6 +18,31 @@ async function generatePbit(projectData, outputPath) {
     validateMappedData(mapped);
 
     const zip = new JSZip();
+    // Mandatory parts for a valid PBIT/PBIX container
+    // Version file tells Power BI which schema version the package conforms to.
+    // Use a Desktop build number that is known to be accepted. Any non‑empty string works, but
+    // sticking to an authentic-looking version avoids false positives during validation.
+    zip.file('Version', '14.0.177.0');
+    // Richer [Content_Types].xml
+    zip.file('[Content_Types].xml',
+      '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n' +
+      '  <Default Extension="json" ContentType="application/json"/>\n' +
+      '  <Default Extension="txt" ContentType="text/plain"/>\n' +
+      '  <Default Extension="xml" ContentType="application/xml"/>\n' +
+      '  <Override PartName="/DataModelSchema" ContentType="application/json"/>\n' +
+      '  <Override PartName="/Report/Layout" ContentType="application/json"/>\n' +
+      '  <Override PartName="/Version" ContentType="text/plain"/>\n' +
+      '</Types>');
+
+    // Root relationships file (required by OPC spec)
+    zip.folder('_rels').file('.rels',
+      '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>');
+
+    // Empty SecurityBindings to avoid missing part error in some Desktop builds
+    zip.file('SecurityBindings', '');
+
     // Simple tables JSON
     zip.file('tables/tasks.json', JSON.stringify(mapped.tasks));
     zip.file('tables/resources.json', JSON.stringify(mapped.resources));
