@@ -8,8 +8,13 @@ console.log('Power BI Template Generator bootstrap');
 // Placeholder implementation – will iterate through JSON files and create .pbit
 
 const args = process.argv.slice(2);
+// Quick health/status check for CLI usage
+if (args[0] === '--status') {
+  console.log('Power BI generator CLI is operational.');
+  process.exit(0);
+}
 if (args.length === 0) {
-  console.error('Usage: node dist/generator/index.js <input-json> [output-pbit]');
+  console.error('Usage: node dist/generator/index.js <input-json> [output-pbit]\n       node dist/generator/index.js --status');
   process.exit(1);
 }
 
