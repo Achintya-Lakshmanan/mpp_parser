@@ -324,10 +324,14 @@ function buildDataModelSchema(mapped, measuresArr) {
       partitions: [
         {
           name: 'Partition',
-          mode: 'Import',
+          mode: 'import',
           source: {
-            type: 'm',
-            expression: `let\n    Source = Json.Document(File.Contents(\"tables/${tblName}.json\")),\n    #\"Converted to Table\" = Table.FromRecords(Source)\n in\n    #\"Converted to Table\"`,
+            type: 'calculated',
+            expression: `let
+                Source = Json.Document(File.Contents("tables/${tblName}.json")),
+                #"Converted to Table" = Table.FromRecords(Source)
+             in
+                #"Converted to Table"`,
           },
         },
       ],
@@ -335,7 +339,7 @@ function buildDataModelSchema(mapped, measuresArr) {
   }
   return {
     name: crypto.randomUUID(),
-    compatibilityLevel: 1550,
+    compatibilityLevel: 1565,
     model: {
       culture: 'en-US',
       tables,
