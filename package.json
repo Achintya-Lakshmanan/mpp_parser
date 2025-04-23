@@ -10,6 +10,7 @@
     "test-server": "node src/backend/test-server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "test": "concurrently \"npm run start\" \"npm run test-server\"",
+    "test:mock": "node src/mock/runMockTests.js",
     "gen:build": "tsc -p tsconfig.json",
     "gen:start": "node dist/generator/index.js",
     "gen:dev": "ts-node-dev --respawn --transpile-only src/generator/index.ts",
