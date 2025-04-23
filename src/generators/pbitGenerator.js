@@ -4,6 +4,7 @@ const JSZip = require('jszip');
 const crypto = require('crypto');
 const { mapProjectData } = require('./dataMapper');
 const daxDefs = require('./daxDefinitions');
+const visualDefs = require('../visuals');
 
 // Helper to create UTF‑16LE buffers without BOM
 const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
@@ -82,6 +83,8 @@ async function generatePbit(projectData, outputPath) {
 
     // DAX measures
     zip.file('dax/measures.json', toUtf16(daxDefs));
+    // Visual, layout, filter definitions
+    zip.file('report/visuals.json', toUtf16(visualDefs));
 
     // --- Minimal Power BI template structure placeholders ---
     // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema matching Desktop expectations
