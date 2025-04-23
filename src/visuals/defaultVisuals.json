@@ -1,0 +1,94 @@
+{
+  "pages": [
+    {
+      "name": "Tasks",
+      "visuals": [
+        {
+          "id": "tasksTable",
+          "type": "Table",
+          "table": "tasks",
+          "fields": ["id", "name", "start", "finish", "percentComplete", "resourceNames"]
+        },
+        {
+          "id": "tasksGantt",
+          "type": "Gantt",
+          "table": "tasks",
+          "fields": {
+            "task": "name",
+            "startDate": "start",
+            "endDate": "finish",
+            "percentComplete": "percentComplete",
+            "resource": "resourceNames"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "visuals": [
+        {
+          "id": "resourceTable",
+          "type": "Table",
+          "table": "resources",
+          "fields": ["id", "name", "type", "maxUnits", "cost"]
+        },
+        {
+          "id": "resourcePie",
+          "type": "DonutChart",
+          "table": "resources",
+          "fields": {
+            "legend": "type",
+            "values": "count"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assignments",
+      "visuals": [
+        {
+          "id": "assignmentMatrix",
+          "type": "Matrix",
+          "table": "assignments",
+          "fields": {
+            "rows": "resourceName",
+            "columns": "taskName",
+            "values": "work"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Project Overview",
+      "visuals": [
+        {
+          "id": "projectSummary",
+          "type": "Card",
+          "table": "tasks",
+          "fields": {
+            "value": "totalWork"
+          }
+        },
+        {
+          "id": "tasksByStatus",
+          "type": "ClusteredBarChart",
+          "table": "tasks",
+          "fields": {
+            "axis": "status",
+            "values": "count"
+          }
+        },
+        {
+          "id": "resourceUtilization",
+          "type": "StackedColumnChart",
+          "table": "assignments",
+          "fields": {
+            "axis": "resourceName",
+            "legend": "taskName",
+            "values": "work"
+          }
+        }
+      ]
+    }
+  ]
+}
