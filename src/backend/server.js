@@ -684,6 +684,16 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
 // Must be after all other middlewares/routes
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, _next) => {
+  // Handle Multer-specific errors first
+  if (err.name === 'MulterError') {
+    logger.warn('Multer upload error:', err);
+    let msg = err.message;
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      msg = `File exceeds limit of ${MAX_JSON_SIZE / (1024 * 1024)} MB`;
+    }
+    return res.status(400).json({ error: msg });
+  }
+
   logger.error('Unhandled error:', err);
   res.status(err.status || 500).json({
     error: err.publicMessage || 'Internal Server Error',
@@ -691,6 +701,11 @@ app.use((err, req, res, _next) => {
   });
 });
 /* eslint-enable no-unused-vars */
+
+// 404 handler for any unmatched route
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
 
 // Start the server
 app.listen(port, () => {
