@@ -1,0 +1,267 @@
+Feedback Type:
+Frown (Error)
+
+Timestamp:
+2025-04-23T10:50:51.2732832Z
+
+Local Time:
+2025-04-23T16:20:51.2732832+05:30
+
+Session ID:
+482f010d-84e8-454d-a433-44632da5b7c7
+
+Release:
+March 2025
+
+Product Version:
+2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788 (x64)
+
+Error Message:
+'C:\Users\PriyadarshiniPalanis\OneDrive - Lumel Technologies Inc\Downloads\simple-project 3.pbit' can't be opened. Either the file is encrypted or corrupted.
+
+Stack Trace:
+   at Microsoft.PowerBI.Client.Windows.Storage.FileOpenError.HandleError(IWindowService windowService, LocalizedString title)
+   at Microsoft.PowerBI.Client.Windows.Services.TemplateManager.<TryImportTemplateAsync>d__19.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PowerBI.Client.Windows.Commands.ApplicationCommands.DataImportCommands.<ImportTemplate>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.<HandleAwaitableAsyncExceptions>d__1.MoveNext()
+
+Stack Trace Message:
+'C:\Users\PriyadarshiniPalanis\OneDrive - Lumel Technologies Inc\Downloads\simple-project 3.pbit' can't be opened. Either the file is encrypted or corrupted.
+
+Invocation Stack Trace:
+   at Microsoft.Mashup.Host.Document.ExceptionExtensions.GetCurrentInvocationStackTrace()
+   at Microsoft.Mashup.Client.UI.Shared.FeedbackErrorInfo..ctor(String message, Exception exception, Nullable`1 stackTraceInfo, String messageDetail)
+   at Microsoft.PowerBI.Client.PowerBIUnexpectedExceptionHandler.HandleKnownExceptions(Exception e)
+   at Microsoft.PowerBI.Client.PowerBIUnexpectedExceptionHandler.HandleException(Exception e)
+   at Microsoft.PowerBI.Client.Windows.Utilities.PowerBIFormUnexpectedExceptionHandler.HandleException(Exception e)
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.<HandleAwaitableAsyncExceptions>d__1.MoveNext()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.HandleAwaitableAsyncExceptions(IExceptionHandler exceptionHandler, Func`1 asyncFunc)
+   at Microsoft.PowerBI.Client.Windows.Commands.CompositeCommand`1.Execute(ICommand command, Object parameter)
+   at Microsoft.Practices.Prism.Commands.CompositeCommand.Execute(Object parameter)
+   at Microsoft.PowerBI.Client.Windows.Commands.CompositeCommand`1.Execute(T parameter)
+   at Microsoft.PowerBI.Client.Program.<>c__DisplayClass7_2.<<RunApplicationLegacy>b__5>d.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunCallback(ContextCallback callback, Object state, Task& currentTask)
+   at System.Threading.Tasks.Task.FinishContinuations()
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.PowerBI.Client.SignInService.<CompleteSignIn>d__9.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunCallback(ContextCallback callback, Object state, Task& currentTask)
+   at System.Threading.Tasks.Task.FinishContinuations()
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.PowerBI.Client.SignInService.<SignInSilent>d__10.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Delegate.DynamicInvokeImpl(Object[] args)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackDo(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackHelper(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Windows.Forms.Control.InvokeMarshaledCallback(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at Microsoft.Mashup.Client.UI.Shared.WindowManager.ShowModal[T](T dialog, Func`1 showModalFunction)
+   at Microsoft.PowerBI.Client.Program.<>c__DisplayClass7_0.<RunApplicationLegacy>b__0()
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.<>c__DisplayClass3_0.<HandleExceptionsWithNestedTasks>b__0()
+   at Microsoft.Mashup.Host.Document.ExceptionHandlerExtensions.HandleExceptions(IExceptionHandler exceptionHandler, Action action)
+   at Microsoft.PowerBI.Client.Program.RunApplicationLegacy(String[] args, IPowerBIRootTrace trace)
+   at Microsoft.PowerBI.Client.Program.Main(String[] args)
+
+
+InnerException0.Stack Trace Message:
+'㐱〮ㄮ㜷〮' is not a valid .pbix file version number.
+
+InnerException0.Stack Trace:
+   at Microsoft.PowerBI.Packaging.PowerBIPackager.ValidateVersion(String versionContents, Version& pbixFileVersion)
+   at Microsoft.PowerBI.Packaging.PowerBIPackager.Validate(Package storagePackage, Version& pbixFileVersion)
+   at Microsoft.PowerBI.Packaging.PowerBIPackager.Open(Stream storageStream, Boolean& requiresConversionToReportLayout, Byte[]& securityBindings, Version& pbixFileVersion, Boolean skipValidation)
+   at Microsoft.PowerBI.Client.Windows.Services.PowerBIPackagingService.<Open>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PowerBI.Client.Windows.Services.TemplateManager.<TryImportTemplateAsync>d__19.MoveNext()
+
+InnerException0.Invocation Stack Trace:
+   at Microsoft.Mashup.Host.Document.ExceptionExtensions.GetCurrentInvocationStackTrace()
+   at Microsoft.Mashup.Client.UI.Shared.FeedbackErrorInfo.GetFeedbackValuesFromException(Exception e, String prefix)
+   at Microsoft.Mashup.Client.UI.Shared.FeedbackErrorInfo.GetFeedbackValuesFromInnerExceptions(Exception e, Int32 depth)
+   at Microsoft.Mashup.Client.UI.Shared.FeedbackErrorInfo.CreateAdditionalErrorInfo(Exception e)
+   at Microsoft.Mashup.Client.UI.Shared.FeedbackErrorInfo..ctor(String message, Exception exception, Nullable`1 stackTraceInfo, String messageDetail)
+   at Microsoft.PowerBI.Client.PowerBIUnexpectedExceptionHandler.HandleKnownExceptions(Exception e)
+   at Microsoft.PowerBI.Client.PowerBIUnexpectedExceptionHandler.HandleException(Exception e)
+   at Microsoft.PowerBI.Client.Windows.Utilities.PowerBIFormUnexpectedExceptionHandler.HandleException(Exception e)
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.<HandleAwaitableAsyncExceptions>d__1.MoveNext()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.HandleAwaitableAsyncExceptions(IExceptionHandler exceptionHandler, Func`1 asyncFunc)
+   at Microsoft.PowerBI.Client.Windows.Commands.CompositeCommand`1.Execute(ICommand command, Object parameter)
+   at Microsoft.Practices.Prism.Commands.CompositeCommand.Execute(Object parameter)
+   at Microsoft.PowerBI.Client.Windows.Commands.CompositeCommand`1.Execute(T parameter)
+   at Microsoft.PowerBI.Client.Program.<>c__DisplayClass7_2.<<RunApplicationLegacy>b__5>d.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunCallback(ContextCallback callback, Object state, Task& currentTask)
+   at System.Threading.Tasks.Task.FinishContinuations()
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.PowerBI.Client.SignInService.<CompleteSignIn>d__9.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunCallback(ContextCallback callback, Object state, Task& currentTask)
+   at System.Threading.Tasks.Task.FinishContinuations()
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.PowerBI.Client.SignInService.<SignInSilent>d__10.MoveNext()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.MoveNextRunner.Run()
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Delegate.DynamicInvokeImpl(Object[] args)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackDo(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackHelper(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Windows.Forms.Control.InvokeMarshaledCallback(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at Microsoft.Mashup.Client.UI.Shared.WindowManager.ShowModal[T](T dialog, Func`1 showModalFunction)
+   at Microsoft.PowerBI.Client.Program.<>c__DisplayClass7_0.<RunApplicationLegacy>b__0()
+   at Microsoft.PowerBI.Client.Windows.IExceptionHandlerExtensions.<>c__DisplayClass3_0.<HandleExceptionsWithNestedTasks>b__0()
+   at Microsoft.Mashup.Host.Document.ExceptionHandlerExtensions.HandleExceptions(IExceptionHandler exceptionHandler, Action action)
+   at Microsoft.PowerBI.Client.Program.RunApplicationLegacy(String[] args, IPowerBIRootTrace trace)
+   at Microsoft.PowerBI.Client.Program.Main(String[] args)
+
+
+OS Version:
+Microsoft Windows NT 10.0.26100.0 (x64 en-US)
+
+CLR Version:
+4.8 or later [Release Number = 533320]
+
+Peak Virtual Memory:
+70.3 GB
+
+Private Memory:
+591 MB
+
+Peak Working Set:
+889 MB
+
+IE Version:
+11.1882.26100.0
+
+User ID:
+114c5adc-dd6d-46b9-a5ee-7b8bd412fce6
+
+Workbook Package Info:
+1* - en-IN, Query Groups: 0, fastCombine: Disabled, runBackgroundAnalysis: False.
+
+Telemetry Enabled:
+True
+
+Snapshot Trace Logs:
+C:\Users\PriyadarshiniPalanis\AppData\Local\Microsoft\Power BI Desktop\FrownSnapShot10ac24dc-3aa3-4d4d-9997-e5f4c49eae65.zip
+
+Model Default Mode:
+Empty
+
+Model Version:
+PowerBI_V1
+
+Performance Trace Logs:
+C:\Users\PriyadarshiniPalanis\AppData\Local\Microsoft\Power BI Desktop\PerformanceTraces.zip
+
+Enabled Preview Features:
+PBI_snowflakeAdbcVersionEnabled
+PBI_shapeMapVisualEnabled
+PBI_enhancedTooltips
+PBI_sparklines
+PBI_scorecardVisual
+PBI_fieldParametersSuperSwitch
+PBI_setLabelOnExportPdf
+PBI_oneDriveSave
+PBI_oneDriveShare
+PBI_odspSaveBackgroundUpload
+PBI_useModernPublishDialogs
+PBI_gitIntegration
+PBI_tmdlInDataset
+PBI_directLakeRemoteModeling
+PBI_newCard
+PBI_buttonSlicerAuthoring
+PBI_advancedSlicerTypeList
+PBI_textSlicer
+PBI_EimLessElevatedUser
+PBI_mobileAutoReportLayout
+PBI_daxInlineCopilot
+PBI_aiNarrativesVisual
+PBI_generateMeasureDescriptionsButton
+PBI_visualCalculationsAuthoring
+PBI_desktopReportAuthoringCopilot
+
+Disabled Preview Features:
+PBI_SpanishLinguisticsEnabled
+PBI_qnaLiveConnect
+PBI_metricsArtifactsOnDesktop
+PBI_b2bExternalDatasetSharing
+PBI_onObject
+PBI_modernOfficeFilePicker
+PBI_publishDialogsSupportSubfolders
+PBI_enhancedReportFormat
+PBI_directLakeOnOneLake
+PBI_qnaImproveLsdlCopilot
+PBI_tmdlViewToggle
+PBI_UserInstalledVerticaODBCDriver
+
+Disabled DirectQuery Options:
+TreatHanaAsRelationalSource
+
+Cloud:
+GlobalCloud
+
+PowerBINonFatalError_ErrorCode:
+InvalidReportFile
+
+DPI Scale:
+150%
+
+Supported Services:
+Power BI
+
+Formulas:
+
+
+section Section1;
