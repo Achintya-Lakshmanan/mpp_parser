@@ -2,5 +2,6 @@
   "port": 3001,
   "uploadDir": "uploads",
   "generatorDir": "src/generator",
-  "logLevel": "debug"
+  "logLevel": "debug",
+  "maxJsonSize": 10485760
 }

@@ -2,5 +2,6 @@
   "port": 8080,
   "uploadDir": "uploads",
   "generatorDir": "dist/generator",
-  "logLevel": "info"
+  "logLevel": "info",
+  "maxJsonSize": 10485760
 }

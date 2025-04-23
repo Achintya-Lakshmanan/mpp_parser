@@ -40,6 +40,7 @@ const port = process.env.PORT || config.port || 3001;
 // Directories derived from configuration (fallbacks included)
 const UPLOAD_DIR_NAME = config.uploadDir || 'uploads';
 const GENERATOR_DIR_REL = config.generatorDir || path.join('src', 'generator');
+const MAX_JSON_SIZE = config.maxJsonSize || 10 * 1024 * 1024; // 10 MB
 
 // At the top of the file, after require statements
 const execPromise = promisify(exec);
@@ -107,7 +108,7 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
-// Configure multer for file uploads
+// Configure multer for MPP/MPX uploads (legacy)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadDir = path.join(__dirname, UPLOAD_DIR_NAME);
@@ -127,6 +128,19 @@ const upload = multer({
     const ext = path.extname(file.originalname).toLowerCase();
     if (ext !== '.mpp' && ext !== '.mpx') {
       return cb(new Error('Only .mpp and .mpx files are allowed'));
+    }
+    cb(null, true);
+  },
+});
+
+// Multer instance for JSON uploads
+const jsonUpload = multer({
+  storage,
+  limits: { fileSize: MAX_JSON_SIZE },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext !== '.json') {
+      return cb(new Error('Only .json files are allowed'));
     }
     cb(null, true);
   },
@@ -604,6 +618,48 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
   } catch (error) {
     logger.error('Error processing file:', error);
     res.status(500).json({ error: error.message || 'Failed to process file' });
+  }
+});
+
+// Endpoint to upload and validate project JSON directly
+app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No JSON file uploaded' });
+    }
+
+    // Read and parse uploaded JSON
+    let projectData;
+    try {
+      const fileContent = await fs.promises.readFile(req.file.path, 'utf-8');
+      projectData = JSON.parse(fileContent);
+    } catch (parseErr) {
+      logger.error('Failed to parse uploaded JSON:', parseErr);
+      return res.status(400).json({ error: 'Invalid JSON file' });
+    }
+
+    // Validate against schema if available
+    if (validateProject) {
+      const valid = validateProject(projectData);
+      if (!valid) {
+        logger.warn('Uploaded JSON failed schema validation');
+        return res.status(400).json({ error: 'JSON does not match schema', details: validateProject.errors });
+      }
+    }
+
+    // Save validated JSON for generator usage
+    const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
+    await fs.promises.mkdir(generatorDir, { recursive: true });
+    const outputPath = path.join(generatorDir, 'project-data.json');
+    await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
+    logger.info(`Saved validated JSON to ${outputPath}`);
+
+    // Clean up temp upload
+    fs.unlinkSync(req.file.path);
+
+    res.json({ message: 'JSON uploaded and validated successfully' });
+  } catch (err) {
+    next(err);
   }
 });
 
