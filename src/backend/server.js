@@ -7,9 +7,30 @@ const { promisify } = require('util');
 const { exec } = require('child_process');
 const os = require('os');
 const https = require('https');
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3001;
+
+// Load environment-specific configuration
+const ENV = process.env.NODE_ENV || 'dev';
+let config = {};
+try {
+  const configPath = path.join(__dirname, '..', '..', 'config', `config.${ENV}.json`);
+  if (fs.existsSync(configPath)) {
+    config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    console.log(`Loaded configuration for ${ENV} from ${configPath}`);
+  } else {
+    console.warn(`Config file not found for ENV=${ENV} at ${configPath}. Using defaults.`);
+  }
+} catch (err) {
+  console.error('Failed to load configuration:', err);
+}
+
+const port = process.env.PORT || config.port || 3001;
+
+// Directories derived from configuration (fallbacks included)
+const UPLOAD_DIR_NAME = config.uploadDir || 'uploads';
+const GENERATOR_DIR_REL = config.generatorDir || path.join('src', 'generator');
 
 // At the top of the file, after require statements
 const execPromise = promisify(exec);
@@ -59,7 +80,7 @@ app.use(cors());
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, 'uploads');
+    const uploadDir = path.join(__dirname, UPLOAD_DIR_NAME);
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -527,7 +548,7 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
 
     // NEW: Persist project data as JSON for generator usage
     try {
-      const generatorDir = path.join(__dirname, '..', 'generator');
+      const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
       await fs.promises.mkdir(generatorDir, { recursive: true });
       const outputPath = path.join(generatorDir, 'project-data.json');
       await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');

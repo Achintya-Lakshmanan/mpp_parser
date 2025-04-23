@@ -1,0 +1,6 @@
+{
+  "port": 8080,
+  "uploadDir": "uploads",
+  "generatorDir": "dist/generator",
+  "logLevel": "info"
+}
