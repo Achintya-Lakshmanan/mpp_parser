@@ -16,7 +16,7 @@ const FileUploader = ({ onFileUpload }) => {
         setFile(null);
         return;
       }
-      
+
       setFile(selectedFile);
       setError('');
     }
@@ -24,28 +24,28 @@ const FileUploader = ({ onFileUpload }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!file) {
       setError('Please select a file first');
       return;
     }
-    
+
     setLoading(true);
     setError('');
-    
+
     try {
       const formData = new FormData();
       formData.append('projectFile', file);
-      
+
       const response = await fetch('http://localhost:3001/api/parse', {
         method: 'POST',
         body: formData,
       });
-      
+
       if (!response.ok) {
         throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
       }
-      
+
       const data = await response.json();
       onFileUpload(data);
     } catch (err) {
@@ -60,24 +60,15 @@ const FileUploader = ({ onFileUpload }) => {
       <h2>Upload Microsoft Project File</h2>
       <form onSubmit={handleSubmit}>
         <div className="file-input-container">
-          <input
-            type="file"
-            onChange={handleFileChange}
-            accept=".mpp,.mpx"
-            id="file-input"
-          />
+          <input type="file" onChange={handleFileChange} accept=".mpp,.mpx" id="file-input" />
           <label htmlFor="file-input" className="file-input-label">
             {file ? file.name : 'Choose a file'}
           </label>
         </div>
-        
+
         {error && <div className="error-message">{error}</div>}
-        
-        <button 
-          type="submit" 
-          className="upload-button"
-          disabled={!file || loading}
-        >
+
+        <button type="submit" className="upload-button" disabled={!file || loading}>
           {loading ? 'Processing...' : 'Parse Project File'}
         </button>
       </form>

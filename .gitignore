@@ -25,3 +25,5 @@ node_modules/
 # Task files
 tasks.json
 tasks/ 
+# Template generator build
+/dist

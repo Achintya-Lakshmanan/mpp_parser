@@ -16,15 +16,13 @@ const App = () => {
         <h1>Microsoft Project Parser</h1>
         <p>Upload and parse MPP and MPX files</p>
       </header>
-      
+
       <main>
         <FileUploader onFileUpload={handleFileUpload} />
-        
-        {projectData && (
-          <ProjectViewer projectData={projectData} />
-        )}
+
+        {projectData && <ProjectViewer projectData={projectData} />}
       </main>
-      
+
       <footer>
         <p>Powered by MPXJ and React</p>
       </footer>

@@ -19,35 +19,37 @@ const downloadFile = (url, dest) => {
   return new Promise((resolve, reject) => {
     console.log(`Downloading ${url}`);
     const file = fs.createWriteStream(dest);
-    
-    https.get(url, (response) => {
-      if (response.statusCode === 404) {
-        file.close();
-        fs.unlink(dest, () => {});
-        console.error(`File not found (404): ${url}`);
-        reject(new Error(`File not found (404): ${url}`));
-        return;
-      }
-      
-      if (response.statusCode !== 200) {
-        file.close();
-        fs.unlink(dest, () => {});
-        reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
-        return;
-      }
-      
-      response.pipe(file);
-      file.on('finish', () => {
-        file.close(() => {
-          console.log(`Successfully downloaded ${url}`);
-          resolve(dest);
+
+    https
+      .get(url, (response) => {
+        if (response.statusCode === 404) {
+          file.close();
+          fs.unlink(dest, () => {});
+          console.error(`File not found (404): ${url}`);
+          reject(new Error(`File not found (404): ${url}`));
+          return;
+        }
+
+        if (response.statusCode !== 200) {
+          file.close();
+          fs.unlink(dest, () => {});
+          reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
+          return;
+        }
+
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close(() => {
+            console.log(`Successfully downloaded ${url}`);
+            resolve(dest);
+          });
         });
+      })
+      .on('error', (err) => {
+        fs.unlink(dest, () => {});
+        console.error(`Error downloading ${url}: ${err.message}`);
+        reject(err);
       });
-    }).on('error', (err) => {
-      fs.unlink(dest, () => {});
-      console.error(`Error downloading ${url}: ${err.message}`);
-      reject(err);
-    });
   });
 };
 
@@ -65,10 +67,10 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
-  }
+  },
 });
 
-const upload = multer({ 
+const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
@@ -76,7 +78,7 @@ const upload = multer({
       return cb(new Error('Only .mpp and .mpx files are allowed'));
     }
     cb(null, true);
-  }
+  },
 });
 
 // Execute Java command to parse the MPP/MPX file
@@ -86,23 +88,23 @@ const parseWithJava = async (filePath) => {
       // Create a temp directory for Java output
       const tempDir = path.join(os.tmpdir(), `mpp_parser_${Date.now()}`);
       await fs.promises.mkdir(tempDir, { recursive: true });
-      
+
       // Create lib directory for JAR files
       const libDir = path.join(tempDir, 'lib');
       await fs.promises.mkdir(libDir, { recursive: true });
-      
+
       try {
         // 1. Copy required JAR files from local lib directory to temp lib directory
         const sourceLibDir = path.join(__dirname, 'lib');
         console.log('Copying JAR files from:', sourceLibDir);
-        
+
         // Get list of JAR files in the source directory
-        const jarFiles = fs.readdirSync(sourceLibDir).filter(file => file.endsWith('.jar'));
-        
+        const jarFiles = fs.readdirSync(sourceLibDir).filter((file) => file.endsWith('.jar'));
+
         if (jarFiles.length === 0) {
           throw new Error('No JAR files found in the lib directory');
         }
-        
+
         // Copy each JAR file to the temp lib directory
         for (const jarFile of jarFiles) {
           const sourcePath = path.join(sourceLibDir, jarFile);
@@ -110,9 +112,9 @@ const parseWithJava = async (filePath) => {
           await fs.promises.copyFile(sourcePath, destPath);
           console.log(`Copied ${jarFile}`);
         }
-        
+
         console.log('JAR files copied successfully');
-        
+
         // 2. Download additional required dependencies
         console.log('Downloading additional dependencies...');
         const dependencyUrls = [
@@ -123,45 +125,52 @@ const parseWithJava = async (filePath) => {
           'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar',
           'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar',
           'https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar',
-          'https://repo1.maven.org/maven2/com/rtfparserkit/rtfparserkit/1.10.0/rtfparserkit-1.10.0.jar'
+          'https://repo1.maven.org/maven2/com/rtfparserkit/rtfparserkit/1.10.0/rtfparserkit-1.10.0.jar',
         ];
-        
+
         // Download each dependency, but continue if some fail
-        const downloadResults = await Promise.allSettled(dependencyUrls.map(url => {
-          const fileName = url.substring(url.lastIndexOf('/') + 1);
-          const filePath = path.join(libDir, fileName);
-          return downloadFile(url, filePath);
-        }));
-        
+        const downloadResults = await Promise.allSettled(
+          dependencyUrls.map((url) => {
+            const fileName = url.substring(url.lastIndexOf('/') + 1);
+            const filePath = path.join(libDir, fileName);
+            return downloadFile(url, filePath);
+          })
+        );
+
         // Check results and report failed downloads
         const failedDownloads = downloadResults
-          .filter(result => result.status === 'rejected')
-          .map((result, index) => ({ 
-            url: dependencyUrls[index], 
-            reason: result.reason.message 
+          .filter((result) => result.status === 'rejected')
+          .map((result, index) => ({
+            url: dependencyUrls[index],
+            reason: result.reason.message,
           }));
-          
+
         if (failedDownloads.length > 0) {
           console.warn(`${failedDownloads.length} dependencies failed to download:`);
-          failedDownloads.forEach(failure => console.warn(`- ${failure.url}: ${failure.reason}`));
-          
+          failedDownloads.forEach((failure) => console.warn(`- ${failure.url}: ${failure.reason}`));
+
           // Only throw if all critical Jackson libraries failed
-          const allJacksonFailed = ['jackson-core', 'jackson-databind', 'jackson-annotations']
-            .every(lib => failedDownloads.some(failure => failure.url.includes(lib)));
-            
+          const allJacksonFailed = [
+            'jackson-core',
+            'jackson-databind',
+            'jackson-annotations',
+          ].every((lib) => failedDownloads.some((failure) => failure.url.includes(lib)));
+
           if (allJacksonFailed) {
             throw new Error('Failed to download critical Jackson libraries');
           }
         }
-        
-        console.log(`Downloaded ${downloadResults.filter(r => r.status === 'fulfilled').length} dependencies successfully`);
+
+        console.log(
+          `Downloaded ${downloadResults.filter((r) => r.status === 'fulfilled').length} dependencies successfully`
+        );
       } catch (err) {
         console.error('Error preparing JAR files:', err);
         await fs.promises.rm(tempDir, { recursive: true, force: true });
         reject(new Error(`Error preparing JAR files: ${err.message}`));
         return;
       }
-      
+
       // Write Java code to a temporary file
       const javaFilePath = path.join(tempDir, 'MPPParser.java');
       const javaCode = `
@@ -389,18 +398,18 @@ public class MPPParser {
 }
 `;
       await fs.promises.writeFile(javaFilePath, javaCode);
-      
+
       // Define paths for JAR files
       const mpxjJarPath = path.join(__dirname, 'lib', 'mpxj.jar');
       const poiJarPath = path.join(__dirname, 'lib', 'poi.jar');
-      
+
       // Define classpath separator based on platform
       const pathSeparator = process.platform === 'win32' ? ';' : ':';
-      
+
       // Compile the Java code
       console.log('Compiling Java code...');
       const classpath = `"${mpxjJarPath}${pathSeparator}${poiJarPath}${pathSeparator}${libDir}/*"`;
-      
+
       try {
         await execPromise(`javac -cp ${classpath} ${javaFilePath}`);
       } catch (err) {
@@ -409,56 +418,63 @@ public class MPPParser {
         reject(new Error(`Error compiling Java code: ${err.message}`));
         return;
       }
-      
+
       // Execute the Java program
       try {
-        const { stdout, stderr } = await execPromise(`java -cp ${classpath}${pathSeparator}"${tempDir}" MPPParser "${filePath}"`);
-        
+        const { stdout, stderr } = await execPromise(
+          `java -cp ${classpath}${pathSeparator}"${tempDir}" MPPParser "${filePath}"`
+        );
+
         // If stderr exists, log it but continue unless it indicates a critical error
         if (stderr && typeof stderr === 'string') {
           console.error('Java execution stderr:', stderr);
-          
+
           // Check for fatal errors that should stop execution
-          if (stderr.includes('Exception in thread "main"') || 
-              stderr.includes('Error: Could not find or load main class') ||
-              stderr.includes('NoClassDefFoundError')) {
+          if (
+            stderr.includes('Exception in thread "main"') ||
+            stderr.includes('Error: Could not find or load main class') ||
+            stderr.includes('NoClassDefFoundError')
+          ) {
             throw new Error(`Java execution error: ${stderr}`);
           }
         }
-        
+
         // Debug the stdout before parsing
         console.log('Java stdout type:', typeof stdout);
         if (stdout) {
           console.log('Java stdout length:', stdout.length);
-          console.log('Java stdout preview:', stdout.substring(0, 200) + (stdout.length > 200 ? '...' : ''));
+          console.log(
+            'Java stdout preview:',
+            stdout.substring(0, 200) + (stdout.length > 200 ? '...' : '')
+          );
         } else {
           console.log('Java stdout is empty or null');
         }
-        
+
         // Ensure we have valid JSON before parsing
         if (!stdout || typeof stdout !== 'string' || stdout.trim() === '') {
           throw new Error('Empty or invalid output from Java program');
         }
-        
+
         // Try to extract JSON part if there's extra output
         let jsonStr = stdout.trim();
-        
+
         // Find the beginning and end of JSON
         const jsonStartIndex = jsonStr.indexOf('{');
         const jsonEndIndex = jsonStr.lastIndexOf('}');
-        
+
         if (jsonStartIndex >= 0 && jsonEndIndex > jsonStartIndex) {
           // Extract just the JSON portion
           jsonStr = jsonStr.substring(jsonStartIndex, jsonEndIndex + 1);
         }
-        
+
         let parsedData;
         try {
           parsedData = JSON.parse(jsonStr);
         } catch (parseError) {
           console.error('JSON parsing error:', parseError);
           console.error('Attempted to parse:', jsonStr);
-          
+
           // Try one more approach - look for obvious JSON structure
           try {
             const match = stdout.match(/\{[\s\S]*\}/);
@@ -474,10 +490,10 @@ public class MPPParser {
             throw new Error(`Failed to parse Java output as JSON: ${parseError.message}`);
           }
         }
-        
+
         // Clean up temp directory
         await fs.promises.rm(tempDir, { recursive: true, force: true });
-        
+
         resolve(parsedData);
       } catch (err) {
         console.error('Error executing Java program:', err);
@@ -497,24 +513,23 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
-    
+
     // Check if the required JAR files exist
     const mpxjJar = path.join(__dirname, 'lib', 'mpxj.jar');
     const poiJar = path.join(__dirname, 'lib', 'poi.jar');
-    
+
     if (!fs.existsSync(mpxjJar) || !fs.existsSync(poiJar)) {
       return res.status(500).json({ error: 'Required JAR files are missing' });
     }
-    
+
     // Parse the project file using Java
     const projectData = await parseWithJava(req.file.path);
-    
+
     // Clean up the uploaded file
     fs.unlinkSync(req.file.path);
-    
+
     // Return the parsed data
     res.json(projectData);
-    
   } catch (error) {
     console.error('Error processing file:', error);
     res.status(500).json({ error: error.message || 'Failed to process file' });

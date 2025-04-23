@@ -3,7 +3,7 @@ import './ProjectViewer.css';
 
 const ProjectViewer = ({ projectData }) => {
   const [activeTab, setActiveTab] = useState('tasks');
-  
+
   if (!projectData) {
     return <div className="project-viewer-empty">No project data available</div>;
   }
@@ -30,7 +30,7 @@ const ProjectViewer = ({ projectData }) => {
             </tr>
           </thead>
           <tbody>
-            {tasks.map(task => (
+            {tasks.map((task) => (
               <tr key={task.id} className={task.summary ? 'summary-task' : ''}>
                 <td>{task.id}</td>
                 <td className="task-name" style={{ paddingLeft: `${task.outlineLevel * 20}px` }}>
@@ -41,10 +41,11 @@ const ProjectViewer = ({ projectData }) => {
                 <td>{task.duration}</td>
                 <td>{task.percentComplete}%</td>
                 <td>
-                  {Array.isArray(task.predecessors) 
+                  {Array.isArray(task.predecessors)
                     ? task.predecessors.map((pred, i) => (
                         <div key={i}>
-                          {pred.taskName} ({pred.type}{pred.lag !== "0d" ? ", " + pred.lag : ""})
+                          {pred.taskName} ({pred.type}
+                          {pred.lag !== '0d' ? ', ' + pred.lag : ''})
                           {i < task.predecessors.length - 1 ? ', ' : ''}
                         </div>
                       ))
@@ -77,7 +78,7 @@ const ProjectViewer = ({ projectData }) => {
             </tr>
           </thead>
           <tbody>
-            {resources.map(resource => (
+            {resources.map((resource) => (
               <tr key={resource.id}>
                 <td>{resource.id}</td>
                 <td>{resource.name}</td>
@@ -158,34 +159,34 @@ const ProjectViewer = ({ projectData }) => {
   return (
     <div className="project-viewer">
       <h2>Project Data</h2>
-      
+
       <div className="tabs">
-        <button 
-          className={activeTab === 'tasks' ? 'active' : ''} 
+        <button
+          className={activeTab === 'tasks' ? 'active' : ''}
           onClick={() => setActiveTab('tasks')}
         >
           Tasks
         </button>
-        <button 
-          className={activeTab === 'resources' ? 'active' : ''} 
+        <button
+          className={activeTab === 'resources' ? 'active' : ''}
           onClick={() => setActiveTab('resources')}
         >
           Resources
         </button>
-        <button 
-          className={activeTab === 'assignments' ? 'active' : ''} 
+        <button
+          className={activeTab === 'assignments' ? 'active' : ''}
           onClick={() => setActiveTab('assignments')}
         >
           Assignments
         </button>
-        <button 
-          className={activeTab === 'properties' ? 'active' : ''} 
+        <button
+          className={activeTab === 'properties' ? 'active' : ''}
           onClick={() => setActiveTab('properties')}
         >
           Properties
         </button>
       </div>
-      
+
       <div className="tab-content">
         {activeTab === 'tasks' && renderTasks()}
         {activeTab === 'resources' && renderResources()}
