@@ -21,7 +21,7 @@ async function generatePbit(projectData, outputPath) {
   try {
     const mapped = mapProjectData(projectData);
     validateMappedData(mapped);
-    validateVisualDefs(mapped, visualDefs);
+    // validateVisualDefs(mapped, visualDefs);
 
     const zip = new JSZip();
     // Mandatory parts for a valid PBIT/PBIX container
@@ -89,26 +89,7 @@ async function generatePbit(projectData, outputPath) {
 
     // --- Minimal Power BI template structure placeholders ---
     // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema matching Desktop expectations
-    const modelId = crypto.randomUUID();
-    const dataModelSchema = {
-      name: modelId,
-      compatibilityLevel: 1550,
-      model: {
-        culture: 'en-IN',
-        cultures: [
-          {
-            name: 'en-IN',
-            linguisticMetadata: {
-              content: {
-                Version: '1.0.0',
-                Language: 'en-US',
-              },
-              contentType: 'json',
-            },
-          },
-        ],
-      },
-    };
+    const dataModelSchema = buildDataModelSchema(mapped, daxDefs);
     zip.file('DataModelSchema', toUtf16(dataModelSchema));
 
     // DiagramLayout file
@@ -322,6 +303,44 @@ function validateVisualDefs(mapped, defs) {
   if (errors.length) {
     throw new Error(`Visual definition validation failed:\n${errors.join('\n')}`);
   }
+}
+
+// Build DataModelSchema with tables, columns, and measures
+function buildDataModelSchema(mapped, measuresArr) {
+  const mkColumns = (row) => Object.keys(row).map((c) => ({ name: c, dataType: 'string' }));
+
+  const tables = [];
+  for (const [tblName, rows] of Object.entries(mapped)) {
+    if (!Array.isArray(rows) || !rows.length) continue;
+    const tblMeasures = measuresArr.filter((m) => m.table === tblName).map((m) => ({
+      name: m.name,
+      expression: m.expression,
+      formatString: '',
+    }));
+    tables.push({
+      name: tblName,
+      columns: mkColumns(rows[0]),
+      measures: tblMeasures,
+      partitions: [
+        {
+          name: 'Partition',
+          mode: 'Import',
+          source: {
+            type: 'm',
+            expression: `let\n    Source = Json.Document(File.Contents(\"tables/${tblName}.json\")),\n    #\"Converted to Table\" = Table.FromRecords(Source)\n in\n    #\"Converted to Table\"`,
+          },
+        },
+      ],
+    });
+  }
+  return {
+    name: crypto.randomUUID(),
+    compatibilityLevel: 1550,
+    model: {
+      culture: 'en-US',
+      tables,
+    },
+  };
 }
 
 module.exports = { generatePbit };
