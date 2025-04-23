@@ -21,6 +21,7 @@ async function generatePbit(projectData, outputPath) {
   try {
     const mapped = mapProjectData(projectData);
     validateMappedData(mapped);
+    validateVisualDefs(mapped, visualDefs);
 
     const zip = new JSZip();
     // Mandatory parts for a valid PBIT/PBIX container
@@ -290,6 +291,37 @@ function validateMappedData(mapped) {
     throw new Error('No resources found in project data');
   }
   // Additional checks can be added here (e.g., assignments integrity)
+}
+
+// Validate visuals against mapped table schema
+function validateVisualDefs(mapped, defs) {
+  const tableFields = {
+    tasks: mapped.tasks.length ? Object.keys(mapped.tasks[0]) : [],
+    resources: mapped.resources.length ? Object.keys(mapped.resources[0]) : [],
+    assignments: mapped.assignments.length ? Object.keys(mapped.assignments[0]) : [],
+    properties: mapped.properties.length ? Object.keys(mapped.properties[0]) : [],
+  };
+
+  const errors = [];
+  for (const page of defs.defaultVisuals.pages) {
+    for (const vis of page.visuals) {
+      if (!tableFields[vis.table]) {
+        errors.push(`Unknown table ${vis.table} in visual ${vis.id}`);
+        continue;
+      }
+      const fields = Array.isArray(vis.fields)
+        ? vis.fields
+        : Object.values(vis.fields || {});
+      for (const f of fields) {
+        if (!tableFields[vis.table].includes(f) && f !== 'count' && f !== 'totalWork') {
+          errors.push(`Field ${f} not found in table ${vis.table} (visual ${vis.id})`);
+        }
+      }
+    }
+  }
+  if (errors.length) {
+    throw new Error(`Visual definition validation failed:\n${errors.join('\n')}`);
+  }
 }
 
 module.exports = { generatePbit };
