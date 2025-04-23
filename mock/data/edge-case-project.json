@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "name": "Edge Case Project",
+    "author": "Mock User",
+    "startDate": "2025-02-01",
+    "finishDate": "2025-02-10",
+    "currentDate": "2025-02-05",
+    "taskCount": 4,
+    "resourceCount": 2,
+    "assignmentCount": 2
+  },
+  "tasks": [
+    { "id": 1, "uniqueID": 1, "name": "Unassigned Task", "outlineNumber": "1", "outlineLevel": 1, "start": "2025-02-01", "finish": "2025-02-02", "duration": "1d", "work": 8, "percentComplete": 50 },
+    { "id": 2, "uniqueID": 2, "name": "No Work Milestone", "outlineNumber": "2", "outlineLevel": 1, "start": "2025-02-02", "finish": "2025-02-02", "duration": "0d", "work": 0, "percentComplete": 100 },
+    { "id": 3, "uniqueID": 3, "name": "Long Name Task — 𝑬𝒙𝒆𝒎𝒑𝒍𝒆 💡", "outlineNumber": "3", "outlineLevel": 1, "start": "2025-02-03", "finish": "2025-02-07", "duration": "4d", "work": 32, "percentComplete": 0 },
+    { "id": 4, "uniqueID": 4, "name": "Resource Only", "outlineNumber": "4", "outlineLevel": 1, "start": "2025-02-08", "finish": "2025-02-10", "duration": "2d", "work": 16, "percentComplete": 0 }
+  ],
+  "resources": [
+    { "id": 1, "uniqueID": 1, "name": "Resource A", "type": "Work", "maxUnits": 1 },
+    { "id": 2, "uniqueID": 2, "name": "Orphan Resource", "type": "Material", "maxUnits": 1 }
+  ],
+  "assignments": [
+    { "taskID": 4, "resourceID": 1, "units": 1 },
+    { "taskID": 4, "resourceID": 1, "units": 0.5 }
+  ]
+}

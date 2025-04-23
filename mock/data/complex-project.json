@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "name": "Complex Project",
+    "author": "Mock User",
+    "startDate": "2025-03-01",
+    "finishDate": "2025-06-30",
+    "currentDate": "2025-03-15",
+    "taskCount": 100,
+    "resourceCount": 5,
+    "assignmentCount": 150
+  },
+  "tasks": [
+    // Only outline first 5 tasks for brevity; tooling tests can expand programmatically
+    { "id": 1, "uniqueID": 1, "name": "Phase 1", "outlineNumber": "1", "outlineLevel": 1, "start": "2025-03-01", "finish": "2025-03-15", "duration": "10d", "work": 80, "percentComplete": 10 },
+    { "id": 2, "uniqueID": 2, "name": "Task 1.1", "outlineNumber": "1.1", "outlineLevel": 2, "start": "2025-03-01", "finish": "2025-03-05", "duration": "4d", "work": 32, "percentComplete": 0 },
+    { "id": 3, "uniqueID": 3, "name": "Task 1.2", "outlineNumber": "1.2", "outlineLevel": 2, "start": "2025-03-05", "finish": "2025-03-10", "duration": "4d", "work": 32, "percentComplete": 0 },
+    { "id": 4, "uniqueID": 4, "name": "Task 1.3", "outlineNumber": "1.3", "outlineLevel": 2, "start": "2025-03-10", "finish": "2025-03-15", "duration": "4d", "work": 32, "percentComplete": 0 },
+    { "id": 5, "uniqueID": 5, "name": "Milestone 1", "outlineNumber": "1.4", "outlineLevel": 2, "start": "2025-03-15", "finish": "2025-03-15", "duration": "0d", "work": 0, "percentComplete": 0 }
+  ],
+  "resources": [
+    { "id": 1, "uniqueID": 1, "name": "Resource A", "type": "Work", "maxUnits": 1 },
+    { "id": 2, "uniqueID": 2, "name": "Resource B", "type": "Work", "maxUnits": 1 },
+    { "id": 3, "uniqueID": 3, "name": "Resource C", "type": "Work", "maxUnits": 1 },
+    { "id": 4, "uniqueID": 4, "name": "Resource D", "type": "Work", "maxUnits": 1 },
+    { "id": 5, "uniqueID": 5, "name": "Resource E", "type": "Work", "maxUnits": 1 }
+  ],
+  "assignments": [
+    { "taskID": 2, "resourceID": 1, "units": 1 }
+  ]
+}
