@@ -27,8 +27,8 @@ async function generatePbit(projectData, outputPath) {
     // Encode as UTF‑16LE without BOM (Power BI accepts this for Version part)
     const versionBuf = Buffer.from('1.28', 'utf16le');
     zip.file('Version', versionBuf, { compression: 'STORE' });
-    // Richer [Content_Types].xml
-    zip.file('[Content_Types].xml',
+    // Richer [Content_Types].xml encoded UTF‑8 with BOM
+    const contentTypesXml =
       '<?xml version="1.0" encoding="utf-8"?>\n' +
       '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n' +
       '  <Default Extension="json" ContentType=""/>\n' +
@@ -39,7 +39,9 @@ async function generatePbit(projectData, outputPath) {
       '  <Override PartName="/Settings" ContentType="application/json" />\n' +
       '  <Override PartName="/Metadata" ContentType="application/json" />\n' +
       '  <Override PartName="/SecurityBindings" ContentType="" />\n' +
-      '</Types>');
+      '</Types>';
+    const ctBuf = Buffer.from('\uFEFF' + contentTypesXml, 'utf8');
+    zip.file('[Content_Types].xml', ctBuf, { compression: 'STORE' });
 
     // Root relationships file (required by OPC spec)
     zip.folder('_rels').file('.rels',
@@ -185,7 +187,7 @@ async function generatePbit(projectData, outputPath) {
     reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
 
     reportFolder.folder('StaticResources').folder('SharedResources').folder('BaseThemes')
-      .file('CY24SU10.json', toUtf16({
+      .file('CY24SU10.json', JSON.stringify({
         "name": "CY24SU10",
         "dataColors": ["#118DFF", "#12239E", "#E66C37", "#6B007B", "#E044A7", "#744EC2", "#D9B300", "#D64550", "#197278", "#1AAB40", "#15C6F4", "#4092FF", "#FFA058", "#BE5DC9", "#F472D0", "#B5A1FF", "#C4A200", "#FF8080", "#00DBBC", "#5BD667", "#0091D5", "#4668C5", "#FF6300", "#99008A", "#EC008C", "#533285", "#99700A", "#FF4141", "#1F9A85", "#25891C", "#0057A2", "#002050", "#C94F0F", "#450F54", "#B60064", "#34124F", "#6A5A29", "#1AAB40", "#BA141A", "#0C3D37", "#0B511F"],
         "foreground": "#252423",
