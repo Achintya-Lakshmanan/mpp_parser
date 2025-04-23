@@ -1,0 +1,121 @@
+Product Requirements Document: MPP JSON to Power BI Template Generator
+
+1. Introduction
+
+Purpose: This document outlines the requirements for a tool or process that generates a Power BI Template file (.pbit) using data exported from a Microsoft Project file (.mpp) into a JSON format.
+Problem: Analyzing and visualizing Microsoft Project data often requires manual export and transformation steps to bring it into powerful reporting tools like Power BI. Creating a consistent Power BI report structure for different projects is time-consuming.
+Solution: Develop an automated or semi-automated solution that takes a predefined JSON export from an MPP file and generates a standardized Power BI Template (.pbit). This template will contain the necessary data model, relationships, basic measures, and potentially starter visuals, allowing users to quickly connect their specific project data export and gain insights.
+Goal: To significantly reduce the manual effort required to visualize MPP data in Power BI, promote reporting consistency across projects, and provide a starting point for deeper analysis.
+2. Goals & Objectives
+
+Goal 1: Automate the creation of a Power BI data model based on MPP data structure (as represented in the input JSON).
+Goal 2: Pre-define essential relationships between project entities (e.g., Tasks, Resources, Assignments) within the PBIT.
+Goal 3: Include a set of baseline DAX measures relevant for project management (e.g., Task Count, % Complete, Variance calculations if data is available).
+Goal 4: Optionally include pre-built, common project management visuals in the template (e.g., Gantt-like chart, Resource Allocation, Task Status).
+Goal 5: Ensure the generated PBIT is easily usable by Power BI Desktop users.
+3. Target Audience
+
+Primary Users: Project Managers, Program Managers, PMO Analysts, Data Analysts.
+Assumed Skills: Familiarity with Microsoft Project concepts, basic understanding of Power BI Desktop (connecting to data, using templates), understanding of the JSON data structure being exported from MPP.
+4. Functional Requirements
+
+FR1: Input - JSON Data Source
+FR1.1: The system must accept a JSON file as input.
+FR1.2: The structure of the input JSON file must be clearly defined and documented. This structure is assumed to be derived from an MPP file export process (Note: The mechanism for exporting MPP to this specific JSON format is outside the scope of this PRD but needs to be established).
+FR1.3: The JSON must contain key project entities, including (but not limited to, based on the defined JSON schema):
+Project Summary Information (Name, Start/Finish Dates, Duration, Cost, Work)
+Tasks (ID, Name, Start, Finish, Duration, % Complete, Cost, Work, WBS, Predecessors, Successors, Resource Names/IDs, Baseline dates/duration/cost/work if available, Custom Fields)
+Resources (ID, Name, Type, Cost Rate, Group)
+Assignments (Task ID, Resource ID, Work, Cost, Start, Finish)
+Calendars (if relevant for calculations)
+FR2: Data Processing & Modeling
+FR2.1: Parse the input JSON file.
+FR2.2: Transform the hierarchical or flat JSON data into relational tables suitable for Power BI (e.g., a 'Tasks' table, 'Resources' table, 'Assignments' table, 'Project Summary' table).
+FR2.3: Define appropriate data types for each column in the Power BI data model (e.g., Text, Whole Number, Decimal Number, Date/Time).
+FR2.4: Automatically create relationships between the generated tables (e.g., 'Assignments'[Task ID] <-> 'Tasks'[ID], 'Assignments'[Resource ID] <-> 'Resources'[ID]). Cardinality and cross-filter direction should be set appropriately (typically Many-to-One, Single direction).
+FR2.5: Implement basic data cleansing or handling for potential null/empty values where appropriate.
+FR3: DAX Measures
+FR3.1: Include a set of pre-defined, commonly used DAX measures. Examples:
+Total Tasks = COUNTROWS('Tasks')
+Total Cost = SUM('Tasks'[Cost]) (or from Assignments)
+Total Work = SUM('Tasks'[Work]) (or from Assignments)
+Overall % Complete (Weighted by duration or work, if possible)
+Number of Active/Late/Completed Tasks (based on status or dates)
+Schedule Variance (SV) (if Baseline data is present in JSON)
+Cost Variance (CV) (if Baseline data is present in JSON)
+FR4: Output - PBIT File Generation
+FR4.1: Generate a valid Power BI Template (.pbit) file.
+FR4.2: The PBIT file must contain the data model (tables, columns, relationships) defined in FR2.
+FR4.3: The PBIT file must contain the DAX measures defined in FR3.
+FR4.4 (Optional): The PBIT file may contain pre-configured report pages with suggested visuals:
+Project Overview Dashboard (KPIs, summary stats)
+Task Schedule/Timeline (e.g., using a Matrix visual formatted like a Gantt, or a custom visual if licensed)
+Resource Load/Allocation view
+Cost Analysis view
+FR4.5: The PBIT should prompt the user for the path to their specific JSON data file upon opening (standard PBIT behavior if data source parameters are used).
+FR5: Configuration (Optional)
+FR5.1: Allow users to configure which optional elements are included (e.g., include/exclude sample visuals, select specific sets of DAX measures).
+FR5.2: Allow mapping customization if the input JSON structure might vary slightly.
+5. Non-Functional Requirements
+
+NFR1: Performance: The generation process should complete within a reasonable timeframe (e.g., < 1-2 minutes) for typical project file sizes (e.g., up to 5,000 tasks). Performance targets need validation based on expected MPP file complexity.
+NFR2: Reliability: The system must consistently produce valid PBIT files for valid JSON inputs conforming to the defined schema.
+NFR3: Usability:
+If a tool/script, it should be easy to execute (e.g., simple command-line interface or basic GUI).
+Clear instructions/documentation must be provided on how to use the generator and the expected JSON format.
+NFR4: Maintainability: If custom code is written (e.g., using Python, C# with Power BI SDKs/APIs), it should be well-structured, commented, and potentially version-controlled.
+NFR5: Compatibility: The generated PBIT file must be compatible with recent versions of Power BI Desktop (specify target version, e.g., "versions released in the last 12 months").
+6. Data Schema / Mapping (Crucial - Needs Detailed Definition)
+
+This section requires explicit definition based on the chosen MPP-to-JSON export mechanism.
+Example Snippet:
+JSON Source: project.tasks[*] array
+Power BI Table: Tasks
+Field Mappings:
+JSON task.id -> Tasks[Task ID] (Type: Whole Number)
+JSON task.name -> Tasks[Task Name] (Type: Text)
+JSON task.start_date -> Tasks[Start Date] (Type: Date/Time)
+JSON task.finish_date -> Tasks[Finish Date] (Type: Date/Time)
+JSON task.percent_complete -> Tasks[% Complete] (Type: Decimal Number, format as %)
+JSON task.resource_names -> Tasks[Resource Names] (Type: Text)
+JSON task.baseline_finish_date -> Tasks[Baseline Finish Date] (Type: Date/Time) [If available]
+(Repeat for Resources, Assignments, Project Summary, etc.)
+7. User Interface (UI) / User Experience (UX)
+
+Scenario 1: Script-based:
+Likely a command-line tool.
+Input: Path to JSON file.
+Output: Path for the generated PBIT file.
+Feedback: Console messages indicating progress, success, or errors.
+Scenario 2: Simple GUI:
+Browse button to select input JSON file.
+Browse button/textbox to specify output PBIT file name/location.
+"Generate" button.
+Status display area (e.g., "Processing...", "Complete", "Error: [message]").
+8. Error Handling
+
+Handle invalid JSON file format/parsing errors.
+Handle missing mandatory fields in the JSON data based on the defined schema.
+Handle file I/O errors (cannot read input, cannot write output).
+Provide clear, user-understandable error messages.
+9. Future Considerations / Out of Scope (V1)
+
+Direct connection to MPP file (requires different tooling, potentially using Power Query SDK or third-party connectors).
+Handling multiple baseline data.
+Advanced/custom visualizations requiring specific licenses or marketplace visuals.
+Incremental data refresh (PBIT is a template; refresh happens in the PBIX).
+Highly complex custom field mapping UI.
+Web-based interface for generation.
+Support for XML export from MPP instead of JSON.
+10. Release Criteria / Success Metrics
+
+Criteria:
+All mandatory Functional Requirements (FR1-FR4) are implemented and tested.
+Core Non-Functional Requirements (Performance on test files, Reliability, Usability) are met.
+Documentation for JSON schema and tool usage is complete.
+Successful generation of usable PBIT files from a defined set of test JSON files (varying complexity).
+Success Metrics:
+Time saved per project report setup (estimated).
+Adoption rate by target users.
+Number of successfully generated PBITs.
+User feedback rating.
