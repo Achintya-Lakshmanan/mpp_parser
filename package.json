@@ -15,7 +15,8 @@
     "gen:start": "node dist/generator/index.js",
     "gen:dev": "ts-node-dev --respawn --transpile-only src/generator/index.ts",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md,css}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "benchmark:gen": "node src/benchmark/templateGeneratorBenchmark.js"
   },
   "keywords": [
     "mpp",
