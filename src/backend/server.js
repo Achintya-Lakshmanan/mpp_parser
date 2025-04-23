@@ -572,6 +572,14 @@ public class MPPParser {
   });
 };
 
+// Helper to format AJV validation errors into user‑friendly objects
+function formatValidationErrors(errors) {
+  return errors.map((err) => ({
+    field: err.instancePath ? err.instancePath.replace(/^\//, '') : err.params?.missingProperty || '',
+    message: err.message,
+  }));
+}
+
 // API endpoint to parse project file
 app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
   try {
@@ -595,7 +603,10 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       const valid = validateProject(projectData);
       if (!valid) {
         logger.error('Project data failed schema validation', validateProject.errors);
-        return res.status(400).json({ error: 'Parsed data invalid', details: validateProject.errors });
+        return res.status(400).json({
+          error: 'JSON validation failed',
+          details: formatValidationErrors(validateProject.errors || []),
+        });
       }
     }
 
@@ -617,7 +628,10 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
     res.json(projectData);
   } catch (error) {
     logger.error('Error processing file:', error);
-    res.status(500).json({ error: error.message || 'Failed to process file' });
+    res.status(500).json({
+      error: error.publicMessage || 'Internal Server Error',
+      details: process.env.NODE_ENV === 'prod' ? undefined : error.message,
+    });
   }
 });
 
@@ -643,7 +657,10 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
       const valid = validateProject(projectData);
       if (!valid) {
         logger.warn('Uploaded JSON failed schema validation');
-        return res.status(400).json({ error: 'JSON does not match schema', details: validateProject.errors });
+        return res.status(400).json({
+          error: 'JSON validation failed',
+          details: formatValidationErrors(validateProject.errors || []),
+        });
       }
     }
 
@@ -668,7 +685,10 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, _next) => {
   logger.error('Unhandled error:', err);
-  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
+  res.status(err.status || 500).json({
+    error: err.publicMessage || 'Internal Server Error',
+    details: process.env.NODE_ENV === 'prod' ? undefined : err.message,
+  });
 });
 /* eslint-enable no-unused-vars */
 
