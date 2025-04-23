@@ -1,28 +1,100 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ProjectData",
+  "title": "MPPProjectData",
   "type": "object",
   "properties": {
     "properties": {
       "type": "object",
-      "required": ["name", "startDate", "finishDate"],
+      "required": [
+        "name",
+        "startDate",
+        "finishDate",
+        "taskCount",
+        "resourceCount",
+        "assignmentCount"
+      ],
       "properties": {
-        "name": { "type": "string" },
+        "name": { "type": ["string", "null"] },
+        "author": { "type": ["string", "null"] },
+        "company": { "type": ["string", "null"] },
         "startDate": { "type": "string" },
-        "finishDate": { "type": "string" }
-      }
+        "finishDate": { "type": "string" },
+        "statusDate": { "type": ["string", "null"] },
+        "currentDate": { "type": "string" },
+        "taskCount": { "type": "integer" },
+        "resourceCount": { "type": "integer" },
+        "assignmentCount": { "type": "integer" }
+      },
+      "additionalProperties": true
     },
     "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "start", "finish"],
+        "properties": {
+          "id": { "type": ["integer", "string"] },
+          "uniqueID": { "type": ["integer", "string"] },
+          "name": { "type": ["string", "null"] },
+          "outlineNumber": { "type": ["string", "null"] },
+          "outlineLevel": { "type": ["integer", "null"] },
+          "start": { "type": "string" },
+          "finish": { "type": "string" },
+          "duration": { "type": ["string", "null"] },
+          "work": { "type": ["string", "null"] },
+          "percentComplete": { "type": ["number", "integer", "null"] },
+          "type": { "type": ["string", "null"] },
+          "constraint": { "type": ["string", "null"] },
+          "predecessors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "taskID": { "type": ["integer", "string"] },
+                "taskName": { "type": "string" },
+                "type": { "type": "string" },
+                "lag": { "type": ["string", "null"] }
+              },
+              "required": ["taskID"]
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "resources": {
       "type": "array",
       "items": {
         "type": "object",
         "required": ["id", "name"],
         "properties": {
           "id": { "type": ["integer", "string"] },
-          "name": { "type": "string" }
-        }
+          "uniqueID": { "type": ["integer", "string"] },
+          "name": { "type": ["string", "null"] },
+          "type": { "type": ["string", "null"] },
+          "maxUnits": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "assignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["taskID", "resourceID"],
+        "properties": {
+          "taskID": { "type": ["integer", "string"] },
+          "taskUniqueID": { "type": ["integer", "string"] },
+          "taskName": { "type": ["string", "null"] },
+          "resourceID": { "type": ["integer", "string"] },
+          "resourceUniqueID": { "type": ["integer", "string"] },
+          "resourceName": { "type": ["string", "null"] },
+          "units": { "type": ["number", "integer", "null"] }
+        },
+        "additionalProperties": true
       }
     }
   },
-  "required": ["properties", "tasks"]
+  "required": ["properties", "tasks", "resources", "assignments"],
+  "additionalProperties": false
 }
