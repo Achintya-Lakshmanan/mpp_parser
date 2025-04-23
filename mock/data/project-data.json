@@ -1,0 +1,2421 @@
+{
+  "properties": {
+    "name": null,
+    "author": "Greg Susman - GS Design, Inc.",
+    "company": "B4UBUILD.COM - http://www.b4ubuild.com/",
+    "startDate": "2008-06-01",
+    "finishDate": "2008-09-03",
+    "statusDate": "Not set",
+    "currentDate": "2025-04-23",
+    "taskCount": 63,
+    "resourceCount": 60,
+    "assignmentCount": 55
+  },
+  "tasks": [
+    {
+      "id": 0,
+      "uniqueID": 0,
+      "name": "b4ubuild_sample_07a",
+      "outlineNumber": "0",
+      "outlineLevel": 0,
+      "start": "2008-06-01",
+      "finish": "2008-09-03",
+      "duration": "68.0d",
+      "work": "1056.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 1,
+      "uniqueID": 145,
+      "name": "Contracts",
+      "outlineNumber": "1",
+      "outlineLevel": 1,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 2,
+      "uniqueID": 287,
+      "name": "Supply Lot Sale Agreement",
+      "outlineNumber": "1.1",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 3,
+      "uniqueID": 273,
+      "name": "Supply Construction Agreement",
+      "outlineNumber": "1.2",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 4,
+      "uniqueID": 2,
+      "name": "Supply Contract Plans",
+      "outlineNumber": "1.3",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 3,
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "uniqueID": 262,
+      "name": "Supply Contract Specifications",
+      "outlineNumber": "1.4",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 3,
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "uniqueID": 3,
+      "name": "Supply Contract Site Plan",
+      "outlineNumber": "1.5",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 3,
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "uniqueID": 289,
+      "name": "Secure Financing",
+      "outlineNumber": "1.6",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 8,
+      "uniqueID": 290,
+      "name": "Construction Loan Settlement",
+      "outlineNumber": "1.7",
+      "outlineLevel": 2,
+      "start": "2008-06-01",
+      "finish": "2008-06-01",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 9,
+      "uniqueID": 274,
+      "name": "Document Review & Revision",
+      "outlineNumber": "2",
+      "outlineLevel": 1,
+      "start": "2008-06-02",
+      "finish": "2008-07-04",
+      "duration": "25.0d",
+      "work": "328.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 10,
+      "uniqueID": 275,
+      "name": "Review & Finalize Plans",
+      "outlineNumber": "2.1",
+      "outlineLevel": 2,
+      "start": "2008-06-02",
+      "finish": "2008-06-20",
+      "duration": "15.0d",
+      "work": "120.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 4,
+          "taskUniqueID": 2,
+          "taskName": "Supply Contract Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "uniqueID": 276,
+      "name": "Review & Finalize Specifications",
+      "outlineNumber": "2.2",
+      "outlineLevel": 2,
+      "start": "2008-06-02",
+      "finish": "2008-06-27",
+      "duration": "20.0d",
+      "work": "160.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 5,
+          "taskUniqueID": 262,
+          "taskName": "Supply Contract Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "uniqueID": 277,
+      "name": "Review & Finalize Site Plan",
+      "outlineNumber": "2.3",
+      "outlineLevel": 2,
+      "start": "2008-06-23",
+      "finish": "2008-06-23",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 6,
+          "taskUniqueID": 3,
+          "taskName": "Supply Contract Site Plan",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 10,
+          "taskUniqueID": 275,
+          "taskName": "Review & Finalize Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "uniqueID": 282,
+      "name": "Print Construction Drawings",
+      "outlineNumber": "2.4",
+      "outlineLevel": 2,
+      "start": "2008-06-30",
+      "finish": "2008-07-04",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 10,
+          "taskUniqueID": 275,
+          "taskName": "Review & Finalize Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 11,
+          "taskUniqueID": 276,
+          "taskName": "Review & Finalize Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 12,
+          "taskUniqueID": 277,
+          "taskName": "Review & Finalize Site Plan",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "uniqueID": 284,
+      "name": "Approve Revised Plans",
+      "outlineNumber": "2.5",
+      "outlineLevel": 2,
+      "start": "2008-07-04",
+      "finish": "2008-07-04",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "uniqueID": 285,
+      "name": "Approve Revised Specifications",
+      "outlineNumber": "2.6",
+      "outlineLevel": 2,
+      "start": "2008-07-04",
+      "finish": "2008-07-04",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "uniqueID": 291,
+      "name": "Approve Revised Site Plan",
+      "outlineNumber": "2.7",
+      "outlineLevel": 2,
+      "start": "2008-07-04",
+      "finish": "2008-07-04",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "uniqueID": 4,
+      "name": "Bids & Contracts",
+      "outlineNumber": "3",
+      "outlineLevel": 1,
+      "start": "2008-07-07",
+      "finish": "2008-08-07",
+      "duration": "24.0d",
+      "work": "248.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 18,
+      "uniqueID": 146,
+      "name": "Make Copies of Plans",
+      "outlineNumber": "3.1",
+      "outlineLevel": 2,
+      "start": "2008-07-07",
+      "finish": "2008-07-09",
+      "duration": "3.0d",
+      "work": "24.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 14,
+          "taskUniqueID": 284,
+          "taskName": "Approve Revised Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "uniqueID": 278,
+      "name": "Make Copies of Specifications",
+      "outlineNumber": "3.2",
+      "outlineLevel": 2,
+      "start": "2008-07-07",
+      "finish": "2008-07-08",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 15,
+          "taskUniqueID": 285,
+          "taskName": "Approve Revised Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "uniqueID": 5,
+      "name": "Distribute Plans & Specifications",
+      "outlineNumber": "3.3",
+      "outlineLevel": 2,
+      "start": "2008-07-10",
+      "finish": "2008-07-10",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "START_NO_EARLIER_THAN",
+      "predecessors": [
+        {
+          "taskID": 18,
+          "taskUniqueID": 146,
+          "taskName": "Make Copies of Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 19,
+          "taskUniqueID": 278,
+          "taskName": "Make Copies of Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "uniqueID": 6,
+      "name": "Receive Bids",
+      "outlineNumber": "3.4",
+      "outlineLevel": 2,
+      "start": "2008-07-11",
+      "finish": "2008-07-24",
+      "duration": "10.0d",
+      "work": "80.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "START_NO_EARLIER_THAN",
+      "predecessors": [
+        {
+          "taskID": 20,
+          "taskUniqueID": 5,
+          "taskName": "Distribute Plans & Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "uniqueID": 7,
+      "name": "Review Bids",
+      "outlineNumber": "3.5",
+      "outlineLevel": 2,
+      "start": "2008-07-25",
+      "finish": "2008-07-31",
+      "duration": "5.0d",
+      "work": "80.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 23,
+      "uniqueID": 279,
+      "name": "Sales",
+      "outlineNumber": "3.5.1",
+      "outlineLevel": 3,
+      "start": "2008-07-25",
+      "finish": "2008-07-31",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 21,
+          "taskUniqueID": 6,
+          "taskName": "Receive Bids",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "uniqueID": 280,
+      "name": "Construction",
+      "outlineNumber": "3.5.2",
+      "outlineLevel": 3,
+      "start": "2008-07-25",
+      "finish": "2008-07-31",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 21,
+          "taskUniqueID": 6,
+          "taskName": "Receive Bids",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "uniqueID": 8,
+      "name": "Execute Subcontractor Agreements",
+      "outlineNumber": "3.6",
+      "outlineLevel": 2,
+      "start": "2008-08-01",
+      "finish": "2008-08-07",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "START_NO_EARLIER_THAN",
+      "predecessors": [
+        {
+          "taskID": 23,
+          "taskUniqueID": 279,
+          "taskName": "Sales",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "uniqueID": 9,
+      "name": "Grading & Building Permits",
+      "outlineNumber": "4",
+      "outlineLevel": 1,
+      "start": "2008-07-07",
+      "finish": "2008-07-29",
+      "duration": "17.0d",
+      "work": "208.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 27,
+      "uniqueID": 10,
+      "name": "Schedule lot stake-out",
+      "outlineNumber": "4.1",
+      "outlineLevel": 2,
+      "start": "2008-07-07",
+      "finish": "2008-07-07",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "uniqueID": 11,
+      "name": "Stake lot",
+      "outlineNumber": "4.2",
+      "outlineLevel": 2,
+      "start": "2008-07-11",
+      "finish": "2008-07-11",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 27,
+          "taskUniqueID": 10,
+          "taskName": "Schedule lot stake-out",
+          "type": "FS",
+          "lag": "3.0d"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "uniqueID": 293,
+      "name": "File Grading Permit Application",
+      "outlineNumber": "4.3",
+      "outlineLevel": 2,
+      "start": "2008-07-07",
+      "finish": "2008-07-07",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 16,
+          "taskUniqueID": 291,
+          "taskName": "Approve Revised Site Plan",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "uniqueID": 12,
+      "name": "File Building Permit Application",
+      "outlineNumber": "4.4",
+      "outlineLevel": 2,
+      "start": "2008-07-07",
+      "finish": "2008-07-09",
+      "duration": "3.0d",
+      "work": "24.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 14,
+          "taskUniqueID": 284,
+          "taskName": "Approve Revised Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 15,
+          "taskUniqueID": 285,
+          "taskName": "Approve Revised Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 16,
+          "taskUniqueID": 291,
+          "taskName": "Approve Revised Site Plan",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "uniqueID": 13,
+      "name": "Post Lot Identification",
+      "outlineNumber": "4.5",
+      "outlineLevel": 2,
+      "start": "2008-07-14",
+      "finish": "2008-07-14",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 28,
+          "taskUniqueID": 11,
+          "taskName": "Stake lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 29,
+          "taskUniqueID": 293,
+          "taskName": "File Grading Permit Application",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 30,
+          "taskUniqueID": 12,
+          "taskName": "File Building Permit Application",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "uniqueID": 15,
+      "name": "Meet Sediment Control Inspector",
+      "outlineNumber": "4.6",
+      "outlineLevel": 2,
+      "start": "2008-07-15",
+      "finish": "2008-07-15",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 29,
+          "taskUniqueID": 293,
+          "taskName": "File Grading Permit Application",
+          "type": "FS",
+          "lag": "2.0d"
+        },
+        {
+          "taskID": 28,
+          "taskUniqueID": 11,
+          "taskName": "Stake lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 31,
+          "taskUniqueID": 13,
+          "taskName": "Post Lot Identification",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "uniqueID": 14,
+      "name": "Walk Lot w/ Owner",
+      "outlineNumber": "4.7",
+      "outlineLevel": 2,
+      "start": "2008-07-16",
+      "finish": "2008-07-16",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 32,
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "uniqueID": 16,
+      "name": "Install Construction Entrance",
+      "outlineNumber": "4.8",
+      "outlineLevel": 2,
+      "start": "2008-07-17",
+      "finish": "2008-07-17",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 32,
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 33,
+          "taskUniqueID": 14,
+          "taskName": "Walk Lot w/ Owner",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "uniqueID": 153,
+      "name": "Install Sediment Controls",
+      "outlineNumber": "4.9",
+      "outlineLevel": 2,
+      "start": "2008-07-17",
+      "finish": "2008-07-18",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 32,
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 33,
+          "taskUniqueID": 14,
+          "taskName": "Walk Lot w/ Owner",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "uniqueID": 17,
+      "name": "Sediment Control Insp.",
+      "outlineNumber": "4.10",
+      "outlineLevel": 2,
+      "start": "2008-07-21",
+      "finish": "2008-07-21",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 34,
+          "taskUniqueID": 16,
+          "taskName": "Install Construction Entrance",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 35,
+          "taskUniqueID": 153,
+          "taskName": "Install Sediment Controls",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "uniqueID": 18,
+      "name": "Grading Permit Issued",
+      "outlineNumber": "4.11",
+      "outlineLevel": 2,
+      "start": "2008-07-22",
+      "finish": "2008-07-22",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 36,
+          "taskUniqueID": 17,
+          "taskName": "Sediment Control Insp.",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "uniqueID": 147,
+      "name": "County Permit Process",
+      "outlineNumber": "4.12",
+      "outlineLevel": 2,
+      "start": "2008-07-10",
+      "finish": "2008-07-23",
+      "duration": "10.0d",
+      "work": "80.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 30,
+          "taskUniqueID": 12,
+          "taskName": "File Building Permit Application",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "uniqueID": 19,
+      "name": "Building Permit Approved",
+      "outlineNumber": "4.13",
+      "outlineLevel": 2,
+      "start": "2008-07-24",
+      "finish": "2008-07-24",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 38,
+          "taskUniqueID": 147,
+          "taskName": "County Permit Process",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 37,
+          "taskUniqueID": 18,
+          "taskName": "Grading Permit Issued",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "uniqueID": 281,
+      "name": "Pay Permit Fees and Excise Taxes",
+      "outlineNumber": "4.14",
+      "outlineLevel": 2,
+      "start": "2008-07-29",
+      "finish": "2008-07-29",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 39,
+          "taskUniqueID": 19,
+          "taskName": "Building Permit Approved",
+          "type": "FS",
+          "lag": "2.0d"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "uniqueID": 294,
+      "name": "Building Permit Issued",
+      "outlineNumber": "4.15",
+      "outlineLevel": 2,
+      "start": "2008-07-29",
+      "finish": "2008-07-29",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 40,
+          "taskUniqueID": 281,
+          "taskName": "Pay Permit Fees and Excise Taxes",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "uniqueID": 20,
+      "name": "Site Work",
+      "outlineNumber": "5",
+      "outlineLevel": 1,
+      "start": "2008-07-23",
+      "finish": "2008-07-31",
+      "duration": "7.0d",
+      "work": "64.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 43,
+      "uniqueID": 21,
+      "name": "Clear Lot",
+      "outlineNumber": "5.1",
+      "outlineLevel": 2,
+      "start": "2008-07-23",
+      "finish": "2008-07-25",
+      "duration": "3.0d",
+      "work": "24.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 37,
+          "taskUniqueID": 18,
+          "taskName": "Grading Permit Issued",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "uniqueID": 22,
+      "name": "Strip Topsoil & Stockpile",
+      "outlineNumber": "5.2",
+      "outlineLevel": 2,
+      "start": "2008-07-28",
+      "finish": "2008-07-28",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "uniqueID": 23,
+      "name": "Stake Lot for Excavation",
+      "outlineNumber": "5.3",
+      "outlineLevel": 2,
+      "start": "2008-07-28",
+      "finish": "2008-07-28",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "uniqueID": 24,
+      "name": "Rough grade lot",
+      "outlineNumber": "5.4",
+      "outlineLevel": 2,
+      "start": "2008-07-29",
+      "finish": "2008-07-29",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 45,
+          "taskUniqueID": 23,
+          "taskName": "Stake Lot for Excavation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "uniqueID": 25,
+      "name": "Excavate for foundation",
+      "outlineNumber": "5.5",
+      "outlineLevel": 2,
+      "start": "2008-07-30",
+      "finish": "2008-07-31",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 39,
+          "taskUniqueID": 19,
+          "taskName": "Building Permit Approved",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 45,
+          "taskUniqueID": 23,
+          "taskName": "Stake Lot for Excavation",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 46,
+          "taskUniqueID": 24,
+          "taskName": "Rough grade lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "uniqueID": 26,
+      "name": "Foundation",
+      "outlineNumber": "6",
+      "outlineLevel": 1,
+      "start": "2008-08-01",
+      "finish": "2008-09-03",
+      "duration": "24.0d",
+      "work": "208.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 49,
+      "uniqueID": 27,
+      "name": "Layout footings",
+      "outlineNumber": "6.1",
+      "outlineLevel": 2,
+      "start": "2008-08-01",
+      "finish": "2008-08-01",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 47,
+          "taskUniqueID": 25,
+          "taskName": "Excavate for foundation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "uniqueID": 28,
+      "name": "Dig Footings & Install Reinforcing",
+      "outlineNumber": "6.2",
+      "outlineLevel": 2,
+      "start": "2008-08-04",
+      "finish": "2008-08-04",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 49,
+          "taskUniqueID": 27,
+          "taskName": "Layout footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "uniqueID": 29,
+      "name": "Footing Inspection",
+      "outlineNumber": "6.3",
+      "outlineLevel": 2,
+      "start": "2008-08-04",
+      "finish": "2008-08-04",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 50,
+          "taskUniqueID": 28,
+          "taskName": "Dig Footings & Install Reinforcing",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "uniqueID": 30,
+      "name": "Pour footings",
+      "outlineNumber": "6.4",
+      "outlineLevel": 2,
+      "start": "2008-08-05",
+      "finish": "2008-08-05",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 51,
+          "taskUniqueID": 29,
+          "taskName": "Footing Inspection",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "uniqueID": 31,
+      "name": "Pin Footings",
+      "outlineNumber": "6.5",
+      "outlineLevel": 2,
+      "start": "2008-08-06",
+      "finish": "2008-08-06",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 52,
+          "taskUniqueID": 30,
+          "taskName": "Pour footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "uniqueID": 32,
+      "name": "Stock Block, Mortar, Sand",
+      "outlineNumber": "6.6",
+      "outlineLevel": 2,
+      "start": "2008-08-07",
+      "finish": "2008-08-07",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 53,
+          "taskUniqueID": 31,
+          "taskName": "Pin Footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "uniqueID": 33,
+      "name": "Build Block Foundation",
+      "outlineNumber": "6.7",
+      "outlineLevel": 2,
+      "start": "2008-08-08",
+      "finish": "2008-08-28",
+      "duration": "15.0d",
+      "work": "120.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 53,
+          "taskUniqueID": 31,
+          "taskName": "Pin Footings",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 54,
+          "taskUniqueID": 32,
+          "taskName": "Stock Block, Mortar, Sand",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "uniqueID": 35,
+      "name": "Foundation Certification",
+      "outlineNumber": "6.8",
+      "outlineLevel": 2,
+      "start": "2008-08-28",
+      "finish": "2008-08-28",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 55,
+          "taskUniqueID": 33,
+          "taskName": "Build Block Foundation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "uniqueID": 310,
+      "name": "Draw #1 (Location Survey)",
+      "outlineNumber": "6.9",
+      "outlineLevel": 2,
+      "start": "2008-08-28",
+      "finish": "2008-08-28",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 56,
+          "taskUniqueID": 35,
+          "taskName": "Foundation Certification",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "uniqueID": 36,
+      "name": "Fill Block Cores w/ Concrete",
+      "outlineNumber": "6.10",
+      "outlineLevel": 2,
+      "start": "2008-08-29",
+      "finish": "2008-08-29",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 55,
+          "taskUniqueID": 33,
+          "taskName": "Build Block Foundation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "uniqueID": 34,
+      "name": "Steel Delivery",
+      "outlineNumber": "6.11",
+      "outlineLevel": 2,
+      "start": "2008-09-01",
+      "finish": "2008-09-01",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 58,
+          "taskUniqueID": 36,
+          "taskName": "Fill Block Cores w/ Concrete",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "uniqueID": 37,
+      "name": "Set Lintels, Bolts, Cap Block",
+      "outlineNumber": "6.12",
+      "outlineLevel": 2,
+      "start": "2008-09-02",
+      "finish": "2008-09-03",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 59,
+          "taskUniqueID": 34,
+          "taskName": "Steel Delivery",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "uniqueID": 39,
+      "name": "Lumber Delivery",
+      "outlineNumber": "6.13",
+      "outlineLevel": 2,
+      "start": "2008-09-01",
+      "finish": "2008-09-01",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 58,
+          "taskUniqueID": 36,
+          "taskName": "Fill Block Cores w/ Concrete",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "uniqueID": 38,
+      "name": "Waterproofing and Drain Tile",
+      "outlineNumber": "6.14",
+      "outlineLevel": 2,
+      "start": "2008-09-02",
+      "finish": "2008-09-02",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 61,
+          "taskUniqueID": 39,
+          "taskName": "Lumber Delivery",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "uniqueID": 0,
+      "name": null,
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 1,
+      "uniqueID": 1,
+      "name": "Sales Department",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 2,
+      "uniqueID": 2,
+      "name": "Construction Dept.",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 3,
+      "uniqueID": 3,
+      "name": "Sales Dept.",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 4,
+      "uniqueID": 10,
+      "name": "Client",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 5,
+      "uniqueID": 13,
+      "name": "County",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 6,
+      "uniqueID": 14,
+      "name": "County Sediment Control Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 7,
+      "uniqueID": 15,
+      "name": "Sediment Control Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 8,
+      "uniqueID": 16,
+      "name": "Department of Permits & Licenses",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 9,
+      "uniqueID": 19,
+      "name": "Building Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 10,
+      "uniqueID": 20,
+      "name": "Mason",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 11,
+      "uniqueID": 21,
+      "name": "Civil Engineer",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 12,
+      "uniqueID": 22,
+      "name": "Concrete Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 13,
+      "uniqueID": 23,
+      "name": "Concrete Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 14,
+      "uniqueID": 24,
+      "name": "Excavation Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 15,
+      "uniqueID": 25,
+      "name": "Masonry Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 16,
+      "uniqueID": 26,
+      "name": "Block Masonry Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 17,
+      "uniqueID": 27,
+      "name": "Steel Supplier",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 18,
+      "uniqueID": 28,
+      "name": "Lumber Supplier",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 19,
+      "uniqueID": 29,
+      "name": "Waterproofing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 20,
+      "uniqueID": 30,
+      "name": "Lender",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 21,
+      "uniqueID": 31,
+      "name": "Framing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 22,
+      "uniqueID": 32,
+      "name": "Pest Control Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 23,
+      "uniqueID": 33,
+      "name": "Mechanical Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 24,
+      "uniqueID": 34,
+      "name": "Plumbing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 25,
+      "uniqueID": 35,
+      "name": "Field Superintendent",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 26,
+      "uniqueID": 36,
+      "name": "Plumbing Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 27,
+      "uniqueID": 37,
+      "name": "Electrical Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 28,
+      "uniqueID": 38,
+      "name": "Alarm Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 29,
+      "uniqueID": 39,
+      "name": "Client's Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 30,
+      "uniqueID": 40,
+      "name": "Electrical Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 31,
+      "uniqueID": 41,
+      "name": "Roofing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 32,
+      "uniqueID": 42,
+      "name": "Exterior Trim Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 33,
+      "uniqueID": 44,
+      "name": "Brick Masonry Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 34,
+      "uniqueID": 45,
+      "name": "Insulation Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 35,
+      "uniqueID": 46,
+      "name": "BGE Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 36,
+      "uniqueID": 47,
+      "name": "Drywall Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 37,
+      "uniqueID": 48,
+      "name": "Painting Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 38,
+      "uniqueID": 49,
+      "name": "Trim Supplier",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 39,
+      "uniqueID": 50,
+      "name": "Interior Trim Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 40,
+      "uniqueID": 51,
+      "name": "Cabinet Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 41,
+      "uniqueID": 54,
+      "name": "Deck Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 42,
+      "uniqueID": 55,
+      "name": "Driveway Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 43,
+      "uniqueID": 56,
+      "name": "Seeding Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 44,
+      "uniqueID": 57,
+      "name": "Hardware Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 45,
+      "uniqueID": 58,
+      "name": "Mirror Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 46,
+      "uniqueID": 59,
+      "name": "Tile Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 47,
+      "uniqueID": 60,
+      "name": "Hardwood Floor Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 48,
+      "uniqueID": 61,
+      "name": "Carpet Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 49,
+      "uniqueID": 62,
+      "name": "Department of Licensing & Permits",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 50,
+      "uniqueID": 63,
+      "name": "Paint Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 51,
+      "uniqueID": 64,
+      "name": "Window Cleaning Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 52,
+      "uniqueID": 65,
+      "name": "Cleaning Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 53,
+      "uniqueID": 66,
+      "name": "Superintendent",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 54,
+      "uniqueID": 67,
+      "name": "Builder",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 55,
+      "uniqueID": 68,
+      "name": "Punch Out Crew",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 56,
+      "uniqueID": 69,
+      "name": "Stucco Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 57,
+      "uniqueID": 70,
+      "name": "Sales Manager",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 58,
+      "uniqueID": 71,
+      "name": "Construction Manager",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 59,
+      "uniqueID": 72,
+      "name": "Project Manager",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    }
+  ],
+  "assignments": [
+    {
+      "taskID": 2,
+      "taskUniqueID": 287,
+      "taskName": "Supply Lot Sale Agreement",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 3,
+      "taskUniqueID": 273,
+      "taskName": "Supply Construction Agreement",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 4,
+      "taskUniqueID": 2,
+      "taskName": "Supply Contract Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 5,
+      "taskUniqueID": 262,
+      "taskName": "Supply Contract Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 6,
+      "taskUniqueID": 3,
+      "taskName": "Supply Contract Site Plan",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 7,
+      "taskUniqueID": 289,
+      "taskName": "Secure Financing",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 8,
+      "taskUniqueID": 290,
+      "taskName": "Construction Loan Settlement",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 10,
+      "taskUniqueID": 275,
+      "taskName": "Review & Finalize Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 11,
+      "taskUniqueID": 276,
+      "taskName": "Review & Finalize Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 12,
+      "taskUniqueID": 277,
+      "taskName": "Review & Finalize Site Plan",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 13,
+      "taskUniqueID": 282,
+      "taskName": "Print Construction Drawings",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 14,
+      "taskUniqueID": 284,
+      "taskName": "Approve Revised Plans",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 15,
+      "taskUniqueID": 285,
+      "taskName": "Approve Revised Specifications",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 16,
+      "taskUniqueID": 291,
+      "taskName": "Approve Revised Site Plan",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 18,
+      "taskUniqueID": 146,
+      "taskName": "Make Copies of Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 19,
+      "taskUniqueID": 278,
+      "taskName": "Make Copies of Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 20,
+      "taskUniqueID": 5,
+      "taskName": "Distribute Plans & Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 21,
+      "taskUniqueID": 6,
+      "taskName": "Receive Bids",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 23,
+      "taskUniqueID": 279,
+      "taskName": "Sales",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 24,
+      "taskUniqueID": 280,
+      "taskName": "Construction",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 25,
+      "taskUniqueID": 8,
+      "taskName": "Execute Subcontractor Agreements",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 27,
+      "taskUniqueID": 10,
+      "taskName": "Schedule lot stake-out",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 28,
+      "taskUniqueID": 11,
+      "taskName": "Stake lot",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 29,
+      "taskUniqueID": 293,
+      "taskName": "File Grading Permit Application",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 30,
+      "taskUniqueID": 12,
+      "taskName": "File Building Permit Application",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 31,
+      "taskUniqueID": 13,
+      "taskName": "Post Lot Identification",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 32,
+      "taskUniqueID": 15,
+      "taskName": "Meet Sediment Control Inspector",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 33,
+      "taskUniqueID": 14,
+      "taskName": "Walk Lot w/ Owner",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 34,
+      "taskUniqueID": 16,
+      "taskName": "Install Construction Entrance",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 35,
+      "taskUniqueID": 153,
+      "taskName": "Install Sediment Controls",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 36,
+      "taskUniqueID": 17,
+      "taskName": "Sediment Control Insp.",
+      "resourceID": 7,
+      "resourceUniqueID": 15,
+      "resourceName": "Sediment Control Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 37,
+      "taskUniqueID": 18,
+      "taskName": "Grading Permit Issued",
+      "resourceID": 7,
+      "resourceUniqueID": 15,
+      "resourceName": "Sediment Control Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 38,
+      "taskUniqueID": 147,
+      "taskName": "County Permit Process",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 39,
+      "taskUniqueID": 19,
+      "taskName": "Building Permit Approved",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 40,
+      "taskUniqueID": 281,
+      "taskName": "Pay Permit Fees and Excise Taxes",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 41,
+      "taskUniqueID": 294,
+      "taskName": "Building Permit Issued",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 43,
+      "taskUniqueID": 21,
+      "taskName": "Clear Lot",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 44,
+      "taskUniqueID": 22,
+      "taskName": "Strip Topsoil & Stockpile",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 45,
+      "taskUniqueID": 23,
+      "taskName": "Stake Lot for Excavation",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 46,
+      "taskUniqueID": 24,
+      "taskName": "Rough grade lot",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 47,
+      "taskUniqueID": 25,
+      "taskName": "Excavate for foundation",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 49,
+      "taskUniqueID": 27,
+      "taskName": "Layout footings",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 50,
+      "taskUniqueID": 28,
+      "taskName": "Dig Footings & Install Reinforcing",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 51,
+      "taskUniqueID": 29,
+      "taskName": "Footing Inspection",
+      "resourceID": 9,
+      "resourceUniqueID": 19,
+      "resourceName": "Building Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 52,
+      "taskUniqueID": 30,
+      "taskName": "Pour footings",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 53,
+      "taskUniqueID": 31,
+      "taskName": "Pin Footings",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 54,
+      "taskUniqueID": 32,
+      "taskName": "Stock Block, Mortar, Sand",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 55,
+      "taskUniqueID": 33,
+      "taskName": "Build Block Foundation",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 56,
+      "taskUniqueID": 35,
+      "taskName": "Foundation Certification",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 57,
+      "taskUniqueID": 310,
+      "taskName": "Draw #1 (Location Survey)",
+      "resourceID": 20,
+      "resourceUniqueID": 30,
+      "resourceName": "Lender",
+      "units": 10000
+    },
+    {
+      "taskID": 58,
+      "taskUniqueID": 36,
+      "taskName": "Fill Block Cores w/ Concrete",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 59,
+      "taskUniqueID": 34,
+      "taskName": "Steel Delivery",
+      "resourceID": 17,
+      "resourceUniqueID": 27,
+      "resourceName": "Steel Supplier",
+      "units": 10000
+    },
+    {
+      "taskID": 60,
+      "taskUniqueID": 37,
+      "taskName": "Set Lintels, Bolts, Cap Block",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 61,
+      "taskUniqueID": 39,
+      "taskName": "Lumber Delivery",
+      "resourceID": 18,
+      "resourceUniqueID": 28,
+      "resourceName": "Lumber Supplier",
+      "units": 10000
+    },
+    {
+      "taskID": 62,
+      "taskUniqueID": 38,
+      "taskName": "Waterproofing and Drain Tile",
+      "resourceID": 19,
+      "resourceUniqueID": 29,
+      "resourceName": "Waterproofing Subcontractor",
+      "units": 10000
+    }
+  ]
+}
