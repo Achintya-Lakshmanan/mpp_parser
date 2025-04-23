@@ -5,6 +5,9 @@ const crypto = require('crypto');
 const { mapProjectData } = require('./dataMapper');
 const daxDefs = require('./daxDefinitions');
 
+// Helper to create UTF‑16LE buffers without BOM
+const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
+
 /**
  * Generate a basic .pbit (Power BI template) file from project data JSON.
  * This is a minimal placeholder implementation: it packages the raw JSON and a README into a zip
@@ -21,8 +24,8 @@ async function generatePbit(projectData, outputPath) {
     const zip = new JSZip();
     // Mandatory parts for a valid PBIT/PBIX container
     // Version file tells Power BI which schema version the package conforms to.
-    // Encode as UTF‑16LE with BOM, as real PBIX/PBIT packages do.
-    const versionBuf = Buffer.from('\uFEFF1.28', 'utf16le');
+    // Encode as UTF‑16LE without BOM (Power BI accepts this for Version part)
+    const versionBuf = Buffer.from('1.28', 'utf16le');
     zip.file('Version', versionBuf, { compression: 'STORE' });
     // Richer [Content_Types].xml
     zip.file('[Content_Types].xml',
@@ -63,20 +66,20 @@ async function generatePbit(projectData, outputPath) {
     }
 
     // Simple tables JSON
-    zip.file('tables/tasks.json', JSON.stringify(mapped.tasks));
-    zip.file('tables/resources.json', JSON.stringify(mapped.resources));
-    zip.file('tables/assignments.json', JSON.stringify(mapped.assignments));
-    zip.file('tables/properties.json', JSON.stringify(mapped.properties));
+    zip.file('tables/tasks.json', toUtf16(mapped.tasks));
+    zip.file('tables/resources.json', toUtf16(mapped.resources));
+    zip.file('tables/assignments.json', toUtf16(mapped.assignments));
+    zip.file('tables/properties.json', toUtf16(mapped.properties));
 
     // Relationships placeholder (tasks.id -> assignments.taskID etc.)
     const relationships = [
       { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
       { fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
     ];
-    zip.file('relationships.json', JSON.stringify(relationships));
+    zip.file('relationships.json', toUtf16(relationships));
 
     // DAX measures
-    zip.file('dax/measures.json', JSON.stringify(daxDefs));
+    zip.file('dax/measures.json', toUtf16(daxDefs));
 
     // --- Minimal Power BI template structure placeholders ---
     // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema matching Desktop expectations
@@ -100,10 +103,10 @@ async function generatePbit(projectData, outputPath) {
         ],
       },
     };
-    zip.file('DataModelSchema', JSON.stringify(dataModelSchema));
+    zip.file('DataModelSchema', toUtf16(dataModelSchema));
 
     // DiagramLayout file
-    zip.file('DiagramLayout', JSON.stringify({
+    zip.file('DiagramLayout', toUtf16({
       version: '1.1.0',
       diagrams: [
         {
@@ -122,8 +125,8 @@ async function generatePbit(projectData, outputPath) {
       defaultDiagram: 'All tables',
     }));
 
-    // Settings file
-    zip.file('Settings', JSON.stringify({
+    // Settings file – encode as UTF‑16LE without BOM
+    const settingsObj = {
       Version: 4,
       ReportSettings: {},
       QueriesSettings: {
@@ -131,10 +134,12 @@ async function generatePbit(projectData, outputPath) {
         RelationshipImportEnabled: true,
         Version: '2.141.602.0',
       },
-    }));
+    };
+    const settingsBuf = Buffer.from(JSON.stringify(settingsObj), 'utf16le');
+    zip.file('Settings', settingsBuf, { compression: 'STORE' });
 
     // Metadata file
-    zip.file('Metadata', JSON.stringify({
+    zip.file('Metadata', toUtf16({
       Version: 5,
       AutoCreatedRelationships: [],
       FileDescription: 'Created by MPP Parser',
@@ -176,10 +181,11 @@ async function generatePbit(projectData, outputPath) {
         '{"version":"5.59","themeCollection":{"baseTheme":{"name":"CY24SU10","version":"5.62","type":2}},"activeSectionIndex":0,"defaultDrillFilterOtherVisuals":true,"settings":{"useNewFilterPaneExperience":true,"allowChangeFilterTypes":true,"useStylableVisualContainerHeader":true,"queryLimitOption":6,"useEnhancedTooltips":true,"exportDataMode":1,"useDefaultAggregateDisplayName":true},"objects":{"section":[{"properties":{"verticalAlignment":{"expr":{"Literal":{"Value":"\'Top\'"}}}}}]}}',
       layoutOptimization: 0,
     };
-    reportFolder.file('Layout', JSON.stringify(layout));
+    const layoutBuf = Buffer.from(JSON.stringify(layout), 'utf16le');
+    reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
 
     reportFolder.folder('StaticResources').folder('SharedResources').folder('BaseThemes')
-      .file('CY24SU10.json', JSON.stringify({
+      .file('CY24SU10.json', toUtf16({
         "name": "CY24SU10",
         "dataColors": ["#118DFF", "#12239E", "#E66C37", "#6B007B", "#E044A7", "#744EC2", "#D9B300", "#D64550", "#197278", "#1AAB40", "#15C6F4", "#4092FF", "#FFA058", "#BE5DC9", "#F472D0", "#B5A1FF", "#C4A200", "#FF8080", "#00DBBC", "#5BD667", "#0091D5", "#4668C5", "#FF6300", "#99008A", "#EC008C", "#533285", "#99700A", "#FF4141", "#1F9A85", "#25891C", "#0057A2", "#002050", "#C94F0F", "#450F54", "#B60064", "#34124F", "#6A5A29", "#1AAB40", "#BA141A", "#0C3D37", "#0B511F"],
         "foreground": "#252423",
