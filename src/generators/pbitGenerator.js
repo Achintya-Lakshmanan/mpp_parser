@@ -20,9 +20,9 @@ async function generatePbit(projectData, outputPath) {
     const zip = new JSZip();
     // Mandatory parts for a valid PBIT/PBIX container
     // Version file tells Power BI which schema version the package conforms to.
-    // Use a Desktop build number that is known to be accepted. Any non‑empty string works, but
-    // sticking to an authentic-looking version avoids false positives during validation.
-    zip.file('Version', '14.0.177.0');
+    // Encode as UTF‑16LE with BOM, as real PBIX/PBIT packages do.
+    const versionBuf = Buffer.from('\uFEFF14.0.177.0', 'utf16le');
+    zip.file('Version', versionBuf, { compression: 'STORE' });
     // Richer [Content_Types].xml
     zip.file('[Content_Types].xml',
       '<?xml version="1.0" encoding="UTF-8"?>\n' +
