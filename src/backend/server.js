@@ -8,6 +8,15 @@ const { exec } = require('child_process');
 const os = require('os');
 const https = require('https');
 require('dotenv').config();
+const winston = require('winston');
+const Ajv = require('ajv');
+
+// Logger setup
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console()],
+});
 
 const app = express();
 
@@ -18,12 +27,12 @@ try {
   const configPath = path.join(__dirname, '..', '..', 'config', `config.${ENV}.json`);
   if (fs.existsSync(configPath)) {
     config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-    console.log(`Loaded configuration for ${ENV} from ${configPath}`);
+    logger.info(`Loaded configuration for ${ENV} from ${configPath}`);
   } else {
-    console.warn(`Config file not found for ENV=${ENV} at ${configPath}. Using defaults.`);
+    logger.warn(`Config file not found for ENV=${ENV} at ${configPath}. Using defaults.`);
   }
 } catch (err) {
-  console.error('Failed to load configuration:', err);
+  logger.error('Failed to load configuration:', err);
 }
 
 const port = process.env.PORT || config.port || 3001;
@@ -35,10 +44,26 @@ const GENERATOR_DIR_REL = config.generatorDir || path.join('src', 'generator');
 // At the top of the file, after require statements
 const execPromise = promisify(exec);
 
+// AJV setup & schema
+const ajv = new Ajv({ allErrors: true });
+let validateProject;
+try {
+  const schemaPath = path.join(__dirname, 'schemas', 'project-schema.json');
+  if (fs.existsSync(schemaPath)) {
+    const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+    validateProject = ajv.compile(schema);
+    logger.info('Project schema loaded for validation');
+  } else {
+    logger.warn('Project schema not found; validation disabled');
+  }
+} catch (err) {
+  logger.error('Failed to load/compile schema:', err);
+}
+
 // Function to download a file from a URL
 const downloadFile = (url, dest) => {
   return new Promise((resolve, reject) => {
-    console.log(`Downloading ${url}`);
+    logger.log(`Downloading ${url}`);
     const file = fs.createWriteStream(dest);
 
     https
@@ -46,7 +71,7 @@ const downloadFile = (url, dest) => {
         if (response.statusCode === 404) {
           file.close();
           fs.unlink(dest, () => {});
-          console.error(`File not found (404): ${url}`);
+          logger.error(`File not found (404): ${url}`);
           reject(new Error(`File not found (404): ${url}`));
           return;
         }
@@ -61,14 +86,14 @@ const downloadFile = (url, dest) => {
         response.pipe(file);
         file.on('finish', () => {
           file.close(() => {
-            console.log(`Successfully downloaded ${url}`);
+            logger.log(`Successfully downloaded ${url}`);
             resolve(dest);
           });
         });
       })
       .on('error', (err) => {
         fs.unlink(dest, () => {});
-        console.error(`Error downloading ${url}: ${err.message}`);
+        logger.error(`Error downloading ${url}: ${err.message}`);
         reject(err);
       });
   });
@@ -76,6 +101,11 @@ const downloadFile = (url, dest) => {
 
 // Enable CORS
 app.use(cors());
+
+// Health-check endpoint
+app.get('/api/health', (_req, res) => {
+  res.json({ status: 'ok' });
+});
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -117,7 +147,7 @@ const parseWithJava = async (filePath) => {
       try {
         // 1. Copy required JAR files from local lib directory to temp lib directory
         const sourceLibDir = path.join(__dirname, 'lib');
-        console.log('Copying JAR files from:', sourceLibDir);
+        logger.log('Copying JAR files from:', sourceLibDir);
 
         // Get list of JAR files in the source directory
         const jarFiles = fs.readdirSync(sourceLibDir).filter((file) => file.endsWith('.jar'));
@@ -131,13 +161,13 @@ const parseWithJava = async (filePath) => {
           const sourcePath = path.join(sourceLibDir, jarFile);
           const destPath = path.join(libDir, jarFile);
           await fs.promises.copyFile(sourcePath, destPath);
-          console.log(`Copied ${jarFile}`);
+          logger.log(`Copied ${jarFile}`);
         }
 
-        console.log('JAR files copied successfully');
+        logger.log('JAR files copied successfully');
 
         // 2. Download additional required dependencies
-        console.log('Downloading additional dependencies...');
+        logger.log('Downloading additional dependencies...');
         const dependencyUrls = [
           'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar',
           'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.14.2/jackson-databind-2.14.2.jar',
@@ -167,8 +197,8 @@ const parseWithJava = async (filePath) => {
           }));
 
         if (failedDownloads.length > 0) {
-          console.warn(`${failedDownloads.length} dependencies failed to download:`);
-          failedDownloads.forEach((failure) => console.warn(`- ${failure.url}: ${failure.reason}`));
+          logger.warn(`${failedDownloads.length} dependencies failed to download:`);
+          failedDownloads.forEach((failure) => logger.warn(`- ${failure.url}: ${failure.reason}`));
 
           // Only throw if all critical Jackson libraries failed
           const allJacksonFailed = [
@@ -182,11 +212,11 @@ const parseWithJava = async (filePath) => {
           }
         }
 
-        console.log(
+        logger.log(
           `Downloaded ${downloadResults.filter((r) => r.status === 'fulfilled').length} dependencies successfully`
         );
       } catch (err) {
-        console.error('Error preparing JAR files:', err);
+        logger.error('Error preparing JAR files:', err);
         await fs.promises.rm(tempDir, { recursive: true, force: true });
         reject(new Error(`Error preparing JAR files: ${err.message}`));
         return;
@@ -428,13 +458,13 @@ public class MPPParser {
       const pathSeparator = process.platform === 'win32' ? ';' : ':';
 
       // Compile the Java code
-      console.log('Compiling Java code...');
+      logger.log('Compiling Java code...');
       const classpath = `"${mpxjJarPath}${pathSeparator}${poiJarPath}${pathSeparator}${libDir}/*"`;
 
       try {
         await execPromise(`javac -cp ${classpath} ${javaFilePath}`);
       } catch (err) {
-        console.error('Error executing Java parser:', err);
+        logger.error('Error executing Java parser:', err);
         await fs.promises.rm(tempDir, { recursive: true, force: true });
         reject(new Error(`Error compiling Java code: ${err.message}`));
         return;
@@ -448,7 +478,7 @@ public class MPPParser {
 
         // If stderr exists, log it but continue unless it indicates a critical error
         if (stderr && typeof stderr === 'string') {
-          console.error('Java execution stderr:', stderr);
+          logger.error('Java execution stderr:', stderr);
 
           // Check for fatal errors that should stop execution
           if (
@@ -461,15 +491,15 @@ public class MPPParser {
         }
 
         // Debug the stdout before parsing
-        console.log('Java stdout type:', typeof stdout);
+        logger.log('Java stdout type:', typeof stdout);
         if (stdout) {
-          console.log('Java stdout length:', stdout.length);
-          console.log(
+          logger.log('Java stdout length:', stdout.length);
+          logger.log(
             'Java stdout preview:',
             stdout.substring(0, 200) + (stdout.length > 200 ? '...' : '')
           );
         } else {
-          console.log('Java stdout is empty or null');
+          logger.log('Java stdout is empty or null');
         }
 
         // Ensure we have valid JSON before parsing
@@ -493,21 +523,21 @@ public class MPPParser {
         try {
           parsedData = JSON.parse(jsonStr);
         } catch (parseError) {
-          console.error('JSON parsing error:', parseError);
-          console.error('Attempted to parse:', jsonStr);
+          logger.error('JSON parsing error:', parseError);
+          logger.error('Attempted to parse:', jsonStr);
 
           // Try one more approach - look for obvious JSON structure
           try {
             const match = stdout.match(/\{[\s\S]*\}/);
             if (match) {
               parsedData = JSON.parse(match[0]);
-              console.log('Successfully parsed JSON using regex extraction');
+              logger.log('Successfully parsed JSON using regex extraction');
             } else {
               throw new Error('No JSON object found in output');
             }
           } catch (secondError) {
-            console.error('Second parsing attempt failed:', secondError);
-            console.error('Full raw stdout:', stdout);
+            logger.error('Second parsing attempt failed:', secondError);
+            logger.error('Full raw stdout:', stdout);
             throw new Error(`Failed to parse Java output as JSON: ${parseError.message}`);
           }
         }
@@ -517,12 +547,12 @@ public class MPPParser {
 
         resolve(parsedData);
       } catch (err) {
-        console.error('Error executing Java program:', err);
+        logger.error('Error executing Java program:', err);
         await fs.promises.rm(tempDir, { recursive: true, force: true });
         reject(new Error(`Error executing Java program: ${err.message}`));
       }
     } catch (err) {
-      console.error('Error in parseWithJava:', err);
+      logger.error('Error in parseWithJava:', err);
       reject(err);
     }
   });
@@ -546,15 +576,24 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
     // Parse the project file using Java
     const projectData = await parseWithJava(req.file.path);
 
+    // Validate parsed data if schema available
+    if (validateProject) {
+      const valid = validateProject(projectData);
+      if (!valid) {
+        logger.error('Project data failed schema validation', validateProject.errors);
+        return res.status(400).json({ error: 'Parsed data invalid', details: validateProject.errors });
+      }
+    }
+
     // NEW: Persist project data as JSON for generator usage
     try {
       const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
       await fs.promises.mkdir(generatorDir, { recursive: true });
       const outputPath = path.join(generatorDir, 'project-data.json');
       await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
-      console.log(`Saved project data JSON to ${outputPath}`);
+      logger.log(`Saved project data JSON to ${outputPath}`);
     } catch (writeErr) {
-      console.error('Failed to write project data JSON:', writeErr);
+      logger.error('Failed to write project data JSON:', writeErr);
     }
 
     // Clean up the uploaded file
@@ -563,12 +602,21 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
     // Return the parsed data
     res.json(projectData);
   } catch (error) {
-    console.error('Error processing file:', error);
+    logger.error('Error processing file:', error);
     res.status(500).json({ error: error.message || 'Failed to process file' });
   }
 });
 
+// --- Global error handler ---
+// Must be after all other middlewares/routes
+/* eslint-disable no-unused-vars */
+app.use((err, req, res, _next) => {
+  logger.error('Unhandled error:', err);
+  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
+});
+/* eslint-enable no-unused-vars */
+
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  logger.info(`Server running on port ${port}`);
 });

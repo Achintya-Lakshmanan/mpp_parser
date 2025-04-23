@@ -1,5 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { generatePbit } from '../generators/pbitGenerator';
 
 console.log('Power BI Template Generator bootstrap');
 // Placeholder implementation – will iterate through JSON files and create .pbit
@@ -22,5 +25,11 @@ console.log(`Reading JSON from ${inputJson}`);
 const jsonData = JSON.parse(fs.readFileSync(inputJson, 'utf-8'));
 console.log('JSON keys:', Object.keys(jsonData));
 
-// TODO: Transform and package into .pbit
-console.log(`Will write PBIT to ${outputPbit}`);
+// Call generator
+console.log(`Generating PBIT to ${outputPbit}`);
+generatePbit(jsonData, outputPbit)
+  .then(() => console.log('PBIT template generated.'))
+  .catch((err: unknown) => {
+    console.error('Failed to generate PBIT:', err);
+    process.exit(1);
+  });
