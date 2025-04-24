@@ -23,6 +23,14 @@ async function generatePbit(projectData, outputPath) {
     validateMappedData(mapped);
     // validateVisualDefs(mapped, visualDefs);
 
+    // Create lineage tag keymap for tables
+    const tableLineageTags = {};
+    Object.keys(mapped)
+      .filter(tableName => Array.isArray(mapped[tableName]) && mapped[tableName].length > 0)
+      .forEach(tableName => {
+        tableLineageTags[tableName] = crypto.randomUUID();
+      });
+
     const zip = new JSZip();
     // Mandatory parts for a valid PBIT/PBIX container
     // Version file tells Power BI which schema version the package conforms to.
@@ -85,7 +93,7 @@ async function generatePbit(projectData, outputPath) {
     // DAX measures
     zip.file('dax/measures.json', toUtf16(daxDefs));
     // Visual, layout, filter definitions
-    zip.file('report/visuals.json', toUtf16(visualDefs));
+    zip.file('Report/visuals.json', toUtf16(visualDefs));
 
     // --- Minimal Power BI template structure placeholders ---
     // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema matching Desktop expectations
@@ -99,7 +107,15 @@ async function generatePbit(projectData, outputPath) {
         {
           ordinal: 0,
           scrollPosition: { x: 0, y: 0 },
-          nodes: [],
+          nodes: Object.keys(mapped)
+            .filter(tableName => Array.isArray(mapped[tableName]) && mapped[tableName].length > 0)
+            .map((tableName, index) => ({
+              location: { x: index * 250, y: 0 },
+              nodeIndex: tableName,
+              nodeLineageTag: tableLineageTags[tableName],
+              size: { height: 300, width: 234 },
+              zIndex: 0
+            })),
           name: 'All tables',
           zoomValue: 100,
           pinKeyFieldsToTop: false,
@@ -111,7 +127,7 @@ async function generatePbit(projectData, outputPath) {
       selectedDiagram: 'All tables',
       defaultDiagram: 'All tables',
     }));
-
+    
     // Settings file – encode as UTF‑16LE without BOM
     const settingsObj = {
       Version: 4,
@@ -119,6 +135,7 @@ async function generatePbit(projectData, outputPath) {
       QueriesSettings: {
         TypeDetectionEnabled: true,
         RelationshipImportEnabled: true,
+        RunBackgroundAnalysis:true,
         Version: '2.141.602.0',
       },
     };
@@ -317,6 +334,51 @@ function buildDataModelSchema(mapped, measuresArr) {
       expression: m.expression,
       formatString: '',
     }));
+    
+    // Generate table-specific M expression
+    let mExpression;
+    if (tblName === 'properties') {
+      // Special handling for properties table with property expansion
+      mExpression = `let
+        Source = Json.Document(File.Contents("tables/${tblName}.json")),
+        #"Converted to Table" = Table.FromRecords(Source),
+        #"Expanded properties" = Table.ExpandRecordColumn(#"Converted to Table", "properties", {"name", "author", "company", "startDate", "finishDate", "statusDate", "currentDate", "taskCount", "resourceCount", "assignmentCount"}, {"properties.name", "properties.author", "properties.company", "properties.startDate", "properties.finishDate", "properties.statusDate", "properties.currentDate", "properties.taskCount", "properties.resourceCount", "properties.assignmentCount"}),
+        #"Changed Type" = Table.TransformColumnTypes(#"Expanded properties",{{"properties.name", type any}, {"properties.author", type text}, {"properties.company", type text}, {"properties.startDate", type date}, {"properties.finishDate", type date}, {"properties.statusDate", type text}, {"properties.currentDate", type date}, {"properties.taskCount", Int64.Type}, {"properties.resourceCount", Int64.Type}, {"properties.assignmentCount", Int64.Type}})
+      in
+        #"Changed Type"`;
+    } else if (tblName === 'tasks') {
+      // Tasks table transformation
+      mExpression = `let
+        Source = Json.Document(File.Contents("tables/${tblName}.json")),
+        #"Converted to Table" = Table.FromRecords(Source),
+        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"name", type text}, {"duration", type number}, {"start", type datetime}, {"finish", type datetime}, {"percentComplete", Percentage.Type}, {"outlineLevel", Int64.Type}, {"work", type number}, {"cost", Currency.Type}})
+      in
+        #"Changed Type"`;
+    } else if (tblName === 'resources') {
+      // Resources table transformation
+      mExpression = `let
+        Source = Json.Document(File.Contents("tables/${tblName}.json")),
+        #"Converted to Table" = Table.FromRecords(Source),
+        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"name", type text}, {"type", type text}, {"email", type text}, {"maxUnits", Percentage.Type}, {"standardRate", Currency.Type}, {"overtimeRate", Currency.Type}, {"cost", Currency.Type}})
+      in
+        #"Changed Type"`;
+    } else if (tblName === 'assignments') {
+      // Assignments table transformation
+      mExpression = `let
+        Source = Json.Document(File.Contents("tables/${tblName}.json")),
+        #"Converted to Table" = Table.FromRecords(Source),
+        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"taskID", type text}, {"resourceID", type text}, {"units", Percentage.Type}, {"work", type number}, {"cost", Currency.Type}})
+      in
+        #"Changed Type"`;
+    } else {
+      // Generic transformation for any other tables
+      mExpression = `let
+        Source = Json.Document(File.Contents("tables/${tblName}.json")),
+        #"Converted to Table" = Table.FromRecords(Source)
+      in
+        #"Converted to Table"`;
+    }
+    
     tables.push({
       name: tblName,
       columns: mkColumns(rows[0]),
@@ -326,23 +388,61 @@ function buildDataModelSchema(mapped, measuresArr) {
           name: 'Partition',
           mode: 'import',
           source: {
-            type: 'calculated',
-            expression: `let
-                Source = Json.Document(File.Contents("tables/${tblName}.json")),
-                #"Converted to Table" = Table.FromRecords(Source)
-             in
-                #"Converted to Table"`,
+            type: 'm',
+            expression: mExpression,
           },
+        },
+      ], 
+      annotations: [
+        {
+          name: "PBI_NavigationStepName",
+          value: "Navigation"
+        },
+        {
+          name: 'PBI_ResultType',
+          value: 'Table',
         },
       ],
     });
   }
   return {
     name: crypto.randomUUID(),
-    compatibilityLevel: 1565,
+    compatibilityLevel: 1550,
     model: {
       culture: 'en-US',
+      dataAccessOptions: {
+        legacyRedirects: true,
+        returnErrorValuesAsNull: true
+      },
+      defaultPowerBIDataSourceVersion: "powerBI_V3",
+      sourceQueryCulture: "en-US",
       tables,
+      cultures: [
+        {
+          name: "en-US",
+          linguisticMetadata: {
+            content: {
+              Version: "1.0.0",
+              Language: "en-US"
+            },
+            contentType: "json"
+          },
+        },
+      ],
+      annotations: [
+        {
+          name: "PBI_QueryOrder",
+          value: "[\"project-data\"]"
+        },
+        {
+          name: "__PBI_TimeIntelligenceEnabled",
+          value: "1"
+        },
+        {
+          name: "PBIDesktopVersion",
+          value: "2.141.1253.0 (25.03)+74f9999a1e95f78c739f3ea2b96ba340e9ba8729"
+        }
+      ]
     },
   };
 }

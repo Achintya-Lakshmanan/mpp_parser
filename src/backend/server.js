@@ -14,9 +14,25 @@ const Ajv = require('ajv');
 // Logger setup
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.simple(),
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ level, message, timestamp }) => {
+      return `${timestamp} ${level}: ${message}`;
+    })
+  ),
   transports: [new winston.transports.Console()],
 });
+
+// Add custom log level handlers to ensure all log calls are properly formatted
+const originalLog = logger.log;
+logger.log = function(message, ...args) {
+  // If message is a string and no additional args, convert to object format
+  if (typeof message === 'string' && args.length === 0) {
+    return originalLog.call(this, { level: 'info', message });
+  }
+  // Otherwise, proceed with normal logging
+  return originalLog.call(this, message, ...args);
+};
 
 const app = express();
 
@@ -161,7 +177,7 @@ const parseWithJava = async (filePath) => {
       try {
         // 1. Copy required JAR files from local lib directory to temp lib directory
         const sourceLibDir = path.join(__dirname, 'lib');
-        logger.log('Copying JAR files from:', sourceLibDir);
+        logger.info('Copying JAR files from:', sourceLibDir);
 
         // Get list of JAR files in the source directory
         const jarFiles = fs.readdirSync(sourceLibDir).filter((file) => file.endsWith('.jar'));
@@ -175,13 +191,13 @@ const parseWithJava = async (filePath) => {
           const sourcePath = path.join(sourceLibDir, jarFile);
           const destPath = path.join(libDir, jarFile);
           await fs.promises.copyFile(sourcePath, destPath);
-          logger.log(`Copied ${jarFile}`);
+          logger.info(`Copied ${jarFile}`);
         }
 
-        logger.log('JAR files copied successfully');
+        logger.info('JAR files copied successfully');
 
         // 2. Download additional required dependencies
-        logger.log('Downloading additional dependencies...');
+        logger.info('Downloading additional dependencies...');
         const dependencyUrls = [
           'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar',
           'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.14.2/jackson-databind-2.14.2.jar',
@@ -190,7 +206,7 @@ const parseWithJava = async (filePath) => {
           'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar',
           'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar',
           'https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar',
-          'https://repo1.maven.org/maven2/com/rtfparserkit/rtfparserkit/1.10.0/rtfparserkit-1.10.0.jar',
+          'https://repo1.maven.org/maven2/com/github/joniles/rtfparserkit/1.16.0/rtfparserkit-1.16.0.jar',
         ];
 
         // Download each dependency, but continue if some fail
@@ -226,7 +242,7 @@ const parseWithJava = async (filePath) => {
           }
         }
 
-        logger.log(
+        logger.info(
           `Downloaded ${downloadResults.filter((r) => r.status === 'fulfilled').length} dependencies successfully`
         );
       } catch (err) {
@@ -472,7 +488,7 @@ public class MPPParser {
       const pathSeparator = process.platform === 'win32' ? ';' : ':';
 
       // Compile the Java code
-      logger.log('Compiling Java code...');
+      logger.info('Compiling Java code...');
       const classpath = `"${mpxjJarPath}${pathSeparator}${poiJarPath}${pathSeparator}${libDir}/*"`;
 
       try {
@@ -505,15 +521,15 @@ public class MPPParser {
         }
 
         // Debug the stdout before parsing
-        logger.log('Java stdout type:', typeof stdout);
+        logger.info('Java stdout type:', typeof stdout);
         if (stdout) {
-          logger.log('Java stdout length:', stdout.length);
-          logger.log(
+          logger.info('Java stdout length:', stdout.length);
+          logger.info(
             'Java stdout preview:',
             stdout.substring(0, 200) + (stdout.length > 200 ? '...' : '')
           );
         } else {
-          logger.log('Java stdout is empty or null');
+          logger.info('Java stdout is empty or null');
         }
 
         // Ensure we have valid JSON before parsing
@@ -545,7 +561,7 @@ public class MPPParser {
             const match = stdout.match(/\{[\s\S]*\}/);
             if (match) {
               parsedData = JSON.parse(match[0]);
-              logger.log('Successfully parsed JSON using regex extraction');
+              logger.info('Successfully parsed JSON using regex extraction');
             } else {
               throw new Error('No JSON object found in output');
             }
@@ -616,7 +632,7 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       await fs.promises.mkdir(generatorDir, { recursive: true });
       const outputPath = path.join(generatorDir, 'project-data.json');
       await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
-      logger.log(`Saved project data JSON to ${outputPath}`);
+      logger.info(`Saved project data JSON to ${outputPath}`);
     } catch (writeErr) {
       logger.error('Failed to write project data JSON:', writeErr);
     }
