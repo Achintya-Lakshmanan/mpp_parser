@@ -394,9 +394,12 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     // Step 4: Ensure proper types - could be enhanced with actual type detection
     TypedTable = Table.TransformColumnTypes(TableData, {}, null),
     #"Expanded predecessors" = Table.ExpandListColumn(TypedTable, "predecessors"),
-    #"Expanded predecessors1" = Table.ExpandRecordColumn(#"Expanded predecessors", "predecessors", {"taskID", "taskUniqueID", "taskName", "type", "lag"}, {"predecessors.taskID", "predecessors.taskUniqueID", "predecessors.taskName", "predecessors.type", "predecessors.lag"})
+    #"Expanded predecessors1" = Table.ExpandRecordColumn(#"Expanded predecessors", "predecessors", {"taskID", "taskUniqueID", "taskName", "type", "lag"}, {"predecessors.taskID", "predecessors.taskUniqueID", "predecessors.taskName", "predecessors.type", "predecessors.lag"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded predecessors1",{{"start", type date}, {"finish", type date}}),
+    #"Added Custom" = Table.AddColumn(#"Changed Type", "Custom", each [finish]-[start]),
+    #"Inserted Total Days" = Table.AddColumn(#"Added Custom", "Total Days", each Duration.TotalDays([Custom]), type number)
 in
-    #"Expanded predecessors1"`;
+    #"Inserted Total Days"`;
     } else {
       // Dynamic M expression that uses the actual table data for each table
       mExpression = `let
