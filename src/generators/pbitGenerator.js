@@ -10,11 +10,12 @@ const visualDefs = require('../visuals');
 const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
 
 class PbitGenerator {
-  constructor(mapped, outputPath) {
+  constructor(mapped, outputPath, daxDefinitions) {
     this.mapped = mapped;
     this.outputPath = outputPath;
     this.zip = new JSZip();
     this.tableLineageTags = {};
+    this.daxDefinitions = daxDefinitions; // Store merged DAX defs
   }
 
   createLineageTags() {
@@ -81,18 +82,20 @@ class PbitGenerator {
   addRelationships() {
     const rels = [
       // { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
-      { name: tableLineageTags.resources, fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
+      { name: this.tableLineageTags.resources, fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
     ];
     this.zip.file('relationships.json', toUtf16(rels));
   }
 
   addDaxAndVisuals() {
-    this.zip.file('dax/measures.json', toUtf16(daxDefs));
+    // Use the DAX definitions passed to the constructor
+    this.zip.file('dax/measures.json', toUtf16(this.daxDefinitions));
     this.zip.file('Report/visuals.json', toUtf16(visualDefs));
   }
 
   addDataModelSchema() {
-    const schema = buildDataModelSchema(this.mapped, daxDefs, this.tableLineageTags);
+    // Pass the constructor's DAX definitions to buildDataModelSchema
+    const schema = buildDataModelSchema(this.mapped, this.daxDefinitions, this.tableLineageTags);
     this.zip.file('DataModelSchema', toUtf16(schema));
   }
 
@@ -212,14 +215,49 @@ class PbitGenerator {
               return [];
             }
           })()],
-          config: '{}',
-          displayOption: 1,
-          width: 1280,
-          height: 720,
+          config: (() => { // Use an IIFE to load and handle errors
+            try {
+              const reportConfig = require(path.join(__dirname, '../config/reportConfigBase.json'));
+              // Since the content is already a string containing JSON, we just return it.
+              // If it were a JS object, we'd use JSON.stringify(reportConfig)
+              // Correction: require automatically parses JSON, so we need to stringify it.
+              return JSON.stringify(reportConfig); 
+            } catch (error) {
+              console.error("Error loading reportConfigBase.json:", error);
+              // Return a default empty config string on error
+              return '{}';
+            }
+          })(),
+          layoutOptimization: 0,
+          publicCustomVisuals: [
+            "InforiverCharts582F6C55AB6442EF8FA129089285CB47"
+          ],
+          theme: (() => {
+            try {
+              const themeConfig = require(path.join(__dirname, '../config/themeBase.json'));
+              // Stringify the loaded JSON object for the PBIX file
+              return JSON.stringify(themeConfig);
+            } catch (error) {
+              console.error("Error loading themeBase.json:", error);
+              // Return a default empty theme string on error
+              return '{}'; // Or a minimal valid theme JSON string if necessary
+            }
+          })()
         },
       ],
-      config:
-        '{"version":"5.59","themeCollection":{"baseTheme":{"name":"CY24SU10","version":"5.62","type":2}},"activeSectionIndex":0,"defaultDrillFilterOtherVisuals":true,"linguisticSchemaSyncVersion":2,"settings":{"useNewFilterPaneExperience":true,"allowChangeFilterTypes":true,"useStylableVisualContainerHeader":true,"queryLimitOption":6,"useEnhancedTooltips":true,"exportDataMode":1,"useDefaultAggregateDisplayName":true},"objects":{"section":[{"properties":{"verticalAlignment":{"expr":{"Literal":{"Value":"Top"}}}}}]}}',
+      config: (() => { // Use an IIFE to load and handle errors
+        try {
+          const reportConfig = require(path.join(__dirname, '../config/reportConfigBase.json'));
+          // Since the content is already a string containing JSON, we just return it.
+          // If it were a JS object, we'd use JSON.stringify(reportConfig)
+          // Correction: require automatically parses JSON, so we need to stringify it.
+          return JSON.stringify(reportConfig); 
+        } catch (error) {
+          console.error("Error loading reportConfigBase.json:", error);
+          // Return a default empty config string on error
+          return '{}';
+        }
+      })(),
       layoutOptimization: 0,
       publicCustomVisuals: [
         "InforiverCharts582F6C55AB6442EF8FA129089285CB47"
@@ -228,81 +266,9 @@ class PbitGenerator {
     const layoutBuf = Buffer.from(JSON.stringify(layout), 'utf16le');
     reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
 
-    reportFolder.folder('StaticResources').folder('SharedResources').folder('BaseThemes')
-      .file('CY24SU10.json', JSON.stringify({
-        "name": "CY24SU10",
-        "dataColors": ["#118DFF", "#12239E", "#E66C37", "#6B007B", "#E044A7", "#744EC2", "#D9B300", "#D64550", "#197278", "#1AAB40", "#15C6F4", "#4092FF", "#FFA058", "#BE5DC9", "#F472D0", "#B5A1FF", "#C4A200", "#FF8080", "#00DBBC", "#5BD667", "#0091D5", "#4668C5", "#FF6300", "#99008A", "#EC008C", "#533285", "#99700A", "#FF4141", "#1F9A85", "#25891C", "#0057A2", "#002050", "#C94F0F", "#450F54", "#B60064", "#34124F", "#6A5A29", "#1AAB40", "#BA141A", "#0C3D37", "#0B511F"],
-        "foreground": "#252423",
-        "foregroundNeutralSecondary": "#605E5C",
-        "foregroundNeutralTertiary": "#B3B0AD",
-        "background": "#FFFFFF",
-        "backgroundLight": "#F3F2F1",
-        "backgroundNeutral": "#C8C6C4",
-        "tableAccent": "#118DFF",
-        "good": "#1AAB40",
-        "neutral": "#D9B300",
-        "bad": "#D64554",
-        "maximum": "#118DFF",
-        "center": "#D9B300",
-        "minimum": "#DEEFFF",
-        "null": "#FF7F48",
-        "hyperlink": "#0078d4",
-        "visitedHyperlink": "#0078d4",
-        "textClasses": {
-          "callout": { "fontSize": 45, "fontFace": "DIN", "color": "#252423" },
-          "title": { "fontSize": 12, "fontFace": "DIN", "color": "#252423" },
-          "header": { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#252423" },
-          "label": { "fontSize": 10, "fontFace": "Segoe UI", "color": "#252423" }
-        },
-        "visualStyles": {
-          "*": {
-            "*": {
-              "*": [{ "wordWrap": true }], "line": [{ "transparency": 0 }],
-              "outline": [{ "transparency": 0 }], "plotArea": [{ "transparency": 0 }],
-              "categoryAxis": [{ "showAxisTitle": true, "gridlineStyle": "dotted", "concatenateLabels": false }],
-              "valueAxis": [{ "showAxisTitle": true, "gridlineStyle": "dotted" }],
-              "y2Axis": [{ "show": true }], "title": [{ "titleWrap": true }], "lineStyles": [{ "strokeWidth": 3 }],
-              "wordWrap": [{ "show": true }],
-              "background": [{ "show": true, "transparency": 0 }],
-              "border": [{ "width": 1 }],
-              "outspacePane": [{ "backgroundColor": { "solid": { "color": "#ffffff" } }, "transparency": 0, "border": true, "borderColor": { "solid": { "color": "#B3B0AD" } } }],
-              "filterCard": [{ "$id": "Applied", "transparency": 0, "foregroundColor": { "solid": { "color": "#252423" } }, "border": true }, { "$id": "Available", "transparency": 0, "foregroundColor": { "solid": { "color": "#252423" } }, "border": true }]
-            }
-          }, "scatterChart": { "*": { "bubbles": [{ "bubbleSize": -10, "markerRangeType": "auto" }], "general": [{ "responsive": true }], "fillPoint": [{ "show": true }], "legend": [{ "showGradientLegend": true }] } },
-          "lineChart": { "*": { "general": [{ "responsive": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }], "forecast": [{ "matchSeriesInterpolation": true }] } }, "map": { "*": { "bubbles": [{ "bubbleSize": -10, "markerRangeType": "auto" }] } },
-          "azureMap": { "*": { "bubbleLayer": [{ "bubbleRadius": 8, "minBubbleRadius": 8, "maxRadius": 40 }], "barChart": [{ "barHeight": 3, "thickness": 3 }] } }, "pieChart": {
-            "*": {
-              "legend": [{ "show": true, "position": "RightCenter" }],
-              "labels": [{ "labelStyle": "Data value, percent of total" }]
-            }
-          }, "donutChart": { "*": { "legend": [{ "show": true, "position": "RightCenter" }], "labels": [{ "labelStyle": "Data value, percent of total" }] } },
-          "pivotTable": { "*": { "rowHeaders": [{ "showExpandCollapseButtons": true, "legacyStyleDisabled": true }] } }, "multiRowCard": { "*": { "card": [{ "outlineWeight": 2, "barShow": true, "barWeight": 2 }] } }, "kpi": { "*": { "trendline": [{ "transparency": 20 }] } },
-          "cardVisual": { "*": { "layout": [{ "maxTiles": 3 }], "overflow": [{ "type": 0 }], "image": [{ "fixedSize": false }, { "imageAreaSize": 50 }] } }, "advancedSlicerVisual": { "*": { "layout": [{ "maxTiles": 3 }] } }, "slicer": {
-            "*": {
-              "general": [{ "responsive": true }], "date": [{ "hideDatePickerButton": false }],
-              "items": [{ "padding": 4, "accessibilityContrastProperties": true }]
-            }
-          }, "waterfallChart": { "*": { "general": [{ "responsive": true }] } }, "columnChart": { "*": { "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "clusteredColumnChart": { "*": { "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } },
-          "hundredPercentStackedColumnChart": { "*": { "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "barChart": { "*": { "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "clusteredBarChart": {
-            "*": {
-              "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }],
-              "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }]
-            }
-          },
-          "hundredPercentStackedBarChart": { "*": { "general": [{ "responsive": true }], "legend": [{ "showGradientLegend": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "areaChart": { "*": { "general": [{ "responsive": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "stackedAreaChart": {
-            "*": {
-              "general": [{ "responsive": true }],
-              "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }]
-            }
-          }, "lineClusteredColumnComboChart": { "*": { "general": [{ "responsive": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "lineStackedColumnComboChart": { "*": { "general": [{ "responsive": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "ribbonChart": {
-            "*": {
-              "general": [{ "responsive": true }],
-              "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }], "valueAxis": [{ "show": true }]
-            }
-          }, "hundredPercentStackedAreaChart": { "*": { "general": [{ "responsive": true }], "smallMultiplesLayout": [{ "backgroundTransparency": 0, "gridLineType": "inner" }] } }, "group": { "*": { "background": [{ "show": false }] } }, "basicShape": { "*": { "background": [{ "show": false }], "general": [{ "keepLayerOrder": true }], "visualHeader": [{ "show": false }] } }, "shape": { "*": { "background": [{ "show": false }], "general": [{ "keepLayerOrder": true }], "visualHeader": [{ "show": false }] } }, "image": { "*": { "background": [{ "show": false }], "general": [{ "keepLayerOrder": true }], "visualHeader": [{ "show": false }], "lockAspect": [{ "show": true }] } }, "actionButton": { "*": { "background": [{ "show": false }], "visualHeader": [{ "show": false }] } }, "pageNavigator": { "*": { "background": [{ "show": false }], "visualHeader": [{ "show": false }] } }, "bookmarkNavigator": { "*": { "background": [{ "show": false }], "visualHeader": [{ "show": false }] } }, "textbox": { "*": { "general": [{ "keepLayerOrder": true }], "visualHeader": [{ "show": false }] } }, "page": { "*": { "outspace": [{ "color": { "solid": { "color": "#FFFFFF" } } }], "background": [{ "transparency": 100 }] } }
-        }
-      }));
-
+    // this.zip.file('Report/StaticResources/SharedResources/BaseThemes/CY24SU10.json', toUtf16(
+    //   JSON.stringify({ ... })
+    // ));
   }
 
   async build() {
@@ -338,14 +304,56 @@ class PbitGenerator {
  *
  * @param {object} projectData - Parsed project JSON.
  * @param {string} outputPath - Absolute path where the .pbit file will be written.
+ * @param {string} [customDaxPath] - Optional absolute path to a JSON file containing custom DAX definitions.
  */
-async function generatePbit(projectData, outputPath) {
+async function generatePbit(projectData, outputPath, customDaxPath) {
   try {
     const mapped = mapProjectData(projectData);
     validateMappedData(mapped);
-    const generator = new PbitGenerator(mapped, outputPath);
+    // validateVisualDefs(mapped, visualDefs);
+
+    // --- Load and Merge DAX Definitions --- 
+    let finalDaxDefs = [...daxDefs]; // Start with standard definitions
+
+    if (customDaxPath) {
+      try {
+        if (await fs.pathExists(customDaxPath)) {
+          const customDaxStr = await fs.readFile(customDaxPath, 'utf8');
+          const customDax = JSON.parse(customDaxStr);
+          if (!Array.isArray(customDax)) {
+            throw new Error('Custom DAX file must contain a JSON array.');
+          }
+          
+          // Merge/Override logic
+          const daxMap = new Map();
+          // Add standard definitions first
+          finalDaxDefs.forEach(def => daxMap.set(`${def.table}::${def.name}`, def));
+          // Add/override with custom definitions
+          customDax.forEach(def => {
+            if (def.table && def.name && def.expression) {
+              daxMap.set(`${def.table}::${def.name}`, def);
+            } else {
+              console.warn(`Skipping invalid custom DAX definition: ${JSON.stringify(def)}`);
+            }
+          });
+          finalDaxDefs = Array.from(daxMap.values());
+          console.log(`Loaded and merged ${customDax.length} custom DAX definitions from ${customDaxPath}`);
+        } else {
+          console.warn(`Custom DAX file not found: ${customDaxPath}`);
+        }
+      } catch (err) {
+        console.error(`Error loading or merging custom DAX definitions from ${customDaxPath}:`, err);
+        // Decide if we should proceed with standard DAX or throw error
+        // For now, proceed with standard DAX
+        finalDaxDefs = [...daxDefs];
+      }
+    }
+    // --- End DAX Loading/Merging ---
+
+    const generator = new PbitGenerator(mapped, outputPath, finalDaxDefs);
     await generator.build();
     await generator.save();
+
   } catch (err) {
     throw new Error(`PBIT generation failed: ${err.message || err}`);
   }
@@ -503,16 +511,7 @@ in
       },
       defaultPowerBIDataSourceVersion: "powerBI_V3",
       sourceQueryCulture: "en-US",
-      tables,
-      // relationships: [ 
-      //   { 
-      //     name: tableLineageTags.assignments,
-      //     fromTable: "assignments",
-      //     fromColumn: "resourceID",
-      //     toTable: "resources",
-      //     toColumn: "id",
-      //   },
-      // ],
+      tables, 
       cultures: [
         {
           name: "en-US",
@@ -536,7 +535,7 @@ in
         },
         {
           name: "PBIDesktopVersion",
-          value: "2.122.746.0"
+          value: "2.141.1451.0"
         }
       ]
     },
