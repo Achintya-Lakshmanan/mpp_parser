@@ -310,7 +310,7 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
   try {
     const mapped = mapProjectData(projectData);
     validateMappedData(mapped);
-    // validateVisualDefs(mapped, visualDefs);
+    validateVisualDefs(mapped, visualDefs);
 
     // --- Load and Merge DAX Definitions --- 
     let finalDaxDefs = [...daxDefs]; // Start with standard definitions
