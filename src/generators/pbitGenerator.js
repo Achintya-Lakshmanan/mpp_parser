@@ -9,35 +9,28 @@ const visualDefs = require('../visuals');
 // Helper to create UTF‑16LE buffers without BOM
 const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
 
-/**
- * Generate a basic .pbit (Power BI template) file from project data JSON.
- * This is a minimal placeholder implementation: it packages the raw JSON and a README into a zip
- * with .pbit extension. Real-world templates require additional layout and DataModel files.
- *
- * @param {object} projectData - Parsed project JSON.
- * @param {string} outputPath - Absolute path where the .pbit file will be written.
- */
-async function generatePbit(projectData, outputPath) {
-  try {
-    const mapped = mapProjectData(projectData);
-    validateMappedData(mapped);
-    // validateVisualDefs(mapped, visualDefs);
+class PbitGenerator {
+  constructor(mapped, outputPath) {
+    this.mapped = mapped;
+    this.outputPath = outputPath;
+    this.zip = new JSZip();
+    this.tableLineageTags = {};
+  }
 
-    // Create lineage tag keymap for tables
-    const tableLineageTags = {};
-    Object.keys(mapped)
-      .filter(tableName => Array.isArray(mapped[tableName]) && mapped[tableName].length > 0)
+  createLineageTags() {
+    Object.keys(this.mapped)
+      .filter(tableName => Array.isArray(this.mapped[tableName]) && this.mapped[tableName].length > 0)
       .forEach(tableName => {
-        tableLineageTags[tableName] = crypto.randomUUID();
+        this.tableLineageTags[tableName] = crypto.randomUUID();
       });
+  }
 
-    const zip = new JSZip();
-    // Mandatory parts for a valid PBIT/PBIX container
-    // Version file tells Power BI which schema version the package conforms to.
-    // Encode as UTF‑16LE without BOM (Power BI accepts this for Version part)
+  addVersion() {
     const versionBuf = Buffer.from('1.28', 'utf16le');
-    zip.file('Version', versionBuf, { compression: 'STORE' });
-    // Richer [Content_Types].xml encoded UTF‑8 with BOM
+    this.zip.file('Version', versionBuf, { compression: 'STORE' });
+  }
+
+  addContentTypes() {
     const contentTypesXml =
       '<?xml version="1.0" encoding="utf-8"?>\n' +
       '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n' +
@@ -51,108 +44,114 @@ async function generatePbit(projectData, outputPath) {
       '  <Override PartName="/SecurityBindings" ContentType="" />\n' +
       '</Types>';
     const ctBuf = Buffer.from('\uFEFF' + contentTypesXml, 'utf8');
-    zip.file('[Content_Types].xml', ctBuf, { compression: 'STORE' });
+    this.zip.file('[Content_Types].xml', ctBuf, { compression: 'STORE' });
+  }
 
-    // Root relationships file (required by OPC spec)
-    zip.folder('_rels').file('.rels',
-      '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>');
+  addRootRelationships() {
+    this.zip
+      .folder('_rels')
+      .file(
+        '.rels',
+        '<?xml version="1.0" encoding="UTF-8"?>\n' +
+          '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>'
+      );
+  }
 
-    // Load SecurityBindings from baseTemplate.pbit if available
+  async addSecurityBindings() {
     let securityBuf = null;
     try {
       const bpPath = path.join(__dirname, 'baseTemplate.pbit');
       const bpData = await fs.readFile(bpPath);
       const bpZip = await JSZip.loadAsync(bpData);
       const secFile = bpZip.file('SecurityBindings');
-      if (secFile) {
-        securityBuf = await secFile.async('nodebuffer');
-      }
+      if (secFile) securityBuf = await secFile.async('nodebuffer');
     } catch (_) {
-      // ignore – we'll fallback below
+      // fallback to empty
     }
-    if (securityBuf) {
-      zip.file('SecurityBindings', securityBuf, { compression: 'STORE' });
-    } else {
-      zip.file('SecurityBindings', '');
-    }
+    this.zip.file('SecurityBindings', securityBuf || '', { compression: 'STORE' });
+  }
 
-    // Simple tables JSON
-    zip.file('tables/tasks.json', toUtf16(mapped.tasks));
-    zip.file('tables/resources.json', toUtf16(mapped.resources));
-    zip.file('tables/assignments.json', toUtf16(mapped.assignments));
-    zip.file('tables/properties.json', toUtf16(mapped.properties));
+  addTables() {
+    this.zip.file('tables/tasks.json', toUtf16(this.mapped.tasks));
+    this.zip.file('tables/resources.json', toUtf16(this.mapped.resources));
+    this.zip.file('tables/assignments.json', toUtf16(this.mapped.assignments));
+    this.zip.file('tables/properties.json', toUtf16(this.mapped.properties));
+  }
 
-    // Relationships placeholder (tasks.id -> assignments.taskID etc.)
-    const relationships = [
+  addRelationships() {
+    const rels = [
       { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
       { fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
     ];
-    zip.file('relationships.json', toUtf16(relationships));
+    this.zip.file('relationships.json', toUtf16(rels));
+  }
 
-    // DAX measures
-    zip.file('dax/measures.json', toUtf16(daxDefs));
-    // Visual, layout, filter definitions
-    zip.file('Report/visuals.json', toUtf16(visualDefs));
+  addDaxAndVisuals() {
+    this.zip.file('dax/measures.json', toUtf16(daxDefs));
+    this.zip.file('Report/visuals.json', toUtf16(visualDefs));
+  }
 
-    // --- Minimal Power BI template structure placeholders ---
-    // According to reverse‑engineered PBIX/PBIT structure, include DataModelSchema matching Desktop expectations
-    const dataModelSchema = buildDataModelSchema(mapped, daxDefs);
-    zip.file('DataModelSchema', toUtf16(dataModelSchema));
+  addDataModelSchema() {
+    const schema = buildDataModelSchema(this.mapped, daxDefs);
+    this.zip.file('DataModelSchema', toUtf16(schema));
+  }
 
-    // DiagramLayout file
-    zip.file('DiagramLayout', toUtf16({
-      version: '1.1.0',
-      diagrams: [
-        {
-          ordinal: 0,
-          scrollPosition: { x: 0, y: 0 },
-          nodes: Object.keys(mapped)
-            .filter(tableName => Array.isArray(mapped[tableName]) && mapped[tableName].length > 0)
-            .map((tableName, index) => ({
-              location: { x: index * 250, y: 0 },
-              nodeIndex: tableName,
-              nodeLineageTag: tableLineageTags[tableName],
-              size: { height: 300, width: 234 },
-              zIndex: 0
-            })),
-          name: 'All tables',
-          zoomValue: 100,
-          pinKeyFieldsToTop: false,
-          showExtraHeaderInfo: false,
-          hideKeyFieldsWhenCollapsed: false,
-          tablesLocked: false,
-        },
-      ],
-      selectedDiagram: 'All tables',
-      defaultDiagram: 'All tables',
-    }));
+  addDiagramLayout() {
+    this.zip.file(
+      'DiagramLayout',
+      toUtf16({
+        version: '1.1.0',
+        diagrams: [
+          {
+            ordinal: 0,
+            scrollPosition: { x: 0, y: 0 },
+            nodes: Object.keys(this.mapped)
+              .filter(t => Array.isArray(this.mapped[t]) && this.mapped[t].length)
+              .map((t, i) => ({
+                location: { x: i * 250, y: 0 },
+                nodeIndex: t,
+                nodeLineageTag: this.tableLineageTags[t],
+                size: { height: 300, width: 234 },
+                zIndex: 0,
+              })),
+            name: 'All tables',
+            zoomValue: 100,
+            pinKeyFieldsToTop: false,
+            showExtraHeaderInfo: false,
+            hideKeyFieldsWhenCollapsed: false,
+            tablesLocked: false,
+          },
+        ],
+        selectedDiagram: 'All tables',
+        defaultDiagram: 'All tables',
+      })
+    );
+  }
 
-    // Settings file – encode as UTF‑16LE without BOM
+  addSettings() {
     const settingsObj = {
       Version: 4,
       ReportSettings: {},
-      QueriesSettings: {
-        TypeDetectionEnabled: true,
-        RelationshipImportEnabled: true,
-        RunBackgroundAnalysis: true,
-        Version: '2.141.602.0',
-      },
+      QueriesSettings: { TypeDetectionEnabled: true, RelationshipImportEnabled: true, RunBackgroundAnalysis: true, Version: '2.141.602.0' },
     };
-    const settingsBuf = Buffer.from(JSON.stringify(settingsObj), 'utf16le');
-    zip.file('Settings', settingsBuf, { compression: 'STORE' });
+    this.zip.file('Settings', Buffer.from(JSON.stringify(settingsObj), 'utf16le'), { compression: 'STORE' });
+  }
 
-    // Metadata file
-    zip.file('Metadata', toUtf16({
-      Version: 5,
-      AutoCreatedRelationships: [],
-      FileDescription: 'Created by MPP Parser',
-      CreatedFrom: 'Cloud',
-      CreatedFromRelease: '2025.03',
-    }));
+  addMetadata() {
+    this.zip.file(
+      'Metadata',
+      toUtf16({
+        Version: 5,
+        AutoCreatedRelationships: [],
+        FileDescription: 'Created by MPP Parser',
+        CreatedFrom: 'Cloud',
+        CreatedFromRelease: '2025.03',
+      })
+    );
+  }
 
-    // Detailed report layout JSON
-    const reportFolder = zip.folder('Report');
+  addReportLayout() {
+    const reportFolder = this.zip.folder('Report');
     const layout = {
       id: 0,
       resourcePackages: [
@@ -263,19 +262,50 @@ async function generatePbit(projectData, outputPath) {
         }
       }));
 
-    zip.file('README.txt', 'Auto‑generated minimal Power BI template. Replace with real model.');
+    this.zip.file('README.txt', 'Auto-generated minimal Power BI template. Replace with real model.');
+  }
 
-    const buffer = await zip.generateAsync({ type: 'nodebuffer' });
-    await fs.ensureDir(path.dirname(outputPath));
-    await fs.writeFile(outputPath, buffer);
+  async build() {
+    this.createLineageTags();
+    this.addVersion();
+    this.addContentTypes();
+    this.addRootRelationships();
+    await this.addSecurityBindings();
+    this.addTables();
+    this.addRelationships();
+    this.addDaxAndVisuals();
+    this.addDataModelSchema();
+    this.addDiagramLayout();
+    this.addSettings();
+    this.addMetadata();
+    this.addReportLayout();
+  }
 
-    // Quick validation – ensure file exists and not empty
-    const stats = await fs.stat(outputPath);
-    if (stats.size === 0) {
-      throw new Error('Generated .pbit file is empty');
-    }
+  async save() {
+    const buffer = await this.zip.generateAsync({ type: 'nodebuffer' });
+    await fs.ensureDir(path.dirname(this.outputPath));
+    await fs.writeFile(this.outputPath, buffer);
+    const stats = await fs.stat(this.outputPath);
+    if (stats.size === 0) throw new Error('Generated .pbit file is empty');
+  }
+}
+
+/**
+ * Generate a basic .pbit (Power BI template) file from project data JSON.
+ * This is a minimal placeholder implementation: it packages the raw JSON and a README into a zip
+ * with .pbit extension. Real-world templates require additional layout and DataModel files.
+ *
+ * @param {object} projectData - Parsed project JSON.
+ * @param {string} outputPath - Absolute path where the .pbit file will be written.
+ */
+async function generatePbit(projectData, outputPath) {
+  try {
+    const mapped = mapProjectData(projectData);
+    validateMappedData(mapped);
+    const generator = new PbitGenerator(mapped, outputPath);
+    await generator.build();
+    await generator.save();
   } catch (err) {
-    // Re-throw with clearer context
     throw new Error(`PBIT generation failed: ${err.message || err}`);
   }
 }
