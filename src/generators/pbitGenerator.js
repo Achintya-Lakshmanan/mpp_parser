@@ -359,15 +359,104 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
   }
 }
 
-// Basic sanity checks on mapped data before packaging
+// Enhanced data validation for mapped data
 function validateMappedData(mapped) {
+  const errors = [];
+  const taskIds = new Set();
+  const resourceIds = new Set();
+
+  // 1. Basic Existence Checks
   if (!mapped.tasks?.length) {
-    throw new Error('No tasks found in project data – cannot generate template');
+    errors.push('No tasks found in project data – cannot generate template.');
+    // Cannot proceed with further validation if tasks are missing
+    if (errors.length > 0) throw new Error(`Data validation failed:\n- ${errors.join('\n- ')}`);
   }
   if (!mapped.resources?.length) {
-    throw new Error('No resources found in project data');
+    // Allow generation without resources, but log a warning? Or error? Let's error for now.
+    errors.push('No resources found in project data.');
   }
-  // Additional checks can be added here (e.g., assignments integrity)
+
+  // 2. Task Validation (IDs, Dates)
+  mapped.tasks.forEach((task, index) => {
+    const taskIdDesc = `Task (ID: ${task.id}, Name: "${task.name}", Index: ${index})`;
+    // Check ID uniqueness
+    if (task.id == null) {
+      errors.push(`${taskIdDesc}: Missing 'id'.`);
+    } else if (taskIds.has(task.id)) {
+      errors.push(`${taskIdDesc}: Duplicate Task ID found.`);
+    } else {
+      taskIds.add(task.id);
+    }
+    // Check Date Formats (simple check for now)
+    if (task.start && new Date(task.start).toString() === 'Invalid Date') {
+      errors.push(`${taskIdDesc}: Invalid 'start' date format: ${task.start}.`);
+    }
+    if (task.finish && new Date(task.finish).toString() === 'Invalid Date') {
+      errors.push(`${taskIdDesc}: Invalid 'finish' date format: ${task.finish}.`);
+    }
+    // Check Predecessor Task IDs exist (if predecessors array exists)
+    if (Array.isArray(task.predecessors)) {
+      task.predecessors.forEach((pred, pIndex) => {
+         if (pred.taskID == null) {
+            errors.push(`${taskIdDesc}, Predecessor ${pIndex}: Missing 'taskID'.`);
+         }
+         // Note: Cannot check if pred.taskID exists in taskIds *yet*, need to collect all taskIds first.
+         // This check is moved after the loop.
+      });
+    }
+  });
+
+  // 3. Resource Validation (IDs)
+  mapped.resources.forEach((res, index) => {
+    const resIdDesc = `Resource (ID: ${res.id}, Name: "${res.name}", Index: ${index})`;
+    if (res.id == null) {
+       errors.push(`${resIdDesc}: Missing 'id'.`);
+    } else if (resourceIds.has(res.id)) {
+      errors.push(`${resIdDesc}: Duplicate Resource ID found.`);
+    } else {
+      resourceIds.add(res.id);
+    }
+  });
+
+  // 4. Assignment Validation (Relationship Integrity)
+  if (mapped.assignments?.length) {
+    mapped.assignments.forEach((assignment, index) => {
+      const assignDesc = `Assignment (Index: ${index}, TaskID: ${assignment.taskID}, ResourceID: ${assignment.resourceID})`;
+      if (assignment.taskID == null) {
+         errors.push(`${assignDesc}: Missing 'taskID'.`);
+      } else if (!taskIds.has(assignment.taskID)) {
+        errors.push(`${assignDesc}: References non-existent Task ID ${assignment.taskID}.`);
+      }
+      if (assignment.resourceID == null) {
+         errors.push(`${assignDesc}: Missing 'resourceID'.`);
+      } else if (!resourceIds.has(assignment.resourceID)) {
+        // Only flag if resources exist
+        if (mapped.resources?.length) {
+          errors.push(`${assignDesc}: References non-existent Resource ID ${assignment.resourceID}.`);
+        }
+      }
+    });
+  }
+
+  // 5. Predecessor Validation (Relationship Integrity - Part 2)
+   mapped.tasks.forEach((task, index) => {
+     if (Array.isArray(task.predecessors)) {
+       const taskIdDesc = `Task (ID: ${task.id}, Name: "${task.name}", Index: ${index})`;
+       task.predecessors.forEach((pred, pIndex) => {
+         if (pred.taskID != null && !taskIds.has(pred.taskID)) {
+            errors.push(`${taskIdDesc}, Predecessor ${pIndex} (ID: ${pred.taskID}): References non-existent Task ID ${pred.taskID}.`);
+         }
+       });
+     }
+   });
+
+  // Final Error Check
+  if (errors.length > 0) {
+    throw new Error(`Data validation failed:\n- ${errors.join('\n- ')}`);
+  }
+
+  // If we reach here, basic validation passed
+  console.log("Data validation passed successfully.");
 }
 
 // Validate visuals against mapped table schema
