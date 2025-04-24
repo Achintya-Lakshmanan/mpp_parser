@@ -535,6 +535,10 @@ in
         {
           name: "__PBI_TimeIntelligenceEnabled",
           value: "1"
+        },
+        {
+          name: "PBIDesktopVersion",
+          value: "2.122.746.0"
         }
       ]
     },
