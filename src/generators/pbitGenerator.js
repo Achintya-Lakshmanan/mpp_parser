@@ -257,7 +257,9 @@ class PbitGenerator {
           // Return a default empty config string on error
           return '{}';
         }
-      })(),
+      })(), 
+      //config": "{\"objects\":{}}", for pbix
+      displayOption: 0,
       layoutOptimization: 0,
       publicCustomVisuals: [
         "InforiverCharts582F6C55AB6442EF8FA129089285CB47"
