@@ -80,8 +80,8 @@ class PbitGenerator {
 
   addRelationships() {
     const rels = [
-      { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
-      { fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
+      // { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
+      { name: tableLineageTags.resources, fromTable: 'resources', fromCol: 'id', toTable: 'assignments', toCol: 'resourceID' },
     ];
     this.zip.file('relationships.json', toUtf16(rels));
   }
@@ -92,7 +92,7 @@ class PbitGenerator {
   }
 
   addDataModelSchema() {
-    const schema = buildDataModelSchema(this.mapped, daxDefs);
+    const schema = buildDataModelSchema(this.mapped, daxDefs, this.tableLineageTags);
     this.zip.file('DataModelSchema', toUtf16(schema));
   }
 
@@ -272,7 +272,7 @@ class PbitGenerator {
     this.addRootRelationships();
     await this.addSecurityBindings();
     this.addTables();
-    this.addRelationships();
+    // this.addRelationships();
     this.addDaxAndVisuals();
     this.addDataModelSchema();
     this.addDiagramLayout();
@@ -353,7 +353,7 @@ function validateVisualDefs(mapped, defs) {
 }
 
 // Build DataModelSchema with tables, columns, and measures
-function buildDataModelSchema(mapped, measuresArr) {
+function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
   const mkColumns = (row, tableName) => Object.keys(row).map((c) => ({
     name: c, 
     dataType: (tableName === 'assignments' && c === 'units') ? 'int64' : 'string', 
@@ -454,20 +454,15 @@ in
       defaultPowerBIDataSourceVersion: "powerBI_V3",
       sourceQueryCulture: "en-US",
       tables,
-      relationships: [
-        { 
-          fromTable: "tasks",
-          fromColumn: "predecessors.taskID",
-          toTable: "assignments",
-          toColumn: "taskID"
-        },
-        { 
-          fromTable: "assignments",
-          fromColumn: "resourceID",
-          toTable: "resources",
-          toColumn: "id"
-        }
-      ],
+      // relationships: [ 
+      //   { 
+      //     name: tableLineageTags.assignments,
+      //     fromTable: "assignments",
+      //     fromColumn: "resourceID",
+      //     toTable: "resources",
+      //     toColumn: "id",
+      //   },
+      // ],
       cultures: [
         {
           name: "en-US",
