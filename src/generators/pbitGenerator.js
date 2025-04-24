@@ -496,8 +496,8 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     name: c,
     dataType: (tableName === 'assignments' && c === 'units') || (tableName === 'tasks' && c === 'percentComplete') ? 'int64' :
       (tableName === 'tasks' && (c === 'start' || c === 'finish')) ? 'dateTime' : 'string',
-    ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? { formatString: 'Long Date' } : {}),
     sourceColumn: c,
+    ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? { formatString: 'Long Date' } : {}),
     summarizeBy: "none",
     annotations: [
       {
@@ -601,6 +601,23 @@ in
       defaultPowerBIDataSourceVersion: "powerBI_V3",
       sourceQueryCulture: "en-US",
       tables, 
+      relationships: [
+      {
+        name: crypto.randomUUID(),
+        fromTable: "tasks",
+        fromColumn: "id",
+        toTable: "assignments",
+        toColumn: "taskID",
+        isActive: false
+      },
+      {
+        name: crypto.randomUUID(),
+        fromTable: "assignments",
+        fromColumn: "resourceID",
+        toTable: "resources",
+        toColumn: "id"
+      }
+    ],
       cultures: [
         {
           name: "en-US",
