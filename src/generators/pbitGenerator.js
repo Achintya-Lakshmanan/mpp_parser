@@ -324,7 +324,18 @@ function validateVisualDefs(mapped, defs) {
 
 // Build DataModelSchema with tables, columns, and measures
 function buildDataModelSchema(mapped, measuresArr) {
-  const mkColumns = (row) => Object.keys(row).map((c) => ({ name: c, dataType: 'string' }));
+  const mkColumns = (row, tableName) => Object.keys(row).map((c) => ({
+    name: c, 
+    dataType: (tableName === 'assignments' && c === 'units') ? 'int64' : 'string', 
+    sourceColumn: c, 
+    summarizeBy: "none",
+    annotations: [
+      {
+        name: "SummarizationSetBy",
+        value: "Automatic"
+      }
+    ]
+  }));
 
   const tables = [];
   for (const [tblName, rows] of Object.entries(mapped)) {
@@ -338,8 +349,27 @@ function buildDataModelSchema(mapped, measuresArr) {
     // Generate table-specific M expression
     let mExpression;
 
-    // Dynamic M expression that uses the actual table data for each table
-    mExpression = `let
+    // Special handling for tasks table to expand predecessors
+    if (tblName === 'tasks') {
+      mExpression = `let
+    // Step 1: Embed JSON string from actual table data
+    RawJson = "${JSON.stringify(rows).replace(/"/g, '""')}",
+ 
+    // Step 2: Parse JSON
+    ParsedJson = Json.Document(RawJson),
+ 
+    // Step 3: Convert to table
+    TableData = Table.FromRecords(ParsedJson),
+ 
+    // Step 4: Ensure proper types - could be enhanced with actual type detection
+    TypedTable = Table.TransformColumnTypes(TableData, {}, null),
+    #"Expanded predecessors" = Table.ExpandListColumn(TypedTable, "predecessors"),
+    #"Expanded predecessors1" = Table.ExpandRecordColumn(#"Expanded predecessors", "predecessors", {"taskID", "taskUniqueID", "taskName", "type", "lag"}, {"predecessors.taskID", "predecessors.taskUniqueID", "predecessors.taskName", "predecessors.type", "predecessors.lag"})
+in
+    #"Expanded predecessors1"`;
+    } else {
+      // Dynamic M expression that uses the actual table data for each table
+      mExpression = `let
     // Step 1: Embed JSON string from actual table data
     RawJson = "${JSON.stringify(rows).replace(/"/g, '""')}",
  
@@ -354,10 +384,11 @@ function buildDataModelSchema(mapped, measuresArr) {
 in
     TypedTable
 `;
+    }
 
     tables.push({
       name: tblName,
-      columns: mkColumns(rows[0]),
+      columns: mkColumns(rows[0], tblName),
       measures: tblMeasures,
       partitions: [
         {
@@ -383,7 +414,7 @@ in
   }
   return {
     name: crypto.randomUUID(),
-    compatibilityLevel: 1550,
+    compatibilityLevel: 1567,
     model: {
       culture: 'en-US',
       dataAccessOptions: {
@@ -393,6 +424,20 @@ in
       defaultPowerBIDataSourceVersion: "powerBI_V3",
       sourceQueryCulture: "en-US",
       tables,
+      relationships: [
+        { 
+          fromTable: "tasks",
+          fromColumn: "predecessors.taskID",
+          toTable: "assignments",
+          toColumn: "taskID"
+        },
+        { 
+          fromTable: "assignments",
+          fromColumn: "resourceID",
+          toTable: "resources",
+          toColumn: "id"
+        }
+      ],
       cultures: [
         {
           name: "en-US",
@@ -408,7 +453,7 @@ in
       annotations: [
         {
           name: "PBI_QueryOrder",
-          value: "[\"project-data\"]"
+          value: "[\"tasks\",\"resources\",\"assignments\",\"properties\"]"
         },
         {
           name: "__PBI_TimeIntelligenceEnabled",

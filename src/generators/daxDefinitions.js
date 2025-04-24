@@ -17,7 +17,8 @@ module.exports = [
   {
     table: 'assignments',
     name: 'Total Units',
-    expression: 'SUM(assignments[units])',
+    expression: 'CALCULATE(SUM(assignments[units]))',
+    formatString: "0",
   },
   // --- Added standard project management KPIs ---
   {
@@ -29,20 +30,16 @@ module.exports = [
     table: 'tasks',
     name: 'Project Completion %',
     expression: 'DIVIDE(SUM(tasks[percentComplete]), COUNTROWS(tasks))',
-  },
-  {
-    table: 'resources',
-    name: 'Total Resource Cost',
-    expression: 'SUM(resources[cost])',
-  },
+  }, 
   {
     table: 'assignments',
     name: 'Average Resource Utilization',
-    expression: 'AVERAGE(assignments[units])',
-  },
-  {
-    table: 'tasks',
-    name: 'Cost per Task',
-    expression: 'DIVIDE(SUM(resources[cost]), COUNTROWS(tasks))',
+    expression: 'CALCULATE(AVERAGE(assignments[units]))',
+    annotations: [
+      {
+        name: "PBI_FormatHint",
+        value: "{\"isGeneralNumber\":true}"
+      }
+    ]
   },
 ];
