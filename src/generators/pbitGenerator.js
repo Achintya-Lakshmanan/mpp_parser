@@ -607,8 +607,7 @@ in
         fromTable: "tasks",
         fromColumn: "id",
         toTable: "assignments",
-        toColumn: "taskID",
-        isActive: false
+        toColumn: "taskID"
       },
       {
         name: crypto.randomUUID(),
