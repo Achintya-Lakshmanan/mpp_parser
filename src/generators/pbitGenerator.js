@@ -53,7 +53,7 @@ class PbitGenerator {
       .file(
         '.rels',
         '<?xml version="1.0" encoding="UTF-8"?>\n' +
-          '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>'
       );
   }
 
@@ -152,17 +152,17 @@ class PbitGenerator {
 
   addCustomVisuals() {
     const customVisualsPath = path.join(__dirname, 'CustomVisuals');
-    
+
     // Add Inforiver Charts custom visual
     const inforiverPath = path.join(customVisualsPath, 'InforiverCharts582F6C55AB6442EF8FA129089285CB47');
-    
+
     // Read and add package.json
     const packageJsonPath = path.join(inforiverPath, 'package.json');
     if (fs.existsSync(packageJsonPath)) {
       const packageJson = fs.readFileSync(packageJsonPath);
       this.zip.file('Report/CustomVisuals/InforiverCharts582F6C55AB6442EF8FA129089285CB47/package.json', packageJson);
     }
-    
+
     // Read and add resources
     const resourcesPath = path.join(inforiverPath, 'resources');
     if (fs.existsSync(resourcesPath)) {
@@ -218,7 +218,7 @@ class PbitGenerator {
         },
       ],
       config:
-        '{"version":"5.59","themeCollection":{"baseTheme":{"name":"CY24SU10","version":"5.62","type":2}},"activeSectionIndex":0,"defaultDrillFilterOtherVisuals":true,"settings":{"useNewFilterPaneExperience":true,"allowChangeFilterTypes":true,"useStylableVisualContainerHeader":true,"queryLimitOption":6,"useEnhancedTooltips":true,"exportDataMode":1,"useDefaultAggregateDisplayName":true},"objects":{"section":[{"properties":{"verticalAlignment":{"expr":{"Literal":{"Value":"\'Top\'"}}}}}]}}',
+        '{"version":"5.59","themeCollection":{"baseTheme":{"name":"CY24SU10","version":"5.62","type":2}},"activeSectionIndex":0,"defaultDrillFilterOtherVisuals":true,"linguisticSchemaSyncVersion":2,"settings":{"useNewFilterPaneExperience":true,"allowChangeFilterTypes":true,"useStylableVisualContainerHeader":true,"queryLimitOption":6,"useEnhancedTooltips":true,"exportDataMode":1,"useDefaultAggregateDisplayName":true},"objects":{"section":[{"properties":{"verticalAlignment":{"expr":{"Literal":{"Value":"Top"}}}}}]}}',
       layoutOptimization: 0,
       publicCustomVisuals: [
         "InforiverCharts582F6C55AB6442EF8FA129089285CB47"
@@ -396,15 +396,21 @@ function validateVisualDefs(mapped, defs) {
 // Build DataModelSchema with tables, columns, and measures
 function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
   const mkColumns = (row, tableName) => Object.keys(row).map((c) => ({
-    name: c, 
-    dataType: (tableName === 'assignments' && c === 'units') || (tableName === 'tasks' && c === 'percentComplete') ? 'int64' : 'string', 
-    sourceColumn: c, 
+    name: c,
+    dataType: (tableName === 'assignments' && c === 'units') || (tableName === 'tasks' && c === 'percentComplete') ? 'int64' :
+      (tableName === 'tasks' && (c === 'start' || c === 'finish')) ? 'dateTime' : 'string',
+    ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? { formatString: 'Long Date' } : {}),
+    sourceColumn: c,
     summarizeBy: "none",
     annotations: [
       {
         name: "SummarizationSetBy",
         value: "Automatic"
-      }
+      },
+      ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? [{
+        name: "UnderlyingDateTimeDataType",
+        value: "Date"
+      }] : [])
     ]
   }));
 
