@@ -1,49 +1,53 @@
-# Microsoft Project Parser - Documentation
+# MPP JSON to Power BI Template Generator (`mpp-json-to-pbit`)
 
 ## Overview
-This application provides a React-based solution for parsing Microsoft Project files (.mpp and .mpx formats). It consists of a React frontend for file uploading and data visualization, and a Node.js backend that uses the MPXJ Java library to parse the project files.
+This project provides a command-line interface (CLI) tool and library to convert Microsoft Project data, previously exported to a specific JSON format, into a Power BI template file (`.pbit`). This allows for rapid visualization and analysis of project data within Power BI without manual setup.
 
-## Architecture
-The solution is built with the following components:
+The tool takes a JSON file containing project tasks, resources, and assignments as input and generates a `.pbit` file containing:
+- Mapped data tables (Tasks, Resources, Assignments, Properties)
+- Predefined DAX measures and calculations
+- Default report visuals and page layouts
 
-1. **React Frontend**
-   - File upload component
-   - Project data visualization with tabs for tasks, resources, assignments, and properties
-   - Responsive design for both desktop and mobile
-
-2. **Node.js Backend**
-   - REST API for file processing
-   - Integration with MPXJ Java library via node-java-maven
-   - Extraction of project data including tasks, resources, timelines, and dependencies
-
-3. **MPXJ Integration**
-   - Java-based library for parsing Microsoft Project files
-   - Accessed through Node.js using Java bridge
+## Prerequisites
+- Node.js (v14 or higher suggested)
 
 ## Installation
 
-### Prerequisites
-- Node.js (v14 or higher)
-- Java Runtime Environment (JRE) 8 or higher
-
-### Setup Instructions
-
-1. Clone the repository or extract the provided files
-```
-git clone <repository-url>
-cd mpp_parser
+```bash
+npm install -g mpp-json-to-pbit # Or install locally within your project
 ```
 
-2. Install dependencies
-```
-npm install
+## Usage
+
+```bash
+mpp-json-to-pbit --input <path/to/your/project.json> --output <path/to/your/template.pbit> [--custom-dax <path/to/custom-dax.json>]
 ```
 
-3. Ensure Java libraries are in place
+**Arguments:**
+
+*   `--input` / `-i`: (Required) Path to the input JSON file exported from Microsoft Project (using a compatible exporter).
+*   `--output` / `-o`: (Required) Path where the generated `.pbit` file should be saved.
+*   `--custom-dax` / `-d`: (Optional) Path to a JSON file containing custom DAX measures to merge with or override the standard definitions.
+
+### Input JSON Format
+The input JSON file should adhere to the structure expected by the tool, typically including arrays for `tasks`, `resources`, `assignments`, and an object for `properties`.
+
+*(Note: A formal JSON schema definition or link to the exporting tool generating this format should ideally be provided here.)*
+
+### Custom DAX Definitions
+The `--custom-dax` option allows you to provide a JSON file containing an array of DAX definitions. Each definition object should have `name`, `table`, and `expression` properties. If a custom measure has the same name and table as a standard measure, the custom one will override it.
+
+Example `custom-dax.json`:
+```json
+[
+  {
+    "name": "Total Cost Custom",
+    "table": "Resources",
+    "expression": "SUMX(Resources, Resources[cost] * 1.1) /* 10% overhead */"
+  }
+]
 ```
-mkdir -p src/backend/lib
-# Download MPXJ and POI libraries if not already present
-```
+
 
 ## Usage
 
@@ -61,141 +65,37 @@ npm run start
 
 3. Access the application at http://localhost:3000
 
-### Testing Mode
 
-For testing without Java integration:
-```
-npm run test
-```
+## Development
 
-This will start both the frontend and a mock backend server.
+To contribute or run the tool from the source:
 
-### Production Build
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd mpp_parser
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Run the tool (example):**
+    ```bash
+    node src/cli.js -i src/mock/data/project-data.json -o test-output.pbit
+    ```
 
-1. Build the frontend
-```
-npm run build
-```
+## Testing
 
-2. The compiled files will be available in the `dist` directory
+Run the available test suites:
 
-## API Reference
-
-### POST /api/parse
-Parses an uploaded Microsoft Project file.
-
-**Request:**
-- Content-Type: multipart/form-data
-- Body: Form data with 'projectFile' field containing the .mpp or .mpx file
-
-**Response:**
-```json
-{
-  "properties": {
-    "name": "Project Name",
-    "startDate": "2023-01-01",
-    "finishDate": "2023-12-31",
-    "statusDate": "2023-04-15",
-    "currentDate": "2023-04-15",
-    "calendar": "Standard",
-    "defaultTaskType": "Fixed Units",
-    "taskCount": 25,
-    "resourceCount": 10
-  },
-  "tasks": [
-    {
-      "id": 1,
-      "uniqueID": 1,
-      "name": "Task Name",
-      "outlineLevel": 0,
-      "summary": true,
-      "start": "2023-01-01",
-      "finish": "2023-01-15",
-      "duration": "15d",
-      "percentComplete": "50",
-      "predecessors": ""
-    }
-  ],
-  "resources": [
-    {
-      "id": 1,
-      "uniqueID": 1,
-      "name": "Resource Name",
-      "type": "WORK",
-      "email": "resource@example.com",
-      "maxUnits": "100%",
-      "cost": "75.00"
-    }
-  ],
-  "assignments": [
-    {
-      "taskID": 1,
-      "taskName": "Task Name",
-      "resourceID": 1,
-      "resourceName": "Resource Name",
-      "units": 100,
-      "work": "40h",
-      "start": "2023-01-01",
-      "finish": "2023-01-15"
-    }
-  ]
-}
-```
-
-## Component Reference
-
-### FileUploader
-Handles file selection and uploading to the backend.
-
-**Props:**
-- `onFileUpload`: Function to handle the parsed project data
-
-### ProjectViewer
-Displays the parsed project data in a tabbed interface.
-
-**Props:**
-- `projectData`: Object containing the parsed project data
-
-## Customization
-
-### Styling
-The application uses CSS files for styling. You can modify the following files to customize the appearance:
-- `src/App.css`: Main application styles
-- `src/components/FileUploader.css`: File upload component styles
-- `src/components/ProjectViewer.css`: Project data visualization styles
-
-### Backend Configuration
-The backend server configuration can be modified in `src/backend/server.js`.
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Java Bridge Initialization Failure**
-   - Ensure Java is installed and properly configured
-   - Check that the MPXJ and POI JAR files are in the correct location
-   - https://github.com/joniles/mpxj
-   - https://poi.apache.org/download.html
-
-2. **File Upload Errors**
-   - Verify that the file is a valid .mpp or .mpx format
-   - Check server logs for detailed error messages
-
-3. **Frontend Build Issues**
-   - Ensure all dependencies are installed
-   - Check webpack configuration in webpack.config.js
-
-## Integration with Larger Applications
-
-To integrate this parser into a larger application:
-
-1. **As a Component**
-   - Import the React components into your existing React application
-   - Pass the necessary props and handle the parsed data
-
-2. **As a Service**
-   - Use the backend as a standalone service
-   - Make API calls to the parser endpoint from your application
+*   **Unit Tests:** Test individual functions (data mapping, validation, etc.).
+    ```bash
+    npm run test:unit
+    ```
+*   **Mock Generation Tests:** Perform end-to-end tests using mock JSON data to generate `.pbit` files.
+    ```bash
+    npm run test:mock
+    ```
 
 ## License
 This project is licensed under the ISC License.

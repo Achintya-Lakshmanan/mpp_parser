@@ -18,8 +18,39 @@ function mapProjectData(projectData) {
   const resourceMap = new Map(projectData.resources.map(r => [r.id, r]));
   const assignmentsByTask = _.groupBy(projectData.assignments, 'taskID');
 
-  const tasks = [];
+  // --- Calculate Parent IDs ---
+  const tasksWithParents = [];
+  const parentStack = []; // Stores uniqueID of parent at each level index
+
   for (const t of projectData.tasks) {
+      // Adjust stack based on current task's outline level
+      while (parentStack.length > t.outlineLevel) {
+          parentStack.pop();
+      }
+
+      // Determine parentUniqueID
+      const parentUniqueID = t.outlineLevel > 0 ? parentStack[t.outlineLevel - 1] : null; // Or 0 if preferred for root
+
+      // Add task with parent ID
+      tasksWithParents.push({ ...t, parentUniqueID });
+
+      // Update stack for potential children of this task
+      if (t.summary) { // Only summary tasks can be parents in this logic
+          if (parentStack.length === t.outlineLevel) {
+              parentStack.push(t.uniqueID);
+          } else {
+              // This case handles potential errors or inconsistencies in outline levels
+              // For simplicity, we'll overwrite, but real-world might need more robust handling
+              parentStack[t.outlineLevel] = t.uniqueID;
+              // Trim any deeper levels if structure jumps back
+              parentStack.length = t.outlineLevel + 1;
+          }
+      }
+  }
+  // --- End Parent ID Calculation ---
+
+  const tasks = [];
+  for (const t of tasksWithParents) { // Iterate tasks with calculated parentUniqueID
     // Determine status
     let status = 'Not Started';
     if (t.percentComplete > 0 && t.percentComplete < 100) {
@@ -50,6 +81,7 @@ function mapProjectData(projectData) {
       type: t.type,
       constraint: t.constraint,
       predecessors: t.predecessors,
+      // parentUniqueID: t.parentUniqueID, // Added parentUniqueID
       status: status, // Added status
       resourceNames: resourceNames, // Added resource names string
     });
