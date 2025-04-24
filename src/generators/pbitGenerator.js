@@ -127,7 +127,7 @@ async function generatePbit(projectData, outputPath) {
       selectedDiagram: 'All tables',
       defaultDiagram: 'All tables',
     }));
-    
+
     // Settings file – encode as UTF‑16LE without BOM
     const settingsObj = {
       Version: 4,
@@ -135,7 +135,7 @@ async function generatePbit(projectData, outputPath) {
       QueriesSettings: {
         TypeDetectionEnabled: true,
         RelationshipImportEnabled: true,
-        RunBackgroundAnalysis:true,
+        RunBackgroundAnalysis: true,
         Version: '2.141.602.0',
       },
     };
@@ -334,51 +334,27 @@ function buildDataModelSchema(mapped, measuresArr) {
       expression: m.expression,
       formatString: '',
     }));
-    
+
     // Generate table-specific M expression
     let mExpression;
-    if (tblName === 'properties') {
-      // Special handling for properties table with property expansion
-      mExpression = `let
-        Source = Json.Document(File.Contents("tables/${tblName}.json")),
-        #"Converted to Table" = Table.FromRecords(Source),
-        #"Expanded properties" = Table.ExpandRecordColumn(#"Converted to Table", "properties", {"name", "author", "company", "startDate", "finishDate", "statusDate", "currentDate", "taskCount", "resourceCount", "assignmentCount"}, {"properties.name", "properties.author", "properties.company", "properties.startDate", "properties.finishDate", "properties.statusDate", "properties.currentDate", "properties.taskCount", "properties.resourceCount", "properties.assignmentCount"}),
-        #"Changed Type" = Table.TransformColumnTypes(#"Expanded properties",{{"properties.name", type any}, {"properties.author", type text}, {"properties.company", type text}, {"properties.startDate", type date}, {"properties.finishDate", type date}, {"properties.statusDate", type text}, {"properties.currentDate", type date}, {"properties.taskCount", Int64.Type}, {"properties.resourceCount", Int64.Type}, {"properties.assignmentCount", Int64.Type}})
-      in
-        #"Changed Type"`;
-    } else if (tblName === 'tasks') {
-      // Tasks table transformation
-      mExpression = `let
-        Source = Json.Document(File.Contents("tables/${tblName}.json")),
-        #"Converted to Table" = Table.FromRecords(Source),
-        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"name", type text}, {"duration", type number}, {"start", type datetime}, {"finish", type datetime}, {"percentComplete", Percentage.Type}, {"outlineLevel", Int64.Type}, {"work", type number}, {"cost", Currency.Type}})
-      in
-        #"Changed Type"`;
-    } else if (tblName === 'resources') {
-      // Resources table transformation
-      mExpression = `let
-        Source = Json.Document(File.Contents("tables/${tblName}.json")),
-        #"Converted to Table" = Table.FromRecords(Source),
-        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"name", type text}, {"type", type text}, {"email", type text}, {"maxUnits", Percentage.Type}, {"standardRate", Currency.Type}, {"overtimeRate", Currency.Type}, {"cost", Currency.Type}})
-      in
-        #"Changed Type"`;
-    } else if (tblName === 'assignments') {
-      // Assignments table transformation
-      mExpression = `let
-        Source = Json.Document(File.Contents("tables/${tblName}.json")),
-        #"Converted to Table" = Table.FromRecords(Source),
-        #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table", {{"id", type text}, {"taskID", type text}, {"resourceID", type text}, {"units", Percentage.Type}, {"work", type number}, {"cost", Currency.Type}})
-      in
-        #"Changed Type"`;
-    } else {
-      // Generic transformation for any other tables
-      mExpression = `let
-        Source = Json.Document(File.Contents("tables/${tblName}.json")),
-        #"Converted to Table" = Table.FromRecords(Source)
-      in
-        #"Converted to Table"`;
-    }
-    
+
+    // Dynamic M expression that uses the actual table data for each table
+    mExpression = `let
+    // Step 1: Embed JSON string from actual table data
+    RawJson = "${JSON.stringify(rows).replace(/"/g, '""')}",
+ 
+    // Step 2: Parse JSON
+    ParsedJson = Json.Document(RawJson),
+ 
+    // Step 3: Convert to table
+    TableData = Table.FromRecords(ParsedJson),
+ 
+    // Step 4: Ensure proper types - could be enhanced with actual type detection
+    TypedTable = Table.TransformColumnTypes(TableData, {}, null)
+in
+    TypedTable
+`;
+
     tables.push({
       name: tblName,
       columns: mkColumns(rows[0]),
@@ -392,7 +368,7 @@ function buildDataModelSchema(mapped, measuresArr) {
             expression: mExpression,
           },
         },
-      ], 
+      ],
       annotations: [
         {
           name: "PBI_NavigationStepName",
