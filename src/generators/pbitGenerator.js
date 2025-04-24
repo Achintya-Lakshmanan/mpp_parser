@@ -150,6 +150,33 @@ class PbitGenerator {
     );
   }
 
+  addCustomVisuals() {
+    const customVisualsPath = path.join(__dirname, 'CustomVisuals');
+    
+    // Add Inforiver Charts custom visual
+    const inforiverPath = path.join(customVisualsPath, 'InforiverCharts582F6C55AB6442EF8FA129089285CB47');
+    
+    // Read and add package.json
+    const packageJsonPath = path.join(inforiverPath, 'package.json');
+    if (fs.existsSync(packageJsonPath)) {
+      const packageJson = fs.readFileSync(packageJsonPath);
+      this.zip.file('Report/CustomVisuals/InforiverCharts582F6C55AB6442EF8FA129089285CB47/package.json', packageJson);
+    }
+    
+    // Read and add resources
+    const resourcesPath = path.join(inforiverPath, 'resources');
+    if (fs.existsSync(resourcesPath)) {
+      const files = fs.readdirSync(resourcesPath);
+      files.forEach(file => {
+        const filePath = path.join(resourcesPath, file);
+        if (fs.statSync(filePath).isFile()) {
+          const fileData = fs.readFileSync(filePath);
+          this.zip.file(`Report/CustomVisuals/InforiverCharts582F6C55AB6442EF8FA129089285CB47/resources/${file}`, fileData);
+        }
+      });
+    }
+  }
+
   addReportLayout() {
     const reportFolder = this.zip.folder('Report');
     const layout = {
@@ -291,6 +318,7 @@ class PbitGenerator {
     this.addDiagramLayout();
     this.addSettings();
     this.addMetadata();
+    this.addCustomVisuals();
     this.addReportLayout();
   }
 
