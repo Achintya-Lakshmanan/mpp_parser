@@ -173,7 +173,17 @@ class PbitGenerator {
           displayName: 'Page 1',
           filters: '[]',
           ordinal: 0,
-          visualContainers: [],
+          visualContainers: [
+            {
+              x: 9.693527393207905,
+              y: 0,
+              z: 0,
+              width: 1270,
+              height: 720,
+              config: "{\"name\":\"e350dca10bb8089724e1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":1270,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"InforiverCharts582F6C55AB6442EF8FA129089285CB47\",\"projections\":{\"othermeasure\":[{\"queryRef\":\"Min(tasks.start)\"},{\"queryRef\":\"Min(tasks.finish)\"}],\"category\":[{\"queryRef\":\"tasks.id\",\"active\":true},{\"queryRef\":\"tasks.name\",\"active\":true},{\"queryRef\":\"tasks.predecessors.taskName\",\"active\":true}],\"ameasure\":[{\"queryRef\":\"Sum(tasks.Total Days)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"tasks\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"start\"}},\"Function\":3},\"Name\":\"Min(tasks.start)\",\"NativeReferenceName\":\"Earliest start\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"name\"},\"Name\":\"tasks.name\",\"NativeReferenceName\":\"name\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"finish\"}},\"Function\":3},\"Name\":\"Min(tasks.finish)\",\"NativeReferenceName\":\"Earliest finish\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Days\"}},\"Function\":0},\"Name\":\"Sum(tasks.Total Days)\",\"NativeReferenceName\":\"Sum of Total Days\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"predecessors.taskName\"},\"Name\":\"tasks.predecessors.taskName\",\"NativeReferenceName\":\"predecessors.taskName\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"id\"},\"Name\":\"tasks.id\",\"NativeReferenceName\":\"id\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"id\"}}}]}}}",
+              filters: "[]"
+            }
+          ],
           config: '{}',
           displayOption: 1,
           width: 1280,
@@ -183,6 +193,9 @@ class PbitGenerator {
       config:
         '{"version":"5.59","themeCollection":{"baseTheme":{"name":"CY24SU10","version":"5.62","type":2}},"activeSectionIndex":0,"defaultDrillFilterOtherVisuals":true,"settings":{"useNewFilterPaneExperience":true,"allowChangeFilterTypes":true,"useStylableVisualContainerHeader":true,"queryLimitOption":6,"useEnhancedTooltips":true,"exportDataMode":1,"useDefaultAggregateDisplayName":true},"objects":{"section":[{"properties":{"verticalAlignment":{"expr":{"Literal":{"Value":"\'Top\'"}}}}}]}}',
       layoutOptimization: 0,
+      publicCustomVisuals: [
+        "InforiverCharts582F6C55AB6442EF8FA129089285CB47"
+      ]
     };
     const layoutBuf = Buffer.from(JSON.stringify(layout), 'utf16le');
     reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
@@ -356,7 +369,7 @@ function validateVisualDefs(mapped, defs) {
 function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
   const mkColumns = (row, tableName) => Object.keys(row).map((c) => ({
     name: c, 
-    dataType: (tableName === 'assignments' && c === 'units') ? 'int64' : 'string', 
+    dataType: (tableName === 'assignments' && c === 'units') || (tableName === 'tasks' && c === 'percentComplete') ? 'int64' : 'string', 
     sourceColumn: c, 
     summarizeBy: "none",
     annotations: [
