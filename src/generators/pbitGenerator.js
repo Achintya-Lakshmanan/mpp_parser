@@ -553,22 +553,43 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     #"Added Custom" = Table.AddColumn(#"Changed Type", "Custom", each [finish]-[start]),
     #"Inserted Total Days" = Table.AddColumn(#"Added Custom", "Total Days", each Duration.TotalDays([Custom]), type number),
 // Create a reference table for lookup
+        // Lookup table for outlineNumber → name
     LookupTable = Table.SelectColumns(#"Inserted Total Days", {"outlineNumber", "name"}),
-    // Add SplitLevels to parse outlineNumber
-    AddSplitLevels = Table.AddColumn( #"Inserted Total Days", "SplitLevels", each Text.Split([outlineNumber], ".")),
-    // Build path segments
-    AddL0Key = Table.AddColumn(AddSplitLevels, "L0_Key", each try [SplitLevels]{0} otherwise null),
-    AddL1Key = Table.AddColumn(AddL0Key, "L1_Key", each try [SplitLevels]{0} & "." & [SplitLevels]{1} otherwise null),
-    AddL2Key = Table.AddColumn(AddL1Key, "L2_Key", each try [SplitLevels]{0} & "." & [SplitLevels]{1} & "." & [SplitLevels]{2} otherwise null),
-    // Merge to get name for each level
-    MergeL0 = Table.NestedJoin(AddL2Key, {"L0_Key"}, LookupTable, {"outlineNumber"}, "L0Data", JoinKind.LeftOuter),
-    ExpandL0 = Table.ExpandTableColumn(MergeL0, "L0Data", {"name"}, {"L0"}),
-    MergeL1 = Table.NestedJoin(ExpandL0, {"L1_Key"}, LookupTable, {"outlineNumber"}, "L1Data", JoinKind.LeftOuter),
-    ExpandL1 = Table.ExpandTableColumn(MergeL1, "L1Data", {"name"}, {"L1"}),
-    MergeL2 = Table.NestedJoin(ExpandL1, {"L2_Key"}, LookupTable, {"outlineNumber"}, "L2Data", JoinKind.LeftOuter),
-    ExpandL2 = Table.ExpandTableColumn(MergeL2, "L2Data", {"name"}, {"L2"}),
-    // Remove helper columns
-    Cleaned = Table.RemoveColumns(ExpandL2, {"SplitLevels", "L0_Key", "L1_Key", "L2_Key"})
+
+    // Split outline number into list
+    AddSplitLevels = Table.AddColumn(#"Inserted Total Days", "SplitLevels", each Text.Split([outlineNumber], ".")),
+
+    // Determine max depth
+    MaxDepth = List.Max(List.Transform(AddSplitLevels[SplitLevels], each List.Count(_))),
+
+    // Add LevelKeys: L0_Key = first item, L1_Key = first two joined, etc.
+    AddLevelKeys = List.Accumulate(
+        {0..MaxDepth - 1},
+        AddSplitLevels,
+        (state, i) =>
+            Table.AddColumn(state, "L" & Text.From(i) & "_Key", each
+                let
+                    seg = try Text.Combine(List.FirstN([SplitLevels], i + 1), ".") otherwise null
+                in
+                    if List.Count([SplitLevels]) > i then seg else null
+            )
+    ),
+
+    // Merge each Lx_Key to get name
+    AddLevelNames = List.Accumulate(
+        {0..MaxDepth - 1},
+        AddLevelKeys,
+        (state, i) =>
+            let
+                levelKey = "L" & Text.From(i) & "_Key",
+                merged = Table.NestedJoin(state, {levelKey}, LookupTable, {"outlineNumber"}, "L" & Text.From(i) & "_Data", JoinKind.LeftOuter),
+                expanded = Table.ExpandTableColumn(merged, "L" & Text.From(i) & "_Data", {"name"}, {"L" & Text.From(i)})
+            in
+                expanded
+    ),
+
+    // Remove split + key columns for cleanup
+    Cleaned = Table.RemoveColumns(AddLevelNames, {"SplitLevels"} & List.Transform({0..MaxDepth - 1}, each "L" & Text.From(_) & "_Key"))
 in
     Cleaned`;
     } else {
