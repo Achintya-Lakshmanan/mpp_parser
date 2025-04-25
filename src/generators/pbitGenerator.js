@@ -289,6 +289,20 @@ class PbitGenerator {
 async function generatePbit(projectData, outputPath, customDaxPath) {
   try {
     const mapped = mapProjectData(projectData);
+
+    // --- DEBUGGING: Check keys in mapped.assignments ---
+    if (mapped.assignments && mapped.assignments.length > 0) {
+      const sampleKeys = Object.keys(mapped.assignments[0]);
+      console.log('DEBUG: Sample keys in first assignment record:', sampleKeys);
+      // Get all unique keys from the first few records for better sampling
+      const allSampleKeys = new Set();
+      mapped.assignments.slice(0, 5).forEach(a => Object.keys(a).forEach(k => allSampleKeys.add(k)));
+      console.log('DEBUG: Unique keys in first 5 assignment records:', Array.from(allSampleKeys));
+    } else {
+      console.log('DEBUG: No assignments found in mapped data.');
+    }
+    // --- END DEBUGGING ---
+
     validateMappedData(mapped);
     validateVisualDefs(mapped, visualDefs);
     // --- Load and Merge DAX Definitions --- 
@@ -463,15 +477,32 @@ function validateMappedData(mapped) {
 }
 // Validate visuals against mapped table schema
 function validateVisualDefs(mapped, defs) {
+  // Helper to get all unique keys from an array of objects
+  const getAllKeys = (arr) => {
+    if (!arr || arr.length === 0) return [];
+    const keySet = new Set();
+    arr.forEach(obj => Object.keys(obj).forEach(key => keySet.add(key)));
+    return Array.from(keySet);
+  };
+
+  // Get all unique keys from ALL rows in each table
   const tableFields = {
-    tasks: mapped.tasks.length ? Object.keys(mapped.tasks[0]) : [],
-    resources: mapped.resources.length ? Object.keys(mapped.resources[0]) : [],
-    assignments: mapped.assignments.length ? Object.keys(mapped.assignments[0]) : [],
-    properties: mapped.properties.length ? Object.keys(mapped.properties[0]) : [],
+    tasks: getAllKeys(mapped.tasks),
+    resources: getAllKeys(mapped.resources),
+    assignments: getAllKeys(mapped.assignments),
+    properties: getAllKeys(mapped.properties),
   };
   const errors = [];
+  const hasAssignments = mapped.assignments && mapped.assignments.length > 0;
+
   for (const page of defs.defaultVisuals.pages) {
     for (const vis of page.visuals) {
+      // If assignments are missing, skip validating visuals that depend on the assignments table
+      if (vis.table === 'assignments' && !hasAssignments) {
+        console.warn(`Skipping validation for visual '${vis.id}' as input data has no assignments.`);
+        continue;
+      }
+
       if (!tableFields[vis.table]) {
         errors.push(`Unknown table ${vis.table} in visual ${vis.id}`);
         continue;
