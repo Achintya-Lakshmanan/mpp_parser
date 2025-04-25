@@ -134,7 +134,7 @@ class PbitGenerator {
         AutoCreatedRelationships: [],
         FileDescription: 'Created by MPP Parser',
         CreatedFrom: 'Cloud',
-        CreatedFromRelease: '2025.03',
+        CreatedFromRelease: '2025.04',
       })
     );
   }
