@@ -494,24 +494,81 @@ function validateVisualDefs(mapped, defs) {
 
 // Build DataModelSchema with tables, columns, and measures
 function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
-  const mkColumns = (row, tableName) => Object.keys(row).map((c) => ({
-    name: c,
-    dataType: (tableName === 'assignments' && c === 'units') || (tableName === 'tasks' && c === 'percentComplete') ? 'int64' :
-      (tableName === 'tasks' && (c === 'start' || c === 'finish')) ? 'dateTime' : 'string',
-    sourceColumn: c,
-    ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? { formatString: 'Long Date' } : {}),
-    summarizeBy: "none",
-    annotations: [
+  const mkColumns = (row, tableName) => Object.keys(row).map((c) => {
+    // Determine data type by examining the actual value in the first row
+    const value = row[c];
+    let dataType = 'string'; // Default type
+    let formatObj = {};
+    let annotations = [
       {
         name: "SummarizationSetBy",
         value: "Automatic"
-      },
-      ...(tableName === 'tasks' && (c === 'start' || c === 'finish') ? [{
+      }
+    ];
+
+    // Determine data type based on the value
+    if (typeof value === 'number') {
+      if (Number.isInteger(value)) {
+        dataType = 'int64';
+      } else {
+        dataType = 'double';
+      }
+    } else if (typeof value === 'string') {
+      // Check if it's a numeric string that should be treated as a number
+      if (!isNaN(Number(value)) && value.trim() !== '') {
+        // Treat as numeric - try to determine if int or float
+        const num = Number(value);
+        if (Number.isInteger(num)) {
+          dataType = 'int64';
+        } else {
+          dataType = 'double';
+        }
+      } 
+      // Special case for fields that should always be numeric
+      else if (c === 'outlineNumber' || c === 'outlineLevel' || c.toLowerCase().includes('index') || 
+              c.toLowerCase().includes('number') || c.toLowerCase().includes('count')) {
+        dataType = 'int64';
+      }
+      // Only check for date if it's not already determined to be a number
+      else if (!isNaN(Date.parse(value)) && value.length > 1) {
+        // Make sure it's actually a valid date format, not just a number that parses as a date
+        // Simple check: valid dates typically have more than 1 character
+        dataType = 'dateTime';
+        formatObj = { formatString: 'Long Date' };
+        annotations.push({
+          name: "UnderlyingDateTimeDataType",
+          value: "Date"
+        });
+      }
+    } else if (typeof value === 'boolean') {
+      dataType = 'boolean';
+    }
+
+    // Special case handling for known columns based on both name and tableName
+    if ((tableName === 'assignments' && c === 'units') || 
+        (tableName === 'tasks' && c === 'percentComplete')) {
+      dataType = 'int64';
+    }
+    
+    if (tableName === 'tasks' && (c === 'start' || c === 'finish')) {
+      dataType = 'dateTime';
+      formatObj = { formatString: 'Long Date' };
+      annotations = annotations.filter(a => a.name !== "UnderlyingDateTimeDataType");
+      annotations.push({
         name: "UnderlyingDateTimeDataType",
         value: "Date"
-      }] : [])
-    ]
-  }));
+      });
+    }
+
+    return {
+      name: c,
+      dataType: dataType,
+      sourceColumn: c,
+      ...formatObj,
+      summarizeBy: "none",
+      annotations: annotations
+    };
+  });
 
   const tables = [];
   for (const [tblName, rows] of Object.entries(mapped)) {
