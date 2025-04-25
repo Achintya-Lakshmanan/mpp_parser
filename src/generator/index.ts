@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { generatePbit } from '../generators/pbitGenerator';
+import { generatePbit } from '../generators/pbitGenerator.js';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { loadProjectJsonStream } = require('../utils/largeJsonLoader');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -42,7 +42,11 @@ console.log('Power BI Template Generator bootstrap');
     await generatePbit(jsonData, outputPbit);
     console.log('PBIT template generated.');
   } catch (err) {
-    console.error('Failed:', err.message || err);
+    if (err instanceof Error) {
+      console.error('Failed:', err.message);
+    } else {
+      console.error('Failed with unknown error:', err);
+    }
     process.exit(1);
   }
 })();

@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { mapProjectData } = require('./dataMapper');
 const daxDefs = require('./daxDefinitions');
 const visualDefs = require('../visuals');
+const AdmZip = require('adm-zip');
 // Helper to create UTF‑16LE buffers without BOM
 const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
 class PbitGenerator {
@@ -124,7 +125,7 @@ class PbitGenerator {
       ReportSettings: {},
       QueriesSettings: { TypeDetectionEnabled: true, RelationshipImportEnabled: true, RunBackgroundAnalysis: true, Version: '2.141.602.0' },
     };
-    this.zip.file('Settings', Buffer.from(JSON.stringify(settingsObj), 'utf16le'), { compression: 'STORE' });
+    this.zip.file('Settings', Buffer.from(JSON.stringify(settingsObj), 'utf16le'));
   }
   addMetadata() {
     this.zip.file(
@@ -202,7 +203,7 @@ class PbitGenerator {
               // Since the content is already a string containing JSON, we just return it.
               // If it were a JS object, we'd use JSON.stringify(reportConfig)
               // Correction: require automatically parses JSON, so we need to stringify it.
-              return JSON.stringify(reportConfig); 
+              return JSON.stringify(reportConfig);
             } catch (error) {
               console.error("Error loading reportConfigBase.json:", error);
               // Return a default empty config string on error
@@ -232,13 +233,13 @@ class PbitGenerator {
           // Since the content is already a string containing JSON, we just return it.
           // If it were a JS object, we'd use JSON.stringify(reportConfig)
           // Correction: require automatically parses JSON, so we need to stringify it.
-          return JSON.stringify(reportConfig); 
+          return JSON.stringify(reportConfig);
         } catch (error) {
           console.error("Error loading reportConfigBase.json:", error);
           // Return a default empty config string on error
           return '{}';
         }
-      })(), 
+      })(),
       //config": "{\"objects\":{}}", for pbix
       displayOption: 0,
       layoutOptimization: 0,
@@ -247,7 +248,7 @@ class PbitGenerator {
       ]
     };
     const layoutBuf = Buffer.from(JSON.stringify(layout), 'utf16le');
-    reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
+    reportFolder.file('Layout', layoutBuf);
     // this.zip.file('Report/StaticResources/SharedResources/BaseThemes/CY24SU10.json', toUtf16(
     //   JSON.stringify({ ... })
     // ));
@@ -328,6 +329,36 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
     const generator = new PbitGenerator(mapped, outputPath, finalDaxDefs);
     await generator.build();
     await generator.save();
+
+    // --- Unzip and Re-zip ---
+    console.log(`Verification step: Unzipping and re-zipping ${outputPath}...`);
+    const tempExtractDir = path.join(path.dirname(outputPath), '_temp_pbit_extract');
+    const rezippedOutputPath = outputPath.replace('.pbit', '_rezipped.pbit');
+    try {
+      await fs.ensureDir(tempExtractDir);
+      const readZip = new AdmZip(outputPath);
+      readZip.extractAllTo(tempExtractDir, /*overwrite*/ true);
+      console.log(`  - Extracted contents to ${tempExtractDir}`);
+
+      const writeZip = new AdmZip();
+      writeZip.addLocalFolder(tempExtractDir);
+      writeZip.writeZip(rezippedOutputPath);
+      console.log(`  - Re-zipped contents to ${rezippedOutputPath}`);
+
+      await fs.remove(tempExtractDir); // Clean up temp directory
+      console.log(`  - Cleaned up temporary directory ${tempExtractDir}`);
+      console.log('Verification step completed.');
+    } catch (zipError) {
+      console.error('Error during unzip/re-zip verification:', zipError);
+      // Optionally remove temp dir even on error
+      if (await fs.pathExists(tempExtractDir)) {
+        await fs.remove(tempExtractDir);
+      }
+      // Decide if this error should stop the whole process
+      // throw new Error(`Unzip/Re-zip verification failed: ${zipError.message}`);
+    }
+    // --- End Unzip and Re-zip ---
+
   } catch (err) {
     throw new Error(`PBIT generation failed: ${err.message || err}`);
   }
@@ -368,11 +399,11 @@ function validateMappedData(mapped) {
     // Check Predecessor Task IDs exist (if predecessors array exists)
     if (Array.isArray(task.predecessors)) {
       task.predecessors.forEach((pred, pIndex) => {
-         if (pred.taskID == null) {
-            errors.push(`${taskIdDesc}, Predecessor ${pIndex}: Missing 'taskID'.`);
-         }
-         // Note: Cannot check if pred.taskID exists in taskIds *yet*, need to collect all taskIds first.
-         // This check is moved after the loop.
+        if (pred.taskID == null) {
+          errors.push(`${taskIdDesc}, Predecessor ${pIndex}: Missing 'taskID'.`);
+        }
+        // Note: Cannot check if pred.taskID exists in taskIds *yet*, need to collect all taskIds first.
+        // This check is moved after the loop.
       });
     }
   });
@@ -380,7 +411,7 @@ function validateMappedData(mapped) {
   mapped.resources.forEach((res, index) => {
     const resIdDesc = `Resource (ID: ${res.id}, Name: "${res.name}", Index: ${index})`;
     if (res.id == null) {
-       errors.push(`${resIdDesc}: Missing 'id'.`);
+      errors.push(`${resIdDesc}: Missing 'id'.`);
     } else if (resourceIds.has(res.id)) {
       errors.push(`${resIdDesc}: Duplicate Resource ID found.`);
     } else {
@@ -390,33 +421,39 @@ function validateMappedData(mapped) {
   // 4. Assignment Validation (Relationship Integrity)
   if (mapped.assignments?.length) {
     mapped.assignments.forEach((assignment, index) => {
-      const assignDesc = `Assignment (Index: ${index}, TaskID: ${assignment.taskID}, ResourceID: ${assignment.resourceID})`;
+      const assignDesc = `Assignment (Index: ${index}, TaskID: ${assignment.taskID}, TaskUniqueID: ${assignment.taskUniqueID}, ResourceID: ${assignment.resourceID}, ResourceUniqueID: ${assignment.resourceUniqueID})`;
       if (assignment.taskID == null) {
-         errors.push(`${assignDesc}: Missing 'taskID'.`);
+        errors.push(`${assignDesc}: Missing 'taskID'.`);
       } else if (!taskIds.has(assignment.taskID)) {
         errors.push(`${assignDesc}: References non-existent Task ID ${assignment.taskID}.`);
       }
+      if (assignment.taskUniqueID == null) {
+        errors.push(`${assignDesc}: Missing 'taskUniqueID'.`);
+      }
       if (assignment.resourceID == null) {
-         errors.push(`${assignDesc}: Missing 'resourceID'.`);
+        errors.push(`${assignDesc}: Missing 'resourceID'.`);
       } else if (!resourceIds.has(assignment.resourceID)) {
         // Only flag if resources exist
         if (mapped.resources?.length) {
           errors.push(`${assignDesc}: References non-existent Resource ID ${assignment.resourceID}.`);
         }
       }
+      if (assignment.resourceUniqueID == null) {
+        errors.push(`${assignDesc}: Missing 'resourceUniqueID'.`);
+      }
     });
   }
   // 5. Predecessor Validation (Relationship Integrity - Part 2)
-   mapped.tasks.forEach((task, index) => {
-     if (Array.isArray(task.predecessors)) {
-       const taskIdDesc = `Task (ID: ${task.id}, Name: "${task.name}", Index: ${index})`;
-       task.predecessors.forEach((pred, pIndex) => {
-         if (pred.taskID != null && !taskIds.has(pred.taskID)) {
-            errors.push(`${taskIdDesc}, Predecessor ${pIndex} (ID: ${pred.taskID}): References non-existent Task ID ${pred.taskID}.`);
-         }
-       });
-     }
-   });
+  mapped.tasks.forEach((task, index) => {
+    if (Array.isArray(task.predecessors)) {
+      const taskIdDesc = `Task (ID: ${task.id}, Name: "${task.name}", Index: ${index})`;
+      task.predecessors.forEach((pred, pIndex) => {
+        if (pred.taskID != null && !taskIds.has(pred.taskID)) {
+          errors.push(`${taskIdDesc}, Predecessor ${pIndex} (ID: ${pred.taskID}): References non-existent Task ID ${pred.taskID}.`);
+        }
+      });
+    }
+  });
   // Final Error Check
   if (errors.length > 0) {
     throw new Error(`Data validation failed:\n- ${errors.join('\n- ')}`);
@@ -483,10 +520,10 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
         } else {
           dataType = 'double';
         }
-      } 
+      }
       // Special case for fields that should always be numeric
-      else if (c === 'outlineNumber' || c === 'outlineLevel' || c.toLowerCase().includes('index') || 
-              c.toLowerCase().includes('number') || c.toLowerCase().includes('count')) {
+      else if (c === 'outlineNumber' || c === 'outlineLevel' || c.toLowerCase().includes('index') ||
+        c.toLowerCase().includes('number') || c.toLowerCase().includes('count')) {
         dataType = 'int64';
       }
       // Only check for date if it's not already determined to be a number
@@ -504,8 +541,8 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
       dataType = 'boolean';
     }
     // Special case handling for known columns based on both name and tableName
-    if ((tableName === 'assignments' && c === 'units') || 
-        (tableName === 'tasks' && c === 'percentComplete')) {
+    if ((tableName === 'assignments' && c === 'units') ||
+      (tableName === 'tasks' && c === 'percentComplete')) {
       dataType = 'int64';
     }
     if (tableName === 'tasks' && (c === 'start' || c === 'finish')) {
@@ -589,9 +626,11 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     ),
 
     // Remove split + key columns for cleanup
-    Cleaned = Table.RemoveColumns(AddLevelNames, {"SplitLevels"} & List.Transform({0..MaxDepth - 1}, each "L" & Text.From(_) & "_Key"))
+    Cleaned = Table.RemoveColumns(AddLevelNames, {"SplitLevels"} & List.Transform({0..MaxDepth - 1}, each "L" & Text.From(_) & "_Key")),
+    #"Added Index" = Table.AddIndexColumn(Cleaned, "Index", 1, 1, Int64.Type),
+    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Task Index"}})
 in
-    Cleaned`;
+    #"Renamed Columns"`;
     } else {
       // Dynamic M expression that uses the actual table data for each table
       mExpression = `let
@@ -632,7 +671,58 @@ in
         },
       ],
     });
+    //new Table for assignment joins
   }
+
+  // --- Add new table for Assignments joined with Tasks ---
+  const assignmentsTasksJoinMExpression = `let
+    Source = Table.NestedJoin(assignments, {"taskID", "taskUniqueID"}, tasks, {"id", "uniqueID"}, "tasks", JoinKind.LeftOuter),
+    #"Expanded tasks" = Table.ExpandTableColumn(Source, "tasks", {"Task Index"}, {"tasks.Task Index"})
+in
+    #"Expanded tasks"`;
+
+  // Infer columns for the new join table
+  let assignmentsTasksJoinColumns = [];
+  if (mapped.assignments && mapped.assignments.length > 0) {
+    // Start with assignments columns
+    assignmentsTasksJoinColumns = mkColumns(mapped.assignments[0], 'assignments');
+    // Add the 'tasks.Task Index' column (assuming Int64 type based on Task Index creation)
+    assignmentsTasksJoinColumns.push({
+      name: "tasks.Task Index",
+      dataType: "int64",
+      sourceColumn: "tasks.Task Index",
+      summarizeBy: "none",
+      annotations: [
+        { name: "SummarizationSetBy", value: "Automatic" }
+      ]
+    });
+  } else {
+    console.warn("Cannot create AssignmentsTasksJoin table: 'assignments' data is missing or empty.");
+  }
+
+  if (assignmentsTasksJoinColumns.length > 0) {
+    tables.push({
+      name: "AssignmentsTasksJoin",
+      columns: assignmentsTasksJoinColumns,
+      measures: [], // No specific measures for this joined table initially
+      partitions: [
+        {
+          name: "AssignmentsTasksJoin-Partition",
+          mode: "import",
+          source: {
+            type: "m",
+            expression: assignmentsTasksJoinMExpression,
+          },
+        },
+      ],
+      annotations: [
+        { name: "PBI_NavigationStepName", value: "Navigation" },
+        { name: "PBI_ResultType", value: "Table" },
+      ],
+    });
+  }
+  // --- End new table ---
+
   return {
     name: crypto.randomUUID(),
     compatibilityLevel: 1567,
@@ -644,23 +734,23 @@ in
       },
       defaultPowerBIDataSourceVersion: "powerBI_V3",
       sourceQueryCulture: "en-US",
-      tables, 
+      tables,
       relationships: [
-      {
-        name: crypto.randomUUID(),
-        fromTable: "tasks",
-        fromColumn: "id",
-        toTable: "assignments",
-        toColumn: "taskID"
-      },
-      {
-        name: crypto.randomUUID(),
-        fromTable: "assignments",
-        fromColumn: "resourceID",
-        toTable: "resources",
-        toColumn: "id"
-      }
-    ],
+        // {
+        //   name: crypto.randomUUID(),
+        //   fromTable: "AssignmentsTasksJoin",
+        //   fromColumn: "tasks.Task Index",
+        //   toTable: "tasks",
+        //   toColumn: "Task Index"
+        // },
+        {
+          name: crypto.randomUUID(),
+          fromTable: "AssignmentsTasksJoin",
+          fromColumn: "resourceID",
+          toTable: "resources",
+          toColumn: "id"
+        }
+      ],
       cultures: [
         {
           name: "en-US",
@@ -676,7 +766,7 @@ in
       annotations: [
         {
           name: "PBI_QueryOrder",
-          value: "[\"tasks\",\"resources\",\"assignments\",\"properties\"]"
+          value: "[\"tasks\",\"resources\",\"assignments\",\"properties\",\"AssignmentsTasksJoin\"]"
         },
         {
           name: "__PBI_TimeIntelligenceEnabled",

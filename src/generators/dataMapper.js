@@ -93,11 +93,13 @@ function mapProjectData(projectData) {
     const resource = resourceMap.get(a.resourceID);
     assignments.push({
       taskID: a.taskID,
+      taskUniqueID: task ? task.uniqueID : null,
       resourceID: a.resourceID,
+      resourceUniqueID: resource ? resource.uniqueID : null,
       units: a.units,
-      taskName: task ? task.name : 'Unknown Task',       // Added task name
-      resourceName: resource ? resource.name : 'Unknown Resource', // Added resource name
-      work: a.work || 0, // Added assignment work (assuming 'work' field exists, else 0)
+      taskName: task ? task.name : 'Unknown Task',
+      resourceName: resource ? resource.name : 'Unknown Resource',
+      work: a.work || 0,
     });
   }
 
