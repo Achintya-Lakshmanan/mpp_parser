@@ -545,10 +545,6 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     ParsedJson = Json.Document(RawJson),
     // Step 3: Convert to table
     TableData = Table.FromRecords(ParsedJson),
-    // Step 2: Parse JSON
-    ParsedJson = Json.Document(RawJson),
-    // Step 3: Convert to table
-    TableData = Table.FromRecords(ParsedJson),
     // Step 4: Ensure proper types - could be enhanced with actual type detection
     TypedTable = Table.TransformColumnTypes(TableData, {}, null),
     #"Expanded predecessors" = Table.ExpandListColumn(TypedTable, "predecessors"),
