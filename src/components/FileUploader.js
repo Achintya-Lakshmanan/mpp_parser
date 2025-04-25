@@ -11,8 +11,8 @@ const FileUploader = ({ onFileUpload }) => {
     if (selectedFile) {
       // Check if file is MPP or MPX
       const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
-      if (fileExtension !== 'mpp' && fileExtension !== 'mpx') {
-        setError('Please select a valid Microsoft Project file (.mpp or .mpx)');
+      if (fileExtension !== 'mpp' && fileExtension !== 'mpx' && fileExtension !== 'mpt') {
+        setError('Please select a valid Microsoft Project file (.mpp or .mpx or .mpt)');
         setFile(null);
         return;
       }
