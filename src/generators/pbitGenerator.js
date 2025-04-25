@@ -5,10 +5,8 @@ const crypto = require('crypto');
 const { mapProjectData } = require('./dataMapper');
 const daxDefs = require('./daxDefinitions');
 const visualDefs = require('../visuals');
-
 // Helper to create UTF‑16LE buffers without BOM
 const toUtf16 = (v) => Buffer.from(typeof v === 'string' ? v : JSON.stringify(v), 'utf16le');
-
 class PbitGenerator {
   constructor(mapped, outputPath, daxDefinitions) {
     this.mapped = mapped;
@@ -17,7 +15,6 @@ class PbitGenerator {
     this.tableLineageTags = {};
     this.daxDefinitions = daxDefinitions; // Store merged DAX defs
   }
-
   createLineageTags() {
     Object.keys(this.mapped)
       .filter(tableName => Array.isArray(this.mapped[tableName]) && this.mapped[tableName].length > 0)
@@ -25,12 +22,10 @@ class PbitGenerator {
         this.tableLineageTags[tableName] = crypto.randomUUID();
       });
   }
-
   addVersion() {
     const versionBuf = Buffer.from('1.28', 'utf16le');
     this.zip.file('Version', versionBuf, { compression: 'STORE' });
   }
-
   addContentTypes() {
     const contentTypesXml =
       '<?xml version="1.0" encoding="utf-8"?>\n' +
@@ -47,7 +42,6 @@ class PbitGenerator {
     const ctBuf = Buffer.from('\uFEFF' + contentTypesXml, 'utf8');
     this.zip.file('[Content_Types].xml', ctBuf, { compression: 'STORE' });
   }
-
   addRootRelationships() {
     this.zip
       .folder('_rels')
@@ -57,7 +51,6 @@ class PbitGenerator {
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>'
       );
   }
-
   async addSecurityBindings() {
     let securityBuf = null;
     try {
@@ -71,14 +64,12 @@ class PbitGenerator {
     }
     this.zip.file('SecurityBindings', securityBuf || '', { compression: 'STORE' });
   }
-
   addTables() {
     this.zip.file('tables/tasks.json', toUtf16(this.mapped.tasks));
     this.zip.file('tables/resources.json', toUtf16(this.mapped.resources));
     this.zip.file('tables/assignments.json', toUtf16(this.mapped.assignments));
     this.zip.file('tables/properties.json', toUtf16(this.mapped.properties));
   }
-
   addRelationships() {
     const rels = [
       // { fromTable: 'tasks', fromCol: 'id', toTable: 'assignments', toCol: 'taskID' },
@@ -86,19 +77,16 @@ class PbitGenerator {
     ];
     this.zip.file('relationships.json', toUtf16(rels));
   }
-
   addDaxAndVisuals() {
     // Use the DAX definitions passed to the constructor
     this.zip.file('dax/measures.json', toUtf16(this.daxDefinitions));
     this.zip.file('Report/visuals.json', toUtf16(visualDefs));
   }
-
   addDataModelSchema() {
     // Pass the constructor's DAX definitions to buildDataModelSchema
     const schema = buildDataModelSchema(this.mapped, this.daxDefinitions, this.tableLineageTags);
     this.zip.file('DataModelSchema', toUtf16(schema));
   }
-
   addDiagramLayout() {
     this.zip.file(
       'DiagramLayout',
@@ -130,7 +118,6 @@ class PbitGenerator {
       })
     );
   }
-
   addSettings() {
     const settingsObj = {
       Version: 4,
@@ -139,7 +126,6 @@ class PbitGenerator {
     };
     this.zip.file('Settings', Buffer.from(JSON.stringify(settingsObj), 'utf16le'), { compression: 'STORE' });
   }
-
   addMetadata() {
     this.zip.file(
       'Metadata',
@@ -152,20 +138,16 @@ class PbitGenerator {
       })
     );
   }
-
   addCustomVisuals() {
     const customVisualsPath = path.join(__dirname, 'CustomVisuals');
-
     // Add Inforiver Charts custom visual
     const inforiverPath = path.join(customVisualsPath, 'InforiverCharts582F6C55AB6442EF8FA129089285CB47');
-
     // Read and add package.json
     const packageJsonPath = path.join(inforiverPath, 'package.json');
     if (fs.existsSync(packageJsonPath)) {
       const packageJson = fs.readFileSync(packageJsonPath);
       this.zip.file('Report/CustomVisuals/InforiverCharts582F6C55AB6442EF8FA129089285CB47/package.json', packageJson);
     }
-
     // Read and add resources
     const resourcesPath = path.join(inforiverPath, 'resources');
     if (fs.existsSync(resourcesPath)) {
@@ -179,7 +161,6 @@ class PbitGenerator {
       });
     }
   }
-
   addReportLayout() {
     const reportFolder = this.zip.folder('Report');
     const layout = {
@@ -267,12 +248,10 @@ class PbitGenerator {
     };
     const layoutBuf = Buffer.from(JSON.stringify(layout), 'utf16le');
     reportFolder.file('Layout', layoutBuf, { compression: 'STORE' });
-
     // this.zip.file('Report/StaticResources/SharedResources/BaseThemes/CY24SU10.json', toUtf16(
     //   JSON.stringify({ ... })
     // ));
   }
-
   async build() {
     this.createLineageTags();
     this.addVersion();
@@ -289,7 +268,6 @@ class PbitGenerator {
     this.addCustomVisuals();
     this.addReportLayout();
   }
-
   async save() {
     const buffer = await this.zip.generateAsync({ type: 'nodebuffer' });
     await fs.ensureDir(path.dirname(this.outputPath));
@@ -298,7 +276,6 @@ class PbitGenerator {
     if (stats.size === 0) throw new Error('Generated .pbit file is empty');
   }
 }
-
 /**
  * Generate a basic .pbit (Power BI template) file from project data JSON.
  * This is a minimal placeholder implementation: it packages the raw JSON and a README into a zip
@@ -313,10 +290,8 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
     const mapped = mapProjectData(projectData);
     validateMappedData(mapped);
     validateVisualDefs(mapped, visualDefs);
-
     // --- Load and Merge DAX Definitions --- 
     let finalDaxDefs = [...daxDefs]; // Start with standard definitions
-
     if (customDaxPath) {
       try {
         if (await fs.pathExists(customDaxPath)) {
@@ -325,7 +300,6 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
           if (!Array.isArray(customDax)) {
             throw new Error('Custom DAX file must contain a JSON array.');
           }
-          
           // Merge/Override logic
           const daxMap = new Map();
           // Add standard definitions first
@@ -351,22 +325,18 @@ async function generatePbit(projectData, outputPath, customDaxPath) {
       }
     }
     // --- End DAX Loading/Merging ---
-
     const generator = new PbitGenerator(mapped, outputPath, finalDaxDefs);
     await generator.build();
     await generator.save();
-
   } catch (err) {
     throw new Error(`PBIT generation failed: ${err.message || err}`);
   }
 }
-
 // Enhanced data validation for mapped data
 function validateMappedData(mapped) {
   const errors = [];
   const taskIds = new Set();
   const resourceIds = new Set();
-
   // 1. Basic Existence Checks
   if (!mapped.tasks?.length) {
     errors.push('No tasks found in project data – cannot generate template.');
@@ -377,7 +347,6 @@ function validateMappedData(mapped) {
     // Allow generation without resources, but log a warning? Or error? Let's error for now.
     errors.push('No resources found in project data.');
   }
-
   // 2. Task Validation (IDs, Dates)
   mapped.tasks.forEach((task, index) => {
     const taskIdDesc = `Task (ID: ${task.id}, Name: "${task.name}", Index: ${index})`;
@@ -407,7 +376,6 @@ function validateMappedData(mapped) {
       });
     }
   });
-
   // 3. Resource Validation (IDs)
   mapped.resources.forEach((res, index) => {
     const resIdDesc = `Resource (ID: ${res.id}, Name: "${res.name}", Index: ${index})`;
@@ -419,7 +387,6 @@ function validateMappedData(mapped) {
       resourceIds.add(res.id);
     }
   });
-
   // 4. Assignment Validation (Relationship Integrity)
   if (mapped.assignments?.length) {
     mapped.assignments.forEach((assignment, index) => {
@@ -439,7 +406,6 @@ function validateMappedData(mapped) {
       }
     });
   }
-
   // 5. Predecessor Validation (Relationship Integrity - Part 2)
    mapped.tasks.forEach((task, index) => {
      if (Array.isArray(task.predecessors)) {
@@ -451,16 +417,13 @@ function validateMappedData(mapped) {
        });
      }
    });
-
   // Final Error Check
   if (errors.length > 0) {
     throw new Error(`Data validation failed:\n- ${errors.join('\n- ')}`);
   }
-
   // If we reach here, basic validation passed
   console.log("Data validation passed successfully.");
 }
-
 // Validate visuals against mapped table schema
 function validateVisualDefs(mapped, defs) {
   const tableFields = {
@@ -469,7 +432,6 @@ function validateVisualDefs(mapped, defs) {
     assignments: mapped.assignments.length ? Object.keys(mapped.assignments[0]) : [],
     properties: mapped.properties.length ? Object.keys(mapped.properties[0]) : [],
   };
-
   const errors = [];
   for (const page of defs.defaultVisuals.pages) {
     for (const vis of page.visuals) {
@@ -491,7 +453,6 @@ function validateVisualDefs(mapped, defs) {
     throw new Error(`Visual definition validation failed:\n${errors.join('\n')}`);
   }
 }
-
 // Build DataModelSchema with tables, columns, and measures
 function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
   const mkColumns = (row, tableName) => Object.keys(row).map((c) => {
@@ -505,7 +466,6 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
         value: "Automatic"
       }
     ];
-
     // Determine data type based on the value
     if (typeof value === 'number') {
       if (Number.isInteger(value)) {
@@ -543,13 +503,11 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
     } else if (typeof value === 'boolean') {
       dataType = 'boolean';
     }
-
     // Special case handling for known columns based on both name and tableName
     if ((tableName === 'assignments' && c === 'units') || 
         (tableName === 'tasks' && c === 'percentComplete')) {
       dataType = 'int64';
     }
-    
     if (tableName === 'tasks' && (c === 'start' || c === 'finish')) {
       dataType = 'dateTime';
       formatObj = { formatString: 'Long Date' };
@@ -559,7 +517,6 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
         value: "Date"
       });
     }
-
     return {
       name: c,
       dataType: dataType,
@@ -569,7 +526,6 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
       annotations: annotations
     };
   });
-
   const tables = [];
   for (const [tblName, rows] of Object.entries(mapped)) {
     if (!Array.isArray(rows) || !rows.length) continue;
@@ -578,50 +534,62 @@ function buildDataModelSchema(mapped, measuresArr, tableLineageTags) {
       expression: m.expression,
       formatString: '',
     }));
-
     // Generate table-specific M expression
     let mExpression;
-
     // Special handling for tasks table to expand predecessors
     if (tblName === 'tasks') {
       mExpression = `let
     // Step 1: Embed JSON string from actual table data
     RawJson = "${JSON.stringify(rows).replace(/"/g, '""')}",
- 
     // Step 2: Parse JSON
     ParsedJson = Json.Document(RawJson),
- 
     // Step 3: Convert to table
     TableData = Table.FromRecords(ParsedJson),
- 
+    // Step 2: Parse JSON
+    ParsedJson = Json.Document(RawJson),
+    // Step 3: Convert to table
+    TableData = Table.FromRecords(ParsedJson),
     // Step 4: Ensure proper types - could be enhanced with actual type detection
     TypedTable = Table.TransformColumnTypes(TableData, {}, null),
     #"Expanded predecessors" = Table.ExpandListColumn(TypedTable, "predecessors"),
     #"Expanded predecessors1" = Table.ExpandRecordColumn(#"Expanded predecessors", "predecessors", {"taskID", "taskUniqueID", "taskName", "type", "lag"}, {"predecessors.taskID", "predecessors.taskUniqueID", "predecessors.taskName", "predecessors.type", "predecessors.lag"}),
     #"Changed Type" = Table.TransformColumnTypes(#"Expanded predecessors1",{{"start", type date}, {"finish", type date}}),
     #"Added Custom" = Table.AddColumn(#"Changed Type", "Custom", each [finish]-[start]),
-    #"Inserted Total Days" = Table.AddColumn(#"Added Custom", "Total Days", each Duration.TotalDays([Custom]), type number)
+    #"Inserted Total Days" = Table.AddColumn(#"Added Custom", "Total Days", each Duration.TotalDays([Custom]), type number),
+// Create a reference table for lookup
+    LookupTable = Table.SelectColumns(#"Inserted Total Days", {"outlineNumber", "name"}),
+    // Add SplitLevels to parse outlineNumber
+    AddSplitLevels = Table.AddColumn( #"Inserted Total Days", "SplitLevels", each Text.Split([outlineNumber], ".")),
+    // Build path segments
+    AddL0Key = Table.AddColumn(AddSplitLevels, "L0_Key", each try [SplitLevels]{0} otherwise null),
+    AddL1Key = Table.AddColumn(AddL0Key, "L1_Key", each try [SplitLevels]{0} & "." & [SplitLevels]{1} otherwise null),
+    AddL2Key = Table.AddColumn(AddL1Key, "L2_Key", each try [SplitLevels]{0} & "." & [SplitLevels]{1} & "." & [SplitLevels]{2} otherwise null),
+    // Merge to get name for each level
+    MergeL0 = Table.NestedJoin(AddL2Key, {"L0_Key"}, LookupTable, {"outlineNumber"}, "L0Data", JoinKind.LeftOuter),
+    ExpandL0 = Table.ExpandTableColumn(MergeL0, "L0Data", {"name"}, {"L0"}),
+    MergeL1 = Table.NestedJoin(ExpandL0, {"L1_Key"}, LookupTable, {"outlineNumber"}, "L1Data", JoinKind.LeftOuter),
+    ExpandL1 = Table.ExpandTableColumn(MergeL1, "L1Data", {"name"}, {"L1"}),
+    MergeL2 = Table.NestedJoin(ExpandL1, {"L2_Key"}, LookupTable, {"outlineNumber"}, "L2Data", JoinKind.LeftOuter),
+    ExpandL2 = Table.ExpandTableColumn(MergeL2, "L2Data", {"name"}, {"L2"}),
+    // Remove helper columns
+    Cleaned = Table.RemoveColumns(ExpandL2, {"SplitLevels", "L0_Key", "L1_Key", "L2_Key"})
 in
-    #"Inserted Total Days"`;
+    Cleaned`;
     } else {
       // Dynamic M expression that uses the actual table data for each table
       mExpression = `let
     // Step 1: Embed JSON string from actual table data
     RawJson = "${JSON.stringify(rows).replace(/"/g, '""')}",
- 
     // Step 2: Parse JSON
     ParsedJson = Json.Document(RawJson),
- 
     // Step 3: Convert to table
     TableData = Table.FromRecords(ParsedJson),
- 
     // Step 4: Ensure proper types - could be enhanced with actual type detection
     TypedTable = Table.TransformColumnTypes(TableData, {}, null)
 in
     TypedTable
 `;
     }
-
     tables.push({
       name: tblName,
       columns: mkColumns(rows[0], tblName),
@@ -705,5 +673,4 @@ in
     },
   };
 }
-
 module.exports = { generatePbit };
