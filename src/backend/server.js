@@ -7,9 +7,11 @@ const { promisify } = require('util');
 const { exec } = require('child_process');
 const os = require('os');
 const https = require('https');
+const { generatePbit } = require('../generators/pbitGenerator');
 require('dotenv').config();
 const winston = require('winston');
 const Ajv = require('ajv');
+
 
 // Logger setup
 const logger = winston.createLogger({
@@ -55,14 +57,17 @@ const port = process.env.PORT || config.port || 3001;
 
 // Directories derived from configuration (fallbacks included)
 const UPLOAD_DIR_NAME = config.uploadDir || 'uploads';
-const GENERATOR_DIR_REL = config.generatorDir || path.join('src', 'generator');
+const GENERATOR_DIR_REL = config.generatorDir || 'generator';  // Removed extra 'src' from path
 const MAX_JSON_SIZE = config.maxJsonSize || 10 * 1024 * 1024; // 10 MB
 
 // At the top of the file, after require statements
 const execPromise = promisify(exec);
 
 // AJV setup & schema
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true,
+  allowUnionTypes: true,
+  strictTypes: "log"
+ });
 let validateProject;
 try {
   const schemaPath = path.join(__dirname, 'schemas', 'project-schema.json');
@@ -117,7 +122,11 @@ const downloadFile = (url, dest) => {
 };
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow only your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Health-check endpoint
 app.get('/api/health', (_req, res) => {
@@ -142,8 +151,8 @@ const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (ext !== '.mpp' && ext !== '.mpx') {
-      return cb(new Error('Only .mpp and .mpx files are allowed'));
+    if (ext !== '.mpp' && ext !== '.mpx' && ext !== '.mpt') {
+      return cb(new Error('Only .mpp, .mpx and .mpt files are allowed'));
     }
     cb(null, true);
   },
@@ -163,7 +172,7 @@ const jsonUpload = multer({
 });
 
 // Execute Java command to parse the MPP/MPX file
-const parseWithJava = async (filePath) => {
+const parseWithJava = async (filePath, startDate) => {
   return new Promise(async (resolve, reject) => {
     try {
       // Create a temp directory for Java output
@@ -197,33 +206,98 @@ const parseWithJava = async (filePath) => {
         logger.info('JAR files copied successfully');
 
         // 2. Download additional required dependencies
-        logger.info('Downloading additional dependencies...');
-        const dependencyUrls = [
-          'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar',
-          'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.14.2/jackson-databind-2.14.2.jar',
-          'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.14.2/jackson-annotations-2.14.2.jar',
-          'https://repo1.maven.org/maven2/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar',
-          'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar',
-          'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar',
-          'https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar',
-          'https://repo1.maven.org/maven2/com/github/joniles/rtfparserkit/1.16.0/rtfparserkit-1.16.0.jar',
+        const DOWNLOADS_DIR = path.join(__dirname, '..', '..', 'downloads');
+        if (!fs.existsSync(DOWNLOADS_DIR)) {
+          fs.mkdirSync(DOWNLOADS_DIR, { recursive: true });
+        }
+
+        const dependencies = [
+          {
+            name: 'Jackson Core',
+            url: 'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar',
+            filename: 'jackson-core-2.14.2.jar'
+          },
+          {
+            name: 'Jackson Databind',
+            url: 'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.14.2/jackson-databind-2.14.2.jar',
+            filename: 'jackson-databind-2.14.2.jar'
+          },
+          {
+            name: 'Jackson Annotations',
+            url: 'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.14.2/jackson-annotations-2.14.2.jar',
+            filename: 'jackson-annotations-2.14.2.jar'
+          },
+          {
+            name: 'Commons IO',
+            url: 'https://repo1.maven.org/maven2/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar',
+            filename: 'commons-io-2.11.0.jar'
+          },
+          {
+            name: 'Log4j API',
+            url: 'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar',
+            filename: 'log4j-api-2.17.2.jar'
+          },
+          {
+            name: 'Log4j Core',
+            url: 'https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar',
+            filename: 'log4j-core-2.17.2.jar'
+          },
+          {
+            name: 'Commons Collections',
+            url: 'https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar',
+            filename: 'commons-collections4-4.4.jar'
+          },
+          {
+            name: 'RTF Parser Kit',
+            url: 'https://repo1.maven.org/maven2/com/github/joniles/rtfparserkit/1.16.0/rtfparserkit-1.16.0.jar',
+            filename: 'rtfparserkit-1.16.0.jar'
+          }
         ];
 
         // Download each dependency, but continue if some fail
-        const downloadResults = await Promise.allSettled(
-          dependencyUrls.map((url) => {
-            const fileName = url.substring(url.lastIndexOf('/') + 1);
-            const filePath = path.join(libDir, fileName);
-            return downloadFile(url, filePath);
-          })
-        );
+        const downloadDependencies = async (libDir) => {
+          logger.info('Checking dependencies...');
+          const downloadResults = [];
+
+          for (const dep of dependencies) {
+            const downloadPath = path.join(DOWNLOADS_DIR, dep.filename);
+            const libPath = path.join(libDir, dep.filename);
+            
+            if (!fs.existsSync(downloadPath)) {
+              logger.info(`Downloading ${dep.name} from ${dep.url}...`);
+              try {
+                await downloadFile(dep.url, downloadPath);
+                logger.info(`Successfully downloaded ${dep.name}`);
+              } catch (err) {
+                logger.error(`Failed to download ${dep.name}: ${err.message}`);
+                downloadResults.push({ status: 'rejected', url: dep.url, reason: err.message });
+                continue;
+              }
+            } else {
+              logger.info(`${dep.name} found in downloads folder`);
+            }
+
+            // Copy from downloads to lib
+            try {
+              await fs.promises.copyFile(downloadPath, libPath);
+              downloadResults.push({ status: 'fulfilled' });
+            } catch (err) {
+              logger.error(`Failed to copy ${dep.name} to lib: ${err.message}`);
+              downloadResults.push({ status: 'rejected', url: dep.url, reason: err.message });
+            }
+          }
+
+          return downloadResults;
+        };
+
+        const downloadResults = await downloadDependencies(libDir);
 
         // Check results and report failed downloads
         const failedDownloads = downloadResults
           .filter((result) => result.status === 'rejected')
           .map((result, index) => ({
-            url: dependencyUrls[index],
-            reason: result.reason.message,
+            url: dependencies[index].url,
+            reason: result.reason,
           }));
 
         if (failedDownloads.length > 0) {
@@ -263,18 +337,21 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.io.File;
 
 public class MPPParser {
     public static void main(String[] args) {
         try {
-            if (args.length != 1) {
-                System.err.println("Usage: java MPPParser <project_file>");
+            if (args.length != 2) {
+                System.err.println("Usage: java MPPParser <project_file> <start_date>");
                 System.exit(1);
             }
 
             String filePath = args[0];
+            String newStartDateStr = args[1];
+            
             File file = new File(filePath);
             
             if (!file.exists()) {
@@ -286,11 +363,23 @@ public class MPPParser {
             UniversalProjectReader reader = new UniversalProjectReader();
             ProjectFile project = reader.read(file);
             
+            // Parse the new start date
+            LocalDateTime newStartDate = LocalDateTime.parse(newStartDateStr + "T00:00");
+            
+            // Calculate the difference between original and new start dates
+            LocalDateTime originalStartDate = project.getProjectProperties().getStartDate();
+            long daysDifference = 0;
+            if (originalStartDate != null) {
+                // Ensure we compare dates at midnight to avoid time-based offsets
+                originalStartDate = originalStartDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
+                daysDifference = ChronoUnit.DAYS.between(originalStartDate, newStartDate);
+            }
+            
             // Set up Jackson for JSON output
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode rootNode = mapper.createObjectNode();
             
-            // Create a date formatter for LocalDateTime
+            // Create a date formatter for LocalDateTime that only includes the date portion
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             
             // Extract project properties
@@ -299,36 +388,22 @@ public class MPPParser {
             propertiesNode.put("author", project.getProjectProperties().getAuthor());
             propertiesNode.put("company", project.getProjectProperties().getCompany());
             
-            // Extract dates using ProjectProperties with extra null checks
-            ProjectProperties props = project.getProjectProperties();
+            // Set the new start date in project properties
+            propertiesNode.put("startDate", newStartDate.format(dateFormatter));
             
-            // Handle dates safely with LocalDateTime
+            // Adjust finish date if available
             try {
-                LocalDateTime startDate = props.getStartDate();
-                propertiesNode.put("startDate", startDate != null ? startDate.format(dateFormatter) : "Not set");
-            } catch (Exception e) {
-                propertiesNode.put("startDate", "Not set");
-            }
-            
-            try {
-                LocalDateTime finishDate = props.getFinishDate();
-                propertiesNode.put("finishDate", finishDate != null ? finishDate.format(dateFormatter) : "Not set");
+                LocalDateTime finishDate = project.getProjectProperties().getFinishDate();
+                if (finishDate != null) {
+                    // Ensure consistent time portion when adjusting dates
+                    finishDate = finishDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
+                    finishDate = finishDate.plusDays(daysDifference);
+                    propertiesNode.put("finishDate", finishDate.format(dateFormatter));
+                } else {
+                    propertiesNode.put("finishDate", "Not set");
+                }
             } catch (Exception e) {
                 propertiesNode.put("finishDate", "Not set");
-            }
-            
-            try {
-                LocalDateTime statusDate = props.getStatusDate();
-                propertiesNode.put("statusDate", statusDate != null ? statusDate.format(dateFormatter) : "Not set");
-            } catch (Exception e) {
-                propertiesNode.put("statusDate", "Not set");
-            }
-            
-            try {
-                LocalDateTime currentDate = props.getCurrentDate();
-                propertiesNode.put("currentDate", currentDate != null ? currentDate.format(dateFormatter) : "Not set");
-            } catch (Exception e) {
-                propertiesNode.put("currentDate", "Not set");
             }
             
             // Other project properties
@@ -338,7 +413,7 @@ public class MPPParser {
             
             rootNode.set("properties", propertiesNode);
             
-            // Extract tasks
+            // Extract tasks with adjusted dates
             ArrayNode tasksNode = mapper.createArrayNode();
             
             for (Task task : project.getTasks()) {
@@ -351,37 +426,41 @@ public class MPPParser {
                     taskNode.put("outlineNumber", task.getOutlineNumber());
                     taskNode.put("outlineLevel", task.getOutlineLevel());
                     
-                    // Handle dates with LocalDateTime
+                    // Adjust task dates by the difference
                     try {
-                        LocalDateTime start = task.getStart();
-                        taskNode.put("start", start != null ? start.format(dateFormatter) : "");
+                        LocalDateTime taskStart = task.getStart();
+                        if (taskStart != null) {
+                            // Normalize time portion to midnight
+                            taskStart = taskStart.withHour(0).withMinute(0).withSecond(0).withNano(0);
+                            taskStart = taskStart.plusDays(daysDifference);
+                            taskNode.put("start", taskStart.format(dateFormatter));
+                        } else {
+                            taskNode.put("start", "");
+                        }
                     } catch (Exception e) {
                         taskNode.put("start", "");
                     }
                     
                     try {
-                        LocalDateTime finish = task.getFinish();
-                        taskNode.put("finish", finish != null ? finish.format(dateFormatter) : "");
+                        LocalDateTime taskFinish = task.getFinish();
+                        if (taskFinish != null) {
+                            // Normalize time portion to midnight
+                            taskFinish = taskFinish.withHour(0).withMinute(0).withSecond(0).withNano(0);
+                            taskFinish = taskFinish.plusDays(daysDifference);
+                            taskNode.put("finish", taskFinish.format(dateFormatter));
+                        } else {
+                            taskNode.put("finish", "");
+                        }
                     } catch (Exception e) {
                         taskNode.put("finish", "");
                     }
                     
-                    // Handle durations
+                    // Keep original durations and other properties
                     taskNode.put("duration", task.getDuration() != null ? task.getDuration().toString() : null);
-                    
-                    // Handle work
                     taskNode.put("work", task.getWork() != null ? task.getWork().toString() : null);
-                    
-                    // Handle percentages
-                    Number percentComplete = task.getPercentageComplete();
-                    taskNode.put("percentComplete", percentComplete != null ? percentComplete.doubleValue() : 0.0);
-                    
-                    // Handle task type
+                    taskNode.put("percentComplete", task.getPercentageComplete() != null ? task.getPercentageComplete().doubleValue() : 0.0);
                     taskNode.put("type", task.getType() != null ? task.getType().toString() : "Normal");
-                    
-                    // Handle constraints
-                    ConstraintType constraintType = task.getConstraintType();
-                    taskNode.put("constraint", constraintType != null ? constraintType.toString() : "As Soon As Possible");
+                    taskNode.put("constraint", task.getConstraintType() != null ? task.getConstraintType().toString() : "As Soon As Possible");
                     
                     // Handle predecessors
                     ArrayNode predecessorsNode = mapper.createArrayNode();
@@ -397,8 +476,6 @@ public class MPPParser {
                         }
                     }
                     taskNode.set("predecessors", predecessorsNode);
-                    
-                    // Add more task properties as needed
                     
                     tasksNode.add(taskNode);
                 }
@@ -503,7 +580,7 @@ public class MPPParser {
       // Execute the Java program
       try {
         const { stdout, stderr } = await execPromise(
-          `java -cp ${classpath}${pathSeparator}"${tempDir}" MPPParser "${filePath}"`
+          `java -cp ${classpath}${pathSeparator}"${tempDir}" MPPParser "${filePath}" "${startDate}"`
         );
 
         // If stderr exists, log it but continue unless it indicates a critical error
@@ -603,6 +680,10 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
+    if (!req.body.startDate) {
+      return res.status(400).json({ error: 'Start date is required' });
+    }
+
     // Check if the required JAR files exist
     const mpxjJar = path.join(__dirname, 'lib', 'mpxj.jar');
     const poiJar = path.join(__dirname, 'lib', 'poi.jar');
@@ -611,8 +692,8 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       return res.status(500).json({ error: 'Required JAR files are missing' });
     }
 
-    // Parse the project file using Java
-    const projectData = await parseWithJava(req.file.path);
+    // Parse the project file using Java with the provided start date
+    const projectData = await parseWithJava(req.file.path, req.body.startDate);
 
     // Validate parsed data if schema available
     if (validateProject) {
@@ -626,22 +707,45 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       }
     }
 
-    // NEW: Persist project data as JSON for generator usage
-    try {
-      const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
-      await fs.promises.mkdir(generatorDir, { recursive: true });
-      const outputPath = path.join(generatorDir, 'project-data.json');
-      await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
-      logger.info(`Saved project data JSON to ${outputPath}`);
-    } catch (writeErr) {
-      logger.error('Failed to write project data JSON:', writeErr);
+    // Generate output paths
+    const timestamp = Date.now();
+    const fileName = path.basename(req.file.originalname, path.extname(req.file.originalname));
+    const outputDir = path.join(__dirname, '..', 'generator');
+    await fs.promises.mkdir(outputDir, { recursive: true });
+
+    // Save JSON (for reference/debugging)
+    const jsonPath = path.join(outputDir, 'project-data.json');
+    await fs.promises.writeFile(jsonPath, JSON.stringify(projectData, null, 2), 'utf-8');
+    logger.info(`Saved project data JSON to ${jsonPath}`);
+
+    // Generate PBIT directly and create rezipped version
+    const pbitPath = path.join(outputDir, `${fileName}_${timestamp}.pbit`);
+    await generatePbit(projectData, pbitPath);
+    logger.info(`Generated PBIT file at ${pbitPath}`);
+
+    // Wait for rezipped file to be created
+    const rezippedPath = pbitPath.replace('.pbit', '_rezipped.pbit');
+    logger.info(`Expected rezipped file at ${rezippedPath}`);
+
+    // Give a small delay to ensure file is ready
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    if (!fs.existsSync(rezippedPath)) {
+      throw new Error('Rezipped file was not created successfully');
     }
 
     // Clean up the uploaded file
     fs.unlinkSync(req.file.path);
 
-    // Return the parsed data
-    res.json(projectData);
+    // Return both JSON and rezipped PBIT paths to the client
+    res.json({
+      message: 'Project file processed successfully',
+      projectData,
+      files: {
+        json: jsonPath,
+        pbit: rezippedPath
+      }
+    });
   } catch (error) {
     logger.error('Error processing file:', error);
     res.status(500).json({
@@ -693,6 +797,31 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
     res.json({ message: 'JSON uploaded and validated successfully' });
   } catch (err) {
     next(err);
+  }
+});
+
+// Add endpoint to download files
+app.get('/api/download/:filename', (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const generatorDir = path.join(__dirname, '..', 'generator');
+    const filePath = path.join(generatorDir, filename);
+
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+
+    // Set Content-Disposition to attachment to trigger download
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+    res.setHeader('Content-Type', 'application/octet-stream');
+
+    // Stream the file
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+  } catch (error) {
+    logger.error('Error downloading file:', error);
+    res.status(500).json({ error: 'Error downloading file' });
   }
 });
 

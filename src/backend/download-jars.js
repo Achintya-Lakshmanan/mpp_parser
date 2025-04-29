@@ -3,7 +3,13 @@ const path = require('path');
 const https = require('https');
 const { exec } = require('child_process');
 
-// Create lib directory if it doesn't exist
+// Create downloads directory if it doesn't exist
+const downloadsDir = path.join(__dirname, '..', '..', 'downloads');
+if (!fs.existsSync(downloadsDir)) {
+  fs.mkdirSync(downloadsDir, { recursive: true });
+}
+
+// Also maintain lib directory for backward compatibility
 const libDir = path.join(__dirname, 'lib');
 if (!fs.existsSync(libDir)) {
   fs.mkdirSync(libDir, { recursive: true });
@@ -32,134 +38,49 @@ function downloadFile(url, dest) {
   });
 }
 
-// Alternative: Try to copy from Maven local repository if exists
-function copyFromMavenRepo() {
-  return new Promise((resolve, reject) => {
-    try {
-      const userHome = process.env.HOME || process.env.USERPROFILE;
-      const mavenRepo = path.join(userHome, '.m2', 'repository');
-
-      // Check for MPXJ jar
-      const mpxjPath = path.join(
-        mavenRepo,
-        'net',
-        'sf',
-        'mpxj',
-        'mpxj',
-        '10.15.0',
-        'mpxj-10.15.0.jar'
-      );
-      const mpxjDest = path.join(libDir, 'mpxj.jar');
-
-      // Check for POI jar
-      const poiPath = path.join(mavenRepo, 'org', 'apache', 'poi', 'poi', '5.2.3', 'poi-5.2.3.jar');
-      const poiDest = path.join(libDir, 'poi.jar');
-
-      let copiedFiles = [];
-
-      if (fs.existsSync(mpxjPath)) {
-        fs.copyFileSync(mpxjPath, mpxjDest);
-        copiedFiles.push(mpxjDest);
-        console.log(`Copied MPXJ JAR to ${mpxjDest}`);
-      }
-
-      if (fs.existsSync(poiPath)) {
-        fs.copyFileSync(poiPath, poiDest);
-        copiedFiles.push(poiDest);
-        console.log(`Copied POI JAR to ${poiDest}`);
-      }
-
-      resolve(copiedFiles);
-    } catch (err) {
-      console.log('Error copying from Maven repository:', err);
-      resolve([]);
-    }
-  });
-}
-
-// Try to download files with Maven
-function downloadWithMaven() {
-  return new Promise((resolve, reject) => {
-    // Run Maven command to download dependencies
-    const mvnCommand =
-      `mvn dependency:get -Dartifact=net.sf.mpxj:mpxj:10.15.0 && ` +
-      `mvn dependency:get -Dartifact=org.apache.poi:poi:5.2.3`;
-
-    exec(mvnCommand, (err, stdout, stderr) => {
-      if (err) {
-        console.error('Error running Maven command:', err);
-        resolve(false);
-        return;
-      }
-
-      console.log('Maven download output:', stdout);
-
-      // Now copy from .m2 repository
-      copyFromMavenRepo()
-        .then((files) => resolve(files.length > 0))
-        .catch((err) => {
-          console.error('Error copying files:', err);
-          resolve(false);
-        });
-    });
-  });
-}
-
 // URLs for direct download
-const mpxjUrl = 'https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/10.15.0/mpxj-10.15.0.jar';
-const poiUrl = 'https://repo1.maven.org/maven2/org/apache/poi/poi/5.2.3/poi-5.2.3.jar';
+const dependencies = [
+  {
+    name: 'MPXJ',
+    url: 'https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/10.15.0/mpxj-10.15.0.jar',
+    filename: 'mpxj.jar'
+  },
+  {
+    name: 'POI',
+    url: 'https://repo1.maven.org/maven2/org/apache/poi/poi/5.2.3/poi-5.2.3.jar',
+    filename: 'poi.jar'
+  }
+];
 
 // Main function
 async function downloadJars() {
   try {
     console.log('Checking for existing JAR files...');
-
-    // Check if files already exist
-    const mpxjJar = path.join(libDir, 'mpxj.jar');
-    const poiJar = path.join(libDir, 'poi.jar');
-
-    if (fs.existsSync(mpxjJar) && fs.existsSync(poiJar)) {
-      console.log('JAR files already exist.');
-      return;
+    
+    for (const dep of dependencies) {
+      const downloadPath = path.join(downloadsDir, dep.filename);
+      const libPath = path.join(libDir, dep.filename);
+      
+      // Check if file exists in downloads directory
+      if (!fs.existsSync(downloadPath)) {
+        console.log(`${dep.name} not found in downloads folder, downloading from ${dep.url}...`);
+        await downloadFile(dep.url, downloadPath);
+        console.log(`${dep.name} downloaded successfully to downloads folder`);
+      } else {
+        console.log(`${dep.name} found in downloads folder`);
+      }
+      
+      // Copy from downloads to lib (if different or doesn't exist)
+      if (!fs.existsSync(libPath) || 
+          fs.statSync(downloadPath).size !== fs.statSync(libPath).size) {
+        fs.copyFileSync(downloadPath, libPath);
+        console.log(`${dep.name} copied to lib directory`);
+      }
     }
-
-    // First try to copy from Maven repository
-    console.log('Trying to copy from local Maven repository...');
-    const copiedFiles = await copyFromMavenRepo();
-
-    if (copiedFiles.length === 2) {
-      console.log('All JAR files copied successfully from Maven repository.');
-      return;
-    }
-
-    // If not all files were copied, try Maven download
-    console.log('Trying to download with Maven...');
-    const mavenSuccess = await downloadWithMaven();
-
-    if (mavenSuccess) {
-      console.log('All JAR files downloaded and copied successfully with Maven.');
-      return;
-    }
-
-    // If Maven failed, download directly from URLs
-    console.log('Downloading JAR files directly...');
-
-    const downloadPromises = [];
-
-    if (!fs.existsSync(mpxjJar)) {
-      console.log(`Downloading MPXJ from ${mpxjUrl}...`);
-      downloadPromises.push(downloadFile(mpxjUrl, mpxjJar));
-    }
-
-    if (!fs.existsSync(poiJar)) {
-      console.log(`Downloading POI from ${poiUrl}...`);
-      downloadPromises.push(downloadFile(poiUrl, poiJar));
-    }
-
-    await Promise.all(downloadPromises);
-    console.log('All JAR files downloaded successfully.');
+    
+    console.log('All JAR files are ready');
   } catch (error) {
-    console.error('Error downloading JAR files:', error);
+    console.error('Error managing JAR files:', error);
     process.exit(1);
   }
 }

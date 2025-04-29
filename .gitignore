@@ -32,3 +32,15 @@ tasks/
 /output/
 /assets/
 /xpress9_build/
+# Downloaded JAR files
+downloads/
+
+# Output files
+*.pbit
+*.zip
+
+# Uploads
+/src/backend/uploads/*
+
+# Pbit files
+*.pbit
