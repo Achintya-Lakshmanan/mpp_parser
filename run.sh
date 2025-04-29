@@ -137,6 +137,9 @@ fi
 BACKEND_PORT=${PORT:-3001}
 FRONTEND_PORT=3000
 
+# Ensure we have a valid port for serve
+SERVE_PORT=${PORT:-3000}
+
 # Check if running on Replit
 if [ -n "$REPL_ID" ]; then
   echo "Running on Replit..."
@@ -150,8 +153,8 @@ if [ -n "$REPL_ID" ]; then
   sleep 3
   
   # Use Replit as proxy by serving static files and proxying API requests
-  echo "Starting frontend server with API proxy..."
-  BACKEND_PORT=$BACKEND_PORT NODE_ENV=production npx serve -s build -l $PORT
+  echo "Starting frontend server with API proxy on port $SERVE_PORT..."
+  BACKEND_PORT=$BACKEND_PORT NODE_ENV=production npx serve -s build --listen $SERVE_PORT
   
   # If frontend stops, kill the backend
   kill $BACKEND_PID
@@ -166,7 +169,7 @@ else
   
   # Start frontend server
   echo "Starting frontend server on port $FRONTEND_PORT..."
-  PORT=$FRONTEND_PORT npx serve -s build
+  PORT=$FRONTEND_PORT npx serve -s build --listen $FRONTEND_PORT
   
   # If frontend stops, kill the backend
   kill $BACKEND_PID
