@@ -1,7 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/**", "destination": "http://localhost:3001/api/:splat" },
-    { "source": "/**", "destination": "/index.html" }
+    { "source": "/api/**", "destination": "http://localhost:3001/api/:splat" }
   ],
   "headers": [
     {
@@ -12,5 +11,7 @@
         { "key": "Expires", "value": "0" }
       ]
     }
-  ]
+  ],
+  "trailingSlash": true,
+  "unlisted": ["node_modules", ".git", "src/backend/uploads"]
 } 

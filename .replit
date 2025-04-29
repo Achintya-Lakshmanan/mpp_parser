@@ -1,9 +1,11 @@
 run = "bash run.sh"
 hidden = [".git", "node_modules", ".config"]
-modules = ["nodejs-18:v3-20230608-f4cd419"]
 
 [nix]
-channel = "stable-23_05"
+channel = "stable-22_11"
+
+[env]
+XDG_CONFIG_HOME = "/home/runner/.config"
 
 [deployment]
 run = ["sh", "-c", "bash run.sh"]
