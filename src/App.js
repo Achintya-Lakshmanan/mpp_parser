@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div className="app-container">
       <header>
-        <h1>Microsoft Project Parser</h1>
+        <h1>Microsoft Project to PBIX</h1>
         <p>Upload and parse MPP and MPX files</p>
       </header>
 

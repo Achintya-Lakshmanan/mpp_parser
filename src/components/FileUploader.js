@@ -111,7 +111,6 @@ const FileUploader = ({ onFileUpload }) => {
 
   return (
     <div className="file-uploader">
-      <h2>Upload Microsoft Project File</h2>
       <form onSubmit={handleSubmit}>
         <div className="file-input-container">
           <input type="file" onChange={handleFileChange} accept=".mpp,.mpx,.mpt" id="file-input" />
@@ -133,7 +132,7 @@ const FileUploader = ({ onFileUpload }) => {
         {error && <div className="error-message">{error}</div>}
 
         <button type="submit" className="upload-button" disabled={!file || loading}>
-          {loading ? 'Processing...' : 'Parse Project File'}
+          {loading ? 'Processing...' : 'Convert to PBIT'}
         </button>
 
         {pbitFile && (
