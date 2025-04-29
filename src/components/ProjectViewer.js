@@ -8,7 +8,8 @@ const ProjectViewer = ({ projectData }) => {
     return <div className="project-viewer-empty">No project data available</div>;
   }
 
-  const { tasks, resources, assignments, properties } = projectData;
+  // Destructure projectData correctly
+  const { tasks = [], resources = [], assignments = [], properties = {} } = projectData.projectData || projectData;
 
   const renderTasks = () => {
     if (!tasks || tasks.length === 0) {
@@ -26,6 +27,7 @@ const ProjectViewer = ({ projectData }) => {
               <th>Finish Date</th>
               <th>Duration</th>
               <th>% Complete</th>
+              <th>Resources</th>
               <th>Predecessors</th>
             </tr>
           </thead>
@@ -40,12 +42,13 @@ const ProjectViewer = ({ projectData }) => {
                 <td>{task.finish}</td>
                 <td>{task.duration}</td>
                 <td>{task.percentComplete}%</td>
+                <td>{task.resourceNames}</td>
                 <td>
                   {Array.isArray(task.predecessors)
                     ? task.predecessors.map((pred, i) => (
                         <div key={i}>
                           {pred.taskName} ({pred.type}
-                          {pred.lag !== '0d' ? ', ' + pred.lag : ''})
+                          {pred.lag !== '0.0d' ? ', ' + pred.lag : ''})
                           {i < task.predecessors.length - 1 ? ', ' : ''}
                         </div>
                       ))
@@ -72,9 +75,7 @@ const ProjectViewer = ({ projectData }) => {
               <th>ID</th>
               <th>Name</th>
               <th>Type</th>
-              <th>Email</th>
               <th>Max Units</th>
-              <th>Cost</th>
             </tr>
           </thead>
           <tbody>
@@ -83,9 +84,7 @@ const ProjectViewer = ({ projectData }) => {
                 <td>{resource.id}</td>
                 <td>{resource.name}</td>
                 <td>{resource.type}</td>
-                <td>{resource.email}</td>
                 <td>{resource.maxUnits}</td>
-                <td>{resource.cost}</td>
               </tr>
             ))}
           </tbody>
@@ -108,8 +107,6 @@ const ProjectViewer = ({ projectData }) => {
               <th>Resource</th>
               <th>Units</th>
               <th>Work</th>
-              <th>Start</th>
-              <th>Finish</th>
             </tr>
           </thead>
           <tbody>
@@ -119,8 +116,6 @@ const ProjectViewer = ({ projectData }) => {
                 <td>{assignment.resourceName}</td>
                 <td>{assignment.units}%</td>
                 <td>{assignment.work}</td>
-                <td>{assignment.start}</td>
-                <td>{assignment.finish}</td>
               </tr>
             ))}
           </tbody>
