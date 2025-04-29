@@ -1,0 +1,11 @@
+run = "bash run.sh"
+hidden = [".git", "node_modules", ".config"]
+modules = ["nodejs-18:v3-20230608-f4cd419"]
+
+[nix]
+channel = "stable-23_05"
+
+[deployment]
+run = ["sh", "-c", "bash run.sh"]
+deploymentTarget = "cloudrun"
+ignorePorts = false 

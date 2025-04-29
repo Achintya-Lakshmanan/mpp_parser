@@ -1,20 +1,14 @@
 {
-  "name": "mpp-parser",
+  "name": "mpp_parser",
   "version": "1.0.0",
-  "description": "Microsoft Project Parser that converts MPP files to PBIT",
-  "main": "src/backend/server.js",//"main": "index.js",
+  "description": "Microsoft Project (MPP/MPX) file parser for React",
+  "main": "index.js",
   "scripts": {
-    "start": "bash run.sh",
-    "build": "npm run build:frontend",
-    "build:frontend": "cd src && npm run build",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
     "server": "node src/backend/server.js",
-    "frontend": "cd src && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "oldstart": "webpack serve --mode development",
-    "oldbuild": "webpack --mode production",
-    "oldserver": "node src/backend/server.js",
-    "oldtest-server": "node src/backend/test-server.js",
-    "olddev": "concurrently \"npm run start\" \"npm run server\"",
+    "test-server": "node src/backend/test-server.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\"",
     "test": "concurrently \"npm run start\" \"npm run test-server\"",
     "test:mock": "node src/mock/runMockTests.js",
     "test:unit": "jest",
@@ -39,20 +33,19 @@
     "adm-zip": "^0.5.16",
     "ajv": "^8.12.0",
     "axios": "^1.9.0",
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.1.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.1",
+    "express": "^5.1.0",
     "fs-extra": "^11.1.1",
     "jszip": "^3.10.1",
-    "multer": "^1.4.5-lts.1",
+    "multer": "^1.4.5-lts.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "stream-json": "^1.7.5",
     "webpack": "^5.99.6",
     "webpack-cli": "^6.0.1",
-    "winston": "^3.11.0",
-    "serve": "^14.2.1"
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
@@ -74,8 +67,5 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3",
     "webpack-dev-server": "^5.2.1"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }

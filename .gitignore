@@ -1,20 +1,57 @@
-node_modules
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build
+build/
+dist/
+*.zip
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+*.tmp
+*.bak
+
+# Uploads and generated files
+src/backend/uploads/
+src/generator/
+downloads/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+*.jar
+
+# Logs
+logs/
+*.log
 
 # Added by Claude Task Master
 # Logs
 logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 dev-debug.log
 # Dependency directories
 node_modules/
-# Environment variables
-.env
 # Editor directories and files
-.idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -32,13 +69,6 @@ tasks/
 /output/
 /assets/
 /xpress9_build/
-# Downloaded JAR files
-downloads/
-
-# Output files
-*.pbit
-*.zip
-
 # Uploads
 /src/backend/uploads/*
 

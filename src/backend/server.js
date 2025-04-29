@@ -123,7 +123,9 @@ const downloadFile = (url, dest) => {
 
 // Enable CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow only your frontend
+  origin: process.env.NODE_ENV === 'production' 
+    ? true  // Allow any origin in production (for Replit)
+    : 'http://localhost:3000', // Allow only local frontend in development
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
