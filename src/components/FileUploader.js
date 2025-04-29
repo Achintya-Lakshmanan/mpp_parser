@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './FileUploader.css';
+// process.env.REACT_APP_API_URL ||
+const API_BASE_URL = 'http://localhost:3001';
 
 const FileUploader = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
@@ -44,7 +46,7 @@ const FileUploader = ({ onFileUpload }) => {
       formData.append('projectFile', file);
       formData.append('startDate', startDate);
 
-      const response = await fetch('http://localhost:3001/api/parse', {
+      const response = await fetch(`${API_BASE_URL}/api/parse`, {
         method: 'POST',
         body: formData,
       });
@@ -73,8 +75,17 @@ const FileUploader = ({ onFileUpload }) => {
     if (!pbitFile) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/download/${pbitFile}`, {
+      // Extract filename from the full path
+      const filename = pbitFile.split('/').pop();
+      if (!filename) {
+        throw new Error('Could not extract filename from path');
+      }
+      // Use only the filename in the download URL
+      const response = await fetch(`${API_BASE_URL}/api/download/${filename}`, {
         method: 'GET',
+        headers: {
+          'Content-Type': 'application/octet-stream',
+        },
       });
 
       if (!response.ok) {
