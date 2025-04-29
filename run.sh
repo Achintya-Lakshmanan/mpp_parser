@@ -12,11 +12,45 @@ if [ ! -d "node_modules" ]; then
   npm install
 fi
 
+# Make sure we have react-scripts in the src directory
+if [ ! -d "src/node_modules/react-scripts" ]; then
+  echo "Installing React dependencies..."
+  cd src
+  npm install react-scripts --save-dev
+  cd ..
+fi
+
 # Create necessary directories
 mkdir -p src/backend/lib
 mkdir -p src/backend/uploads
 mkdir -p src/generator
 mkdir -p downloads
+mkdir -p public
+
+# Ensure we have the public directory set up
+if [ ! -f "public/index.html" ]; then
+  echo "Copying index.html to public directory..."
+  cp src/public/index.html public/ 2>/dev/null || cp build/index.html public/ 2>/dev/null || echo "<!DOCTYPE html>
+<html lang=\"en\">
+  <head>
+    <meta charset=\"utf-8\" />
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+    <meta name=\"theme-color\" content=\"#000000\" />
+    <meta name=\"description\" content=\"MPP Parser - Convert Microsoft Project files to Power BI\" />
+    <title>MPP Parser</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id=\"root\"></div>
+  </body>
+</html>" > public/index.html
+fi
+
+# Build the React app
+if [ ! -d "build" ] || [ -z "$(ls -A build 2>/dev/null)" ]; then
+  echo "Building React app..."
+  npm run build
+fi
 
 # Check for Java - simplified approach
 if ! command -v java &> /dev/null; then
@@ -103,34 +137,6 @@ if [ ! -f "src/backend/schemas/project-schema.json" ]; then
   },
   "required": ["properties", "tasks"]
 }
-EOL
-fi
-
-# Create a minimal build directory if it doesn't exist
-if [ ! -d "build" ] || [ -z "$(ls -A build 2>/dev/null)" ]; then
-  echo "Creating minimal build directory..."
-  mkdir -p build
-  cat > build/index.html << EOL
-<!DOCTYPE html>
-<html>
-<head>
-  <title>MPP Parser</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-    .container { max-width: 600px; margin: 0 auto; }
-    h1 { color: #333; }
-    p { color: #666; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>MPP Parser - Loading...</h1>
-    <p>If this message persists, please check the console for errors.</p>
-  </div>
-</body>
-</html>
 EOL
 fi
 
