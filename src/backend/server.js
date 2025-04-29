@@ -852,6 +852,29 @@ if (MOCK_MODE) {
   });
 }
 
+// If running in Replit, also serve static files from the build directory
+if (process.env.REPL_ID) {
+  const buildPath = path.join(__dirname, '..', '..', 'build');
+  
+  // Check if the build directory exists
+  if (fs.existsSync(buildPath)) {
+    logger.info(`Serving static files from ${buildPath}`);
+    
+    // Serve static files
+    app.use(express.static(buildPath));
+    
+    // Serve index.html for all routes except /api
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api/')) {
+        return next();
+      }
+      res.sendFile(path.join(buildPath, 'index.html'));
+    });
+  } else {
+    logger.warn(`Build directory ${buildPath} not found. Static files won't be served.`);
+  }
+}
+
 // --- Global error handler ---
 // Must be after all other middlewares/routes
 /* eslint-disable no-unused-vars */
