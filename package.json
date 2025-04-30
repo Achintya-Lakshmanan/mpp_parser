@@ -2,7 +2,7 @@
   "name": "mpp-parser",
   "version": "1.0.0",
   "description": "Microsoft Project Parser that converts MPP files to PBIT",
-  "main": "index.js",
+  "main": "src/backend/server.js",
   "scripts": {
     "start": "bash run.sh",
     "build": "npm run build:frontend",
