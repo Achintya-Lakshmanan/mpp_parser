@@ -1,101 +1,68 @@
-# MPP JSON to Power BI Template Generator (`mpp-json-to-pbit`)
+# MPP Parser - Microsoft Project to Power BI
 
-## Overview
-This project provides a command-line interface (CLI) tool and library to convert Microsoft Project data, previously exported to a specific JSON format, into a Power BI template file (`.pbit`). This allows for rapid visualization and analysis of project data within Power BI without manual setup.
+This web application allows users to upload Microsoft Project files (.mpp, .mpx, .mpt) and convert them to Power BI Template (.pbit) files with customized start dates.
 
-The tool takes a JSON file containing project tasks, resources, and assignments as input and generates a `.pbit` file containing:
-- Mapped data tables (Tasks, Resources, Assignments, Properties)
-- Predefined DAX measures and calculations
-- Default report visuals and page layouts
+## Features
 
-## Prerequisites
-- Node.js (v14 or higher suggested)
+- Upload MPP/MPX/MPT files
+- Set a custom start date for the project
+- Generate PBIT files for use with Power BI
+- Parse project data into JSON format
+- View and download the resulting PBIT files
 
-## Installation
+## Running on Replit
 
-```bash
-npm install -g mpp-json-to-pbit # Or install locally within your project
-```
+This project is configured to run on Replit. Simply press the "Run" button and the application will:
 
-## Usage
+1. Install all necessary dependencies
+2. Download required Java libraries (MPXJ and Apache POI)
+3. Start the backend server
+4. Serve the frontend
 
-```bash
-mpp-json-to-pbit --input <path/to/your/project.json> --output <path/to/your/template.pbit> [--custom-dax <path/to/custom-dax.json>]
-```
+The application will be available at the Replit URL provided in your workspace.
 
-**Arguments:**
+## Requirements
 
-*   `--input` / `-i`: (Required) Path to the input JSON file exported from Microsoft Project (using a compatible exporter).
-*   `--output` / `-o`: (Required) Path where the generated `.pbit` file should be saved.
-*   `--custom-dax` / `-d`: (Optional) Path to a JSON file containing custom DAX measures to merge with or override the standard definitions.
+- Node.js 18+
+- Java JDK 11+ (automatically installed in the Replit environment)
+- NPM/Yarn
 
-### Input JSON Format
-The input JSON file should adhere to the structure expected by the tool, typically including arrays for `tasks`, `resources`, `assignments`, and an object for `properties`.
+## Local Development
 
-*(Note: A formal JSON schema definition or link to the exporting tool generating this format should ideally be provided here.)*
+To run this project locally:
 
-### Custom DAX Definitions
-The `--custom-dax` option allows you to provide a JSON file containing an array of DAX definitions. Each definition object should have `name`, `table`, and `expression` properties. If a custom measure has the same name and table as a standard measure, the custom one will override it.
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Make the scripts executable: `chmod +x run.sh setup-env.sh`
+4. Run the application: `./run.sh`
 
-Example `custom-dax.json`:
-```json
-[
-  {
-    "name": "Total Cost Custom",
-    "table": "Resources",
-    "expression": "SUMX(Resources, Resources[cost] * 1.1) /* 10% overhead */"
-  }
-]
-```
+## Project Structure
 
+- `src/backend/` - Express.js backend server
+- `src/components/` - React frontend components
+- `src/generators/` - PBIT generation code
 
-## Usage
+## Environment Variables
 
-### Development Mode
+The following environment variables can be configured:
 
-1. Start the backend server
-```
-npm run server
-```
+- `NODE_ENV` - Environment (development/production)
+- `PORT` - Port for the server to listen on
+- `LOG_LEVEL` - Logging level (info/debug/warn/error)
 
-2. In a separate terminal, start the frontend development server
-```
-npm run start
-```
+## How it Works
 
-3. Access the application at http://localhost:3000
+1. The frontend allows users to upload Microsoft Project files
+2. The backend uses Java with the MPXJ library to parse the file
+3. The parsed data is converted to a PBIT file using the generator
+4. The user can download the resulting PBIT file
 
+## Dependencies
 
-## Development
-
-To contribute or run the tool from the source:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd mpp_parser
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Run the tool (example):**
-    ```bash
-    node src/cli.js -i src/mock/data/project-data.json -o test-output.pbit
-    ```
-
-## Testing
-
-Run the available test suites:
-
-*   **Unit Tests:** Test individual functions (data mapping, validation, etc.).
-    ```bash
-    npm run test:unit
-    ```
-*   **Mock Generation Tests:** Perform end-to-end tests using mock JSON data to generate `.pbit` files.
-    ```bash
-    npm run test:mock
-    ```
+- Express.js - Backend server
+- React - Frontend UI
+- MPXJ - Java library for parsing Microsoft Project files
+- Apache POI - Java library for working with Microsoft documents
 
 ## License
 This project is licensed under the ISC License.

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './FileUploader.css';
-// process.env.REACT_APP_API_URL ||
+
+// Use window.location.origin to dynamically get the host
 //const API_BASE_URL = process.env.REACT_APP_API_URL || window.location.origin;
 const API_BASE_URL = 'http://localhost:3001';
-
 const FileUploader = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
