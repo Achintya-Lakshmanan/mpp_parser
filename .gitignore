@@ -1,5 +1,28 @@
 node_modules
 
+*.bak
+
+# Uploads and generated files
+src/backend/uploads/
+downloads/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+*.jar
+
+# Logs
+logs/
+*.log
 # Added by Claude Task Master
 # Logs
 logs

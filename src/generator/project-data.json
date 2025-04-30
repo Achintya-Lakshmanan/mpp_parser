@@ -1,55 +1,55 @@
 {
   "properties": {
     "name": null,
-    "author": "",
-    "company": "",
-    "startDate": "2025-10-10",
-    "finishDate": "2026-07-21",
-    "taskCount": 124,
-    "resourceCount": 22,
-    "assignmentCount": 129
+    "author": "Greg Susman - GS Design, Inc.",
+    "company": "B4UBUILD.COM - http://www.b4ubuild.com/",
+    "startDate": "2025-04-30",
+    "finishDate": "2025-08-02",
+    "taskCount": 63,
+    "resourceCount": 60,
+    "assignmentCount": 55
   },
   "tasks": [
     {
       "id": 0,
       "uniqueID": 0,
-      "name": "Marketing Campaign Planning",
+      "name": "b4ubuild_sample_07a",
       "outlineNumber": "0",
       "outlineLevel": 0,
-      "start": "2025-10-10",
-      "finish": "2026-07-21",
-      "duration": "205.0d",
-      "work": "2696.0h",
+      "start": "2025-04-30",
+      "finish": "2025-08-02",
+      "duration": "68.0d",
+      "work": "1056.0h",
       "percentComplete": 0,
-      "type": "FIXED_DURATION",
+      "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 1,
-      "uniqueID": 2,
-      "name": "Review Business Strategy Landscape",
+      "uniqueID": 145,
+      "name": "Contracts",
       "outlineNumber": "1",
       "outlineLevel": 1,
-      "start": "2025-10-10",
-      "finish": "2025-11-15",
-      "duration": "27.0d",
-      "work": "256.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_DURATION",
+      "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 2,
-      "uniqueID": 284,
-      "name": "Identify service/product gaps and opportunities",
+      "uniqueID": 287,
+      "name": "Supply Lot Sale Agreement",
       "outlineNumber": "1.1",
       "outlineLevel": 2,
-      "start": "2025-10-10",
-      "finish": "2025-10-14",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
@@ -57,45 +57,37 @@
     },
     {
       "id": 3,
-      "uniqueID": 283,
-      "name": "Complete SWOT analysis",
+      "uniqueID": 273,
+      "name": "Supply Construction Agreement",
       "outlineNumber": "1.2",
       "outlineLevel": 2,
-      "start": "2025-10-17",
-      "finish": "2025-10-21",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 2,
-          "taskUniqueID": 284,
-          "taskName": "Identify service/product gaps and opportunities",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 4,
-      "uniqueID": 165,
-      "name": "Review business model",
+      "uniqueID": 2,
+      "name": "Supply Contract Plans",
       "outlineNumber": "1.3",
       "outlineLevel": 2,
-      "start": "2025-10-24",
-      "finish": "2025-10-24",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 3,
-          "taskUniqueID": 283,
-          "taskName": "Complete SWOT analysis",
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -103,22 +95,22 @@
     },
     {
       "id": 5,
-      "uniqueID": 164,
-      "name": "Review organizational marketing strategy",
+      "uniqueID": 262,
+      "name": "Supply Contract Specifications",
       "outlineNumber": "1.4",
       "outlineLevel": 2,
-      "start": "2025-10-25",
-      "finish": "2025-10-27",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 4,
-          "taskUniqueID": 165,
-          "taskName": "Review business model",
+          "taskID": 3,
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -126,22 +118,22 @@
     },
     {
       "id": 6,
-      "uniqueID": 163,
-      "name": "Review local marketing strategy",
+      "uniqueID": 3,
+      "name": "Supply Contract Site Plan",
       "outlineNumber": "1.5",
       "outlineLevel": 2,
-      "start": "2025-10-28",
-      "finish": "2025-10-28",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 5,
-          "taskUniqueID": 164,
-          "taskName": "Review organizational marketing strategy",
+          "taskID": 3,
+          "taskUniqueID": 273,
+          "taskName": "Supply Construction Agreement",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -149,12 +141,103 @@
     },
     {
       "id": 7,
-      "uniqueID": 162,
-      "name": "Review global marketing strategy",
+      "uniqueID": 289,
+      "name": "Secure Financing",
       "outlineNumber": "1.6",
       "outlineLevel": 2,
-      "start": "2025-10-31",
-      "finish": "2025-10-31",
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 8,
+      "uniqueID": 290,
+      "name": "Construction Loan Settlement",
+      "outlineNumber": "1.7",
+      "outlineLevel": 2,
+      "start": "2025-04-30",
+      "finish": "2025-04-30",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 9,
+      "uniqueID": 274,
+      "name": "Document Review & Revision",
+      "outlineNumber": "2",
+      "outlineLevel": 1,
+      "start": "2025-05-01",
+      "finish": "2025-06-02",
+      "duration": "25.0d",
+      "work": "328.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 10,
+      "uniqueID": 275,
+      "name": "Review & Finalize Plans",
+      "outlineNumber": "2.1",
+      "outlineLevel": 2,
+      "start": "2025-05-01",
+      "finish": "2025-05-19",
+      "duration": "15.0d",
+      "work": "120.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 4,
+          "taskUniqueID": 2,
+          "taskName": "Supply Contract Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "uniqueID": 276,
+      "name": "Review & Finalize Specifications",
+      "outlineNumber": "2.2",
+      "outlineLevel": 2,
+      "start": "2025-05-01",
+      "finish": "2025-05-26",
+      "duration": "20.0d",
+      "work": "160.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 5,
+          "taskUniqueID": 262,
+          "taskName": "Supply Contract Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "uniqueID": 277,
+      "name": "Review & Finalize Site Plan",
+      "outlineNumber": "2.3",
+      "outlineLevel": 2,
+      "start": "2025-05-22",
+      "finish": "2025-05-22",
       "duration": "1.0d",
       "work": "8.0h",
       "percentComplete": 0,
@@ -163,123 +246,15 @@
       "predecessors": [
         {
           "taskID": 6,
-          "taskUniqueID": 163,
-          "taskName": "Review local marketing strategy",
+          "taskUniqueID": 3,
+          "taskName": "Supply Contract Site Plan",
           "type": "FS",
           "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "uniqueID": 161,
-      "name": "Review marketing plan for campaign budget",
-      "outlineNumber": "1.7",
-      "outlineLevel": 2,
-      "start": "2025-11-01",
-      "finish": "2025-11-01",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 7,
-          "taskUniqueID": 162,
-          "taskName": "Review global marketing strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "uniqueID": 152,
-      "name": "Establish go-to-markets for organization",
-      "outlineNumber": "1.8",
-      "outlineLevel": 2,
-      "start": "2025-11-02",
-      "finish": "2025-11-02",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 8,
-          "taskUniqueID": 161,
-          "taskName": "Review marketing plan for campaign budget",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "uniqueID": 145,
-      "name": "Evaluate alignment to corporate strategy goals",
-      "outlineNumber": "1.9",
-      "outlineLevel": 2,
-      "start": "2025-11-03",
-      "finish": "2025-11-04",
-      "duration": "2.0d",
-      "work": "32.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 9,
-          "taskUniqueID": 152,
-          "taskName": "Establish go-to-markets for organization",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 11,
-      "uniqueID": 146,
-      "name": "Evaluate competitive advantages",
-      "outlineNumber": "1.10",
-      "outlineLevel": 2,
-      "start": "2025-11-07",
-      "finish": "2025-11-09",
-      "duration": "3.0d",
-      "work": "48.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
+        },
         {
           "taskID": 10,
-          "taskUniqueID": 145,
-          "taskName": "Evaluate alignment to corporate strategy goals",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 12,
-      "uniqueID": 147,
-      "name": "Review product and service margins",
-      "outlineNumber": "1.11",
-      "outlineLevel": 2,
-      "start": "2025-11-10",
-      "finish": "2025-11-14",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 11,
-          "taskUniqueID": 146,
-          "taskName": "Evaluate competitive advantages",
+          "taskUniqueID": 275,
+          "taskName": "Review & Finalize Plans",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -287,22 +262,36 @@
     },
     {
       "id": 13,
-      "uniqueID": 263,
-      "name": "Review previous campaign performance",
-      "outlineNumber": "1.12",
+      "uniqueID": 282,
+      "name": "Print Construction Drawings",
+      "outlineNumber": "2.4",
       "outlineLevel": 2,
-      "start": "2025-11-15",
-      "finish": "2025-11-15",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "start": "2025-05-29",
+      "finish": "2025-06-02",
+      "duration": "5.0d",
+      "work": "40.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
+          "taskID": 10,
+          "taskUniqueID": 275,
+          "taskName": "Review & Finalize Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 11,
+          "taskUniqueID": 276,
+          "taskName": "Review & Finalize Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
           "taskID": 12,
-          "taskUniqueID": 147,
-          "taskName": "Review product and service margins",
+          "taskUniqueID": 277,
+          "taskName": "Review & Finalize Site Plan",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -310,12 +299,12 @@
     },
     {
       "id": 14,
-      "uniqueID": 288,
-      "name": "Business Strategy Landscape Review Complete",
-      "outlineNumber": "1.13",
+      "uniqueID": 284,
+      "name": "Approve Revised Plans",
+      "outlineNumber": "2.5",
       "outlineLevel": 2,
-      "start": "2025-11-15",
-      "finish": "2025-11-15",
+      "start": "2025-06-02",
+      "finish": "2025-06-02",
       "duration": "0.0d",
       "work": "0.0h",
       "percentComplete": 0,
@@ -324,8 +313,8 @@
       "predecessors": [
         {
           "taskID": 13,
-          "taskUniqueID": 263,
-          "taskName": "Review previous campaign performance",
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -333,37 +322,45 @@
     },
     {
       "id": 15,
-      "uniqueID": 199,
-      "name": "Develop Campaign Concepts",
-      "outlineNumber": "2",
-      "outlineLevel": 1,
-      "start": "2025-11-16",
-      "finish": "2026-01-23",
-      "duration": "49.0d",
-      "work": "504.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 16,
-      "uniqueID": 201,
-      "name": "Create process for qualifying ideas",
-      "outlineNumber": "2.1",
+      "uniqueID": 285,
+      "name": "Approve Revised Specifications",
+      "outlineNumber": "2.6",
       "outlineLevel": 2,
-      "start": "2025-11-16",
-      "finish": "2025-11-22",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-02",
+      "finish": "2025-06-02",
+      "duration": "0.0d",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 14,
-          "taskUniqueID": 288,
-          "taskName": "Business Strategy Landscape Review Complete",
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "uniqueID": 291,
+      "name": "Approve Revised Site Plan",
+      "outlineNumber": "2.7",
+      "outlineLevel": 2,
+      "start": "2025-06-02",
+      "finish": "2025-06-02",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -371,45 +368,37 @@
     },
     {
       "id": 17,
-      "uniqueID": 203,
-      "name": "Establish process for idea sharing",
-      "outlineNumber": "2.2",
-      "outlineLevel": 2,
-      "start": "2025-11-23",
-      "finish": "2025-11-29",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "uniqueID": 4,
+      "name": "Bids & Contracts",
+      "outlineNumber": "3",
+      "outlineLevel": 1,
+      "start": "2025-06-05",
+      "finish": "2025-07-06",
+      "duration": "24.0d",
+      "work": "248.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 16,
-          "taskUniqueID": 201,
-          "taskName": "Create process for qualifying ideas",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 18,
-      "uniqueID": 286,
-      "name": "Gather ideas",
-      "outlineNumber": "2.3",
+      "uniqueID": 146,
+      "name": "Make Copies of Plans",
+      "outlineNumber": "3.1",
       "outlineLevel": 2,
-      "start": "2025-11-30",
-      "finish": "2025-11-30",
-      "duration": "1.0d",
-      "work": "0.0h",
+      "start": "2025-06-05",
+      "finish": "2025-06-07",
+      "duration": "3.0d",
+      "work": "24.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 17,
-          "taskUniqueID": 203,
-          "taskName": "Establish process for idea sharing",
+          "taskID": 14,
+          "taskUniqueID": 284,
+          "taskName": "Approve Revised Plans",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -417,22 +406,22 @@
     },
     {
       "id": 19,
-      "uniqueID": 262,
-      "name": "Final shaping and development of ideas",
-      "outlineNumber": "2.4",
+      "uniqueID": 278,
+      "name": "Make Copies of Specifications",
+      "outlineNumber": "3.2",
       "outlineLevel": 2,
-      "start": "2025-12-01",
-      "finish": "2025-12-07",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-05",
+      "finish": "2025-06-06",
+      "duration": "2.0d",
+      "work": "16.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 18,
-          "taskUniqueID": 286,
-          "taskName": "Gather ideas",
+          "taskID": 15,
+          "taskUniqueID": 285,
+          "taskName": "Approve Revised Specifications",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -440,22 +429,29 @@
     },
     {
       "id": 20,
-      "uniqueID": 202,
-      "name": "Research market environment",
-      "outlineNumber": "2.5",
+      "uniqueID": 5,
+      "name": "Distribute Plans & Specifications",
+      "outlineNumber": "3.3",
       "outlineLevel": 2,
-      "start": "2025-12-08",
-      "finish": "2025-12-14",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-08",
+      "finish": "2025-06-08",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
+      "constraint": "START_NO_EARLIER_THAN",
       "predecessors": [
         {
+          "taskID": 18,
+          "taskUniqueID": 146,
+          "taskName": "Make Copies of Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
           "taskID": 19,
-          "taskUniqueID": 262,
-          "taskName": "Final shaping and development of ideas",
+          "taskUniqueID": 278,
+          "taskName": "Make Copies of Specifications",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -463,22 +459,22 @@
     },
     {
       "id": 21,
-      "uniqueID": 204,
-      "name": "Develop preliminary campaign concepts",
-      "outlineNumber": "2.6",
+      "uniqueID": 6,
+      "name": "Receive Bids",
+      "outlineNumber": "3.4",
       "outlineLevel": 2,
-      "start": "2025-12-15",
-      "finish": "2025-12-21",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-09",
+      "finish": "2025-06-22",
+      "duration": "10.0d",
+      "work": "80.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
+      "constraint": "START_NO_EARLIER_THAN",
       "predecessors": [
         {
           "taskID": 20,
-          "taskUniqueID": 202,
-          "taskName": "Research market environment",
+          "taskUniqueID": 5,
+          "taskName": "Distribute Plans & Specifications",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -486,81 +482,27 @@
     },
     {
       "id": 22,
-      "uniqueID": 215,
-      "name": "Identify campaign targets",
-      "outlineNumber": "2.7",
+      "uniqueID": 7,
+      "name": "Review Bids",
+      "outlineNumber": "3.5",
       "outlineLevel": 2,
-      "start": "2025-12-22",
-      "finish": "2025-12-23",
-      "duration": "2.0d",
-      "work": "16.0h",
+      "start": "2025-06-23",
+      "finish": "2025-06-29",
+      "duration": "5.0d",
+      "work": "80.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 21,
-          "taskUniqueID": 204,
-          "taskName": "Develop preliminary campaign concepts",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 23,
-      "uniqueID": 216,
-      "name": "Develop campaign success metrics",
-      "outlineNumber": "2.8",
-      "outlineLevel": 2,
-      "start": "2025-12-26",
-      "finish": "2025-12-27",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 22,
-          "taskUniqueID": 215,
-          "taskName": "Identify campaign targets",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 24,
-      "uniqueID": 217,
-      "name": "Develop campaign tracking and analysis process",
-      "outlineNumber": "2.9",
-      "outlineLevel": 2,
-      "start": "2025-12-28",
-      "finish": "2025-12-30",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 23,
-          "taskUniqueID": 216,
-          "taskName": "Develop campaign success metrics",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 25,
-      "uniqueID": 206,
-      "name": "Validate concepts through test groups and market research",
-      "outlineNumber": "2.10",
-      "outlineLevel": 2,
-      "start": "2026-01-02",
-      "finish": "2026-01-06",
+      "uniqueID": 279,
+      "name": "Sales",
+      "outlineNumber": "3.5.1",
+      "outlineLevel": 3,
+      "start": "2025-06-23",
+      "finish": "2025-06-29",
       "duration": "5.0d",
       "work": "40.0h",
       "percentComplete": 0,
@@ -568,9 +510,55 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 24,
-          "taskUniqueID": 217,
-          "taskName": "Develop campaign tracking and analysis process",
+          "taskID": 21,
+          "taskUniqueID": 6,
+          "taskName": "Receive Bids",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "uniqueID": 280,
+      "name": "Construction",
+      "outlineNumber": "3.5.2",
+      "outlineLevel": 3,
+      "start": "2025-06-23",
+      "finish": "2025-06-29",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 21,
+          "taskUniqueID": 6,
+          "taskName": "Receive Bids",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "uniqueID": 8,
+      "name": "Execute Subcontractor Agreements",
+      "outlineNumber": "3.6",
+      "outlineLevel": 2,
+      "start": "2025-06-30",
+      "finish": "2025-07-06",
+      "duration": "5.0d",
+      "work": "40.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "START_NO_EARLIER_THAN",
+      "predecessors": [
+        {
+          "taskID": 23,
+          "taskUniqueID": 279,
+          "taskName": "Sales",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -578,35 +566,27 @@
     },
     {
       "id": 26,
-      "uniqueID": 205,
-      "name": "Establish campaign focus list",
-      "outlineNumber": "2.11",
-      "outlineLevel": 2,
-      "start": "2026-01-09",
-      "finish": "2026-01-09",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 9,
+      "name": "Grading & Building Permits",
+      "outlineNumber": "4",
+      "outlineLevel": 1,
+      "start": "2025-06-05",
+      "finish": "2025-06-27",
+      "duration": "17.0d",
+      "work": "208.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 25,
-          "taskUniqueID": 206,
-          "taskName": "Validate concepts through test groups and market research",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 27,
-      "uniqueID": 213,
-      "name": "Establish campaign categories",
-      "outlineNumber": "2.12",
+      "uniqueID": 10,
+      "name": "Schedule lot stake-out",
+      "outlineNumber": "4.1",
       "outlineLevel": 2,
-      "start": "2026-01-10",
-      "finish": "2026-01-10",
+      "start": "2025-06-05",
+      "finish": "2025-06-05",
       "duration": "1.0d",
       "work": "8.0h",
       "percentComplete": 0,
@@ -614,9 +594,9 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 26,
-          "taskUniqueID": 205,
-          "taskName": "Establish campaign focus list",
+          "taskID": 13,
+          "taskUniqueID": 282,
+          "taskName": "Print Construction Drawings",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -624,12 +604,58 @@
     },
     {
       "id": 28,
-      "uniqueID": 270,
-      "name": "Develop public relations strategy",
-      "outlineNumber": "2.13",
+      "uniqueID": 11,
+      "name": "Stake lot",
+      "outlineNumber": "4.2",
       "outlineLevel": 2,
-      "start": "2026-01-11",
-      "finish": "2026-01-13",
+      "start": "2025-06-09",
+      "finish": "2025-06-09",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 27,
+          "taskUniqueID": 10,
+          "taskName": "Schedule lot stake-out",
+          "type": "FS",
+          "lag": "3.0d"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "uniqueID": 293,
+      "name": "File Grading Permit Application",
+      "outlineNumber": "4.3",
+      "outlineLevel": 2,
+      "start": "2025-06-05",
+      "finish": "2025-06-05",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 16,
+          "taskUniqueID": 291,
+          "taskName": "Approve Revised Site Plan",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "uniqueID": 12,
+      "name": "File Building Permit Application",
+      "outlineNumber": "4.4",
+      "outlineLevel": 2,
+      "start": "2025-06-05",
+      "finish": "2025-06-07",
       "duration": "3.0d",
       "work": "24.0h",
       "percentComplete": 0,
@@ -637,22 +663,36 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 27,
-          "taskUniqueID": 213,
-          "taskName": "Establish campaign categories",
+          "taskID": 14,
+          "taskUniqueID": 284,
+          "taskName": "Approve Revised Plans",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 15,
+          "taskUniqueID": 285,
+          "taskName": "Approve Revised Specifications",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 16,
+          "taskUniqueID": 291,
+          "taskName": "Approve Revised Site Plan",
           "type": "FS",
           "lag": "0.0d"
         }
       ]
     },
     {
-      "id": 29,
-      "uniqueID": 208,
-      "name": "Establish preliminary ideal campaign timing for promotion",
-      "outlineNumber": "2.14",
+      "id": 31,
+      "uniqueID": 13,
+      "name": "Post Lot Identification",
+      "outlineNumber": "4.5",
       "outlineLevel": 2,
-      "start": "2026-01-16",
-      "finish": "2026-01-16",
+      "start": "2025-06-12",
+      "finish": "2025-06-12",
       "duration": "1.0d",
       "work": "8.0h",
       "percentComplete": 0,
@@ -661,54 +701,22 @@
       "predecessors": [
         {
           "taskID": 28,
-          "taskUniqueID": 270,
-          "taskName": "Develop public relations strategy",
+          "taskUniqueID": 11,
+          "taskName": "Stake lot",
           "type": "FS",
           "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 30,
-      "uniqueID": 207,
-      "name": "Determine organization regional campaigns",
-      "outlineNumber": "2.15",
-      "outlineLevel": 2,
-      "start": "2026-01-10",
-      "finish": "2026-01-16",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
+        },
         {
-          "taskID": 26,
-          "taskUniqueID": 205,
-          "taskName": "Establish campaign focus list",
+          "taskID": 29,
+          "taskUniqueID": 293,
+          "taskName": "File Grading Permit Application",
           "type": "FS",
           "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 31,
-      "uniqueID": 211,
-      "name": "Determine organization global campaigns",
-      "outlineNumber": "2.16",
-      "outlineLevel": 2,
-      "start": "2026-01-10",
-      "finish": "2026-01-16",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
+        },
         {
-          "taskID": 26,
-          "taskUniqueID": 205,
-          "taskName": "Establish campaign focus list",
+          "taskID": 30,
+          "taskUniqueID": 12,
+          "taskName": "File Building Permit Application",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -716,22 +724,36 @@
     },
     {
       "id": 32,
-      "uniqueID": 212,
-      "name": "Determine organization country campaigns",
-      "outlineNumber": "2.17",
+      "uniqueID": 15,
+      "name": "Meet Sediment Control Inspector",
+      "outlineNumber": "4.6",
       "outlineLevel": 2,
-      "start": "2026-01-10",
-      "finish": "2026-01-16",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-13",
+      "finish": "2025-06-13",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 26,
-          "taskUniqueID": 205,
-          "taskName": "Establish campaign focus list",
+          "taskID": 29,
+          "taskUniqueID": 293,
+          "taskName": "File Grading Permit Application",
+          "type": "FS",
+          "lag": "2.0d"
+        },
+        {
+          "taskID": 28,
+          "taskUniqueID": 11,
+          "taskName": "Stake lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 31,
+          "taskUniqueID": 13,
+          "taskName": "Post Lot Identification",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -739,36 +761,22 @@
     },
     {
       "id": 33,
-      "uniqueID": 214,
-      "name": "Identify localization requirements",
-      "outlineNumber": "2.18",
+      "uniqueID": 14,
+      "name": "Walk Lot w/ Owner",
+      "outlineNumber": "4.7",
       "outlineLevel": 2,
-      "start": "2026-01-17",
-      "finish": "2026-01-23",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-06-14",
+      "finish": "2025-06-14",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 30,
-          "taskUniqueID": 207,
-          "taskName": "Determine organization regional campaigns",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 31,
-          "taskUniqueID": 211,
-          "taskName": "Determine organization global campaigns",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
           "taskID": 32,
-          "taskUniqueID": 212,
-          "taskName": "Determine organization country campaigns",
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -776,29 +784,29 @@
     },
     {
       "id": 34,
-      "uniqueID": 289,
-      "name": "Campaign Concepts Complete",
-      "outlineNumber": "2.19",
+      "uniqueID": 16,
+      "name": "Install Construction Entrance",
+      "outlineNumber": "4.8",
       "outlineLevel": 2,
-      "start": "2026-01-23",
-      "finish": "2026-01-23",
-      "duration": "0.0d",
-      "work": "0.0h",
+      "start": "2025-06-15",
+      "finish": "2025-06-15",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 33,
-          "taskUniqueID": 214,
-          "taskName": "Identify localization requirements",
+          "taskID": 32,
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
           "type": "FS",
           "lag": "0.0d"
         },
         {
-          "taskID": 29,
-          "taskUniqueID": 208,
-          "taskName": "Establish preliminary ideal campaign timing for promotion",
+          "taskID": 33,
+          "taskUniqueID": 14,
+          "taskName": "Walk Lot w/ Owner",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -806,308 +814,12 @@
     },
     {
       "id": 35,
-      "uniqueID": 177,
-      "name": "Create Localization Strategy",
-      "outlineNumber": "3",
-      "outlineLevel": 1,
-      "start": "2026-01-24",
-      "finish": "2026-02-16",
-      "duration": "18.0d",
-      "work": "224.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 36,
-      "uniqueID": 3,
-      "name": "Review corporate sales objectives",
-      "outlineNumber": "3.1",
+      "uniqueID": 153,
+      "name": "Install Sediment Controls",
+      "outlineNumber": "4.9",
       "outlineLevel": 2,
-      "start": "2026-01-24",
-      "finish": "2026-01-24",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 34,
-          "taskUniqueID": 289,
-          "taskName": "Campaign Concepts Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 37,
-      "uniqueID": 167,
-      "name": "Review regional business models",
-      "outlineNumber": "3.2",
-      "outlineLevel": 2,
-      "start": "2026-01-24",
-      "finish": "2026-01-24",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 34,
-          "taskUniqueID": 289,
-          "taskName": "Campaign Concepts Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 38,
-      "uniqueID": 168,
-      "name": "Review global/country business models",
-      "outlineNumber": "3.3",
-      "outlineLevel": 2,
-      "start": "2026-01-24",
-      "finish": "2026-01-24",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 34,
-          "taskUniqueID": 289,
-          "taskName": "Campaign Concepts Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 39,
-      "uniqueID": 4,
-      "name": "Review marketing objectives",
-      "outlineNumber": "3.4",
-      "outlineLevel": 2,
-      "start": "2026-01-24",
-      "finish": "2026-01-24",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 34,
-          "taskUniqueID": 289,
-          "taskName": "Campaign Concepts Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 40,
-      "uniqueID": 14,
-      "name": "Review marketing plan",
-      "outlineNumber": "3.5",
-      "outlineLevel": 2,
-      "start": "2026-01-24",
-      "finish": "2026-01-24",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 34,
-          "taskUniqueID": 289,
-          "taskName": "Campaign Concepts Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 41,
-      "uniqueID": 186,
-      "name": "Establish campaign opportunities",
-      "outlineNumber": "3.6",
-      "outlineLevel": 2,
-      "start": "2026-01-25",
-      "finish": "2026-01-27",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 36,
-          "taskUniqueID": 3,
-          "taskName": "Review corporate sales objectives",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 37,
-          "taskUniqueID": 167,
-          "taskName": "Review regional business models",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 38,
-          "taskUniqueID": 168,
-          "taskName": "Review global/country business models",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 39,
-          "taskUniqueID": 4,
-          "taskName": "Review marketing objectives",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 40,
-          "taskUniqueID": 14,
-          "taskName": "Review marketing plan",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 42,
-      "uniqueID": 166,
-      "name": "Review services and product mix and forecast",
-      "outlineNumber": "3.7",
-      "outlineLevel": 2,
-      "start": "2026-01-30",
-      "finish": "2026-02-01",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 41,
-          "taskUniqueID": 186,
-          "taskName": "Establish campaign opportunities",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 43,
-      "uniqueID": 189,
-      "name": "Review product release cycles",
-      "outlineNumber": "3.8",
-      "outlineLevel": 2,
-      "start": "2026-02-02",
-      "finish": "2026-02-06",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 42,
-          "taskUniqueID": 166,
-          "taskName": "Review services and product mix and forecast",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 44,
-      "uniqueID": 210,
-      "name": "Determine campaign mix for each region",
-      "outlineNumber": "3.9",
-      "outlineLevel": 2,
-      "start": "2026-02-02",
-      "finish": "2026-02-06",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 42,
-          "taskUniqueID": 166,
-          "taskName": "Review services and product mix and forecast",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 45,
-      "uniqueID": 222,
-      "name": "Determine campaign success measures for each region",
-      "outlineNumber": "3.10",
-      "outlineLevel": 2,
-      "start": "2026-02-07",
-      "finish": "2026-02-09",
-      "duration": "3.0d",
-      "work": "48.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 44,
-          "taskUniqueID": 210,
-          "taskName": "Determine campaign mix for each region",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 46,
-      "uniqueID": 223,
-      "name": "Determine tracking mechanism",
-      "outlineNumber": "3.11",
-      "outlineLevel": 2,
-      "start": "2026-02-10",
-      "finish": "2026-02-14",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 45,
-          "taskUniqueID": 222,
-          "taskName": "Determine campaign success measures for each region",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 47,
-      "uniqueID": 304,
-      "name": "Create localization strategy",
-      "outlineNumber": "3.12",
-      "outlineLevel": 2,
-      "start": "2026-02-15",
-      "finish": "2026-02-16",
+      "start": "2025-06-15",
+      "finish": "2025-06-16",
       "duration": "2.0d",
       "work": "16.0h",
       "percentComplete": 0,
@@ -1115,212 +827,29 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 46,
-          "taskUniqueID": 223,
-          "taskName": "Determine tracking mechanism",
+          "taskID": 32,
+          "taskUniqueID": 15,
+          "taskName": "Meet Sediment Control Inspector",
           "type": "FS",
           "lag": "0.0d"
         },
         {
-          "taskID": 44,
-          "taskUniqueID": 210,
-          "taskName": "Determine campaign mix for each region",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 43,
-          "taskUniqueID": 189,
-          "taskName": "Review product release cycles",
+          "taskID": 33,
+          "taskUniqueID": 14,
+          "taskName": "Walk Lot w/ Owner",
           "type": "FS",
           "lag": "0.0d"
         }
       ]
     },
     {
-      "id": 48,
-      "uniqueID": 290,
-      "name": "Localization Strategy Complete",
-      "outlineNumber": "3.13",
+      "id": 36,
+      "uniqueID": 17,
+      "name": "Sediment Control Insp.",
+      "outlineNumber": "4.10",
       "outlineLevel": 2,
-      "start": "2026-02-16",
-      "finish": "2026-02-16",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 47,
-          "taskUniqueID": 304,
-          "taskName": "Create localization strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 49,
-      "uniqueID": 191,
-      "name": "Communicate and Train Internal Organization",
-      "outlineNumber": "4",
-      "outlineLevel": 1,
-      "start": "2026-02-17",
-      "finish": "2026-03-22",
-      "duration": "24.0d",
-      "work": "240.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 50,
-      "uniqueID": 220,
-      "name": "Establish corporate internal communications process",
-      "outlineNumber": "4.1",
-      "outlineLevel": 2,
-      "start": "2026-02-17",
-      "finish": "2026-02-21",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 48,
-          "taskUniqueID": 290,
-          "taskName": "Localization Strategy Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 51,
-      "uniqueID": 226,
-      "name": "Determine regional and country division communications process",
-      "outlineNumber": "4.2",
-      "outlineLevel": 2,
-      "start": "2026-02-22",
-      "finish": "2026-02-28",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 50,
-          "taskUniqueID": 220,
-          "taskName": "Establish corporate internal communications process",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 52,
-      "uniqueID": 227,
-      "name": "Plan communications methods, logistics, and timing",
-      "outlineNumber": "4.3",
-      "outlineLevel": 2,
-      "start": "2026-03-01",
-      "finish": "2026-03-06",
-      "duration": "4.0d",
-      "work": "64.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 51,
-          "taskUniqueID": 226,
-          "taskName": "Determine regional and country division communications process",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 53,
-      "uniqueID": 219,
-      "name": "Regional and country communications to sales, marketing, and management",
-      "outlineNumber": "4.4",
-      "outlineLevel": 2,
-      "start": "2026-03-07",
-      "finish": "2026-03-13",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 52,
-          "taskUniqueID": 227,
-          "taskName": "Plan communications methods, logistics, and timing",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 54,
-      "uniqueID": 277,
-      "name": "Determine internal systems to respond to campaign",
-      "outlineNumber": "4.5",
-      "outlineLevel": 2,
-      "start": "2026-03-14",
-      "finish": "2026-03-20",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 53,
-          "taskUniqueID": 219,
-          "taskName": "Regional and country communications to sales, marketing, and management",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 55,
-      "uniqueID": 305,
-      "name": "Create communications plan",
-      "outlineNumber": "4.6",
-      "outlineLevel": 2,
-      "start": "2026-03-21",
-      "finish": "2026-03-22",
-      "duration": "2.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 54,
-          "taskUniqueID": 277,
-          "taskName": "Determine internal systems to respond to campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 56,
-      "uniqueID": 308,
-      "name": "Identify internal training requirements",
-      "outlineNumber": "4.7",
-      "outlineLevel": 2,
-      "start": "2026-02-17",
-      "finish": "2026-02-17",
+      "start": "2025-06-19",
+      "finish": "2025-06-19",
       "duration": "1.0d",
       "work": "8.0h",
       "percentComplete": 0,
@@ -1328,22 +857,166 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 48,
-          "taskUniqueID": 290,
-          "taskName": "Localization Strategy Complete",
+          "taskID": 34,
+          "taskUniqueID": 16,
+          "taskName": "Install Construction Entrance",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 35,
+          "taskUniqueID": 153,
+          "taskName": "Install Sediment Controls",
           "type": "FS",
           "lag": "0.0d"
         }
       ]
     },
     {
-      "id": 57,
-      "uniqueID": 309,
-      "name": "Develop internal training",
-      "outlineNumber": "4.8",
+      "id": 37,
+      "uniqueID": 18,
+      "name": "Grading Permit Issued",
+      "outlineNumber": "4.11",
       "outlineLevel": 2,
-      "start": "2026-02-20",
-      "finish": "2026-02-22",
+      "start": "2025-06-20",
+      "finish": "2025-06-20",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 36,
+          "taskUniqueID": 17,
+          "taskName": "Sediment Control Insp.",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "uniqueID": 147,
+      "name": "County Permit Process",
+      "outlineNumber": "4.12",
+      "outlineLevel": 2,
+      "start": "2025-06-08",
+      "finish": "2025-06-21",
+      "duration": "10.0d",
+      "work": "80.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 30,
+          "taskUniqueID": 12,
+          "taskName": "File Building Permit Application",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "uniqueID": 19,
+      "name": "Building Permit Approved",
+      "outlineNumber": "4.13",
+      "outlineLevel": 2,
+      "start": "2025-06-22",
+      "finish": "2025-06-22",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 38,
+          "taskUniqueID": 147,
+          "taskName": "County Permit Process",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 37,
+          "taskUniqueID": 18,
+          "taskName": "Grading Permit Issued",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "uniqueID": 281,
+      "name": "Pay Permit Fees and Excise Taxes",
+      "outlineNumber": "4.14",
+      "outlineLevel": 2,
+      "start": "2025-06-27",
+      "finish": "2025-06-27",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 39,
+          "taskUniqueID": 19,
+          "taskName": "Building Permit Approved",
+          "type": "FS",
+          "lag": "2.0d"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "uniqueID": 294,
+      "name": "Building Permit Issued",
+      "outlineNumber": "4.15",
+      "outlineLevel": 2,
+      "start": "2025-06-27",
+      "finish": "2025-06-27",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 40,
+          "taskUniqueID": 281,
+          "taskName": "Pay Permit Fees and Excise Taxes",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "uniqueID": 20,
+      "name": "Site Work",
+      "outlineNumber": "5",
+      "outlineLevel": 1,
+      "start": "2025-06-21",
+      "finish": "2025-06-29",
+      "duration": "7.0d",
+      "work": "64.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 43,
+      "uniqueID": 21,
+      "name": "Clear Lot",
+      "outlineNumber": "5.1",
+      "outlineLevel": 2,
+      "start": "2025-06-21",
+      "finish": "2025-06-23",
       "duration": "3.0d",
       "work": "24.0h",
       "percentComplete": 0,
@@ -1351,22 +1024,325 @@
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 56,
-          "taskUniqueID": 308,
-          "taskName": "Identify internal training requirements",
+          "taskID": 37,
+          "taskUniqueID": 18,
+          "taskName": "Grading Permit Issued",
           "type": "FS",
           "lag": "0.0d"
         }
       ]
     },
     {
-      "id": 58,
-      "uniqueID": 291,
-      "name": "Organization Internal Communications and Training Complete",
-      "outlineNumber": "4.9",
+      "id": 44,
+      "uniqueID": 22,
+      "name": "Strip Topsoil & Stockpile",
+      "outlineNumber": "5.2",
       "outlineLevel": 2,
-      "start": "2026-03-22",
-      "finish": "2026-03-22",
+      "start": "2025-06-26",
+      "finish": "2025-06-26",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "uniqueID": 23,
+      "name": "Stake Lot for Excavation",
+      "outlineNumber": "5.3",
+      "outlineLevel": 2,
+      "start": "2025-06-26",
+      "finish": "2025-06-26",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "uniqueID": 24,
+      "name": "Rough grade lot",
+      "outlineNumber": "5.4",
+      "outlineLevel": 2,
+      "start": "2025-06-27",
+      "finish": "2025-06-27",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 45,
+          "taskUniqueID": 23,
+          "taskName": "Stake Lot for Excavation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "uniqueID": 25,
+      "name": "Excavate for foundation",
+      "outlineNumber": "5.5",
+      "outlineLevel": 2,
+      "start": "2025-06-28",
+      "finish": "2025-06-29",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 39,
+          "taskUniqueID": 19,
+          "taskName": "Building Permit Approved",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 45,
+          "taskUniqueID": 23,
+          "taskName": "Stake Lot for Excavation",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 43,
+          "taskUniqueID": 21,
+          "taskName": "Clear Lot",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 46,
+          "taskUniqueID": 24,
+          "taskName": "Rough grade lot",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "uniqueID": 26,
+      "name": "Foundation",
+      "outlineNumber": "6",
+      "outlineLevel": 1,
+      "start": "2025-06-30",
+      "finish": "2025-08-02",
+      "duration": "24.0d",
+      "work": "208.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 49,
+      "uniqueID": 27,
+      "name": "Layout footings",
+      "outlineNumber": "6.1",
+      "outlineLevel": 2,
+      "start": "2025-06-30",
+      "finish": "2025-06-30",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 47,
+          "taskUniqueID": 25,
+          "taskName": "Excavate for foundation",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "uniqueID": 28,
+      "name": "Dig Footings & Install Reinforcing",
+      "outlineNumber": "6.2",
+      "outlineLevel": 2,
+      "start": "2025-07-03",
+      "finish": "2025-07-03",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 49,
+          "taskUniqueID": 27,
+          "taskName": "Layout footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "uniqueID": 29,
+      "name": "Footing Inspection",
+      "outlineNumber": "6.3",
+      "outlineLevel": 2,
+      "start": "2025-07-03",
+      "finish": "2025-07-03",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 50,
+          "taskUniqueID": 28,
+          "taskName": "Dig Footings & Install Reinforcing",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "uniqueID": 30,
+      "name": "Pour footings",
+      "outlineNumber": "6.4",
+      "outlineLevel": 2,
+      "start": "2025-07-04",
+      "finish": "2025-07-04",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 51,
+          "taskUniqueID": 29,
+          "taskName": "Footing Inspection",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "uniqueID": 31,
+      "name": "Pin Footings",
+      "outlineNumber": "6.5",
+      "outlineLevel": 2,
+      "start": "2025-07-05",
+      "finish": "2025-07-05",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 52,
+          "taskUniqueID": 30,
+          "taskName": "Pour footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "uniqueID": 32,
+      "name": "Stock Block, Mortar, Sand",
+      "outlineNumber": "6.6",
+      "outlineLevel": 2,
+      "start": "2025-07-06",
+      "finish": "2025-07-06",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 53,
+          "taskUniqueID": 31,
+          "taskName": "Pin Footings",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "uniqueID": 33,
+      "name": "Build Block Foundation",
+      "outlineNumber": "6.7",
+      "outlineLevel": 2,
+      "start": "2025-07-07",
+      "finish": "2025-07-27",
+      "duration": "15.0d",
+      "work": "120.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 53,
+          "taskUniqueID": 31,
+          "taskName": "Pin Footings",
+          "type": "FS",
+          "lag": "0.0d"
+        },
+        {
+          "taskID": 54,
+          "taskUniqueID": 32,
+          "taskName": "Stock Block, Mortar, Sand",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "uniqueID": 35,
+      "name": "Foundation Certification",
+      "outlineNumber": "6.8",
+      "outlineLevel": 2,
+      "start": "2025-07-27",
+      "finish": "2025-07-27",
       "duration": "0.0d",
       "work": "0.0h",
       "percentComplete": 0,
@@ -1375,15 +1351,54 @@
       "predecessors": [
         {
           "taskID": 55,
-          "taskUniqueID": 305,
-          "taskName": "Create communications plan",
+          "taskUniqueID": 33,
+          "taskName": "Build Block Foundation",
           "type": "FS",
           "lag": "0.0d"
-        },
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "uniqueID": 310,
+      "name": "Draw #1 (Location Survey)",
+      "outlineNumber": "6.9",
+      "outlineLevel": 2,
+      "start": "2025-07-27",
+      "finish": "2025-07-27",
+      "duration": "0.0d",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
         {
-          "taskID": 57,
-          "taskUniqueID": 309,
-          "taskName": "Develop internal training",
+          "taskID": 56,
+          "taskUniqueID": 35,
+          "taskName": "Foundation Certification",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "uniqueID": 36,
+      "name": "Fill Block Cores w/ Concrete",
+      "outlineNumber": "6.10",
+      "outlineLevel": 2,
+      "start": "2025-07-28",
+      "finish": "2025-07-28",
+      "duration": "1.0d",
+      "work": "8.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 55,
+          "taskUniqueID": 33,
+          "taskName": "Build Block Foundation",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -1391,37 +1406,45 @@
     },
     {
       "id": 59,
-      "uniqueID": 190,
-      "name": "Customer Relationship Management",
-      "outlineNumber": "5",
-      "outlineLevel": 1,
-      "start": "2026-02-17",
-      "finish": "2026-03-10",
-      "duration": "16.0d",
-      "work": "152.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 60,
-      "uniqueID": 198,
-      "name": "Review customer data and feedback",
-      "outlineNumber": "5.1",
+      "uniqueID": 34,
+      "name": "Steel Delivery",
+      "outlineNumber": "6.11",
       "outlineLevel": 2,
-      "start": "2026-02-17",
-      "finish": "2026-02-21",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "start": "2025-07-31",
+      "finish": "2025-07-31",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 48,
-          "taskUniqueID": 290,
-          "taskName": "Localization Strategy Complete",
+          "taskID": 58,
+          "taskUniqueID": 36,
+          "taskName": "Fill Block Cores w/ Concrete",
+          "type": "FS",
+          "lag": "0.0d"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "uniqueID": 37,
+      "name": "Set Lintels, Bolts, Cap Block",
+      "outlineNumber": "6.12",
+      "outlineLevel": 2,
+      "start": "2025-08-01",
+      "finish": "2025-08-02",
+      "duration": "2.0d",
+      "work": "16.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 59,
+          "taskUniqueID": 34,
+          "taskName": "Steel Delivery",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -1429,22 +1452,22 @@
     },
     {
       "id": 61,
-      "uniqueID": 230,
-      "name": "Review company segments and channels",
-      "outlineNumber": "5.2",
+      "uniqueID": 39,
+      "name": "Lumber Delivery",
+      "outlineNumber": "6.13",
       "outlineLevel": 2,
-      "start": "2026-02-17",
-      "finish": "2026-02-21",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "start": "2025-07-31",
+      "finish": "2025-07-31",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 48,
-          "taskUniqueID": 290,
-          "taskName": "Localization Strategy Complete",
+          "taskID": 58,
+          "taskUniqueID": 36,
+          "taskName": "Fill Block Cores w/ Concrete",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -1452,1439 +1475,22 @@
     },
     {
       "id": 62,
-      "uniqueID": 197,
-      "name": "Identify targets for each campaign",
-      "outlineNumber": "5.3",
+      "uniqueID": 38,
+      "name": "Waterproofing and Drain Tile",
+      "outlineNumber": "6.14",
       "outlineLevel": 2,
-      "start": "2026-02-22",
-      "finish": "2026-02-24",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "start": "2025-08-01",
+      "finish": "2025-08-01",
+      "duration": "1.0d",
+      "work": "8.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
-        {
-          "taskID": 60,
-          "taskUniqueID": 198,
-          "taskName": "Review customer data and feedback",
-          "type": "FS",
-          "lag": "0.0d"
-        },
         {
           "taskID": 61,
-          "taskUniqueID": 230,
-          "taskName": "Review company segments and channels",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 63,
-      "uniqueID": 196,
-      "name": "Segment data for each campaign",
-      "outlineNumber": "5.4",
-      "outlineLevel": 2,
-      "start": "2026-02-27",
-      "finish": "2026-03-03",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 62,
-          "taskUniqueID": 197,
-          "taskName": "Identify targets for each campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 64,
-      "uniqueID": 225,
-      "name": "Prepare/procure lists for each campaign",
-      "outlineNumber": "5.5",
-      "outlineLevel": 2,
-      "start": "2026-03-06",
-      "finish": "2026-03-10",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 63,
-          "taskUniqueID": 196,
-          "taskName": "Segment data for each campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 65,
-      "uniqueID": 292,
-      "name": "Customer Relationship Management Complete",
-      "outlineNumber": "5.6",
-      "outlineLevel": 2,
-      "start": "2026-03-10",
-      "finish": "2026-03-10",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 64,
-          "taskUniqueID": 225,
-          "taskName": "Prepare/procure lists for each campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 66,
-      "uniqueID": 108,
-      "name": "Analyze Regional/Global/Country Business Models",
-      "outlineNumber": "6",
-      "outlineLevel": 1,
-      "start": "2026-02-17",
-      "finish": "2026-03-01",
-      "duration": "9.0d",
-      "work": "88.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 67,
-      "uniqueID": 171,
-      "name": "Establish target regions",
-      "outlineNumber": "6.1",
-      "outlineLevel": 2,
-      "start": "2026-02-17",
-      "finish": "2026-02-17",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 48,
-          "taskUniqueID": 290,
-          "taskName": "Localization Strategy Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 68,
-      "uniqueID": 172,
-      "name": "Determine local gaps",
-      "outlineNumber": "6.2",
-      "outlineLevel": 2,
-      "start": "2026-02-20",
-      "finish": "2026-02-21",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 67,
-          "taskUniqueID": 171,
-          "taskName": "Establish target regions",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 69,
-      "uniqueID": 170,
-      "name": "Review local competition",
-      "outlineNumber": "6.3",
-      "outlineLevel": 2,
-      "start": "2026-02-22",
-      "finish": "2026-02-24",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 68,
-          "taskUniqueID": 172,
-          "taskName": "Determine local gaps",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 70,
-      "uniqueID": 174,
-      "name": "Develop competitive advantage",
-      "outlineNumber": "6.4",
-      "outlineLevel": 2,
-      "start": "2026-02-27",
-      "finish": "2026-02-28",
-      "duration": "2.0d",
-      "work": "32.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 69,
-          "taskUniqueID": 170,
-          "taskName": "Review local competition",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 71,
-      "uniqueID": 183,
-      "name": "Identify go-to partners",
-      "outlineNumber": "6.5",
-      "outlineLevel": 2,
-      "start": "2026-03-01",
-      "finish": "2026-03-01",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 70,
-          "taskUniqueID": 174,
-          "taskName": "Develop competitive advantage",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 72,
-      "uniqueID": 293,
-      "name": "Regional/Global/Country Business Models Complete",
-      "outlineNumber": "6.6",
-      "outlineLevel": 2,
-      "start": "2026-03-01",
-      "finish": "2026-03-01",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 71,
-          "taskUniqueID": 183,
-          "taskName": "Identify go-to partners",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 73,
-      "uniqueID": 176,
-      "name": "Develop Campaign",
-      "outlineNumber": "7",
-      "outlineLevel": 1,
-      "start": "2026-03-23",
-      "finish": "2026-04-11",
-      "duration": "14.0d",
-      "work": "104.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 74,
-      "uniqueID": 231,
-      "name": "Review campaign concepts",
-      "outlineNumber": "7.1",
-      "outlineLevel": 2,
-      "start": "2026-03-23",
-      "finish": "2026-03-24",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 58,
-          "taskUniqueID": 291,
-          "taskName": "Organization Internal Communications and Training Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 65,
-          "taskUniqueID": 292,
-          "taskName": "Customer Relationship Management Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 72,
-          "taskUniqueID": 293,
-          "taskName": "Regional/Global/Country Business Models Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 75,
-      "uniqueID": 234,
-      "name": "Create campaign list",
-      "outlineNumber": "7.2",
-      "outlineLevel": 2,
-      "start": "2026-03-27",
-      "finish": "2026-03-27",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 74,
-          "taskUniqueID": 231,
-          "taskName": "Review campaign concepts",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 76,
-      "uniqueID": 233,
-      "name": "Identify campaign leads",
-      "outlineNumber": "7.3",
-      "outlineLevel": 2,
-      "start": "2026-03-28",
-      "finish": "2026-03-28",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 75,
-          "taskUniqueID": 234,
-          "taskName": "Create campaign list",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 77,
-      "uniqueID": 287,
-      "name": "Develop Individual campaigns",
-      "outlineNumber": "7.4",
-      "outlineLevel": 2,
-      "start": "2026-03-29",
-      "finish": "2026-03-29",
-      "duration": "1.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 76,
-          "taskUniqueID": 233,
-          "taskName": "Identify campaign leads",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 78,
-      "uniqueID": 232,
-      "name": "Develop campaign schedules",
-      "outlineNumber": "7.5",
-      "outlineLevel": 2,
-      "start": "2026-03-30",
-      "finish": "2026-03-31",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 77,
-          "taskUniqueID": 287,
-          "taskName": "Develop Individual campaigns",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 79,
-      "uniqueID": 310,
-      "name": "Determine calls to action",
-      "outlineNumber": "7.6",
-      "outlineLevel": 2,
-      "start": "2026-04-03",
-      "finish": "2026-04-04",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 78,
-          "taskUniqueID": 232,
-          "taskName": "Develop campaign schedules",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 80,
-      "uniqueID": 175,
-      "name": "Determine advertising/promotion methods and mix",
-      "outlineNumber": "7.7",
-      "outlineLevel": 2,
-      "start": "2026-04-05",
-      "finish": "2026-04-11",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 79,
-          "taskUniqueID": 310,
-          "taskName": "Determine calls to action",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 81,
-      "uniqueID": 295,
-      "name": "Campaign Development Complete",
-      "outlineNumber": "7.8",
-      "outlineLevel": 2,
-      "start": "2026-04-11",
-      "finish": "2026-04-11",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 80,
-          "taskUniqueID": 175,
-          "taskName": "Determine advertising/promotion methods and mix",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 82,
-      "uniqueID": 178,
-      "name": "Develop Campaign Creative and Testing",
-      "outlineNumber": "8",
-      "outlineLevel": 1,
-      "start": "2026-04-12",
-      "finish": "2026-05-23",
-      "duration": "30.0d",
-      "work": "312.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 83,
-      "uniqueID": 237,
-      "name": "Select vendor for creative",
-      "outlineNumber": "8.1",
-      "outlineLevel": 2,
-      "start": "2026-04-12",
-      "finish": "2026-04-12",
-      "duration": "1.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 81,
-          "taskUniqueID": 295,
-          "taskName": "Campaign Development Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 84,
-      "uniqueID": 311,
-      "name": "Determine campaign voice/messaging style",
-      "outlineNumber": "8.2",
-      "outlineLevel": 2,
-      "start": "2026-04-13",
-      "finish": "2026-04-17",
-      "duration": "3.0d",
-      "work": "48.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 83,
-          "taskUniqueID": 237,
-          "taskName": "Select vendor for creative",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 85,
-      "uniqueID": 236,
-      "name": "Develop concepts and comps",
-      "outlineNumber": "8.3",
-      "outlineLevel": 2,
-      "start": "2026-04-18",
-      "finish": "2026-04-24",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 84,
-          "taskUniqueID": 311,
-          "taskName": "Determine campaign voice/messaging style",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 86,
-      "uniqueID": 238,
-      "name": "Select creative for campaign",
-      "outlineNumber": "8.4",
-      "outlineLevel": 2,
-      "start": "2026-04-25",
-      "finish": "2026-05-01",
-      "duration": "5.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 85,
-          "taskUniqueID": 236,
-          "taskName": "Develop concepts and comps",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 87,
-      "uniqueID": 265,
-      "name": "Prepare pretest materials",
-      "outlineNumber": "8.5",
-      "outlineLevel": 2,
-      "start": "2026-05-02",
-      "finish": "2026-05-08",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 86,
-          "taskUniqueID": 238,
-          "taskName": "Select creative for campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 88,
-      "uniqueID": 267,
-      "name": "Pretest campaign",
-      "outlineNumber": "8.6",
-      "outlineLevel": 2,
-      "start": "2026-05-09",
-      "finish": "2026-05-15",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 87,
-          "taskUniqueID": 265,
-          "taskName": "Prepare pretest materials",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 89,
-      "uniqueID": 266,
-      "name": "Determine if pretest creative achieves objectives",
-      "outlineNumber": "8.7",
-      "outlineLevel": 2,
-      "start": "2026-05-16",
-      "finish": "2026-05-16",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 88,
-          "taskUniqueID": 267,
-          "taskName": "Pretest campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 90,
-      "uniqueID": 268,
-      "name": "Improve creative based on pretest results",
-      "outlineNumber": "8.8",
-      "outlineLevel": 2,
-      "start": "2026-05-17",
-      "finish": "2026-05-23",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 89,
-          "taskUniqueID": 266,
-          "taskName": "Determine if pretest creative achieves objectives",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 91,
-      "uniqueID": 296,
-      "name": "Campaign Creative and Testing Complete",
-      "outlineNumber": "8.9",
-      "outlineLevel": 2,
-      "start": "2026-05-23",
-      "finish": "2026-05-23",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 90,
-          "taskUniqueID": 268,
-          "taskName": "Improve creative based on pretest results",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 92,
-      "uniqueID": 243,
-      "name": "Develop Strategy for External Promotions",
-      "outlineNumber": "9",
-      "outlineLevel": 1,
-      "start": "2026-05-24",
-      "finish": "2026-06-05",
-      "duration": "9.0d",
-      "work": "368.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 93,
-      "uniqueID": 282,
-      "name": "Develop promotion strategy",
-      "outlineNumber": "9.1",
-      "outlineLevel": 2,
-      "start": "2026-05-24",
-      "finish": "2026-05-25",
-      "duration": "2.0d",
-      "work": "32.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 91,
-          "taskUniqueID": 296,
-          "taskName": "Campaign Creative and Testing Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 94,
-      "uniqueID": 275,
-      "name": "Develop press releases",
-      "outlineNumber": "9.2",
-      "outlineLevel": 2,
-      "start": "2026-05-26",
-      "finish": "2026-05-31",
-      "duration": "4.0d",
-      "work": "64.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 93,
-          "taskUniqueID": 282,
-          "taskName": "Develop promotion strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 95,
-      "uniqueID": 274,
-      "name": "Develop announcements",
-      "outlineNumber": "9.3",
-      "outlineLevel": 2,
-      "start": "2026-05-26",
-      "finish": "2026-05-31",
-      "duration": "4.0d",
-      "work": "64.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 93,
-          "taskUniqueID": 282,
-          "taskName": "Develop promotion strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 96,
-      "uniqueID": 276,
-      "name": "Provide pre-release information to analysts",
-      "outlineNumber": "9.4",
-      "outlineLevel": 2,
-      "start": "2026-06-01",
-      "finish": "2026-06-05",
-      "duration": "3.0d",
-      "work": "48.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 94,
-          "taskUniqueID": 275,
-          "taskName": "Develop press releases",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 95,
-          "taskUniqueID": 274,
-          "taskName": "Develop announcements",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 97,
-      "uniqueID": 285,
-      "name": "Generate 'buzz'",
-      "outlineNumber": "9.5",
-      "outlineLevel": 2,
-      "start": "2026-05-26",
-      "finish": "2026-06-01",
-      "duration": "5.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 93,
-          "taskUniqueID": 282,
-          "taskName": "Develop promotion strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 98,
-      "uniqueID": 247,
-      "name": "Execute publicity strategy",
-      "outlineNumber": "9.6",
-      "outlineLevel": 2,
-      "start": "2026-05-24",
-      "finish": "2026-05-30",
-      "duration": "5.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 91,
-          "taskUniqueID": 296,
-          "taskName": "Campaign Creative and Testing Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 99,
-      "uniqueID": 297,
-      "name": "Promotion - External Complete",
-      "outlineNumber": "9.7",
-      "outlineLevel": 2,
-      "start": "2026-06-05",
-      "finish": "2026-06-05",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 98,
-          "taskUniqueID": 247,
-          "taskName": "Execute publicity strategy",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 96,
-          "taskUniqueID": 276,
-          "taskName": "Provide pre-release information to analysts",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 97,
-          "taskUniqueID": 285,
-          "taskName": "Generate 'buzz'",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 100,
-      "uniqueID": 241,
-      "name": "Production",
-      "outlineNumber": "10",
-      "outlineLevel": 1,
-      "start": "2026-06-06",
-      "finish": "2026-06-23",
-      "duration": "14.0d",
-      "work": "112.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 101,
-      "uniqueID": 240,
-      "name": "Submit campaign material for broadcast publications",
-      "outlineNumber": "10.1",
-      "outlineLevel": 2,
-      "start": "2026-06-06",
-      "finish": "2026-06-08",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 99,
-          "taskUniqueID": 297,
-          "taskName": "Promotion - External Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 102,
-      "uniqueID": 245,
-      "name": "Select vendor for appropriate production methods",
-      "outlineNumber": "10.2",
-      "outlineLevel": 2,
-      "start": "2026-06-09",
-      "finish": "2026-06-09",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 101,
-          "taskUniqueID": 240,
-          "taskName": "Submit campaign material for broadcast publications",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 103,
-      "uniqueID": 244,
-      "name": "Production of materials",
-      "outlineNumber": "10.3",
-      "outlineLevel": 2,
-      "start": "2026-06-12",
-      "finish": "2026-06-16",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 102,
-          "taskUniqueID": 245,
-          "taskName": "Select vendor for appropriate production methods",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 104,
-      "uniqueID": 130,
-      "name": "Dissemination of materials",
-      "outlineNumber": "10.4",
-      "outlineLevel": 2,
-      "start": "2026-06-19",
-      "finish": "2026-06-23",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 103,
-          "taskUniqueID": 244,
-          "taskName": "Production of materials",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 105,
-      "uniqueID": 298,
-      "name": "Production Complete",
-      "outlineNumber": "10.5",
-      "outlineLevel": 2,
-      "start": "2026-06-23",
-      "finish": "2026-06-23",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 104,
-          "taskUniqueID": 130,
-          "taskName": "Dissemination of materials",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 106,
-      "uniqueID": 141,
-      "name": "Campaign Release",
-      "outlineNumber": "11",
-      "outlineLevel": 1,
-      "start": "2026-06-09",
-      "finish": "2026-06-27",
-      "duration": "13.0d",
-      "work": "144.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 107,
-      "uniqueID": 140,
-      "name": "Develop campaign release schedules",
-      "outlineNumber": "11.1",
-      "outlineLevel": 2,
-      "start": "2026-06-09",
-      "finish": "2026-06-12",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 101,
-          "taskUniqueID": 240,
-          "taskName": "Submit campaign material for broadcast publications",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 108,
-      "uniqueID": 249,
-      "name": "Determine release teams",
-      "outlineNumber": "11.2",
-      "outlineLevel": 2,
-      "start": "2026-06-13",
-      "finish": "2026-06-13",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 107,
-          "taskUniqueID": 140,
-          "taskName": "Develop campaign release schedules",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 109,
-      "uniqueID": 278,
-      "name": "Perform Inside sales calls",
-      "outlineNumber": "11.3",
-      "outlineLevel": 2,
-      "start": "2026-06-14",
-      "finish": "2026-06-20",
-      "duration": "5.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 108,
-          "taskUniqueID": 249,
-          "taskName": "Determine release teams",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 110,
-      "uniqueID": 248,
-      "name": "Execute campaign",
-      "outlineNumber": "11.4",
-      "outlineLevel": 2,
-      "start": "2026-06-21",
-      "finish": "2026-06-27",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 109,
-          "taskUniqueID": 278,
-          "taskName": "Perform Inside sales calls",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 111,
-      "uniqueID": 299,
-      "name": "Campaign Release Complete",
-      "outlineNumber": "11.5",
-      "outlineLevel": 2,
-      "start": "2026-06-27",
-      "finish": "2026-06-27",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 110,
-          "taskUniqueID": 248,
-          "taskName": "Execute campaign",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 112,
-      "uniqueID": 61,
-      "name": "Campaign Effectiveness",
-      "outlineNumber": "12",
-      "outlineLevel": 1,
-      "start": "2026-06-28",
-      "finish": "2026-07-21",
-      "duration": "18.0d",
-      "work": "192.0h",
-      "percentComplete": 0,
-      "type": "FIXED_DURATION",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 113,
-      "uniqueID": 252,
-      "name": "Evaluate campaign effectiveness",
-      "outlineNumber": "12.1",
-      "outlineLevel": 2,
-      "start": "2026-06-28",
-      "finish": "2026-06-30",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 111,
-          "taskUniqueID": 299,
-          "taskName": "Campaign Release Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 114,
-      "uniqueID": 253,
-      "name": "Review regional sales",
-      "outlineNumber": "12.2",
-      "outlineLevel": 2,
-      "start": "2026-06-28",
-      "finish": "2026-06-28",
-      "duration": "1.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 111,
-          "taskUniqueID": 299,
-          "taskName": "Campaign Release Complete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 115,
-      "uniqueID": 254,
-      "name": "Review global sales",
-      "outlineNumber": "12.3",
-      "outlineLevel": 2,
-      "start": "2026-06-29",
-      "finish": "2026-06-29",
-      "duration": "1.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 114,
-          "taskUniqueID": 253,
-          "taskName": "Review regional sales",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 116,
-      "uniqueID": 255,
-      "name": "Review customer data and feedback",
-      "outlineNumber": "12.4",
-      "outlineLevel": 2,
-      "start": "2026-06-30",
-      "finish": "2026-06-30",
-      "duration": "1.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 115,
-          "taskUniqueID": 254,
-          "taskName": "Review global sales",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 117,
-      "uniqueID": 256,
-      "name": "Perform market analysis",
-      "outlineNumber": "12.5",
-      "outlineLevel": 2,
-      "start": "2026-07-03",
-      "finish": "2026-07-05",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 116,
-          "taskUniqueID": 255,
-          "taskName": "Review customer data and feedback",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 118,
-      "uniqueID": 257,
-      "name": "Review success measures",
-      "outlineNumber": "12.6",
-      "outlineLevel": 2,
-      "start": "2026-07-06",
-      "finish": "2026-07-10",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 113,
-          "taskUniqueID": 252,
-          "taskName": "Evaluate campaign effectiveness",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 114,
-          "taskUniqueID": 253,
-          "taskName": "Review regional sales",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 115,
-          "taskUniqueID": 254,
-          "taskName": "Review global sales",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 116,
-          "taskUniqueID": 255,
-          "taskName": "Review customer data and feedback",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 117,
-          "taskUniqueID": 256,
-          "taskName": "Perform market analysis",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 119,
-      "uniqueID": 258,
-      "name": "Measure campaign effectiveness",
-      "outlineNumber": "12.7",
-      "outlineLevel": 2,
-      "start": "2026-07-11",
-      "finish": "2026-07-13",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 118,
-          "taskUniqueID": 257,
-          "taskName": "Review success measures",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 120,
-      "uniqueID": 260,
-      "name": "Identify any gaps",
-      "outlineNumber": "12.8",
-      "outlineLevel": 2,
-      "start": "2026-07-14",
-      "finish": "2026-07-14",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 119,
-          "taskUniqueID": 258,
-          "taskName": "Measure campaign effectiveness",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 121,
-      "uniqueID": 259,
-      "name": "Develop future campaign ideas",
-      "outlineNumber": "12.9",
-      "outlineLevel": 2,
-      "start": "2026-07-17",
-      "finish": "2026-07-21",
-      "duration": "5.0d",
-      "work": "40.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 120,
-          "taskUniqueID": 260,
-          "taskName": "Identify any gaps",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 122,
-      "uniqueID": 300,
-      "name": "Campaign Effectiveness",
-      "outlineNumber": "12.10",
-      "outlineLevel": 2,
-      "start": "2026-07-21",
-      "finish": "2026-07-21",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 121,
-          "taskUniqueID": 259,
-          "taskName": "Develop future campaign ideas",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 123,
-      "uniqueID": 301,
-      "name": "Marketing Campaign Planning Complete",
-      "outlineNumber": "13",
-      "outlineLevel": 1,
-      "start": "2026-07-21",
-      "finish": "2026-07-21",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 122,
-          "taskUniqueID": 300,
-          "taskName": "Campaign Effectiveness",
+          "taskUniqueID": 39,
+          "taskName": "Lumber Delivery",
           "type": "FS",
           "lag": "0.0d"
         }
@@ -2902,1167 +1508,911 @@
     {
       "id": 1,
       "uniqueID": 1,
-      "name": "Logistics Lead",
+      "name": "Sales Department",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 2,
       "uniqueID": 2,
-      "name": "Marketing Lead",
+      "name": "Construction Dept.",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 3,
       "uniqueID": 3,
-      "name": "Sponsor",
+      "name": "Sales Dept.",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 4,
-      "uniqueID": 4,
-      "name": "Sales",
+      "uniqueID": 10,
+      "name": "Client",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 5,
-      "uniqueID": 6,
-      "name": "Creative",
+      "uniqueID": 13,
+      "name": "County",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 6,
-      "uniqueID": 7,
-      "name": "Content Consultant",
+      "uniqueID": 14,
+      "name": "County Sediment Control Inspector",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 7,
-      "uniqueID": 8,
-      "name": "Marketing",
+      "uniqueID": 15,
+      "name": "Sediment Control Inspector",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 8,
-      "uniqueID": 9,
-      "name": "Marketing Research",
+      "uniqueID": 16,
+      "name": "Department of Permits & Licenses",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 9,
-      "uniqueID": 10,
-      "name": "Corporate Sponsor",
+      "uniqueID": 19,
+      "name": "Building Inspector",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 10,
-      "uniqueID": 11,
-      "name": "Subject Matter Expert",
+      "uniqueID": 20,
+      "name": "Mason",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 11,
-      "uniqueID": 12,
-      "name": "Inside Sales",
+      "uniqueID": 21,
+      "name": "Civil Engineer",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 12,
-      "uniqueID": 13,
-      "name": "Marketing Staff",
+      "uniqueID": 22,
+      "name": "Concrete Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 13,
-      "uniqueID": 14,
-      "name": "Product Marketing",
+      "uniqueID": 23,
+      "name": "Concrete Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 14,
-      "uniqueID": 15,
-      "name": "Regional General Manager",
+      "uniqueID": 24,
+      "name": "Excavation Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 15,
-      "uniqueID": 16,
-      "name": "Country Manager",
+      "uniqueID": 25,
+      "name": "Masonry Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 16,
-      "uniqueID": 17,
-      "name": "Strategic Alliance Lead",
+      "uniqueID": 26,
+      "name": "Block Masonry Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 17,
-      "uniqueID": 18,
-      "name": "Marketing Rep",
+      "uniqueID": 27,
+      "name": "Steel Supplier",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 18,
-      "uniqueID": 19,
-      "name": "Marketing Research",
+      "uniqueID": 28,
+      "name": "Lumber Supplier",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 19,
-      "uniqueID": 20,
-      "name": "Internal PR",
+      "uniqueID": 29,
+      "name": "Waterproofing Subcontractor",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 20,
-      "uniqueID": 21,
-      "name": "PR Company",
+      "uniqueID": 30,
+      "name": "Lender",
       "type": "Work",
       "maxUnits": "10000.0%"
     },
     {
       "id": 21,
-      "uniqueID": 22,
-      "name": "Vendor",
+      "uniqueID": 31,
+      "name": "Framing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 22,
+      "uniqueID": 32,
+      "name": "Pest Control Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 23,
+      "uniqueID": 33,
+      "name": "Mechanical Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 24,
+      "uniqueID": 34,
+      "name": "Plumbing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 25,
+      "uniqueID": 35,
+      "name": "Field Superintendent",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 26,
+      "uniqueID": 36,
+      "name": "Plumbing Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 27,
+      "uniqueID": 37,
+      "name": "Electrical Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 28,
+      "uniqueID": 38,
+      "name": "Alarm Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 29,
+      "uniqueID": 39,
+      "name": "Client's Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 30,
+      "uniqueID": 40,
+      "name": "Electrical Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 31,
+      "uniqueID": 41,
+      "name": "Roofing Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 32,
+      "uniqueID": 42,
+      "name": "Exterior Trim Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 33,
+      "uniqueID": 44,
+      "name": "Brick Masonry Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 34,
+      "uniqueID": 45,
+      "name": "Insulation Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 35,
+      "uniqueID": 46,
+      "name": "BGE Inspector",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 36,
+      "uniqueID": 47,
+      "name": "Drywall Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 37,
+      "uniqueID": 48,
+      "name": "Painting Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 38,
+      "uniqueID": 49,
+      "name": "Trim Supplier",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 39,
+      "uniqueID": 50,
+      "name": "Interior Trim Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 40,
+      "uniqueID": 51,
+      "name": "Cabinet Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 41,
+      "uniqueID": 54,
+      "name": "Deck Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 42,
+      "uniqueID": 55,
+      "name": "Driveway Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 43,
+      "uniqueID": 56,
+      "name": "Seeding Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 44,
+      "uniqueID": 57,
+      "name": "Hardware Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 45,
+      "uniqueID": 58,
+      "name": "Mirror Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 46,
+      "uniqueID": 59,
+      "name": "Tile Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 47,
+      "uniqueID": 60,
+      "name": "Hardwood Floor Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 48,
+      "uniqueID": 61,
+      "name": "Carpet Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 49,
+      "uniqueID": 62,
+      "name": "Department of Licensing & Permits",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 50,
+      "uniqueID": 63,
+      "name": "Paint Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 51,
+      "uniqueID": 64,
+      "name": "Window Cleaning Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 52,
+      "uniqueID": 65,
+      "name": "Cleaning Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 53,
+      "uniqueID": 66,
+      "name": "Superintendent",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 54,
+      "uniqueID": 67,
+      "name": "Builder",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 55,
+      "uniqueID": 68,
+      "name": "Punch Out Crew",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 56,
+      "uniqueID": 69,
+      "name": "Stucco Subcontractor",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 57,
+      "uniqueID": 70,
+      "name": "Sales Manager",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 58,
+      "uniqueID": 71,
+      "name": "Construction Manager",
+      "type": "Work",
+      "maxUnits": "10000.0%"
+    },
+    {
+      "id": 59,
+      "uniqueID": 72,
+      "name": "Project Manager",
       "type": "Work",
       "maxUnits": "10000.0%"
     }
   ],
   "assignments": [
     {
-      "taskID": 36,
-      "taskUniqueID": 3,
-      "taskName": "Review corporate sales objectives",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 39,
-      "taskUniqueID": 4,
-      "taskName": "Review marketing objectives",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 40,
-      "taskUniqueID": 14,
-      "taskName": "Review marketing plan",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 10,
-      "taskUniqueID": 145,
-      "taskName": "Evaluate alignment to corporate strategy goals",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 11,
-      "taskUniqueID": 146,
-      "taskName": "Evaluate competitive advantages",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 9,
-      "taskUniqueID": 152,
-      "taskName": "Establish go-to-markets for organization",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 4,
-      "taskUniqueID": 165,
-      "taskName": "Review business model",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 5,
-      "taskUniqueID": 164,
-      "taskName": "Review organizational marketing strategy",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 6,
-      "taskUniqueID": 163,
-      "taskName": "Review local marketing strategy",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 7,
-      "taskUniqueID": 162,
-      "taskName": "Review global marketing strategy",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 8,
-      "taskUniqueID": 161,
-      "taskName": "Review marketing plan for campaign budget",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 37,
-      "taskUniqueID": 167,
-      "taskName": "Review regional business models",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 38,
-      "taskUniqueID": 168,
-      "taskName": "Review global/country business models",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 67,
-      "taskUniqueID": 171,
-      "taskName": "Establish target regions",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 68,
-      "taskUniqueID": 172,
-      "taskName": "Determine local gaps",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 69,
-      "taskUniqueID": 170,
-      "taskName": "Review local competition",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
-      "units": 10000
-    },
-    {
-      "taskID": 70,
-      "taskUniqueID": 174,
-      "taskName": "Develop competitive advantage",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
-      "units": 10000
-    },
-    {
-      "taskID": 12,
-      "taskUniqueID": 147,
-      "taskName": "Review product and service margins",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 80,
-      "taskUniqueID": 175,
-      "taskName": "Determine advertising/promotion methods and mix",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 71,
-      "taskUniqueID": 183,
-      "taskName": "Identify go-to partners",
-      "resourceID": 16,
-      "resourceUniqueID": 17,
-      "resourceName": "Strategic Alliance Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 41,
-      "taskUniqueID": 186,
-      "taskName": "Establish campaign opportunities",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 42,
-      "taskUniqueID": 166,
-      "taskName": "Review services and product mix and forecast",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 43,
-      "taskUniqueID": 189,
-      "taskName": "Review product release cycles",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 60,
-      "taskUniqueID": 198,
-      "taskName": "Review customer data and feedback",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 16,
-      "taskUniqueID": 201,
-      "taskName": "Create process for qualifying ideas",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 17,
-      "taskUniqueID": 203,
-      "taskName": "Establish process for idea sharing",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 20,
-      "taskUniqueID": 202,
-      "taskName": "Research market environment",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
-      "units": 10000
-    },
-    {
-      "taskID": 21,
-      "taskUniqueID": 204,
-      "taskName": "Develop preliminary campaign concepts",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 25,
-      "taskUniqueID": 206,
-      "taskName": "Validate concepts through test groups and market research",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 26,
-      "taskUniqueID": 205,
-      "taskName": "Establish campaign focus list",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 29,
-      "taskUniqueID": 208,
-      "taskName": "Establish preliminary ideal campaign timing for promotion",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 44,
-      "taskUniqueID": 210,
-      "taskName": "Determine campaign mix for each region",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 30,
-      "taskUniqueID": 207,
-      "taskName": "Determine organization regional campaigns",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 31,
-      "taskUniqueID": 211,
-      "taskName": "Determine organization global campaigns",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 32,
-      "taskUniqueID": 212,
-      "taskName": "Determine organization country campaigns",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 27,
-      "taskUniqueID": 213,
-      "taskName": "Establish campaign categories",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 33,
-      "taskUniqueID": 214,
-      "taskName": "Identify localization requirements",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 22,
-      "taskUniqueID": 215,
-      "taskName": "Identify campaign targets",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 23,
-      "taskUniqueID": 216,
-      "taskName": "Develop campaign success metrics",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 24,
-      "taskUniqueID": 217,
-      "taskName": "Develop campaign tracking and analysis process",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 50,
-      "taskUniqueID": 220,
-      "taskName": "Establish corporate internal communications process",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 53,
-      "taskUniqueID": 219,
-      "taskName": "Regional and country communications to sales, marketing, and management",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 45,
-      "taskUniqueID": 222,
-      "taskName": "Determine campaign success measures for each region",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 46,
-      "taskUniqueID": 223,
-      "taskName": "Determine tracking mechanism",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 62,
-      "taskUniqueID": 197,
-      "taskName": "Identify targets for each campaign",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
-      "units": 10000
-    },
-    {
-      "taskID": 63,
-      "taskUniqueID": 196,
-      "taskName": "Segment data for each campaign",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 64,
-      "taskUniqueID": 225,
-      "taskName": "Prepare/procure lists for each campaign",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 51,
-      "taskUniqueID": 226,
-      "taskName": "Determine regional and country division communications process",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 52,
-      "taskUniqueID": 227,
-      "taskName": "Plan communications methods, logistics, and timing",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 61,
-      "taskUniqueID": 230,
-      "taskName": "Review company segments and channels",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 74,
-      "taskUniqueID": 231,
-      "taskName": "Review campaign concepts",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 75,
-      "taskUniqueID": 234,
-      "taskName": "Create campaign list",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 76,
-      "taskUniqueID": 233,
-      "taskName": "Identify campaign leads",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 78,
-      "taskUniqueID": 232,
-      "taskName": "Develop campaign schedules",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 83,
-      "taskUniqueID": 237,
-      "taskName": "Select vendor for creative",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 85,
-      "taskUniqueID": 236,
-      "taskName": "Develop concepts and comps",
-      "resourceID": 5,
-      "resourceUniqueID": 6,
-      "resourceName": "Creative",
-      "units": 10000
-    },
-    {
-      "taskID": 86,
-      "taskUniqueID": 238,
-      "taskName": "Select creative for campaign",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 101,
-      "taskUniqueID": 240,
-      "taskName": "Submit campaign material for broadcast publications",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 102,
-      "taskUniqueID": 245,
-      "taskName": "Select vendor for appropriate production methods",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 103,
-      "taskUniqueID": 244,
-      "taskName": "Production of materials",
-      "resourceID": 21,
-      "resourceUniqueID": 22,
-      "resourceName": "Vendor",
-      "units": 10000
-    },
-    {
-      "taskID": 107,
-      "taskUniqueID": 140,
-      "taskName": "Develop campaign release schedules",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 108,
-      "taskUniqueID": 249,
-      "taskName": "Determine release teams",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 110,
-      "taskUniqueID": 248,
-      "taskName": "Execute campaign",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 113,
-      "taskUniqueID": 252,
-      "taskName": "Evaluate campaign effectiveness",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 114,
-      "taskUniqueID": 253,
-      "taskName": "Review regional sales",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 115,
-      "taskUniqueID": 254,
-      "taskName": "Review global sales",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 116,
-      "taskUniqueID": 255,
-      "taskName": "Review customer data and feedback",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 117,
-      "taskUniqueID": 256,
-      "taskName": "Perform market analysis",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
-      "units": 10000
-    },
-    {
-      "taskID": 118,
-      "taskUniqueID": 257,
-      "taskName": "Review success measures",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 119,
-      "taskUniqueID": 258,
-      "taskName": "Measure campaign effectiveness",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 121,
-      "taskUniqueID": 259,
-      "taskName": "Develop future campaign ideas",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 120,
-      "taskUniqueID": 260,
-      "taskName": "Identify any gaps",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 19,
-      "taskUniqueID": 262,
-      "taskName": "Final shaping and development of ideas",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 13,
-      "taskUniqueID": 263,
-      "taskName": "Review previous campaign performance",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 87,
-      "taskUniqueID": 265,
-      "taskName": "Prepare pretest materials",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 88,
-      "taskUniqueID": 267,
-      "taskName": "Pretest campaign",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 89,
-      "taskUniqueID": 266,
-      "taskName": "Determine if pretest creative achieves objectives",
-      "resourceID": 17,
-      "resourceUniqueID": 18,
-      "resourceName": "Marketing Rep",
-      "units": 10000
-    },
-    {
-      "taskID": 90,
-      "taskUniqueID": 268,
-      "taskName": "Improve creative based on pretest results",
-      "resourceID": 5,
-      "resourceUniqueID": 6,
-      "resourceName": "Creative",
-      "units": 10000
-    },
-    {
-      "taskID": 28,
-      "taskUniqueID": 270,
-      "taskName": "Develop public relations strategy",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 98,
-      "taskUniqueID": 247,
-      "taskName": "Execute publicity strategy",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 94,
-      "taskUniqueID": 275,
-      "taskName": "Develop press releases",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 95,
-      "taskUniqueID": 274,
-      "taskName": "Develop announcements",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 96,
-      "taskUniqueID": 276,
-      "taskName": "Provide pre-release information to analysts",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 54,
-      "taskUniqueID": 277,
-      "taskName": "Determine internal systems to respond to campaign",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 109,
-      "taskUniqueID": 278,
-      "taskName": "Perform Inside sales calls",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 93,
-      "taskUniqueID": 282,
-      "taskName": "Develop promotion strategy",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 104,
-      "taskUniqueID": 130,
-      "taskName": "Dissemination of materials",
-      "resourceID": 21,
-      "resourceUniqueID": 22,
-      "resourceName": "Vendor",
-      "units": 10000
-    },
-    {
-      "taskID": 114,
-      "taskUniqueID": 253,
-      "taskName": "Review regional sales",
-      "resourceID": 4,
-      "resourceUniqueID": 4,
-      "resourceName": "Sales",
-      "units": 10000
-    },
-    {
-      "taskID": 115,
-      "taskUniqueID": 254,
-      "taskName": "Review global sales",
-      "resourceID": 4,
-      "resourceUniqueID": 4,
-      "resourceName": "Sales",
-      "units": 10000
-    },
-    {
-      "taskID": 10,
-      "taskUniqueID": 145,
-      "taskName": "Evaluate alignment to corporate strategy goals",
-      "resourceID": 3,
-      "resourceUniqueID": 3,
-      "resourceName": "Sponsor",
-      "units": 10000
-    },
-    {
       "taskID": 2,
-      "taskUniqueID": 284,
-      "taskName": "Identify service/product gaps and opportunities",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
-      "units": 10000
-    },
-    {
-      "taskID": 97,
-      "taskUniqueID": 285,
-      "taskName": "Generate 'buzz'",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
+      "taskUniqueID": 287,
+      "taskName": "Supply Lot Sale Agreement",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
       "taskID": 3,
-      "taskUniqueID": 283,
-      "taskName": "Complete SWOT analysis",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
+      "taskUniqueID": 273,
+      "taskName": "Supply Construction Agreement",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
-      "taskID": 45,
-      "taskUniqueID": 222,
-      "taskName": "Determine campaign success measures for each region",
-      "resourceID": 14,
-      "resourceUniqueID": 15,
-      "resourceName": "Regional General Manager",
+      "taskID": 4,
+      "taskUniqueID": 2,
+      "taskName": "Supply Contract Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
-      "taskID": 70,
-      "taskUniqueID": 174,
-      "taskName": "Develop competitive advantage",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
+      "taskID": 5,
+      "taskUniqueID": 262,
+      "taskName": "Supply Contract Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
-      "taskID": 83,
-      "taskUniqueID": 237,
-      "taskName": "Select vendor for creative",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
+      "taskID": 6,
+      "taskUniqueID": 3,
+      "taskName": "Supply Contract Site Plan",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
-      "taskID": 86,
-      "taskUniqueID": 238,
-      "taskName": "Select creative for campaign",
-      "resourceID": 9,
+      "taskID": 7,
+      "taskUniqueID": 289,
+      "taskName": "Secure Financing",
+      "resourceID": 4,
       "resourceUniqueID": 10,
-      "resourceName": "Corporate Sponsor",
+      "resourceName": "Client",
       "units": 10000
     },
     {
-      "taskID": 94,
+      "taskID": 8,
+      "taskUniqueID": 290,
+      "taskName": "Construction Loan Settlement",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 10,
       "taskUniqueID": 275,
-      "taskName": "Develop press releases",
-      "resourceID": 20,
-      "resourceUniqueID": 21,
-      "resourceName": "PR Company",
-      "units": 10000
-    },
-    {
-      "taskID": 95,
-      "taskUniqueID": 274,
-      "taskName": "Develop announcements",
-      "resourceID": 20,
-      "resourceUniqueID": 21,
-      "resourceName": "PR Company",
-      "units": 10000
-    },
-    {
-      "taskID": 96,
-      "taskUniqueID": 276,
-      "taskName": "Provide pre-release information to analysts",
-      "resourceID": 20,
-      "resourceUniqueID": 21,
-      "resourceName": "PR Company",
-      "units": 10000
-    },
-    {
-      "taskID": 97,
-      "taskUniqueID": 285,
-      "taskName": "Generate 'buzz'",
-      "resourceID": 20,
-      "resourceUniqueID": 21,
-      "resourceName": "PR Company",
-      "units": 10000
-    },
-    {
-      "taskID": 98,
-      "taskUniqueID": 247,
-      "taskName": "Execute publicity strategy",
-      "resourceID": 20,
-      "resourceUniqueID": 21,
-      "resourceName": "PR Company",
-      "units": 10000
-    },
-    {
-      "taskID": 93,
-      "taskUniqueID": 282,
-      "taskName": "Develop promotion strategy",
-      "resourceID": 19,
-      "resourceUniqueID": 20,
-      "resourceName": "Internal PR",
-      "units": 10000
-    },
-    {
-      "taskID": 109,
-      "taskUniqueID": 278,
-      "taskName": "Perform Inside sales calls",
-      "resourceID": 11,
-      "resourceUniqueID": 12,
-      "resourceName": "Inside Sales",
-      "units": 10000
-    },
-    {
-      "taskID": 116,
-      "taskUniqueID": 255,
-      "taskName": "Review customer data and feedback",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
+      "taskName": "Review & Finalize Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
       "taskID": 11,
-      "taskUniqueID": 146,
-      "taskName": "Evaluate competitive advantages",
-      "resourceID": 8,
-      "resourceUniqueID": 9,
-      "resourceName": "Marketing Research",
+      "taskUniqueID": 276,
+      "taskName": "Review & Finalize Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
       "units": 10000
     },
     {
-      "taskID": 52,
-      "taskUniqueID": 227,
-      "taskName": "Plan communications methods, logistics, and timing",
-      "resourceID": 1,
-      "resourceUniqueID": 1,
-      "resourceName": "Logistics Lead",
+      "taskID": 12,
+      "taskUniqueID": 277,
+      "taskName": "Review & Finalize Site Plan",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 13,
+      "taskUniqueID": 282,
+      "taskName": "Print Construction Drawings",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 14,
+      "taskUniqueID": 284,
+      "taskName": "Approve Revised Plans",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 15,
+      "taskUniqueID": 285,
+      "taskName": "Approve Revised Specifications",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 16,
+      "taskUniqueID": 291,
+      "taskName": "Approve Revised Site Plan",
+      "resourceID": 4,
+      "resourceUniqueID": 10,
+      "resourceName": "Client",
+      "units": 10000
+    },
+    {
+      "taskID": 18,
+      "taskUniqueID": 146,
+      "taskName": "Make Copies of Plans",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 19,
+      "taskUniqueID": 278,
+      "taskName": "Make Copies of Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 20,
+      "taskUniqueID": 5,
+      "taskName": "Distribute Plans & Specifications",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 21,
+      "taskUniqueID": 6,
+      "taskName": "Receive Bids",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 23,
+      "taskUniqueID": 279,
+      "taskName": "Sales",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 24,
+      "taskUniqueID": 280,
+      "taskName": "Construction",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 25,
+      "taskUniqueID": 8,
+      "taskName": "Execute Subcontractor Agreements",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 27,
+      "taskUniqueID": 10,
+      "taskName": "Schedule lot stake-out",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 28,
+      "taskUniqueID": 11,
+      "taskName": "Stake lot",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 29,
+      "taskUniqueID": 293,
+      "taskName": "File Grading Permit Application",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 30,
+      "taskUniqueID": 12,
+      "taskName": "File Building Permit Application",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 31,
+      "taskUniqueID": 13,
+      "taskName": "Post Lot Identification",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 32,
+      "taskUniqueID": 15,
+      "taskName": "Meet Sediment Control Inspector",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 33,
+      "taskUniqueID": 14,
+      "taskName": "Walk Lot w/ Owner",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 34,
+      "taskUniqueID": 16,
+      "taskName": "Install Construction Entrance",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 35,
+      "taskUniqueID": 153,
+      "taskName": "Install Sediment Controls",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 36,
+      "taskUniqueID": 17,
+      "taskName": "Sediment Control Insp.",
+      "resourceID": 7,
+      "resourceUniqueID": 15,
+      "resourceName": "Sediment Control Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 37,
+      "taskUniqueID": 18,
+      "taskName": "Grading Permit Issued",
+      "resourceID": 7,
+      "resourceUniqueID": 15,
+      "resourceName": "Sediment Control Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 38,
+      "taskUniqueID": 147,
+      "taskName": "County Permit Process",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 39,
+      "taskUniqueID": 19,
+      "taskName": "Building Permit Approved",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 40,
+      "taskUniqueID": 281,
+      "taskName": "Pay Permit Fees and Excise Taxes",
+      "resourceID": 54,
+      "resourceUniqueID": 67,
+      "resourceName": "Builder",
+      "units": 10000
+    },
+    {
+      "taskID": 41,
+      "taskUniqueID": 294,
+      "taskName": "Building Permit Issued",
+      "resourceID": 8,
+      "resourceUniqueID": 16,
+      "resourceName": "Department of Permits & Licenses",
+      "units": 10000
+    },
+    {
+      "taskID": 43,
+      "taskUniqueID": 21,
+      "taskName": "Clear Lot",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 44,
+      "taskUniqueID": 22,
+      "taskName": "Strip Topsoil & Stockpile",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 45,
+      "taskUniqueID": 23,
+      "taskName": "Stake Lot for Excavation",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 46,
+      "taskUniqueID": 24,
+      "taskName": "Rough grade lot",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
       "units": 10000
     },
     {
       "taskID": 47,
-      "taskUniqueID": 304,
-      "taskName": "Create localization strategy",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
+      "taskUniqueID": 25,
+      "taskName": "Excavate for foundation",
+      "resourceID": 14,
+      "resourceUniqueID": 24,
+      "resourceName": "Excavation Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 49,
+      "taskUniqueID": 27,
+      "taskName": "Layout footings",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 50,
+      "taskUniqueID": 28,
+      "taskName": "Dig Footings & Install Reinforcing",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 51,
+      "taskUniqueID": 29,
+      "taskName": "Footing Inspection",
+      "resourceID": 9,
+      "resourceUniqueID": 19,
+      "resourceName": "Building Inspector",
+      "units": 10000
+    },
+    {
+      "taskID": 52,
+      "taskUniqueID": 30,
+      "taskName": "Pour footings",
+      "resourceID": 13,
+      "resourceUniqueID": 23,
+      "resourceName": "Concrete Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 53,
+      "taskUniqueID": 31,
+      "taskName": "Pin Footings",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
+      "units": 10000
+    },
+    {
+      "taskID": 54,
+      "taskUniqueID": 32,
+      "taskName": "Stock Block, Mortar, Sand",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 55,
+      "taskUniqueID": 33,
+      "taskName": "Build Block Foundation",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
       "units": 10000
     },
     {
       "taskID": 56,
-      "taskUniqueID": 308,
-      "taskName": "Identify internal training requirements",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
+      "taskUniqueID": 35,
+      "taskName": "Foundation Certification",
+      "resourceID": 11,
+      "resourceUniqueID": 21,
+      "resourceName": "Civil Engineer",
       "units": 10000
     },
     {
       "taskID": 57,
-      "taskUniqueID": 309,
-      "taskName": "Develop internal training",
-      "resourceID": 12,
-      "resourceUniqueID": 13,
-      "resourceName": "Marketing Staff",
-      "units": 10000
-    },
-    {
-      "taskID": 79,
       "taskUniqueID": 310,
-      "taskName": "Determine calls to action",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
+      "taskName": "Draw #1 (Location Survey)",
+      "resourceID": 20,
+      "resourceUniqueID": 30,
+      "resourceName": "Lender",
       "units": 10000
     },
     {
-      "taskID": 84,
-      "taskUniqueID": 311,
-      "taskName": "Determine campaign voice/messaging style",
-      "resourceID": 5,
-      "resourceUniqueID": 6,
-      "resourceName": "Creative",
+      "taskID": 58,
+      "taskUniqueID": 36,
+      "taskName": "Fill Block Cores w/ Concrete",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
       "units": 10000
     },
     {
-      "taskID": 84,
-      "taskUniqueID": 311,
-      "taskName": "Determine campaign voice/messaging style",
-      "resourceID": 2,
-      "resourceUniqueID": 2,
-      "resourceName": "Marketing Lead",
+      "taskID": 59,
+      "taskUniqueID": 34,
+      "taskName": "Steel Delivery",
+      "resourceID": 17,
+      "resourceUniqueID": 27,
+      "resourceName": "Steel Supplier",
+      "units": 10000
+    },
+    {
+      "taskID": 60,
+      "taskUniqueID": 37,
+      "taskName": "Set Lintels, Bolts, Cap Block",
+      "resourceID": 16,
+      "resourceUniqueID": 26,
+      "resourceName": "Block Masonry Subcontractor",
+      "units": 10000
+    },
+    {
+      "taskID": 61,
+      "taskUniqueID": 39,
+      "taskName": "Lumber Delivery",
+      "resourceID": 18,
+      "resourceUniqueID": 28,
+      "resourceName": "Lumber Supplier",
+      "units": 10000
+    },
+    {
+      "taskID": 62,
+      "taskUniqueID": 38,
+      "taskName": "Waterproofing and Drain Tile",
+      "resourceID": 19,
+      "resourceUniqueID": 29,
+      "resourceName": "Waterproofing Subcontractor",
       "units": 10000
     }
   ]
