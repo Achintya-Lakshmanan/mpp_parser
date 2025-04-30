@@ -64,6 +64,6 @@ downloads/
 
 # Uploads
 /src/backend/uploads/*
-
+build/
 # Pbit files
 *.pbit

@@ -123,11 +123,24 @@ const downloadFile = (url, dest) => {
 
 // Enable CORS
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? true  // Allow any origin in production (for Replit)
-    : 'http://localhost:3000', // Allow only local frontend in development
+  origin: function(origin, callback) {
+    // In production, allow any origin
+    if (process.env.NODE_ENV === 'production') {
+      callback(null, true);
+      return;
+    }
+    
+    // In development, allow localhost and replit domains
+    const allowedOrigins = ['http://localhost:3000', 'https://replit.com', 'https://sp.replit.com'];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // Allow cookies and credentials to be sent
 }));
 
 // Health-check endpoint

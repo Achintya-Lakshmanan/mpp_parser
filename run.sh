@@ -168,7 +168,7 @@ else
   # Start frontend server
   echo "Starting frontend server on port $FRONTEND_PORT..."
   PORT=$FRONTEND_PORT npx serve -s build --listen $FRONTEND_PORT
-  
+  cp -r src/build/ .
   # If frontend stops, kill the backend
   kill $BACKEND_PID
 fi 
