@@ -15,8 +15,8 @@ const FileUploader = ({ onFileUpload }) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
-      if (fileExtension !== 'mpp' && fileExtension !== 'mpx' && fileExtension !== 'mpt') {
-        setError('Please select a valid Microsoft Project file (.mpp or .mpx or .mpt)');
+      if (fileExtension !== 'mpp' && fileExtension !== 'mpx' && fileExtension !== 'mpt' && fileExtension !== 'xer') {
+        setError('Please select a valid Microsoft Project file (.mpp, .mpx, .mpt, .xer)');
         setFile(null);
         return;
       }
@@ -114,7 +114,12 @@ const FileUploader = ({ onFileUpload }) => {
     <div className="file-uploader">
       <form onSubmit={handleSubmit}>
         <div className="file-input-container">
-          <input type="file" onChange={handleFileChange} accept=".mpp,.mpx,.mpt" id="file-input" />
+          <input 
+            type="file" 
+            onChange={handleFileChange} 
+            accept=".mpp,.mpx,.mpt,.xer" 
+            id="file-input" 
+          />
           <label htmlFor="file-input" className="file-input-label">
             {file ? file.name : 'Choose a file'}
           </label>

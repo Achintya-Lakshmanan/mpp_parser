@@ -42,13 +42,23 @@ function downloadFile(url, dest) {
 const dependencies = [
   {
     name: 'MPXJ',
-    url: 'https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/10.15.0/mpxj-10.15.0.jar',
+    url: 'https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/12.3.0/mpxj-12.3.0.jar',
     filename: 'mpxj.jar'
   },
   {
     name: 'POI',
     url: 'https://repo1.maven.org/maven2/org/apache/poi/poi/5.2.3/poi-5.2.3.jar',
     filename: 'poi.jar'
+  },
+  {
+    name: 'SQLite JDBC',
+    url: 'https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.43.0.0/sqlite-jdbc-3.43.0.0.jar',
+    filename: 'sqlite-jdbc-3.43.0.0.jar'
+  },
+  {
+    name: 'Commons Lang3',
+    url: 'https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar',
+    filename: 'commons-lang3-3.13.0.jar'
   }
 ];
 
