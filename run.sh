@@ -3,6 +3,47 @@
 # Print commands for debugging
 set -x
 
+# Function to check if a port is in use
+check_port() {
+    local port=$1
+    if command -v lsof >/dev/null 2>&1; then
+        if lsof -i :$port >/dev/null 2>&1; then
+            return 0  # port is in use
+        fi
+    elif command -v netstat >/dev/null 2>&1; then
+        if netstat -an | grep ":$port " >/dev/null 2>&1; then
+            return 0  # port is in use
+        fi
+    fi
+    return 1  # port is free
+}
+
+# Function to find next available port
+find_free_port() {
+    local port=$1
+    while check_port $port; do
+        echo "Port $port is in use, trying next port..."
+        port=$((port + 1))
+    done
+    echo $port
+}
+
+# Cleanup function
+cleanup() {
+    echo "Cleaning up processes..."
+    if [ ! -z "$BACKEND_PID" ]; then
+        kill $BACKEND_PID 2>/dev/null || true
+    fi
+    # Kill any lingering node processes on our ports
+    if command -v lsof >/dev/null 2>&1; then
+        lsof -ti:${BACKEND_PORT:-3001} | xargs kill 2>/dev/null || true
+        lsof -ti:${FRONTEND_PORT:-3000} | xargs kill 2>/dev/null || true
+    fi
+}
+
+# Set up trap for cleanup
+trap cleanup EXIT
+
 # Setup environment variables
 ./setup-env.sh
 
@@ -69,7 +110,7 @@ if ! command -v java &> /dev/null; then
     else
       echo "Failed to install Java. Please install manually."
       exit 1
-    fi
+    }
   fi
 fi
 
@@ -83,9 +124,9 @@ fi
 # Check if MPXJ jar exists and download if not
 if [ ! -f "src/backend/lib/mpxj.jar" ]; then
   echo "Downloading MPXJ library..."
-  curl -L "https://www.mpxj.org/mpxj-9.3.0.jar" -o "src/backend/lib/mpxj.jar" || {
+  curl -L "https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/12.3.0/mpxj-12.3.0.jar" -o "src/backend/lib/mpxj.jar" || {
     echo "Failed to download MPXJ library. Trying wget..."
-    wget -O "src/backend/lib/mpxj.jar" "https://www.mpxj.org/mpxj-9.3.0.jar" || {
+    wget -O "src/backend/lib/mpxj.jar" "https://repo1.maven.org/maven2/net/sf/mpxj/mpxj/12.3.0/mpxj-12.3.0.jar" || {
       echo "Failed to download MPXJ JAR. The app may not work correctly."
     }
   }
@@ -146,16 +187,20 @@ if [ -n "$REPL_ID" ]; then
   
   # Get available port from Replit
   REPLIT_PORT=${PORT:-3000}
-  echo "Replit PORT: $REPLIT_PORT"
+  REPLIT_PORT=$(find_free_port $REPLIT_PORT)
+  echo "Using Replit PORT: $REPLIT_PORT"
   
   # For single-port Replit setup, run the backend server
   echo "Starting backend server..."
-  # Don't use background process in Replit
-  node src/backend/server.js
+  PORT=$REPLIT_PORT node src/backend/server.js
 else
   # For local development, run both servers
   BACKEND_PORT=${PORT:-3001}
   FRONTEND_PORT=3000
+  
+  # Find free ports
+  BACKEND_PORT=$(find_free_port $BACKEND_PORT)
+  FRONTEND_PORT=$(find_free_port $FRONTEND_PORT)
   
   echo "Running in local development mode"
   echo "Starting backend server on port $BACKEND_PORT..."
@@ -167,8 +212,12 @@ else
   
   # Start frontend server
   echo "Starting frontend server on port $FRONTEND_PORT..."
-  PORT=$FRONTEND_PORT npx serve -s build --listen $FRONTEND_PORT
-  cp -r src/build/ .
-  # If frontend stops, kill the backend
-  kill $BACKEND_PID
-fi 
+  PORT=$FRONTEND_PORT npx serve -s build --listen $FRONTEND_PORT &
+  FRONTEND_PID=$!
+  
+  # Wait for frontend process
+  wait $FRONTEND_PID
+  
+  # Cleanup when done
+  cleanup
+fi

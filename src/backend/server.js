@@ -166,8 +166,8 @@ const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (ext !== '.mpp' && ext !== '.mpx' && ext !== '.mpt') {
-      return cb(new Error('Only .mpp, .mpx and .mpt files are allowed'));
+    if (ext !== '.mpp' && ext !== '.mpx' && ext !== '.mpt' && ext !== '.xer') {
+      return cb(new Error('Only .mpp, .mpx, .mpt and .xer files are allowed'));
     }
     cb(null, true);
   },
@@ -231,6 +231,21 @@ const parseWithJava = async (filePath, startDate) => {
             name: 'Jackson Core',
             url: 'https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar',
             filename: 'jackson-core-2.14.2.jar'
+          },
+          {
+            name: 'Jakarta XML Bind API',
+            url: 'https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0.jar',
+            filename: 'jakarta.xml.bind-api-4.0.0.jar'
+          },
+          {
+            name: 'Jakarta XML Bind Runtime',
+            url: 'https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/4.0.3/jaxb-impl-4.0.3.jar',
+            filename: 'jaxb-impl-4.0.3.jar'
+          },
+          {
+            name: 'Jakarta Activation',
+            url: 'https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar',
+            filename: 'jakarta.activation-api-2.1.0.jar'
           },
           {
             name: 'Jackson Databind',
@@ -501,27 +516,33 @@ public class MPPParser {
             // Extract resources
             ArrayNode resourcesNode = mapper.createArrayNode();
             
-            for (Resource resource : project.getResources()) {
-                if (resource != null && resource.getID() != null) {
-                    ObjectNode resourceNode = mapper.createObjectNode();
-                    
-                    resourceNode.put("id", resource.getID());
-                    resourceNode.put("uniqueID", resource.getUniqueID());
-                    resourceNode.put("name", resource.getName());
-                    resourceNode.put("type", resource.getType() != null ? resource.getType().toString() : "Work");
-                    
-                    // Convert Number to double for calculations
-                    Number maxUnits = resource.getMaxUnits();
-                    String maxUnitsStr = "100%";
-                    if (maxUnits != null) {
-                        double maxUnitsValue = maxUnits.doubleValue() * 100;
-                        maxUnitsStr = maxUnitsValue + "%";
+            // Initialize default resource if none exists
+            if (project.getResources().isEmpty()) {
+                ObjectNode defaultResource = mapper.createObjectNode();
+                defaultResource.put("id", 1);
+                defaultResource.put("uniqueID", 1);
+                defaultResource.put("name", "Unassigned");
+                defaultResource.put("type", "Work");
+                defaultResource.put("maxUnits", "100%");
+                resourcesNode.add(defaultResource);
+            } else {
+                for (Resource resource : project.getResources()) {
+                    if (resource != null && resource.getID() != null) {
+                        ObjectNode resourceNode = mapper.createObjectNode();
+                        resourceNode.put("id", resource.getID());
+                        resourceNode.put("uniqueID", resource.getUniqueID());
+                        resourceNode.put("name", resource.getName());
+                        resourceNode.put("type", resource.getType() != null ? resource.getType().toString() : "Work");
+                        
+                        Number maxUnits = resource.getMaxUnits();
+                        String maxUnitsStr = "100%";
+                        if (maxUnits != null) {
+                            double maxUnitsValue = maxUnits.doubleValue() * 100;
+                            maxUnitsStr = maxUnitsValue + "%";
+                        }
+                        resourceNode.put("maxUnits", maxUnitsStr);
+                        resourcesNode.add(resourceNode);
                     }
-                    resourceNode.put("maxUnits", maxUnitsStr);
-                    
-                    // Add more resource properties as needed
-                    
-                    resourcesNode.add(resourceNode);
                 }
             }
             
@@ -530,29 +551,40 @@ public class MPPParser {
             // Extract assignments
             ArrayNode assignmentsNode = mapper.createArrayNode();
             
-            for (ResourceAssignment assignment : project.getResourceAssignments()) {
-                if (assignment != null && assignment.getTaskUniqueID() != null && assignment.getResourceUniqueID() != null) {
-                    ObjectNode assignmentNode = mapper.createObjectNode();
-                    
-                    assignmentNode.put("taskID", assignment.getTask().getID());
-                    assignmentNode.put("taskUniqueID", assignment.getTaskUniqueID());
-                    assignmentNode.put("taskName", assignment.getTask().getName());
-                    
-                    assignmentNode.put("resourceID", assignment.getResource().getID());
-                    assignmentNode.put("resourceUniqueID", assignment.getResourceUniqueID());
-                    assignmentNode.put("resourceName", assignment.getResource().getName());
-                    
-                    // Convert Number to double for calculations
-                    Number units = assignment.getUnits();
-                    double unitsValue = 100.0;
-                    if (units != null) {
-                        unitsValue = units.doubleValue() * 100;
+            // Create default assignment for tasks if none exists
+            if (project.getResourceAssignments().isEmpty()) {
+                for (Task task : project.getTasks()) {
+                    if (task != null && !task.getSummary()) {  // Only create assignments for non-summary tasks
+                        ObjectNode defaultAssignment = mapper.createObjectNode();
+                        defaultAssignment.put("taskID", task.getID());
+                        defaultAssignment.put("taskUniqueID", task.getUniqueID());
+                        defaultAssignment.put("taskName", task.getName());
+                        defaultAssignment.put("resourceID", 1);  // Default resource ID
+                        defaultAssignment.put("resourceUniqueID", 1);
+                        defaultAssignment.put("resourceName", "Unassigned");
+                        defaultAssignment.put("units", 100.0);
+                        assignmentsNode.add(defaultAssignment);
                     }
-                    assignmentNode.put("units", unitsValue);
-                    
-                    // Add more assignment properties as needed
-                    
-                    assignmentsNode.add(assignmentNode);
+                }
+            } else {
+                for (ResourceAssignment assignment : project.getResourceAssignments()) {
+                    if (assignment != null && assignment.getTaskUniqueID() != null) {
+                        ObjectNode assignmentNode = mapper.createObjectNode();
+                        assignmentNode.put("taskID", assignment.getTask().getID());
+                        assignmentNode.put("taskUniqueID", assignment.getTaskUniqueID());
+                        assignmentNode.put("taskName", assignment.getTask().getName());
+                        assignmentNode.put("resourceID", assignment.getResource().getID());
+                        assignmentNode.put("resourceUniqueID", assignment.getResourceUniqueID());
+                        assignmentNode.put("resourceName", assignment.getResource().getName());
+                        
+                        Number units = assignment.getUnits();
+                        double unitsValue = 100.0;
+                        if (units != null) {
+                            unitsValue = units.doubleValue() * 100;
+                        }
+                        assignmentNode.put("units", unitsValue);
+                        assignmentsNode.add(assignmentNode);
+                    }
                 }
             }
             
@@ -594,23 +626,23 @@ public class MPPParser {
 
       // Execute the Java program
       try {
-        const { stdout, stderr } = await execPromise(
-          `java -cp ${classpath}${pathSeparator}"${tempDir}" MPPParser "${filePath}" "${startDate}"`
-        );
+        const allJars = fs.readdirSync(libDir)
+          .filter(file => file.endsWith('.jar'))
+          .map(file => path.join(libDir, file));
+        
+        // Include temp directory in classpath for finding the MPPParser class
+        const fullClasspath = [tempDir, mpxjJarPath, poiJarPath, ...allJars]
+          .join(pathSeparator);
 
-        // If stderr exists, log it but continue unless it indicates a critical error
-        if (stderr && typeof stderr === 'string') {
-          logger.error('Java execution stderr:', stderr);
+        // Execute the Java program with complete module configuration
+        const javaCommand = `cd "${tempDir}" && java -Djava.util.logging.config.file=/dev/null --add-modules ALL-SYSTEM --add-exports java.base/jdk.internal.loader=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -cp "${fullClasspath}" MPPParser "${filePath}" "${startDate}" 2>&1`;
+        
+        logger.info('Executing Java command:', javaCommand);
+        const { stdout, stderr } = await execPromise(javaCommand);
 
-          // Check for fatal errors that should stop execution
-          if (
-            stderr.includes('Exception in thread "main"') ||
-            stderr.includes('Error: Could not find or load main class') ||
-            stderr.includes('NoClassDefFoundError')
-          ) {
-            throw new Error(`Java execution error: ${stderr}`);
-          }
-        }
+        // Log complete output for debugging
+        if (stdout) logger.info('Java stdout:', stdout);
+        if (stderr) logger.error('Java stderr:', stderr);
 
         // Debug the stdout before parsing
         logger.info('Java stdout type:', typeof stdout);
