@@ -1,5 +1,6 @@
 # MPP Parser - Microsoft Project to Power BI
-
+//podman build -t mpp-parser .
+//podman run -p 3000:3000 -p 3001:3001 localhost/mpp-parser
 This web application allows users to upload Microsoft Project files (.mpp, .mpx, .mpt) and convert them to Power BI Template (.pbit) files with customized start dates.
 
 ## Features

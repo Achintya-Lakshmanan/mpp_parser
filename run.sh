@@ -110,7 +110,7 @@ if ! command -v java &> /dev/null; then
     else
       echo "Failed to install Java. Please install manually."
       exit 1
-    }
+    fi
   fi
 fi
 

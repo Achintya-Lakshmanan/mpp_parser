@@ -131,7 +131,7 @@ app.use(cors({
     }
     
     // In development, allow localhost and replit domains
-    const allowedOrigins = ['http://localhost:3000', 'https://replit.com', 'https://sp.replit.com'];
+    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://replit.com', 'https://sp.replit.com'];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -142,6 +142,11 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // Allow cookies and credentials to be sent
 }));
+
+// Serve static files from the React build directory
+const staticFilesPath = path.join(__dirname, '..', 'build');
+logger.info(`Serving static files from: ${staticFilesPath}`);
+app.use(express.static(staticFilesPath));
 
 // Health-check endpoint
 app.get('/api/health', (_req, res) => {
@@ -920,31 +925,20 @@ if (process.env.REPL_ID) {
   }
 }
 
-// --- Global error handler ---
-// Must be after all other middlewares/routes
-/* eslint-disable no-unused-vars */
-app.use((err, req, res, _next) => {
-  // Handle Multer-specific errors first
-  if (err.name === 'MulterError') {
-    logger.warn('Multer upload error:', err);
-    let msg = err.message;
-    if (err.code === 'LIMIT_FILE_SIZE') {
-      msg = `File exceeds limit of ${MAX_JSON_SIZE / (1024 * 1024)} MB`;
-    }
-    return res.status(400).json({ error: msg });
-  }
-
-  logger.error('Unhandled error:', err);
-  res.status(err.status || 500).json({
-    error: err.publicMessage || 'Internal Server Error',
-    details: process.env.NODE_ENV === 'prod' ? undefined : err.message,
-  });
+// Global error handler
+app.use((err, req, res, next) => {
+  logger.error(err.stack);
+  res.status(500).send('Something broke!');
 });
-/* eslint-enable no-unused-vars */
 
-// 404 handler for any unmatched route
-app.use((req, res) => {
-  res.status(404).json({ error: 'Not Found' });
+// Catch-all route to serve index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticFilesPath, 'index.html'), (err) => {
+    if (err) {
+      logger.error(`Error sending index.html: ${err}`);
+      res.status(500).send(err);
+    }
+  });
 });
 
 // Start the server
