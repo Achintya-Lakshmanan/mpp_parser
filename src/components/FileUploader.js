@@ -3,8 +3,14 @@ import './FileUploader.css';
 
 // Use window.location.origin to dynamically get the host
 // For Docker environments, we need to be more flexible with the API URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || window.location.origin;
+let API_BASE_URL = process.env.REACT_APP_API_URL || window.location.origin;
 // This ensures the app works both in development and production environments
+
+// Safety check to ensure we never use localhost in production
+if (window.location.hostname !== 'localhost' && API_BASE_URL.includes('localhost')) {
+  console.warn('Detected localhost in API URL while running in production - using current origin instead');
+  API_BASE_URL = window.location.origin;
+}
 
 const FileUploader = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);

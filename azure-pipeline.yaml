@@ -25,7 +25,7 @@ stages:
               dockerfile: 'Dockerfile'
               containerRegistry: 'turingACR'
               tags: latest
-              arguments: '--no-cache --build-arg REACT_APP_API_URL=/api'
+              arguments: '--no-cache --build-arg REACT_APP_API_URL=/api --build-arg BUILD_DATE=$(date +%s)'
               
   - stage: Deploy
     displayName: 'Deploy to App Service'

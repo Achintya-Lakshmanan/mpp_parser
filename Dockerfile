@@ -3,8 +3,12 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Add build argument for API URL
+# Add build arguments for API URL and build date for cache invalidation
 ARG REACT_APP_API_URL=/api
+ARG BUILD_DATE=0
+
+# Echo build date for debugging and cache invalidation
+RUN echo "Building with date: $BUILD_DATE"
 
 # Copy package files for root and frontend
 COPY package.json package-lock.json* ./
@@ -23,6 +27,9 @@ COPY . .
 # Use the build argument value
 ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 ENV NODE_ENV=production
+
+# Clear any existing build to ensure clean state
+RUN cd src && rm -rf build
 
 # Build the frontend application
 RUN cd src && npm run build
