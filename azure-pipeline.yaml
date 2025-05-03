@@ -1,7 +1,6 @@
 trigger:
   branches:
-    include:
-      - main
+    include: 
       - Dev
 
 variables:
@@ -31,32 +30,23 @@ stages:
     - job: Deploy
       displayName: Deploy to App Service
       steps:
-      - task: AzureWebAppContainer@1
-        displayName: 'Deploy to Azure Web App'
-        inputs:
-          ConnectionType: 'AzureRM'
-          azureSubscription: 'LMT-PRODUCTS'   
-          AppName: 'lmtmpp-parserapp'
-          containers: 'turing.azurecr.io/lmtmpp-parserapp:latest'
-          appSettings: >-
-            WEBSITES_PORT=3000
-            WEBSITES_CONTAINER_START_TIME_LIMIT=600
-            API_URL=/api
-            NODE_ENV=production
-            REACT_APP_API_URL=/api
-      
+      # Configure App settings first using Azure CLI
       - task: AzureCLI@2
-        displayName: 'Configure Web App Settings'
+        displayName: 'Configure App Settings'
         inputs:
           azureSubscription: 'LMT-PRODUCTS'
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
             # Get resource group from the app name
-            resourceGroup=$(az webapp show --name lmtmpp-parserapp --query resourceGroup --output tsv)
+            resourceGroup=$(az webapp show --name lmtmpp-parserapp --query resourceGroup --output tsv || echo "lmtmpp-resource-group")
             
             echo "Using resource group: $resourceGroup"
             
+            # Configure app settings directly
+            echo "Setting application settings..."
+            az webapp config appsettings set --resource-group $resourceGroup --name lmtmpp-parserapp --settings WEBSITES_PORT=3000 WEBSITES_CONTAINER_START_TIME_LIMIT=600 API_URL=/api NODE_ENV=production REACT_APP_API_URL=/api
+
             # Enable CORS with wildcard
             echo "Configuring CORS settings..."
             az webapp cors add --resource-group $resourceGroup --name lmtmpp-parserapp --allowed-origins "*"
@@ -64,4 +54,13 @@ stages:
             # Configure container startup time limit
             echo "Setting container startup time limit..."
             az resource update --resource-group $resourceGroup --name web --namespace Microsoft.Web --resource-type config --parent sites/lmtmpp-parserapp --set properties.generalSettings.containerStartupTimeLimit=600
+      
+      # Deploy container without app settings (already set above)
+      - task: AzureWebAppContainer@1
+        displayName: 'Deploy to Azure Web App'
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'LMT-PRODUCTS'   
+          AppName: 'lmtmpp-parserapp'
+          containers: 'turing.azurecr.io/lmtmpp-parserapp:latest'
  
