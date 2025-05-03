@@ -1,19 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProjectViewer.css';
 
 const ProjectViewer = ({ projectData }) => {
   const [activeTab, setActiveTab] = useState('tasks');
+  const [dataStructure, setDataStructure] = useState({});
+
+  // Enhanced debugging for Docker environments
+  useEffect(() => {
+    if (!projectData) {
+      console.log('ProjectViewer: No project data received');
+      return;
+    }
+
+    // Log detailed information about the data structure
+    const structure = {
+      type: typeof projectData,
+      hasProjectData: !!(projectData.projectData),
+      hasData: !!(projectData.data),
+      topLevelKeys: Object.keys(projectData),
+      hasTasks: !!(projectData.tasks && Array.isArray(projectData.tasks)),
+      taskCount: projectData.tasks && Array.isArray(projectData.tasks) ? projectData.tasks.length : 0,
+    };
+    
+    console.log('ProjectViewer data structure:', structure);
+    console.log('First 500 chars of projectData:', JSON.stringify(projectData).substring(0, 500) + '...');
+    
+    setDataStructure(structure);
+  }, [projectData]);
 
   if (!projectData) {
     return <div className="project-viewer-empty">No project data available</div>;
   }
 
-  // Destructure projectData correctly
-  const { tasks = [], resources = [], assignments = [], properties = {} } = projectData.projectData || projectData;
+  // More robust destructuring for Docker environments
+  let tasks = [], resources = [], assignments = [], properties = {};
+  
+  try {
+    // Try multiple possible data structures
+    if (projectData.tasks && Array.isArray(projectData.tasks)) {
+      console.log('Using top-level tasks array with', projectData.tasks.length, 'tasks');
+      tasks = projectData.tasks;
+      resources = projectData.resources || [];
+      assignments = projectData.assignments || [];
+      properties = projectData.properties || {};
+    } else if (projectData.projectData && projectData.projectData.tasks) {
+      console.log('Using nested projectData.tasks with', projectData.projectData.tasks.length, 'tasks');
+      tasks = projectData.projectData.tasks;
+      resources = projectData.projectData.resources || [];
+      assignments = projectData.projectData.assignments || [];
+      properties = projectData.projectData.properties || {};
+    } else if (projectData.data && projectData.data.tasks) {
+      console.log('Using data.tasks with', projectData.data.tasks.length, 'tasks');
+      tasks = projectData.data.tasks;
+      resources = projectData.data.resources || [];
+      assignments = projectData.data.assignments || [];
+      properties = projectData.data.properties || {};
+    } else if (Array.isArray(projectData)) {
+      // Handle case where the entire projectData is an array of tasks
+      console.log('ProjectData is an array with', projectData.length, 'items');
+      if (projectData.length > 0 && (projectData[0].id !== undefined || projectData[0].name)) {
+        console.log('Array appears to be tasks');
+        tasks = projectData;
+      }
+    } else {
+      // Last resort - scan properties for tasks array
+      console.log('Scanning for tasks array in properties');
+      for (const key in projectData) {
+        if (projectData[key] && Array.isArray(projectData[key]) && 
+            projectData[key].length > 0 && 
+            projectData[key][0] && 
+            (projectData[key][0].id !== undefined || projectData[key][0].name)) {
+          console.log(`Found potential tasks array in property "${key}" with ${projectData[key].length} items`);
+          tasks = projectData[key];
+          break;
+        }
+      }
+      
+      // Special case: the data might be the success message while the data was saved to a file
+      if (tasks.length === 0 && projectData.message && projectData.message.includes("successfully")) {
+        console.log('Found success message - tasks may be available via /api/data endpoint');
+      }
+    }
+  } catch (err) {
+    console.error('Error extracting data structure:', err);
+  }
 
   const renderTasks = () => {
     if (!tasks || tasks.length === 0) {
-      return <p>No tasks found in this project.</p>;
+      console.log('No tasks found in extracted data structure');
+      return (
+        <div>
+          <p>No tasks found in this project.</p>
+          <div className="debug-info" style={{fontSize: '12px', margin: '20px 0', padding: '10px', backgroundColor: '#f5f5f5', border: '1px solid #ddd'}}>
+            <h4>Debug Information:</h4>
+            <pre>{JSON.stringify(dataStructure, null, 2)}</pre>
+          </div>
+        </div>
+      );
     }
 
     return (

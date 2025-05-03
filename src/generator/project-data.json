@@ -1,138 +1,177 @@
 {
   "properties": {
-    "name": "PROJECT",
+    "name": "Aufgabe Softwareentwickler",
     "author": null,
     "company": null,
-    "startDate": "2025-12-20",
-    "finishDate": "2026-01-01",
-    "taskCount": 24,
+    "startDate": "2025-05-03",
+    "finishDate": "2025-11-28",
+    "taskCount": 58,
     "resourceCount": 0,
     "assignmentCount": 0
   },
   "tasks": [
     {
       "id": 1,
-      "uniqueID": 26010,
-      "name": "PROJECT",
+      "uniqueID": 26011,
+      "name": "Aufgabe Softwareentwickler",
       "outlineNumber": "1",
       "outlineLevel": 1,
-      "start": "2025-12-20",
-      "finish": "2026-01-01",
-      "duration": "204.0h",
+      "start": "2025-05-03",
+      "finish": "2025-11-28",
+      "duration": "1200.0h",
       "work": "0.0h",
-      "percentComplete": 16.39344262295082,
+      "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 2,
-      "uniqueID": 26011,
-      "name": "Project #1",
+      "uniqueID": 101914,
+      "name": "End Milestone Task SE",
       "outlineNumber": "1.1",
       "outlineLevel": 2,
-      "start": "2025-12-20",
-      "finish": "2025-12-28",
-      "duration": "136.0h",
+      "start": "2025-11-28",
+      "finish": "2025-11-28",
+      "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 19.047619047619047,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 55,
+          "taskUniqueID": 101815,
+          "taskName": "End Milestone WBS 5",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 3,
-      "uniqueID": 101717,
-      "name": "Task #1",
-      "outlineNumber": "1.1.1",
-      "outlineLevel": 3,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
+      "uniqueID": 101913,
+      "name": "Start Milestone Task SE",
+      "outlineNumber": "1.2",
+      "outlineLevel": 2,
+      "start": "2025-05-03",
+      "finish": "2025-05-03",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 4,
-      "uniqueID": 101718,
-      "name": "Task #3",
-      "outlineNumber": "1.1.2",
-      "outlineLevel": 3,
-      "start": "2025-12-20",
-      "finish": "2025-12-20",
-      "duration": "0.0h",
+      "uniqueID": 26012,
+      "name": "Nr. 1",
+      "outlineNumber": "1.3",
+      "outlineLevel": 2,
+      "start": "2025-05-03",
+      "finish": "2025-06-13",
+      "duration": "240.0h",
       "work": "0.0h",
-      "percentComplete": 100,
+      "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 5,
-      "uniqueID": 101719,
-      "name": "Task #5",
-      "outlineNumber": "1.1.3",
+      "uniqueID": 101917,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.3.1",
       "outlineLevel": 3,
-      "start": "2025-12-20",
-      "finish": "2025-12-20",
-      "duration": "0.0h",
+      "start": "2025-05-03",
+      "finish": "2025-05-09",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 14,
+          "taskUniqueID": 101863,
+          "taskName": "Start Milestone WBS 1",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 6,
-      "uniqueID": 26013,
-      "name": "Task #2",
-      "outlineNumber": "1.1.4",
+      "uniqueID": 101718,
+      "name": "Fundament",
+      "outlineNumber": "1.3.2",
       "outlineLevel": 3,
-      "start": "2025-12-21",
-      "finish": "2025-12-28",
-      "duration": "119.0h",
+      "start": "2025-05-10",
+      "finish": "2025-05-16",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 21.192052980132452,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 5,
+          "taskUniqueID": 101917,
+          "taskName": "Ausfahrt",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 7,
-      "uniqueID": 101720,
-      "name": "Task #2.1",
-      "outlineNumber": "1.1.4.1",
-      "outlineLevel": 4,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
-      "duration": "0.0h",
+      "uniqueID": 101719,
+      "name": "Turm",
+      "outlineNumber": "1.3.3",
+      "outlineLevel": 3,
+      "start": "2025-05-17",
+      "finish": "2025-05-23",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 12,
+          "taskUniqueID": 101722,
+          "taskName": "LOE1.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 6,
+          "taskUniqueID": 101718,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 8,
-      "uniqueID": 101721,
-      "name": "Task #2.2",
-      "outlineNumber": "1.1.4.2",
-      "outlineLevel": 4,
-      "start": "2025-12-24",
-      "finish": "2025-12-24",
-      "duration": "0.0h",
+      "uniqueID": 101720,
+      "name": "Gondel",
+      "outlineNumber": "1.3.4",
+      "outlineLevel": 3,
+      "start": "2025-05-24",
+      "finish": "2025-05-30",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 7,
-          "taskUniqueID": 101720,
-          "taskName": "Task #2.1",
+          "taskUniqueID": 101719,
+          "taskName": "Turm",
           "type": "FS",
           "lag": "0.0h"
         }
@@ -140,45 +179,52 @@
     },
     {
       "id": 9,
-      "uniqueID": 101722,
-      "name": "Task #2.3",
-      "outlineNumber": "1.1.4.3",
-      "outlineLevel": 4,
-      "start": "2025-12-28",
-      "finish": "2025-12-28",
-      "duration": "0.0h",
+      "uniqueID": 101721,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.3.5",
+      "outlineLevel": 3,
+      "start": "2025-05-31",
+      "finish": "2025-06-06",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 8,
-          "taskUniqueID": 101721,
-          "taskName": "Task #2.2",
+          "taskUniqueID": 101720,
+          "taskName": "Gondel",
           "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 13,
+          "taskUniqueID": 101726,
+          "taskName": "LOE1.2",
+          "type": "FF",
           "lag": "0.0h"
         }
       ]
     },
     {
       "id": 10,
-      "uniqueID": 101723,
-      "name": "Task #2.4",
-      "outlineNumber": "1.1.4.4",
-      "outlineLevel": 4,
-      "start": "2025-12-28",
-      "finish": "2025-12-28",
-      "duration": "0.0h",
+      "uniqueID": 101725,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.3.6",
+      "outlineLevel": 3,
+      "start": "2025-06-07",
+      "finish": "2025-06-13",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 9,
-          "taskUniqueID": 101722,
-          "taskName": "Task #2.3",
+          "taskUniqueID": 101721,
+          "taskName": "3x Blattmontage",
           "type": "FS",
           "lag": "0.0h"
         }
@@ -186,213 +232,1131 @@
     },
     {
       "id": 11,
-      "uniqueID": 26014,
-      "name": "Task #4",
-      "outlineNumber": "1.1.5",
+      "uniqueID": 101723,
+      "name": "End Milestone WBS 1",
+      "outlineNumber": "1.3.7",
       "outlineLevel": 3,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
+      "start": "2025-06-13",
+      "finish": "2025-06-13",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 10,
+          "taskUniqueID": 101725,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 12,
-      "uniqueID": 101724,
-      "name": "Task #4.1",
-      "outlineNumber": "1.1.5.1",
-      "outlineLevel": 4,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
-      "duration": "0.0h",
+      "uniqueID": 101722,
+      "name": "LOE1.1",
+      "outlineNumber": "1.3.8",
+      "outlineLevel": 3,
+      "start": "2025-05-10",
+      "finish": "2025-05-23",
+      "duration": "80.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 6,
+          "taskUniqueID": 101718,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 13,
-      "uniqueID": 101725,
-      "name": "Task #4.2",
-      "outlineNumber": "1.1.5.2",
-      "outlineLevel": 4,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
-      "duration": "0.0h",
+      "uniqueID": 101726,
+      "name": "LOE1.2",
+      "outlineNumber": "1.3.9",
+      "outlineLevel": 3,
+      "start": "2025-05-24",
+      "finish": "2025-06-06",
+      "duration": "80.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 8,
+          "taskUniqueID": 101720,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 14,
-      "uniqueID": 101726,
-      "name": "Task #4.3",
-      "outlineNumber": "1.1.5.3",
-      "outlineLevel": 4,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
+      "uniqueID": 101863,
+      "name": "Start Milestone WBS 1",
+      "outlineNumber": "1.3.10",
+      "outlineLevel": 3,
+      "start": "2025-05-03",
+      "finish": "2025-05-03",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 3,
+          "taskUniqueID": 101913,
+          "taskName": "Start Milestone Task SE",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 15,
-      "uniqueID": 26012,
-      "name": "Project #2",
-      "outlineNumber": "1.2",
+      "uniqueID": 26014,
+      "name": "Nr. 2",
+      "outlineNumber": "1.4",
       "outlineLevel": 2,
-      "start": "2025-12-20",
-      "finish": "2026-01-01",
-      "duration": "204.0h",
+      "start": "2025-06-14",
+      "finish": "2025-07-25",
+      "duration": "240.0h",
       "work": "0.0h",
-      "percentComplete": 16.39344262295082,
+      "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 16,
-      "uniqueID": 26015,
-      "name": "Task #1",
-      "outlineNumber": "1.2.1",
+      "uniqueID": 101918,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.4.1",
       "outlineLevel": 3,
-      "start": "2025-12-20",
-      "finish": "2025-12-21",
-      "duration": "17.0h",
+      "start": "2025-06-14",
+      "finish": "2025-06-20",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 76.71232876712328,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 25,
+          "taskUniqueID": 101909,
+          "taskName": "Start Milestone WBS 2",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 17,
-      "uniqueID": 101727,
-      "name": "Task #1.1",
-      "outlineNumber": "1.2.1.1",
-      "outlineLevel": 4,
-      "start": "2025-12-20",
-      "finish": "2025-12-20",
-      "duration": "0.0h",
+      "uniqueID": 101737,
+      "name": "Fundament",
+      "outlineNumber": "1.4.2",
+      "outlineLevel": 3,
+      "start": "2025-06-21",
+      "finish": "2025-06-27",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 16,
+          "taskUniqueID": 101918,
+          "taskName": "Ausfahrt",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 18,
-      "uniqueID": 101728,
-      "name": "Task #1.2",
-      "outlineNumber": "1.2.1.2",
-      "outlineLevel": 4,
-      "start": "2025-12-21",
-      "finish": "2025-12-21",
-      "duration": "0.0h",
+      "uniqueID": 101738,
+      "name": "Turm",
+      "outlineNumber": "1.4.3",
+      "outlineLevel": 3,
+      "start": "2025-06-28",
+      "finish": "2025-07-04",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 23,
+          "taskUniqueID": 101741,
+          "taskName": "LOE2.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 17,
+          "taskUniqueID": 101737,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 19,
-      "uniqueID": 26016,
-      "name": "Task #2",
-      "outlineNumber": "1.2.2",
+      "uniqueID": 101739,
+      "name": "Gondel",
+      "outlineNumber": "1.4.4",
       "outlineLevel": 3,
-      "start": "2025-12-29",
-      "finish": "2025-12-29",
-      "duration": "0.0h",
+      "start": "2025-07-05",
+      "finish": "2025-07-11",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 18,
+          "taskUniqueID": 101738,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 20,
-      "uniqueID": 101729,
-      "name": "Task #2.1",
-      "outlineNumber": "1.2.2.1",
-      "outlineLevel": 4,
-      "start": "2025-12-29",
-      "finish": "2025-12-29",
-      "duration": "0.0h",
+      "uniqueID": 101740,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.4.5",
+      "outlineLevel": 3,
+      "start": "2025-07-12",
+      "finish": "2025-07-18",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 19,
+          "taskUniqueID": 101739,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 24,
+          "taskUniqueID": 101744,
+          "taskName": "LOE2.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 21,
-      "uniqueID": 26017,
-      "name": "Task #3",
-      "outlineNumber": "1.2.3",
+      "uniqueID": 101743,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.4.6",
       "outlineLevel": 3,
-      "start": "2026-01-01",
-      "finish": "2026-01-01",
-      "duration": "0.0h",
+      "start": "2025-07-19",
+      "finish": "2025-07-25",
+      "duration": "40.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 20,
+          "taskUniqueID": 101740,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 22,
-      "uniqueID": 101730,
-      "name": "Task #3.1",
-      "outlineNumber": "1.2.3.1",
-      "outlineLevel": 4,
-      "start": "2026-01-01",
-      "finish": "2026-01-01",
+      "uniqueID": 101742,
+      "name": "End Milestone WBS 2",
+      "outlineNumber": "1.4.7",
+      "outlineLevel": 3,
+      "start": "2025-07-25",
+      "finish": "2025-07-25",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
-      "type": "FIXED_UNITS",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 21,
+          "taskUniqueID": 101743,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 23,
-      "uniqueID": 101731,
-      "name": "Task #3.2",
-      "outlineNumber": "1.2.3.2",
-      "outlineLevel": 4,
-      "start": "2026-01-01",
-      "finish": "2026-01-01",
+      "uniqueID": 101741,
+      "name": "LOE2.1",
+      "outlineNumber": "1.4.8",
+      "outlineLevel": 3,
+      "start": "2025-06-21",
+      "finish": "2025-07-04",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 17,
+          "taskUniqueID": 101737,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "uniqueID": 101744,
+      "name": "LOE2.2",
+      "outlineNumber": "1.4.9",
+      "outlineLevel": 3,
+      "start": "2025-07-05",
+      "finish": "2025-07-18",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 19,
+          "taskUniqueID": 101739,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "uniqueID": 101909,
+      "name": "Start Milestone WBS 2",
+      "outlineNumber": "1.4.10",
+      "outlineLevel": 3,
+      "start": "2025-06-14",
+      "finish": "2025-06-14",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 11,
+          "taskUniqueID": 101723,
+          "taskName": "End Milestone WBS 1",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "uniqueID": 26019,
+      "name": "Nr. 3",
+      "outlineNumber": "1.5",
+      "outlineLevel": 2,
+      "start": "2025-07-26",
+      "finish": "2025-09-05",
+      "duration": "240.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
-      "id": 24,
-      "uniqueID": 101732,
-      "name": "Task #3.3",
-      "outlineNumber": "1.2.3.3",
-      "outlineLevel": 4,
-      "start": "2026-01-01",
-      "finish": "2026-01-01",
+      "id": 27,
+      "uniqueID": 101919,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.5.1",
+      "outlineLevel": 3,
+      "start": "2025-07-26",
+      "finish": "2025-08-01",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 36,
+          "taskUniqueID": 101910,
+          "taskName": "Start Milestone WBS 3",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "uniqueID": 101747,
+      "name": "Fundament",
+      "outlineNumber": "1.5.2",
+      "outlineLevel": 3,
+      "start": "2025-08-02",
+      "finish": "2025-08-08",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 27,
+          "taskUniqueID": 101919,
+          "taskName": "Ausfahrt",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "uniqueID": 101748,
+      "name": "Turm",
+      "outlineNumber": "1.5.3",
+      "outlineLevel": 3,
+      "start": "2025-08-09",
+      "finish": "2025-08-15",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 34,
+          "taskUniqueID": 101751,
+          "taskName": "LOE3.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 28,
+          "taskUniqueID": 101747,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "uniqueID": 101749,
+      "name": "Gondel",
+      "outlineNumber": "1.5.4",
+      "outlineLevel": 3,
+      "start": "2025-08-16",
+      "finish": "2025-08-22",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 29,
+          "taskUniqueID": 101748,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "uniqueID": 101750,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.5.5",
+      "outlineLevel": 3,
+      "start": "2025-08-23",
+      "finish": "2025-08-29",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 30,
+          "taskUniqueID": 101749,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 35,
+          "taskUniqueID": 101754,
+          "taskName": "LOE3.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "uniqueID": 101753,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.5.6",
+      "outlineLevel": 3,
+      "start": "2025-08-30",
+      "finish": "2025-09-05",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 31,
+          "taskUniqueID": 101750,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "uniqueID": 101752,
+      "name": "End Milestone WBS 3",
+      "outlineNumber": "1.5.7",
+      "outlineLevel": 3,
+      "start": "2025-09-05",
+      "finish": "2025-09-05",
       "duration": "0.0h",
       "work": "0.0h",
-      "percentComplete": 100,
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 32,
+          "taskUniqueID": 101753,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "uniqueID": 101751,
+      "name": "LOE3.1",
+      "outlineNumber": "1.5.8",
+      "outlineLevel": 3,
+      "start": "2025-08-02",
+      "finish": "2025-08-15",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 28,
+          "taskUniqueID": 101747,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "uniqueID": 101754,
+      "name": "LOE3.2",
+      "outlineNumber": "1.5.9",
+      "outlineLevel": 3,
+      "start": "2025-08-16",
+      "finish": "2025-08-29",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 30,
+          "taskUniqueID": 101749,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "uniqueID": 101910,
+      "name": "Start Milestone WBS 3",
+      "outlineNumber": "1.5.10",
+      "outlineLevel": 3,
+      "start": "2025-07-26",
+      "finish": "2025-07-26",
+      "duration": "0.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 22,
+          "taskUniqueID": 101742,
+          "taskName": "End Milestone WBS 2",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "uniqueID": 26024,
+      "name": "Nr. 4",
+      "outlineNumber": "1.6",
+      "outlineLevel": 2,
+      "start": "2025-09-06",
+      "finish": "2025-10-17",
+      "duration": "240.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
+    },
+    {
+      "id": 38,
+      "uniqueID": 101920,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.6.1",
+      "outlineLevel": 3,
+      "start": "2025-09-06",
+      "finish": "2025-09-12",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 47,
+          "taskUniqueID": 101911,
+          "taskName": "Start Milestone WBS 4",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "uniqueID": 101792,
+      "name": "Fundament",
+      "outlineNumber": "1.6.2",
+      "outlineLevel": 3,
+      "start": "2025-09-13",
+      "finish": "2025-09-19",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 38,
+          "taskUniqueID": 101920,
+          "taskName": "Ausfahrt",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "uniqueID": 101793,
+      "name": "Turm",
+      "outlineNumber": "1.6.3",
+      "outlineLevel": 3,
+      "start": "2025-09-20",
+      "finish": "2025-09-26",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 45,
+          "taskUniqueID": 101796,
+          "taskName": "LOE4.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 39,
+          "taskUniqueID": 101792,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "uniqueID": 101794,
+      "name": "Gondel",
+      "outlineNumber": "1.6.4",
+      "outlineLevel": 3,
+      "start": "2025-09-27",
+      "finish": "2025-10-03",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 40,
+          "taskUniqueID": 101793,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "uniqueID": 101795,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.6.5",
+      "outlineLevel": 3,
+      "start": "2025-10-04",
+      "finish": "2025-10-10",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 41,
+          "taskUniqueID": 101794,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 46,
+          "taskUniqueID": 101799,
+          "taskName": "LOE4.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "uniqueID": 101798,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.6.6",
+      "outlineLevel": 3,
+      "start": "2025-10-11",
+      "finish": "2025-10-17",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 42,
+          "taskUniqueID": 101795,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "uniqueID": 101797,
+      "name": "End Milestone WBS 4",
+      "outlineNumber": "1.6.7",
+      "outlineLevel": 3,
+      "start": "2025-10-17",
+      "finish": "2025-10-17",
+      "duration": "0.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 43,
+          "taskUniqueID": 101798,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "uniqueID": 101796,
+      "name": "LOE4.1",
+      "outlineNumber": "1.6.8",
+      "outlineLevel": 3,
+      "start": "2025-09-13",
+      "finish": "2025-09-26",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 39,
+          "taskUniqueID": 101792,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "uniqueID": 101799,
+      "name": "LOE4.2",
+      "outlineNumber": "1.6.9",
+      "outlineLevel": 3,
+      "start": "2025-09-27",
+      "finish": "2025-10-10",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 41,
+          "taskUniqueID": 101794,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "uniqueID": 101911,
+      "name": "Start Milestone WBS 4",
+      "outlineNumber": "1.6.10",
+      "outlineLevel": 3,
+      "start": "2025-09-06",
+      "finish": "2025-09-06",
+      "duration": "0.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 33,
+          "taskUniqueID": 101752,
+          "taskName": "End Milestone WBS 3",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "uniqueID": 26026,
+      "name": "Nr. 5",
+      "outlineNumber": "1.7",
+      "outlineLevel": 2,
+      "start": "2025-10-18",
+      "finish": "2025-11-28",
+      "duration": "240.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": []
+    },
+    {
+      "id": 49,
+      "uniqueID": 101921,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.7.1",
+      "outlineLevel": 3,
+      "start": "2025-10-18",
+      "finish": "2025-10-24",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 58,
+          "taskUniqueID": 101912,
+          "taskName": "Start Milestone WBS 5",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "uniqueID": 101810,
+      "name": "Fundament",
+      "outlineNumber": "1.7.2",
+      "outlineLevel": 3,
+      "start": "2025-10-25",
+      "finish": "2025-10-31",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 49,
+          "taskUniqueID": 101921,
+          "taskName": "Ausfahrt",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "uniqueID": 101811,
+      "name": "Turm",
+      "outlineNumber": "1.7.3",
+      "outlineLevel": 3,
+      "start": "2025-11-01",
+      "finish": "2025-11-07",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 56,
+          "taskUniqueID": 101814,
+          "taskName": "LOE5.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 50,
+          "taskUniqueID": 101810,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "uniqueID": 101812,
+      "name": "Gondel",
+      "outlineNumber": "1.7.4",
+      "outlineLevel": 3,
+      "start": "2025-11-08",
+      "finish": "2025-11-14",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 51,
+          "taskUniqueID": 101811,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "uniqueID": 101813,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.7.5",
+      "outlineLevel": 3,
+      "start": "2025-11-15",
+      "finish": "2025-11-21",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 52,
+          "taskUniqueID": 101812,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 57,
+          "taskUniqueID": 101817,
+          "taskName": "LOE5.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "uniqueID": 101816,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.7.6",
+      "outlineLevel": 3,
+      "start": "2025-11-22",
+      "finish": "2025-11-28",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 53,
+          "taskUniqueID": 101813,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "uniqueID": 101815,
+      "name": "End Milestone WBS 5",
+      "outlineNumber": "1.7.7",
+      "outlineLevel": 3,
+      "start": "2025-11-28",
+      "finish": "2025-11-28",
+      "duration": "0.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 54,
+          "taskUniqueID": 101816,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "uniqueID": 101814,
+      "name": "LOE5.1",
+      "outlineNumber": "1.7.8",
+      "outlineLevel": 3,
+      "start": "2025-10-25",
+      "finish": "2025-11-07",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 50,
+          "taskUniqueID": 101810,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "uniqueID": 101817,
+      "name": "LOE5.2",
+      "outlineNumber": "1.7.9",
+      "outlineLevel": 3,
+      "start": "2025-11-08",
+      "finish": "2025-11-21",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 52,
+          "taskUniqueID": 101812,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "uniqueID": 101912,
+      "name": "Start Milestone WBS 5",
+      "outlineNumber": "1.7.10",
+      "outlineLevel": 3,
+      "start": "2025-10-18",
+      "finish": "2025-10-18",
+      "duration": "0.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 44,
+          "taskUniqueID": 101797,
+          "taskName": "End Milestone WBS 4",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
     }
   ],
   "resources": [
@@ -406,18 +1370,18 @@
   ],
   "assignments": [
     {
-      "taskID": 3,
-      "taskUniqueID": 101717,
-      "taskName": "Task #1",
+      "taskID": 2,
+      "taskUniqueID": 101914,
+      "taskName": "End Milestone Task SE",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
       "units": 100
     },
     {
-      "taskID": 4,
-      "taskUniqueID": 101718,
-      "taskName": "Task #3",
+      "taskID": 3,
+      "taskUniqueID": 101913,
+      "taskName": "Start Milestone Task SE",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -425,8 +1389,17 @@
     },
     {
       "taskID": 5,
-      "taskUniqueID": 101719,
-      "taskName": "Task #5",
+      "taskUniqueID": 101917,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 6,
+      "taskUniqueID": 101718,
+      "taskName": "Fundament",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -434,8 +1407,8 @@
     },
     {
       "taskID": 7,
-      "taskUniqueID": 101720,
-      "taskName": "Task #2.1",
+      "taskUniqueID": 101719,
+      "taskName": "Turm",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -443,8 +1416,8 @@
     },
     {
       "taskID": 8,
-      "taskUniqueID": 101721,
-      "taskName": "Task #2.2",
+      "taskUniqueID": 101720,
+      "taskName": "Gondel",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -452,8 +1425,8 @@
     },
     {
       "taskID": 9,
-      "taskUniqueID": 101722,
-      "taskName": "Task #2.3",
+      "taskUniqueID": 101721,
+      "taskName": "3x Blattmontage",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -461,8 +1434,17 @@
     },
     {
       "taskID": 10,
+      "taskUniqueID": 101725,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 11,
       "taskUniqueID": 101723,
-      "taskName": "Task #2.4",
+      "taskName": "End Milestone WBS 1",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -470,8 +1452,8 @@
     },
     {
       "taskID": 12,
-      "taskUniqueID": 101724,
-      "taskName": "Task #4.1",
+      "taskUniqueID": 101722,
+      "taskName": "LOE1.1",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -479,8 +1461,8 @@
     },
     {
       "taskID": 13,
-      "taskUniqueID": 101725,
-      "taskName": "Task #4.2",
+      "taskUniqueID": 101726,
+      "taskName": "LOE1.2",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -488,8 +1470,17 @@
     },
     {
       "taskID": 14,
-      "taskUniqueID": 101726,
-      "taskName": "Task #4.3",
+      "taskUniqueID": 101863,
+      "taskName": "Start Milestone WBS 1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 16,
+      "taskUniqueID": 101918,
+      "taskName": "Ausfahrt",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -497,8 +1488,8 @@
     },
     {
       "taskID": 17,
-      "taskUniqueID": 101727,
-      "taskName": "Task #1.1",
+      "taskUniqueID": 101737,
+      "taskName": "Fundament",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -506,8 +1497,17 @@
     },
     {
       "taskID": 18,
-      "taskUniqueID": 101728,
-      "taskName": "Task #1.2",
+      "taskUniqueID": 101738,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 19,
+      "taskUniqueID": 101739,
+      "taskName": "Gondel",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -515,8 +1515,17 @@
     },
     {
       "taskID": 20,
-      "taskUniqueID": 101729,
-      "taskName": "Task #2.1",
+      "taskUniqueID": 101740,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 21,
+      "taskUniqueID": 101743,
+      "taskName": "Rückfahrt",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -524,8 +1533,8 @@
     },
     {
       "taskID": 22,
-      "taskUniqueID": 101730,
-      "taskName": "Task #3.1",
+      "taskUniqueID": 101742,
+      "taskName": "End Milestone WBS 2",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -533,8 +1542,8 @@
     },
     {
       "taskID": 23,
-      "taskUniqueID": 101731,
-      "taskName": "Task #3.2",
+      "taskUniqueID": 101741,
+      "taskName": "LOE2.1",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",
@@ -542,8 +1551,287 @@
     },
     {
       "taskID": 24,
-      "taskUniqueID": 101732,
-      "taskName": "Task #3.3",
+      "taskUniqueID": 101744,
+      "taskName": "LOE2.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 25,
+      "taskUniqueID": 101909,
+      "taskName": "Start Milestone WBS 2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 27,
+      "taskUniqueID": 101919,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 28,
+      "taskUniqueID": 101747,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 29,
+      "taskUniqueID": 101748,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 30,
+      "taskUniqueID": 101749,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 31,
+      "taskUniqueID": 101750,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 32,
+      "taskUniqueID": 101753,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 33,
+      "taskUniqueID": 101752,
+      "taskName": "End Milestone WBS 3",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 34,
+      "taskUniqueID": 101751,
+      "taskName": "LOE3.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 35,
+      "taskUniqueID": 101754,
+      "taskName": "LOE3.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 36,
+      "taskUniqueID": 101910,
+      "taskName": "Start Milestone WBS 3",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 38,
+      "taskUniqueID": 101920,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 39,
+      "taskUniqueID": 101792,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 40,
+      "taskUniqueID": 101793,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 41,
+      "taskUniqueID": 101794,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 42,
+      "taskUniqueID": 101795,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 43,
+      "taskUniqueID": 101798,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 44,
+      "taskUniqueID": 101797,
+      "taskName": "End Milestone WBS 4",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 45,
+      "taskUniqueID": 101796,
+      "taskName": "LOE4.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 46,
+      "taskUniqueID": 101799,
+      "taskName": "LOE4.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 47,
+      "taskUniqueID": 101911,
+      "taskName": "Start Milestone WBS 4",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 49,
+      "taskUniqueID": 101921,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 50,
+      "taskUniqueID": 101810,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 51,
+      "taskUniqueID": 101811,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 52,
+      "taskUniqueID": 101812,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 53,
+      "taskUniqueID": 101813,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 54,
+      "taskUniqueID": 101816,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 55,
+      "taskUniqueID": 101815,
+      "taskName": "End Milestone WBS 5",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 56,
+      "taskUniqueID": 101814,
+      "taskName": "LOE5.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 57,
+      "taskUniqueID": 101817,
+      "taskName": "LOE5.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 58,
+      "taskUniqueID": 101912,
+      "taskName": "Start Milestone WBS 5",
       "resourceID": 1,
       "resourceUniqueID": 1,
       "resourceName": "Unassigned",

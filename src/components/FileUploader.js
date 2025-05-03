@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import './FileUploader.css';
 
 // Use window.location.origin to dynamically get the host
+// For Docker environments, we need to be more flexible with the API URL
+//const API_BASE_URL = process.env.REACT_APP_API_URL || window.location.origin;
+// const API_BASE_URL = 'http://localhost:3001';
 const API_BASE_URL = 'http://localhost:3001';
 // //process.env.REACT_APP_API_URL || window.location.origin;
+
 const FileUploader = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -47,6 +51,8 @@ const FileUploader = ({ onFileUpload }) => {
       formData.append('projectFile', file);
       formData.append('startDate', startDate);
 
+      console.log(`Submitting to API URL: ${API_BASE_URL}/api/parse`);
+      
       const response = await fetch(`${API_BASE_URL}/api/parse`, {
         method: 'POST',
         body: formData,
@@ -57,7 +63,41 @@ const FileUploader = ({ onFileUpload }) => {
       }
 
       const data = await response.json();
-      onFileUpload(data);
+      console.log('Raw API response:', JSON.stringify(data));
+      
+      // For debugging - log the data structure before passing it up
+      console.log('API response structure:', {
+        hasProjectData: !!data.projectData,
+        hasTasks: !!(data.tasks || (data.projectData && data.projectData.tasks)),
+        hasData: !!data.data,
+        topLevelKeys: Object.keys(data)
+      });
+      
+      // Handle Docker behavior: If we receive a success message but no project data
+      if (data.message && data.message.includes("successfully") && !data.tasks && !data.projectData) {
+        console.log('Received success message without data - getting data from project-data.json');
+        try {
+          // Make a second request to fetch the project data JSON file
+          const dataResponse = await fetch(`${API_BASE_URL}/api/data`, {
+            method: 'GET',
+          });
+          
+          if (!dataResponse.ok) {
+            throw new Error('Failed to fetch project data');
+          }
+          
+          const projectData = await dataResponse.json();
+          console.log('Retrieved project data from secondary request:', projectData);
+          onFileUpload(projectData);
+        } catch (fetchError) {
+          console.error('Error fetching project data:', fetchError);
+          // If secondary request fails, still pass through the original data
+          onFileUpload(data);
+        }
+      } else {
+        // Normal case - API returned the data directly
+        onFileUpload(data);
+      }
       
       // Extract PBIT filename from path
       if (data.files && data.files.pbit) {
