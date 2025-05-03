@@ -20,6 +20,7 @@ stages:
               dockerfile: 'Dockerfile'
               containerRegistry: 'turingACR'
               tags: latest
+              arguments: '--no-cache'
               
   - stage: Deploy
     displayName: 'Deploy to App Service'
