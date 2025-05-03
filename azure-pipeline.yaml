@@ -46,7 +46,7 @@ stages:
            REACT_APP_API_URL=/api
       
       - task: AzureCLI@2
-        displayName: 'Configure Web App Network Settings'
+        displayName: 'Configure Web App Settings'
         inputs:
           azureSubscription: 'LMT-PRODUCTS'
           scriptType: 'bash'
@@ -61,19 +61,7 @@ stages:
             echo "Configuring CORS settings..."
             az webapp cors add --resource-group $resourceGroup --name lmtmpp-parserapp --allowed-origins "*"
             
-            # Configure port settings
-            echo "Configuring port settings..."
-            az webapp config appsettings set --resource-group $resourceGroup --name lmtmpp-parserapp --settings WEBSITES_PORT=3000
-            
-            # Configure Docker container settings to allow internal communication between ports
-            echo "Configuring Docker container settings..."
-            az webapp config container set --resource-group $resourceGroup --name lmtmpp-parserapp --multicontainer-config-type compose --multicontainer-config-file - <<EOF
-            version: '3'
-            services:
-              app:
-                image: turing.azurecr.io/lmtmpp-parserapp:latest
-                ports:
-                  - "3000:3000"
-                  - "3001:3001"
-            EOF
+            # Configure container startup time limit
+            echo "Setting container startup time limit..."
+            az resource update --resource-group $resourceGroup --name web --namespace Microsoft.Web --resource-type config --parent sites/lmtmpp-parserapp --set properties.generalSettings.containerStartupTimeLimit=600
  
