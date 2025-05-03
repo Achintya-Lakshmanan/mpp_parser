@@ -39,11 +39,11 @@ stages:
          AppName: 'lmtmpp-parserapp'
          containers: 'turing.azurecr.io/lmtmpp-parserapp:latest'
          appSettings: |
-           -WEBSITES_PORT=3000
-           -WEBSITES_CONTAINER_START_TIME_LIMIT=600
-           -API_URL=/api
-           -NODE_ENV=production
-           -REACT_APP_API_URL=/api
+           WEBSITES_PORT=3000
+           WEBSITES_CONTAINER_START_TIME_LIMIT=600
+           API_URL=/api
+           NODE_ENV=production
+           REACT_APP_API_URL=/api
       
       - task: AzureCLI@2
         displayName: 'Configure Web App Network Settings'
