@@ -3,6 +3,9 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
+# Add build argument for API URL
+ARG REACT_APP_API_URL=/api
+
 # Copy package files for root and frontend
 COPY package.json package-lock.json* ./
 COPY src/package.json src/package-lock.json* src/
@@ -17,8 +20,8 @@ RUN cd src && npm ci
 COPY . .
 
 # Set environment variables for frontend build
-# This ensures the React app uses the right API URL in production
-ENV REACT_APP_API_URL=/api
+# Use the build argument value
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 ENV NODE_ENV=production
 
 # Build the frontend application
@@ -63,12 +66,20 @@ RUN printf '%s\n' \
 '  target: backendUrl,' \
 '  changeOrigin: true,' \
 '  pathRewrite: { "^/api": "" },' \
+'  onProxyRes: function(proxyRes, req, res) {' \
+'    proxyRes.headers["Access-Control-Allow-Origin"] = "*";' \
+'    proxyRes.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";' \
+'  }' \
 '}));' \
 '' \
 '// Direct proxy for parse endpoint' \
 'app.use("/parse", createProxyMiddleware({' \
 '  target: backendUrl,' \
 '  changeOrigin: true,' \
+'  onProxyRes: function(proxyRes, req, res) {' \
+'    proxyRes.headers["Access-Control-Allow-Origin"] = "*";' \
+'    proxyRes.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";' \
+'  }' \
 '}));' \
 '' \
 '// Serve static files from React build' \
