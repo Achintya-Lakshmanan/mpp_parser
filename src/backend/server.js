@@ -136,7 +136,8 @@ app.use(cors({
     // Add Azure domains
     const azureDomains = [
       'https://lmtmpp-parserapp.azurewebsites.net',
-      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net'
+      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net',
+      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net:443'
     ];
     
     const allAllowedOrigins = [...allowedOrigins, ...azureDomains];
