@@ -6,6 +6,22 @@
     <title>Microsoft Project Parser</title>
     <!-- Runtime configuration must be loaded before React app -->
     <script src="%PUBLIC_URL%/config.js"></script>
+    <!-- URL patching script must load before main bundle -->
+    <script src="%PUBLIC_URL%/bundle-patch.js"></script>
+    <!-- Register service worker to intercept localhost requests -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <div id="root"></div>

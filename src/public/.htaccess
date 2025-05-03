@@ -3,8 +3,12 @@
   RewriteEngine On
   RewriteBase /
   
-  # Redirect API calls to the local backend
-  RewriteRule ^api/(.*)$ http://localhost:3001/api/$1 [P,L]
+  # Redirect localhost:3001 API calls to the origin
+  RewriteCond %{HTTP_HOST} !^localhost
+  RewriteRule ^localhost:3001/api/(.*)$ /api/$1 [R=307,L]
+  
+  # Redirect API calls to the backend
+  RewriteRule ^api/(.*)$ %{REQUEST_SCHEME}://%{HTTP_HOST}/api/$1 [P,L]
   
   # Handle single page application routes
   RewriteCond %{REQUEST_FILENAME} !-f
