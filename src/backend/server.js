@@ -726,7 +726,7 @@ function formatValidationErrors(errors) {
 }
 
 // API endpoint to parse project file
-app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
+app.post('/api/parse', upload.single('projectFile'), async (req, res, next) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -799,11 +799,7 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
       }
     });
   } catch (error) {
-    logger.error('Error processing file:', error);
-    res.status(500).json({
-      error: error.publicMessage || 'Internal Server Error',
-      details: process.env.NODE_ENV === 'prod' ? undefined : error.message,
-    });
+    next(error); // Pass to error handler
   }
 });
 
@@ -848,7 +844,7 @@ app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, nex
 
     res.json({ message: 'JSON uploaded and validated successfully' });
   } catch (err) {
-    next(err);
+    next(err); // Pass to error handler
   }
 });
 
@@ -925,10 +921,38 @@ if (process.env.REPL_ID) {
   }
 }
 
-// Global error handler
+// Register error handling middleware (must be after all routes)
 app.use((err, req, res, next) => {
-  logger.error(err.stack);
-  res.status(500).send('Something broke!');
+  // Handle Multer errors
+  if (err instanceof multer.MulterError) {
+    logger.error(`Multer error: ${err.message}`, err);
+    
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(413).json({ 
+        error: 'File too large',
+        message: 'The uploaded file exceeds the size limit'
+      });
+    }
+    
+    if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+      return res.status(400).json({ 
+        error: 'Unexpected field', 
+        message: `Please use 'projectFile' for MPP/MPX uploads or 'jsonFile' for JSON uploads. Got '${err.field}'`
+      });
+    }
+    
+    return res.status(400).json({ 
+      error: 'File upload error',
+      message: err.message
+    });
+  }
+  
+  // Handle other errors
+  logger.error('Server error:', err);
+  res.status(500).json({ 
+    error: 'Server error',
+    message: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : err.message
+  });
 });
 
 // Catch-all route to serve index.html for client-side routing
