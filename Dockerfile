@@ -40,6 +40,17 @@ RUN printf '%s\n' \
 'const app = express();' \
 'const port = process.env.PORT || 3000;' \
 '' \
+'// Add CORS headers middleware for all requests' \
+'app.use((req, res, next) => {' \
+'  res.header("Access-Control-Allow-Origin", "*");' \
+'  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");' \
+'  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");' \
+'  if (req.method === "OPTIONS") {' \
+'    return res.status(200).end();' \
+'  }' \
+'  next();' \
+'});' \
+'' \
 '// Start backend server process' \
 'const { spawn } = require("child_process");' \
 '// Explicitly set backend to port 3001' \
@@ -59,7 +70,7 @@ RUN printf '%s\n' \
 '});' \
 '' \
 '// Setup API proxy middleware - send API requests to backend server' \
-'const backendUrl = "http://localhost:3001";' \
+'const backendUrl = process.env.BACKEND_URL || "http://localhost:3001";' \
 'console.log(`Proxying API requests to backend at: ${backendUrl}`);' \
 '' \
 'app.use("/api", createProxyMiddleware({' \
@@ -150,6 +161,7 @@ ENV NODE_ENV=production
 ENV API_URL=/api
 ENV PORT=3000
 ENV BACKEND_PORT=3001
+# For production in Azure, the backend is on the same container
 ENV BACKEND_URL=http://localhost:3001
 
 # Define the command to run the unified server
