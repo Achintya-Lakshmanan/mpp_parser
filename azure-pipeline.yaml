@@ -12,6 +12,11 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
+          # Add explicit cleanup step to ensure fresh build
+          - script: |
+              git clean -xdf
+            displayName: 'Clean workspace'
+            
           - task: Docker@2
             displayName: Build and Push
             inputs:

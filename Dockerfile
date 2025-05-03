@@ -27,53 +27,71 @@ RUN cd src && npm run build
 # Prune frontend dev dependencies (optional, reduces image size)
 RUN cd src && npm prune --production
 
-# Create server configuration file to handle both frontend and API
-RUN echo 'const express = require("express");                                                 \n\
-const path = require("path");                                                                 \n\
-const fs = require("fs");                                                                     \n\
-const { createProxyMiddleware } = require("http-proxy-middleware");                           \n\
-                                                                                              \n\
-const app = express();                                                                        \n\
-const port = process.env.PORT || 3000;                                                        \n\
-                                                                                              \n\
-// Start backend server process                                                               \n\
-const { spawn } = require("child_process");                                                   \n\
-const backendProcess = spawn("node", ["src/backend/server.js"]);                              \n\
-                                                                                              \n\
-backendProcess.stdout.on("data", (data) => {                                                  \n\
-  console.log(`Backend stdout: ${data}`);                                                     \n\
-});                                                                                           \n\
-                                                                                              \n\
-backendProcess.stderr.on("data", (data) => {                                                  \n\
-  console.error(`Backend stderr: ${data}`);                                                   \n\
-});                                                                                           \n\
-                                                                                              \n\
-// Setup API proxy middleware - send API requests to backend server                           \n\
-app.use("/api", createProxyMiddleware({                                                       \n\
-  target: "http://localhost:3001",                                                            \n\
-  changeOrigin: true,                                                                         \n\
-}));                                                                                          \n\
-                                                                                              \n\
-// Serve static files from React build                                                        \n\
-app.use(express.static(path.join(__dirname, "src/build")));                                   \n\
-                                                                                              \n\
-// All other routes serve the React app                                                       \n\
-app.get("*", (req, res) => {                                                                  \n\
-  res.sendFile(path.join(__dirname, "src/build", "index.html"));                              \n\
-});                                                                                           \n\
-                                                                                              \n\
-// Start frontend server                                                                      \n\
-app.listen(port, () => {                                                                      \n\
-  console.log(`Main server running on port ${port}`);                                         \n\
-});                                                                                           \n\
-                                                                                              \n\
-// Handle shutdown properly                                                                   \n\
-process.on("SIGTERM", () => {                                                                 \n\
-  console.log("SIGTERM received, shutting down gracefully");                                  \n\
-  backendProcess.kill();                                                                      \n\
-  process.exit(0);                                                                            \n\
-});                                                                                           \n\
-' > /app/server.js
+# Create proper server.js file without escape characters
+RUN printf '%s\n' \
+'const express = require("express");' \
+'const path = require("path");' \
+'const fs = require("fs");' \
+'const { createProxyMiddleware } = require("http-proxy-middleware");' \
+'' \
+'const app = express();' \
+'const port = process.env.PORT || 3000;' \
+'' \
+'// Start backend server process' \
+'const { spawn } = require("child_process");' \
+'// Explicitly set backend to port 3001' \
+'const backendProcess = spawn("node", ["src/backend/server.js"], {' \
+'  env: { ...process.env, PORT: "3001", BACKEND_PORT: "3001" }' \
+'});' \
+'' \
+'// Log backend port for debugging' \
+'console.log("Starting backend server on port 3001");' \
+'' \
+'backendProcess.stdout.on("data", (data) => {' \
+'  console.log(`Backend stdout: ${data}`);' \
+'});' \
+'' \
+'backendProcess.stderr.on("data", (data) => {' \
+'  console.error(`Backend stderr: ${data}`);' \
+'});' \
+'' \
+'// Setup API proxy middleware - send API requests to backend server' \
+'const backendUrl = "http://localhost:3001";' \
+'console.log(`Proxying API requests to backend at: ${backendUrl}`);' \
+'' \
+'app.use("/api", createProxyMiddleware({' \
+'  target: backendUrl,' \
+'  changeOrigin: true,' \
+'  pathRewrite: { "^/api": "" },' \
+'}));' \
+'' \
+'// Direct proxy for parse endpoint' \
+'app.use("/parse", createProxyMiddleware({' \
+'  target: backendUrl,' \
+'  changeOrigin: true,' \
+'}));' \
+'' \
+'// Serve static files from React build' \
+'app.use(express.static(path.join(__dirname, "src/build")));' \
+'' \
+'// All other routes serve the React app' \
+'app.get("*", (req, res) => {' \
+'  res.sendFile(path.join(__dirname, "src/build", "index.html"));' \
+'});' \
+'' \
+'// Start frontend server on port 3000' \
+'const frontendPort = 3000;' \
+'app.listen(frontendPort, () => {' \
+'  console.log(`Frontend server running on port ${frontendPort}`);' \
+'  console.log(`Backend server should be running on port 3001`);' \
+'});' \
+'' \
+'// Handle shutdown properly' \
+'process.on("SIGTERM", () => {' \
+'  console.log("SIGTERM received, shutting down gracefully");' \
+'  backendProcess.kill();' \
+'  process.exit(0);' \
+'});' > /app/server.js
 
 # Stage 2: Production Image
 FROM node:18-alpine
@@ -103,6 +121,7 @@ COPY --from=builder /app/src/backend/lib ./src/backend/lib/
 COPY --from=builder /app/src/backend/schemas ./src/backend/schemas/
 COPY --from=builder /app/src/mock ./src/mock/
 COPY --from=builder /app/server.js ./server.js
+COPY --from=builder /app/src/public ./src/public/
 
 # Create and set permissions for necessary directories
 RUN mkdir -p /app/src/backend/uploads && chown -R node:node /app/src/backend/uploads
@@ -119,6 +138,8 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV API_URL=/api
 ENV PORT=3000
+ENV BACKEND_PORT=3001
+ENV BACKEND_URL=http://localhost:3001
 
 # Define the command to run the unified server
 CMD ["node", "server.js"]
