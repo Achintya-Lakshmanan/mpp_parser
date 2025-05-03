@@ -132,9 +132,26 @@ app.use(cors({
     
     // In development, allow localhost and replit domains
     const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://replit.com', 'https://sp.replit.com'];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    
+    // Add Azure domains
+    const azureDomains = [
+      'https://lmtmpp-parserapp.azurewebsites.net',
+      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net'
+    ];
+    
+    const allAllowedOrigins = [...allowedOrigins, ...azureDomains];
+    
+    if (!origin) {
+      // Allow requests with no origin (like mobile apps, curl requests, etc)
+      callback(null, true);
+    } else if (allAllowedOrigins.indexOf(origin) !== -1) {
+      // Allow specific origins
+      callback(null, true);
+    } else if (origin.endsWith('.azurewebsites.net')) {
+      // Allow any Azure websites domain
       callback(null, true);
     } else {
+      // Block other origins
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -770,202 +787,13 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res, next) => {
     await fs.promises.writeFile(jsonPath, JSON.stringify(projectData, null, 2), 'utf-8');
     logger.info(`Saved project data JSON to ${jsonPath}`);
 
-    // Generate PBIT directly and create rezipped version
-    const pbitPath = path.join(outputDir, `${fileName}_${timestamp}.pbit`);
-    await generatePbit(projectData, pbitPath);
-    logger.info(`Generated PBIT file at ${pbitPath}`);
-
-    // Wait for rezipped file to be created
-    const rezippedPath = pbitPath.replace('.pbit', '_rezipped.pbit');
-    logger.info(`Expected rezipped file at ${rezippedPath}`);
-
-    // Give a small delay to ensure file is ready
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    if (!fs.existsSync(rezippedPath)) {
-      throw new Error('Rezipped file was not created successfully');
-    }
-
-    // Clean up the uploaded file
-    fs.unlinkSync(req.file.path);
-
-    // Return both JSON and rezipped PBIT paths to the client
-    res.json({
-      message: 'Project file processed successfully',
-      projectData,
-      files: {
-        json: jsonPath,
-        pbit: rezippedPath
-      }
-    });
-  } catch (error) {
-    next(error); // Pass to error handler
-  }
-});
-
-// Endpoint to upload and validate project JSON directly
-app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, next) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No JSON file uploaded' });
-    }
-
-    // Read and parse uploaded JSON
-    let projectData;
-    try {
-      const fileContent = await fs.promises.readFile(req.file.path, 'utf-8');
-      projectData = JSON.parse(fileContent);
-    } catch (parseErr) {
-      logger.error('Failed to parse uploaded JSON:', parseErr);
-      return res.status(400).json({ error: 'Invalid JSON file' });
-    }
-
-    // Validate against schema if available
-    if (validateProject) {
-      const valid = validateProject(projectData);
-      if (!valid) {
-        logger.warn('Uploaded JSON failed schema validation');
-        return res.status(400).json({
-          error: 'JSON validation failed',
-          details: formatValidationErrors(validateProject.errors || []),
-        });
-      }
-    }
-
-    // Save validated JSON for generator usage
-    const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
-    await fs.promises.mkdir(generatorDir, { recursive: true });
-    const outputPath = path.join(generatorDir, 'project-data.json');
-    await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
-    logger.info(`Saved validated JSON to ${outputPath}`);
-
-    // Clean up temp upload
-    fs.unlinkSync(req.file.path);
-
-    res.json({ message: 'JSON uploaded and validated successfully' });
+    res.status(200).json({ message: 'Project data parsed and saved successfully' });
   } catch (err) {
-    next(err); // Pass to error handler
+    logger.error('Error parsing project file:', err);
+    res.status(500).json({ error: 'Failed to parse project file' });
   }
 });
 
-// Add endpoint to download files
-app.get('/api/download/:filename', (req, res) => {
-  try {
-    const filename = req.params.filename;
-    const generatorDir = path.join(__dirname, '..', 'generator');
-    const filePath = path.join(generatorDir, filename);
-
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: 'File not found' });
-    }
-
-    // Set Content-Disposition to attachment to trigger download
-    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
-    res.setHeader('Content-Type', 'application/octet-stream');
-
-    // Stream the file
-    const fileStream = fs.createReadStream(filePath);
-    fileStream.pipe(res);
-  } catch (error) {
-    logger.error('Error downloading file:', error);
-    res.status(500).json({ error: 'Error downloading file' });
-  }
-});
-
-// Add mock mode env support
-const MOCK_MODE = process.env.MOCK_MODE === 'true';
-const delay = require('../mock/delay');
-const mockDelayMs = parseInt(process.env.MOCK_DELAY_MS || '0', 10);
-
-// Quick route to retrieve mock scenario list
-if (MOCK_MODE) {
-  // eslint-disable-next-line global-require
-  const { listScenarios, loadMock } = require('../mock/mockLoader');
-
-  app.get('/api/mock-scenarios', (req, res) => {
-    res.json({ scenarios: listScenarios() });
-  });
-
-  app.get('/api/mock/:name', async (req, res) => {
-    try {
-      const data = loadMock(req.params.name);
-      if (mockDelayMs) await delay(mockDelayMs);
-      res.json(data);
-    } catch (err) {
-      res.status(404).json({ error: err.message });
-    }
-  });
-}
-
-// If running in Replit, also serve static files from the build directory
-if (process.env.REPL_ID) {
-  const buildPath = path.join(__dirname, '..', '..', 'build');
-  
-  // Check if the build directory exists
-  if (fs.existsSync(buildPath)) {
-    logger.info(`Serving static files from ${buildPath}`);
-    
-    // Serve static files
-    app.use(express.static(buildPath));
-    
-    // Serve index.html for all routes except /api
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api/')) {
-        return next();
-      }
-      res.sendFile(path.join(buildPath, 'index.html'));
-    });
-  } else {
-    logger.warn(`Build directory ${buildPath} not found. Static files won't be served.`);
-  }
-}
-
-// Register error handling middleware (must be after all routes)
-app.use((err, req, res, next) => {
-  // Handle Multer errors
-  if (err instanceof multer.MulterError) {
-    logger.error(`Multer error: ${err.message}`, err);
-    
-    if (err.code === 'LIMIT_FILE_SIZE') {
-      return res.status(413).json({ 
-        error: 'File too large',
-        message: 'The uploaded file exceeds the size limit'
-      });
-    }
-    
-    if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-      return res.status(400).json({ 
-        error: 'Unexpected field', 
-        message: `Please use 'projectFile' for MPP/MPX uploads or 'jsonFile' for JSON uploads. Got '${err.field}'`
-      });
-    }
-    
-    return res.status(400).json({ 
-      error: 'File upload error',
-      message: err.message
-    });
-  }
-  
-  // Handle other errors
-  logger.error('Server error:', err);
-  res.status(500).json({ 
-    error: 'Server error',
-    message: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : err.message
-  });
-});
-
-// Catch-all route to serve index.html for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(staticFilesPath, 'index.html'), (err) => {
-    if (err) {
-      logger.error(`Error sending index.html: ${err}`);
-      res.status(500).send(err);
-    }
-  });
-});
-
-// Start the server
 app.listen(port, () => {
-  logger.info(`Server running on port ${port}`);
+  logger.info(`Server is running on port ${port}`);
 });

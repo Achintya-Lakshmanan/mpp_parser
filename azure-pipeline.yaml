@@ -4,6 +4,9 @@ trigger:
       - main
       - Dev
 
+variables:
+  ResourceGroupName: 'lmtmpp-resource-group' # Define the resource group name
+
 stages:
   - stage: Build
     displayName: 'Build and push stage'
@@ -19,24 +22,58 @@ stages:
               command: buildAndPush
               repository: 'lmtmpp-parserapp'
               dockerfile: 'Dockerfile'
-              conatinerRegistry: 'turingACR'
+              containerRegistry: 'turingACR'
               tags: latest
               
   - stage: Deploy
     displayName: 'Deploy to App Service'
-    dependsOn: Build
-    condition: succeeded()
     jobs:
     - job: Deploy
       displayName: Deploy to App Service
       steps:
-      - task: AzureWebApp@1
+      - task: AzureWebAppContainer@1
+        displayName: 'Deploy to Azure Web App'
         inputs:
          ConnectionType: 'AzureRM'
-         azureSubscription: 'lmt-products'   
-         appType: 'webAppContainer'
-         WebAppName: 'lmtmpp-parserapp'
-         DockerNamespace: 'turing.azurecr.io'
-         DockerRepository: 'lmtmpp-parserapp'
-         DockerImageTag: 'latest'
+         azureSubscription: 'LMT-PRODUCTS'   
+         AppName: 'lmtmpp-parserapp'
+         containers: 'turing.azurecr.io/lmtmpp-parserapp:latest'
+         appSettings: |
+           -WEBSITES_PORT=3000
+           -WEBSITES_CONTAINER_START_TIME_LIMIT=600
+           -API_URL=/api
+           -NODE_ENV=production
+           -REACT_APP_API_URL=/api
+      
+      - task: AzureCLI@2
+        displayName: 'Configure Web App Network Settings'
+        inputs:
+          azureSubscription: 'LMT-PRODUCTS'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            # Get resource group from the app name
+            resourceGroup=$(az webapp show --name lmtmpp-parserapp --query resourceGroup --output tsv)
+            
+            echo "Using resource group: $resourceGroup"
+            
+            # Enable CORS with wildcard
+            echo "Configuring CORS settings..."
+            az webapp cors add --resource-group $resourceGroup --name lmtmpp-parserapp --allowed-origins "*"
+            
+            # Configure port settings
+            echo "Configuring port settings..."
+            az webapp config appsettings set --resource-group $resourceGroup --name lmtmpp-parserapp --settings WEBSITES_PORT=3000
+            
+            # Configure Docker container settings to allow internal communication between ports
+            echo "Configuring Docker container settings..."
+            az webapp config container set --resource-group $resourceGroup --name lmtmpp-parserapp --multicontainer-config-type compose --multicontainer-config-file - <<EOF
+            version: '3'
+            services:
+              app:
+                image: turing.azurecr.io/lmtmpp-parserapp:latest
+                ports:
+                  - "3000:3000"
+                  - "3001:3001"
+            EOF
  
