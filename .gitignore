@@ -67,3 +67,8 @@ downloads/
 build/
 # Pbit files
 *.pbit
+
+# CSV Files
+*.csv
+
+./src/generator/*.csv
