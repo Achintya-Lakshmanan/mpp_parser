@@ -20,10 +20,12 @@ stages:
 
           - script: |
               npm ci            
+              cd src && npm ci
               npm run build     
             displayName: 'Install Dependencies and Build'
 
           - script: |
+              ls -la
               mkdir -p deploy              
               cp -r src deploy/src
               cp run.sh deploy/run.sh 
@@ -35,8 +37,9 @@ stages:
           - script: |
               cd deploy 
               chmod +x run.sh              
-              npm install         
-            displayName: 'Install Dependencies in Deploy Folder and Start App'
+              npm install --omit=dev
+              cd src && npm install --omit=dev
+            displayName: 'Install Production Dependencies in Deploy Folder'
 
           - task: ArchiveFiles@2
             inputs:
@@ -71,3 +74,4 @@ stages:
               appType: 'webAppLinux'
               appName: 'lmtmpp-parserapp'
               package: '$(Pipeline.Workspace)/drop/app.zip'
+              startUpCommand: 'bash run.sh'
