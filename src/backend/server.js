@@ -129,12 +129,30 @@ app.use(cors({
       callback(null, true);
       return;
     }
-    
+
     // In development, allow localhost and replit domains
-    const allowedOrigins = ['http://localhost:3000', 'https://replit.com', 'https://sp.replit.com'];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://replit.com', 'https://sp.replit.com'];
+
+    // Add Azure domains
+    const azureDomains = [
+      'https://lmtmpp-parserapp.azurewebsites.net',
+      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net',
+      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net:443'
+    ];
+
+    const allAllowedOrigins = [...allowedOrigins, ...azureDomains];
+
+    if (!origin) {
+      // Allow requests with no origin (like mobile apps, curl requests, etc)
+      callback(null, true);
+    } else if (allAllowedOrigins.indexOf(origin) !== -1) {
+      // Allow specific origins
+      callback(null, true);
+    } else if (origin.endsWith('.azurewebsites.net')) {
+      // Allow any Azure websites domain
       callback(null, true);
     } else {
+      // Block other origins
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -142,6 +160,10 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // Allow cookies and credentials to be sent
 }));
+
+const staticFilesPath = path.join(__dirname, '..', 'build');
+logger.info(`Serving static files from: ${staticFilesPath}`);
+app.use(express.static(staticFilesPath));
 
 // Health-check endpoint
 app.get('/api/health', (_req, res) => {
