@@ -53,6 +53,10 @@ try {
   logger.error('Failed to load configuration:', err);
 }
 
+// Add body parser middlewares
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
 const port = process.env.PORT || config.port || 3001;
 
 // Directories derived from configuration (fallbacks included)
@@ -196,7 +200,7 @@ app.get('/api/data', (req, res) => {
 
 //test api/parse
 //START
-app.post('/api/parse', (req, res) => {
+app.get('/api/parse', (req, res) => {
   const inputData = req.body;
 
   console.log('Received data for parsing:', inputData);

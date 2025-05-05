@@ -1,39 +1,24 @@
 {
   "properties": {
-    "name": null,
-    "author": "Greg Susman - GS Design, Inc.",
-    "company": "B4UBUILD.COM - http://www.b4ubuild.com/",
-    "startDate": "2025-04-30",
-    "finishDate": "2025-08-02",
-    "taskCount": 63,
-    "resourceCount": 60,
-    "assignmentCount": 55
+    "name": "Aufgabe Softwareentwickler",
+    "author": null,
+    "company": null,
+    "startDate": "2025-05-07",
+    "finishDate": "2025-12-02",
+    "taskCount": 58,
+    "resourceCount": 0,
+    "assignmentCount": 0
   },
   "tasks": [
     {
-      "id": 0,
-      "uniqueID": 0,
-      "name": "b4ubuild_sample_07a",
-      "outlineNumber": "0",
-      "outlineLevel": 0,
-      "start": "2025-04-30",
-      "finish": "2025-08-02",
-      "duration": "68.0d",
-      "work": "1056.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
       "id": 1,
-      "uniqueID": 145,
-      "name": "Contracts",
+      "uniqueID": 26011,
+      "name": "Aufgabe Softwareentwickler",
       "outlineNumber": "1",
       "outlineLevel": 1,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "start": "2025-05-07",
+      "finish": "2025-12-02",
+      "duration": "1200.0h",
       "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
@@ -42,538 +27,570 @@
     },
     {
       "id": 2,
-      "uniqueID": 287,
-      "name": "Supply Lot Sale Agreement",
+      "uniqueID": 101914,
+      "name": "End Milestone Task SE",
       "outlineNumber": "1.1",
       "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "start": "2025-12-02",
+      "finish": "2025-12-02",
+      "duration": "0.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
+      "predecessors": [
+        {
+          "taskID": 55,
+          "taskUniqueID": 101815,
+          "taskName": "End Milestone WBS 5",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
     },
     {
       "id": 3,
-      "uniqueID": 273,
-      "name": "Supply Construction Agreement",
+      "uniqueID": 101913,
+      "name": "Start Milestone Task SE",
       "outlineNumber": "1.2",
       "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "start": "2025-05-07",
+      "finish": "2025-05-07",
+      "duration": "0.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
       "id": 4,
-      "uniqueID": 2,
-      "name": "Supply Contract Plans",
+      "uniqueID": 26012,
+      "name": "Nr. 1",
       "outlineNumber": "1.3",
       "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "start": "2025-05-07",
+      "finish": "2025-06-17",
+      "duration": "240.0h",
       "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 3,
-          "taskUniqueID": 273,
-          "taskName": "Supply Construction Agreement",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 5,
-      "uniqueID": 262,
-      "name": "Supply Contract Specifications",
-      "outlineNumber": "1.4",
-      "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "uniqueID": 101917,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.3.1",
+      "outlineLevel": 3,
+      "start": "2025-05-07",
+      "finish": "2025-05-13",
+      "duration": "40.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 3,
-          "taskUniqueID": 273,
-          "taskName": "Supply Construction Agreement",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 14,
+          "taskUniqueID": 101863,
+          "taskName": "Start Milestone WBS 1",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 6,
-      "uniqueID": 3,
-      "name": "Supply Contract Site Plan",
-      "outlineNumber": "1.5",
-      "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "uniqueID": 101718,
+      "name": "Fundament",
+      "outlineNumber": "1.3.2",
+      "outlineLevel": 3,
+      "start": "2025-05-14",
+      "finish": "2025-05-20",
+      "duration": "40.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 3,
-          "taskUniqueID": 273,
-          "taskName": "Supply Construction Agreement",
+          "taskID": 5,
+          "taskUniqueID": 101917,
+          "taskName": "Ausfahrt",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 7,
-      "uniqueID": 289,
-      "name": "Secure Financing",
-      "outlineNumber": "1.6",
-      "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
+      "uniqueID": 101719,
+      "name": "Turm",
+      "outlineNumber": "1.3.3",
+      "outlineLevel": 3,
+      "start": "2025-05-21",
+      "finish": "2025-05-27",
+      "duration": "40.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 8,
-      "uniqueID": 290,
-      "name": "Construction Loan Settlement",
-      "outlineNumber": "1.7",
-      "outlineLevel": 2,
-      "start": "2025-04-30",
-      "finish": "2025-04-30",
-      "duration": "0.0d",
-      "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 9,
-      "uniqueID": 274,
-      "name": "Document Review & Revision",
-      "outlineNumber": "2",
-      "outlineLevel": 1,
-      "start": "2025-05-01",
-      "finish": "2025-06-02",
-      "duration": "25.0d",
-      "work": "328.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 10,
-      "uniqueID": 275,
-      "name": "Review & Finalize Plans",
-      "outlineNumber": "2.1",
-      "outlineLevel": 2,
-      "start": "2025-05-01",
-      "finish": "2025-05-19",
-      "duration": "15.0d",
-      "work": "120.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 4,
-          "taskUniqueID": 2,
-          "taskName": "Supply Contract Plans",
+          "taskID": 12,
+          "taskUniqueID": 101722,
+          "taskName": "LOE1.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 6,
+          "taskUniqueID": 101718,
+          "taskName": "Fundament",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "uniqueID": 101720,
+      "name": "Gondel",
+      "outlineNumber": "1.3.4",
+      "outlineLevel": 3,
+      "start": "2025-05-28",
+      "finish": "2025-06-03",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 7,
+          "taskUniqueID": 101719,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "uniqueID": 101721,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.3.5",
+      "outlineLevel": 3,
+      "start": "2025-06-04",
+      "finish": "2025-06-10",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 8,
+          "taskUniqueID": 101720,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 13,
+          "taskUniqueID": 101726,
+          "taskName": "LOE1.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "uniqueID": 101725,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.3.6",
+      "outlineLevel": 3,
+      "start": "2025-06-11",
+      "finish": "2025-06-17",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 9,
+          "taskUniqueID": 101721,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 11,
-      "uniqueID": 276,
-      "name": "Review & Finalize Specifications",
-      "outlineNumber": "2.2",
-      "outlineLevel": 2,
-      "start": "2025-05-01",
-      "finish": "2025-05-26",
-      "duration": "20.0d",
-      "work": "160.0h",
+      "uniqueID": 101723,
+      "name": "End Milestone WBS 1",
+      "outlineNumber": "1.3.7",
+      "outlineLevel": 3,
+      "start": "2025-06-17",
+      "finish": "2025-06-17",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 5,
-          "taskUniqueID": 262,
-          "taskName": "Supply Contract Specifications",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 10,
+          "taskUniqueID": 101725,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 12,
-      "uniqueID": 277,
-      "name": "Review & Finalize Site Plan",
-      "outlineNumber": "2.3",
-      "outlineLevel": 2,
-      "start": "2025-05-22",
-      "finish": "2025-05-22",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101722,
+      "name": "LOE1.1",
+      "outlineNumber": "1.3.8",
+      "outlineLevel": 3,
+      "start": "2025-05-14",
+      "finish": "2025-05-27",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 6,
-          "taskUniqueID": 3,
-          "taskName": "Supply Contract Site Plan",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 10,
-          "taskUniqueID": 275,
-          "taskName": "Review & Finalize Plans",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskUniqueID": 101718,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 13,
-      "uniqueID": 282,
-      "name": "Print Construction Drawings",
-      "outlineNumber": "2.4",
-      "outlineLevel": 2,
-      "start": "2025-05-29",
-      "finish": "2025-06-02",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "uniqueID": 101726,
+      "name": "LOE1.2",
+      "outlineNumber": "1.3.9",
+      "outlineLevel": 3,
+      "start": "2025-05-28",
+      "finish": "2025-06-10",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 10,
-          "taskUniqueID": 275,
-          "taskName": "Review & Finalize Plans",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 11,
-          "taskUniqueID": 276,
-          "taskName": "Review & Finalize Specifications",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 12,
-          "taskUniqueID": 277,
-          "taskName": "Review & Finalize Site Plan",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 8,
+          "taskUniqueID": 101720,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 14,
-      "uniqueID": 284,
-      "name": "Approve Revised Plans",
-      "outlineNumber": "2.5",
-      "outlineLevel": 2,
-      "start": "2025-06-02",
-      "finish": "2025-06-02",
-      "duration": "0.0d",
+      "uniqueID": 101863,
+      "name": "Start Milestone WBS 1",
+      "outlineNumber": "1.3.10",
+      "outlineLevel": 3,
+      "start": "2025-05-07",
+      "finish": "2025-05-07",
+      "duration": "0.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 13,
-          "taskUniqueID": 282,
-          "taskName": "Print Construction Drawings",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 3,
+          "taskUniqueID": 101913,
+          "taskName": "Start Milestone Task SE",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 15,
-      "uniqueID": 285,
-      "name": "Approve Revised Specifications",
-      "outlineNumber": "2.6",
+      "uniqueID": 26014,
+      "name": "Nr. 2",
+      "outlineNumber": "1.4",
       "outlineLevel": 2,
-      "start": "2025-06-02",
-      "finish": "2025-06-02",
-      "duration": "0.0d",
+      "start": "2025-06-18",
+      "finish": "2025-07-29",
+      "duration": "240.0h",
       "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 13,
-          "taskUniqueID": 282,
-          "taskName": "Print Construction Drawings",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
+      "predecessors": []
     },
     {
       "id": 16,
-      "uniqueID": 291,
-      "name": "Approve Revised Site Plan",
-      "outlineNumber": "2.7",
-      "outlineLevel": 2,
-      "start": "2025-06-02",
-      "finish": "2025-06-02",
-      "duration": "0.0d",
+      "uniqueID": 101918,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.4.1",
+      "outlineLevel": 3,
+      "start": "2025-06-18",
+      "finish": "2025-06-24",
+      "duration": "40.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 13,
-          "taskUniqueID": 282,
-          "taskName": "Print Construction Drawings",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 25,
+          "taskUniqueID": 101909,
+          "taskName": "Start Milestone WBS 2",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 17,
-      "uniqueID": 4,
-      "name": "Bids & Contracts",
-      "outlineNumber": "3",
-      "outlineLevel": 1,
-      "start": "2025-06-05",
-      "finish": "2025-07-06",
-      "duration": "24.0d",
-      "work": "248.0h",
+      "uniqueID": 101737,
+      "name": "Fundament",
+      "outlineNumber": "1.4.2",
+      "outlineLevel": 3,
+      "start": "2025-06-25",
+      "finish": "2025-07-01",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 18,
-      "uniqueID": 146,
-      "name": "Make Copies of Plans",
-      "outlineNumber": "3.1",
-      "outlineLevel": 2,
-      "start": "2025-06-05",
-      "finish": "2025-06-07",
-      "duration": "3.0d",
-      "work": "24.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 14,
-          "taskUniqueID": 284,
-          "taskName": "Approve Revised Plans",
+          "taskID": 16,
+          "taskUniqueID": 101918,
+          "taskName": "Ausfahrt",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "uniqueID": 101738,
+      "name": "Turm",
+      "outlineNumber": "1.4.3",
+      "outlineLevel": 3,
+      "start": "2025-07-02",
+      "finish": "2025-07-08",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 23,
+          "taskUniqueID": 101741,
+          "taskName": "LOE2.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 17,
+          "taskUniqueID": 101737,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 19,
-      "uniqueID": 278,
-      "name": "Make Copies of Specifications",
-      "outlineNumber": "3.2",
-      "outlineLevel": 2,
-      "start": "2025-06-05",
-      "finish": "2025-06-06",
-      "duration": "2.0d",
-      "work": "16.0h",
+      "uniqueID": 101739,
+      "name": "Gondel",
+      "outlineNumber": "1.4.4",
+      "outlineLevel": 3,
+      "start": "2025-07-09",
+      "finish": "2025-07-15",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 15,
-          "taskUniqueID": 285,
-          "taskName": "Approve Revised Specifications",
+          "taskID": 18,
+          "taskUniqueID": 101738,
+          "taskName": "Turm",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 20,
-      "uniqueID": 5,
-      "name": "Distribute Plans & Specifications",
-      "outlineNumber": "3.3",
-      "outlineLevel": 2,
-      "start": "2025-06-08",
-      "finish": "2025-06-08",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101740,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.4.5",
+      "outlineLevel": 3,
+      "start": "2025-07-16",
+      "finish": "2025-07-22",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "START_NO_EARLIER_THAN",
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 18,
-          "taskUniqueID": 146,
-          "taskName": "Make Copies of Plans",
+          "taskID": 19,
+          "taskUniqueID": 101739,
+          "taskName": "Gondel",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         },
         {
-          "taskID": 19,
-          "taskUniqueID": 278,
-          "taskName": "Make Copies of Specifications",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 24,
+          "taskUniqueID": 101744,
+          "taskName": "LOE2.2",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 21,
-      "uniqueID": 6,
-      "name": "Receive Bids",
-      "outlineNumber": "3.4",
-      "outlineLevel": 2,
-      "start": "2025-06-09",
-      "finish": "2025-06-22",
-      "duration": "10.0d",
-      "work": "80.0h",
+      "uniqueID": 101743,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.4.6",
+      "outlineLevel": 3,
+      "start": "2025-07-23",
+      "finish": "2025-07-29",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "START_NO_EARLIER_THAN",
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 20,
-          "taskUniqueID": 5,
-          "taskName": "Distribute Plans & Specifications",
+          "taskUniqueID": 101740,
+          "taskName": "3x Blattmontage",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 22,
-      "uniqueID": 7,
-      "name": "Review Bids",
-      "outlineNumber": "3.5",
-      "outlineLevel": 2,
-      "start": "2025-06-23",
-      "finish": "2025-06-29",
-      "duration": "5.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": []
-    },
-    {
-      "id": 23,
-      "uniqueID": 279,
-      "name": "Sales",
-      "outlineNumber": "3.5.1",
+      "uniqueID": 101742,
+      "name": "End Milestone WBS 2",
+      "outlineNumber": "1.4.7",
       "outlineLevel": 3,
-      "start": "2025-06-23",
-      "finish": "2025-06-29",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-07-29",
+      "finish": "2025-07-29",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 21,
-          "taskUniqueID": 6,
-          "taskName": "Receive Bids",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskUniqueID": 101743,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "uniqueID": 101741,
+      "name": "LOE2.1",
+      "outlineNumber": "1.4.8",
+      "outlineLevel": 3,
+      "start": "2025-06-25",
+      "finish": "2025-07-08",
+      "duration": "80.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 17,
+          "taskUniqueID": 101737,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 24,
-      "uniqueID": 280,
-      "name": "Construction",
-      "outlineNumber": "3.5.2",
+      "uniqueID": 101744,
+      "name": "LOE2.2",
+      "outlineNumber": "1.4.9",
       "outlineLevel": 3,
-      "start": "2025-06-23",
-      "finish": "2025-06-29",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "start": "2025-07-09",
+      "finish": "2025-07-22",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 21,
-          "taskUniqueID": 6,
-          "taskName": "Receive Bids",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 19,
+          "taskUniqueID": 101739,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 25,
-      "uniqueID": 8,
-      "name": "Execute Subcontractor Agreements",
-      "outlineNumber": "3.6",
-      "outlineLevel": 2,
-      "start": "2025-06-30",
-      "finish": "2025-07-06",
-      "duration": "5.0d",
-      "work": "40.0h",
+      "uniqueID": 101909,
+      "name": "Start Milestone WBS 2",
+      "outlineNumber": "1.4.10",
+      "outlineLevel": 3,
+      "start": "2025-06-18",
+      "finish": "2025-06-18",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "START_NO_EARLIER_THAN",
+      "type": "FIXED_DURATION",
+      "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 23,
-          "taskUniqueID": 279,
-          "taskName": "Sales",
+          "taskID": 11,
+          "taskUniqueID": 101723,
+          "taskName": "End Milestone WBS 1",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 26,
-      "uniqueID": 9,
-      "name": "Grading & Building Permits",
-      "outlineNumber": "4",
-      "outlineLevel": 1,
-      "start": "2025-06-05",
-      "finish": "2025-06-27",
-      "duration": "17.0d",
-      "work": "208.0h",
+      "uniqueID": 26019,
+      "name": "Nr. 3",
+      "outlineNumber": "1.5",
+      "outlineLevel": 2,
+      "start": "2025-07-30",
+      "finish": "2025-09-09",
+      "duration": "240.0h",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
@@ -581,587 +598,517 @@
     },
     {
       "id": 27,
-      "uniqueID": 10,
-      "name": "Schedule lot stake-out",
-      "outlineNumber": "4.1",
-      "outlineLevel": 2,
-      "start": "2025-06-05",
-      "finish": "2025-06-05",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101919,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.5.1",
+      "outlineLevel": 3,
+      "start": "2025-07-30",
+      "finish": "2025-08-05",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 13,
-          "taskUniqueID": 282,
-          "taskName": "Print Construction Drawings",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 36,
+          "taskUniqueID": 101910,
+          "taskName": "Start Milestone WBS 3",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 28,
-      "uniqueID": 11,
-      "name": "Stake lot",
-      "outlineNumber": "4.2",
-      "outlineLevel": 2,
-      "start": "2025-06-09",
-      "finish": "2025-06-09",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101747,
+      "name": "Fundament",
+      "outlineNumber": "1.5.2",
+      "outlineLevel": 3,
+      "start": "2025-08-06",
+      "finish": "2025-08-12",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 27,
-          "taskUniqueID": 10,
-          "taskName": "Schedule lot stake-out",
+          "taskUniqueID": 101919,
+          "taskName": "Ausfahrt",
           "type": "FS",
-          "lag": "3.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 29,
-      "uniqueID": 293,
-      "name": "File Grading Permit Application",
-      "outlineNumber": "4.3",
-      "outlineLevel": 2,
-      "start": "2025-06-05",
-      "finish": "2025-06-05",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101748,
+      "name": "Turm",
+      "outlineNumber": "1.5.3",
+      "outlineLevel": 3,
+      "start": "2025-08-13",
+      "finish": "2025-08-19",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 16,
-          "taskUniqueID": 291,
-          "taskName": "Approve Revised Site Plan",
+          "taskID": 34,
+          "taskUniqueID": 101751,
+          "taskName": "LOE3.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 28,
+          "taskUniqueID": 101747,
+          "taskName": "Fundament",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 30,
-      "uniqueID": 12,
-      "name": "File Building Permit Application",
-      "outlineNumber": "4.4",
-      "outlineLevel": 2,
-      "start": "2025-06-05",
-      "finish": "2025-06-07",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "uniqueID": 101749,
+      "name": "Gondel",
+      "outlineNumber": "1.5.4",
+      "outlineLevel": 3,
+      "start": "2025-08-20",
+      "finish": "2025-08-26",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 14,
-          "taskUniqueID": 284,
-          "taskName": "Approve Revised Plans",
+          "taskID": 29,
+          "taskUniqueID": 101748,
+          "taskName": "Turm",
           "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 15,
-          "taskUniqueID": 285,
-          "taskName": "Approve Revised Specifications",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 16,
-          "taskUniqueID": 291,
-          "taskName": "Approve Revised Site Plan",
-          "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 31,
-      "uniqueID": 13,
-      "name": "Post Lot Identification",
-      "outlineNumber": "4.5",
-      "outlineLevel": 2,
-      "start": "2025-06-12",
-      "finish": "2025-06-12",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101750,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.5.5",
+      "outlineLevel": 3,
+      "start": "2025-08-27",
+      "finish": "2025-09-02",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 28,
-          "taskUniqueID": 11,
-          "taskName": "Stake lot",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 29,
-          "taskUniqueID": 293,
-          "taskName": "File Grading Permit Application",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
           "taskID": 30,
-          "taskUniqueID": 12,
-          "taskName": "File Building Permit Application",
+          "taskUniqueID": 101749,
+          "taskName": "Gondel",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 35,
+          "taskUniqueID": 101754,
+          "taskName": "LOE3.2",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 32,
-      "uniqueID": 15,
-      "name": "Meet Sediment Control Inspector",
-      "outlineNumber": "4.6",
-      "outlineLevel": 2,
-      "start": "2025-06-13",
-      "finish": "2025-06-13",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101753,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.5.6",
+      "outlineLevel": 3,
+      "start": "2025-09-03",
+      "finish": "2025-09-09",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 29,
-          "taskUniqueID": 293,
-          "taskName": "File Grading Permit Application",
-          "type": "FS",
-          "lag": "2.0d"
-        },
-        {
-          "taskID": 28,
-          "taskUniqueID": 11,
-          "taskName": "Stake lot",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
           "taskID": 31,
-          "taskUniqueID": 13,
-          "taskName": "Post Lot Identification",
+          "taskUniqueID": 101750,
+          "taskName": "3x Blattmontage",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 33,
-      "uniqueID": 14,
-      "name": "Walk Lot w/ Owner",
-      "outlineNumber": "4.7",
-      "outlineLevel": 2,
-      "start": "2025-06-14",
-      "finish": "2025-06-14",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101752,
+      "name": "End Milestone WBS 3",
+      "outlineNumber": "1.5.7",
+      "outlineLevel": 3,
+      "start": "2025-09-09",
+      "finish": "2025-09-09",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 32,
-          "taskUniqueID": 15,
-          "taskName": "Meet Sediment Control Inspector",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskUniqueID": 101753,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 34,
-      "uniqueID": 16,
-      "name": "Install Construction Entrance",
-      "outlineNumber": "4.8",
-      "outlineLevel": 2,
-      "start": "2025-06-15",
-      "finish": "2025-06-15",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101751,
+      "name": "LOE3.1",
+      "outlineNumber": "1.5.8",
+      "outlineLevel": 3,
+      "start": "2025-08-06",
+      "finish": "2025-08-19",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 32,
-          "taskUniqueID": 15,
-          "taskName": "Meet Sediment Control Inspector",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 33,
-          "taskUniqueID": 14,
-          "taskName": "Walk Lot w/ Owner",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 28,
+          "taskUniqueID": 101747,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 35,
-      "uniqueID": 153,
-      "name": "Install Sediment Controls",
-      "outlineNumber": "4.9",
-      "outlineLevel": 2,
-      "start": "2025-06-15",
-      "finish": "2025-06-16",
-      "duration": "2.0d",
-      "work": "16.0h",
+      "uniqueID": 101754,
+      "name": "LOE3.2",
+      "outlineNumber": "1.5.9",
+      "outlineLevel": 3,
+      "start": "2025-08-20",
+      "finish": "2025-09-02",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 32,
-          "taskUniqueID": 15,
-          "taskName": "Meet Sediment Control Inspector",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 33,
-          "taskUniqueID": 14,
-          "taskName": "Walk Lot w/ Owner",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 30,
+          "taskUniqueID": 101749,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 36,
-      "uniqueID": 17,
-      "name": "Sediment Control Insp.",
-      "outlineNumber": "4.10",
-      "outlineLevel": 2,
-      "start": "2025-06-19",
-      "finish": "2025-06-19",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101910,
+      "name": "Start Milestone WBS 3",
+      "outlineNumber": "1.5.10",
+      "outlineLevel": 3,
+      "start": "2025-07-30",
+      "finish": "2025-07-30",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 34,
-          "taskUniqueID": 16,
-          "taskName": "Install Construction Entrance",
+          "taskID": 22,
+          "taskUniqueID": 101742,
+          "taskName": "End Milestone WBS 2",
           "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 35,
-          "taskUniqueID": 153,
-          "taskName": "Install Sediment Controls",
-          "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 37,
-      "uniqueID": 18,
-      "name": "Grading Permit Issued",
-      "outlineNumber": "4.11",
+      "uniqueID": 26024,
+      "name": "Nr. 4",
+      "outlineNumber": "1.6",
       "outlineLevel": 2,
-      "start": "2025-06-20",
-      "finish": "2025-06-20",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 36,
-          "taskUniqueID": 17,
-          "taskName": "Sediment Control Insp.",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 38,
-      "uniqueID": 147,
-      "name": "County Permit Process",
-      "outlineNumber": "4.12",
-      "outlineLevel": 2,
-      "start": "2025-06-08",
-      "finish": "2025-06-21",
-      "duration": "10.0d",
-      "work": "80.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 30,
-          "taskUniqueID": 12,
-          "taskName": "File Building Permit Application",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 39,
-      "uniqueID": 19,
-      "name": "Building Permit Approved",
-      "outlineNumber": "4.13",
-      "outlineLevel": 2,
-      "start": "2025-06-22",
-      "finish": "2025-06-22",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 38,
-          "taskUniqueID": 147,
-          "taskName": "County Permit Process",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 37,
-          "taskUniqueID": 18,
-          "taskName": "Grading Permit Issued",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 40,
-      "uniqueID": 281,
-      "name": "Pay Permit Fees and Excise Taxes",
-      "outlineNumber": "4.14",
-      "outlineLevel": 2,
-      "start": "2025-06-27",
-      "finish": "2025-06-27",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 39,
-          "taskUniqueID": 19,
-          "taskName": "Building Permit Approved",
-          "type": "FS",
-          "lag": "2.0d"
-        }
-      ]
-    },
-    {
-      "id": 41,
-      "uniqueID": 294,
-      "name": "Building Permit Issued",
-      "outlineNumber": "4.15",
-      "outlineLevel": 2,
-      "start": "2025-06-27",
-      "finish": "2025-06-27",
-      "duration": "0.0d",
+      "start": "2025-09-10",
+      "finish": "2025-10-21",
+      "duration": "240.0h",
       "work": "0.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 40,
-          "taskUniqueID": 281,
-          "taskName": "Pay Permit Fees and Excise Taxes",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 42,
-      "uniqueID": 20,
-      "name": "Site Work",
-      "outlineNumber": "5",
-      "outlineLevel": 1,
-      "start": "2025-06-21",
-      "finish": "2025-06-29",
-      "duration": "7.0d",
-      "work": "64.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": []
     },
     {
-      "id": 43,
-      "uniqueID": 21,
-      "name": "Clear Lot",
-      "outlineNumber": "5.1",
-      "outlineLevel": 2,
-      "start": "2025-06-21",
-      "finish": "2025-06-23",
-      "duration": "3.0d",
-      "work": "24.0h",
+      "id": 38,
+      "uniqueID": 101920,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.6.1",
+      "outlineLevel": 3,
+      "start": "2025-09-10",
+      "finish": "2025-09-16",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 37,
-          "taskUniqueID": 18,
-          "taskName": "Grading Permit Issued",
+          "taskID": 47,
+          "taskUniqueID": 101911,
+          "taskName": "Start Milestone WBS 4",
+          "type": "SS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "uniqueID": 101792,
+      "name": "Fundament",
+      "outlineNumber": "1.6.2",
+      "outlineLevel": 3,
+      "start": "2025-09-17",
+      "finish": "2025-09-23",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 38,
+          "taskUniqueID": 101920,
+          "taskName": "Ausfahrt",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "uniqueID": 101793,
+      "name": "Turm",
+      "outlineNumber": "1.6.3",
+      "outlineLevel": 3,
+      "start": "2025-09-24",
+      "finish": "2025-09-30",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 45,
+          "taskUniqueID": 101796,
+          "taskName": "LOE4.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 39,
+          "taskUniqueID": 101792,
+          "taskName": "Fundament",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "uniqueID": 101794,
+      "name": "Gondel",
+      "outlineNumber": "1.6.4",
+      "outlineLevel": 3,
+      "start": "2025-10-01",
+      "finish": "2025-10-07",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 40,
+          "taskUniqueID": 101793,
+          "taskName": "Turm",
+          "type": "FS",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "uniqueID": 101795,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.6.5",
+      "outlineLevel": 3,
+      "start": "2025-10-08",
+      "finish": "2025-10-14",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 41,
+          "taskUniqueID": 101794,
+          "taskName": "Gondel",
+          "type": "FS",
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 46,
+          "taskUniqueID": 101799,
+          "taskName": "LOE4.2",
+          "type": "FF",
+          "lag": "0.0h"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "uniqueID": 101798,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.6.6",
+      "outlineLevel": 3,
+      "start": "2025-10-15",
+      "finish": "2025-10-21",
+      "duration": "40.0h",
+      "work": "0.0h",
+      "percentComplete": 0,
+      "type": "FIXED_DURATION_AND_UNITS",
+      "constraint": "AS_SOON_AS_POSSIBLE",
+      "predecessors": [
+        {
+          "taskID": 42,
+          "taskUniqueID": 101795,
+          "taskName": "3x Blattmontage",
+          "type": "FS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 44,
-      "uniqueID": 22,
-      "name": "Strip Topsoil & Stockpile",
-      "outlineNumber": "5.2",
-      "outlineLevel": 2,
-      "start": "2025-06-26",
-      "finish": "2025-06-26",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101797,
+      "name": "End Milestone WBS 4",
+      "outlineNumber": "1.6.7",
+      "outlineLevel": 3,
+      "start": "2025-10-21",
+      "finish": "2025-10-21",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 43,
-          "taskUniqueID": 21,
-          "taskName": "Clear Lot",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskUniqueID": 101798,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 45,
-      "uniqueID": 23,
-      "name": "Stake Lot for Excavation",
-      "outlineNumber": "5.3",
-      "outlineLevel": 2,
-      "start": "2025-06-26",
-      "finish": "2025-06-26",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101796,
+      "name": "LOE4.1",
+      "outlineNumber": "1.6.8",
+      "outlineLevel": 3,
+      "start": "2025-09-17",
+      "finish": "2025-09-30",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 43,
-          "taskUniqueID": 21,
-          "taskName": "Clear Lot",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 39,
+          "taskUniqueID": 101792,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 46,
-      "uniqueID": 24,
-      "name": "Rough grade lot",
-      "outlineNumber": "5.4",
-      "outlineLevel": 2,
-      "start": "2025-06-27",
-      "finish": "2025-06-27",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101799,
+      "name": "LOE4.2",
+      "outlineNumber": "1.6.9",
+      "outlineLevel": 3,
+      "start": "2025-10-01",
+      "finish": "2025-10-14",
+      "duration": "80.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 43,
-          "taskUniqueID": 21,
-          "taskName": "Clear Lot",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 45,
-          "taskUniqueID": 23,
-          "taskName": "Stake Lot for Excavation",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 41,
+          "taskUniqueID": 101794,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 47,
-      "uniqueID": 25,
-      "name": "Excavate for foundation",
-      "outlineNumber": "5.5",
-      "outlineLevel": 2,
-      "start": "2025-06-28",
-      "finish": "2025-06-29",
-      "duration": "2.0d",
-      "work": "16.0h",
+      "uniqueID": 101911,
+      "name": "Start Milestone WBS 4",
+      "outlineNumber": "1.6.10",
+      "outlineLevel": 3,
+      "start": "2025-09-10",
+      "finish": "2025-09-10",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 39,
-          "taskUniqueID": 19,
-          "taskName": "Building Permit Approved",
+          "taskID": 33,
+          "taskUniqueID": 101752,
+          "taskName": "End Milestone WBS 3",
           "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 45,
-          "taskUniqueID": 23,
-          "taskName": "Stake Lot for Excavation",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 43,
-          "taskUniqueID": 21,
-          "taskName": "Clear Lot",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
-          "taskID": 46,
-          "taskUniqueID": 24,
-          "taskName": "Rough grade lot",
-          "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 48,
-      "uniqueID": 26,
-      "name": "Foundation",
-      "outlineNumber": "6",
-      "outlineLevel": 1,
-      "start": "2025-06-30",
-      "finish": "2025-08-02",
-      "duration": "24.0d",
-      "work": "208.0h",
+      "uniqueID": 26026,
+      "name": "Nr. 5",
+      "outlineNumber": "1.7",
+      "outlineLevel": 2,
+      "start": "2025-10-22",
+      "finish": "2025-12-02",
+      "duration": "240.0h",
+      "work": "0.0h",
       "percentComplete": 0,
       "type": "FIXED_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
@@ -1169,1251 +1116,726 @@
     },
     {
       "id": 49,
-      "uniqueID": 27,
-      "name": "Layout footings",
-      "outlineNumber": "6.1",
-      "outlineLevel": 2,
-      "start": "2025-06-30",
-      "finish": "2025-06-30",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101921,
+      "name": "Ausfahrt",
+      "outlineNumber": "1.7.1",
+      "outlineLevel": 3,
+      "start": "2025-10-22",
+      "finish": "2025-10-28",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 47,
-          "taskUniqueID": 25,
-          "taskName": "Excavate for foundation",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 58,
+          "taskUniqueID": 101912,
+          "taskName": "Start Milestone WBS 5",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 50,
-      "uniqueID": 28,
-      "name": "Dig Footings & Install Reinforcing",
-      "outlineNumber": "6.2",
-      "outlineLevel": 2,
-      "start": "2025-07-03",
-      "finish": "2025-07-03",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101810,
+      "name": "Fundament",
+      "outlineNumber": "1.7.2",
+      "outlineLevel": 3,
+      "start": "2025-10-29",
+      "finish": "2025-11-04",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 49,
-          "taskUniqueID": 27,
-          "taskName": "Layout footings",
+          "taskUniqueID": 101921,
+          "taskName": "Ausfahrt",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 51,
-      "uniqueID": 29,
-      "name": "Footing Inspection",
-      "outlineNumber": "6.3",
-      "outlineLevel": 2,
-      "start": "2025-07-03",
-      "finish": "2025-07-03",
-      "duration": "0.0d",
+      "uniqueID": 101811,
+      "name": "Turm",
+      "outlineNumber": "1.7.3",
+      "outlineLevel": 3,
+      "start": "2025-11-05",
+      "finish": "2025-11-11",
+      "duration": "40.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
+          "taskID": 56,
+          "taskUniqueID": 101814,
+          "taskName": "LOE5.1",
+          "type": "FF",
+          "lag": "0.0h"
+        },
+        {
           "taskID": 50,
-          "taskUniqueID": 28,
-          "taskName": "Dig Footings & Install Reinforcing",
+          "taskUniqueID": 101810,
+          "taskName": "Fundament",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 52,
-      "uniqueID": 30,
-      "name": "Pour footings",
-      "outlineNumber": "6.4",
-      "outlineLevel": 2,
-      "start": "2025-07-04",
-      "finish": "2025-07-04",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101812,
+      "name": "Gondel",
+      "outlineNumber": "1.7.4",
+      "outlineLevel": 3,
+      "start": "2025-11-12",
+      "finish": "2025-11-18",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 51,
-          "taskUniqueID": 29,
-          "taskName": "Footing Inspection",
+          "taskUniqueID": 101811,
+          "taskName": "Turm",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 53,
-      "uniqueID": 31,
-      "name": "Pin Footings",
-      "outlineNumber": "6.5",
-      "outlineLevel": 2,
-      "start": "2025-07-05",
-      "finish": "2025-07-05",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101813,
+      "name": "3x Blattmontage",
+      "outlineNumber": "1.7.5",
+      "outlineLevel": 3,
+      "start": "2025-11-19",
+      "finish": "2025-11-25",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 52,
-          "taskUniqueID": 30,
-          "taskName": "Pour footings",
+          "taskUniqueID": 101812,
+          "taskName": "Gondel",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
+        },
+        {
+          "taskID": 57,
+          "taskUniqueID": 101817,
+          "taskName": "LOE5.2",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 54,
-      "uniqueID": 32,
-      "name": "Stock Block, Mortar, Sand",
-      "outlineNumber": "6.6",
-      "outlineLevel": 2,
-      "start": "2025-07-06",
-      "finish": "2025-07-06",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101816,
+      "name": "Rückfahrt",
+      "outlineNumber": "1.7.6",
+      "outlineLevel": 3,
+      "start": "2025-11-26",
+      "finish": "2025-12-02",
+      "duration": "40.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
           "taskID": 53,
-          "taskUniqueID": 31,
-          "taskName": "Pin Footings",
+          "taskUniqueID": 101813,
+          "taskName": "3x Blattmontage",
           "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 55,
-      "uniqueID": 33,
-      "name": "Build Block Foundation",
-      "outlineNumber": "6.7",
-      "outlineLevel": 2,
-      "start": "2025-07-07",
-      "finish": "2025-07-27",
-      "duration": "15.0d",
-      "work": "120.0h",
+      "uniqueID": 101815,
+      "name": "End Milestone WBS 5",
+      "outlineNumber": "1.7.7",
+      "outlineLevel": 3,
+      "start": "2025-12-02",
+      "finish": "2025-12-02",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 53,
-          "taskUniqueID": 31,
-          "taskName": "Pin Footings",
-          "type": "FS",
-          "lag": "0.0d"
-        },
-        {
           "taskID": 54,
-          "taskUniqueID": 32,
-          "taskName": "Stock Block, Mortar, Sand",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskUniqueID": 101816,
+          "taskName": "Rückfahrt",
+          "type": "FF",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 56,
-      "uniqueID": 35,
-      "name": "Foundation Certification",
-      "outlineNumber": "6.8",
-      "outlineLevel": 2,
-      "start": "2025-07-27",
-      "finish": "2025-07-27",
-      "duration": "0.0d",
+      "uniqueID": 101814,
+      "name": "LOE5.1",
+      "outlineNumber": "1.7.8",
+      "outlineLevel": 3,
+      "start": "2025-10-29",
+      "finish": "2025-11-11",
+      "duration": "80.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 55,
-          "taskUniqueID": 33,
-          "taskName": "Build Block Foundation",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 50,
+          "taskUniqueID": 101810,
+          "taskName": "Fundament",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 57,
-      "uniqueID": 310,
-      "name": "Draw #1 (Location Survey)",
-      "outlineNumber": "6.9",
-      "outlineLevel": 2,
-      "start": "2025-07-27",
-      "finish": "2025-07-27",
-      "duration": "0.0d",
+      "uniqueID": 101817,
+      "name": "LOE5.2",
+      "outlineNumber": "1.7.9",
+      "outlineLevel": 3,
+      "start": "2025-11-12",
+      "finish": "2025-11-25",
+      "duration": "80.0h",
       "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION_AND_UNITS",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 56,
-          "taskUniqueID": 35,
-          "taskName": "Foundation Certification",
-          "type": "FS",
-          "lag": "0.0d"
+          "taskID": 52,
+          "taskUniqueID": 101812,
+          "taskName": "Gondel",
+          "type": "SS",
+          "lag": "0.0h"
         }
       ]
     },
     {
       "id": 58,
-      "uniqueID": 36,
-      "name": "Fill Block Cores w/ Concrete",
-      "outlineNumber": "6.10",
-      "outlineLevel": 2,
-      "start": "2025-07-28",
-      "finish": "2025-07-28",
-      "duration": "1.0d",
-      "work": "8.0h",
+      "uniqueID": 101912,
+      "name": "Start Milestone WBS 5",
+      "outlineNumber": "1.7.10",
+      "outlineLevel": 3,
+      "start": "2025-10-22",
+      "finish": "2025-10-22",
+      "duration": "0.0h",
+      "work": "0.0h",
       "percentComplete": 0,
-      "type": "FIXED_UNITS",
+      "type": "FIXED_DURATION",
       "constraint": "AS_SOON_AS_POSSIBLE",
       "predecessors": [
         {
-          "taskID": 55,
-          "taskUniqueID": 33,
-          "taskName": "Build Block Foundation",
+          "taskID": 44,
+          "taskUniqueID": 101797,
+          "taskName": "End Milestone WBS 4",
           "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 59,
-      "uniqueID": 34,
-      "name": "Steel Delivery",
-      "outlineNumber": "6.11",
-      "outlineLevel": 2,
-      "start": "2025-07-31",
-      "finish": "2025-07-31",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 58,
-          "taskUniqueID": 36,
-          "taskName": "Fill Block Cores w/ Concrete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 60,
-      "uniqueID": 37,
-      "name": "Set Lintels, Bolts, Cap Block",
-      "outlineNumber": "6.12",
-      "outlineLevel": 2,
-      "start": "2025-08-01",
-      "finish": "2025-08-02",
-      "duration": "2.0d",
-      "work": "16.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 59,
-          "taskUniqueID": 34,
-          "taskName": "Steel Delivery",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 61,
-      "uniqueID": 39,
-      "name": "Lumber Delivery",
-      "outlineNumber": "6.13",
-      "outlineLevel": 2,
-      "start": "2025-07-31",
-      "finish": "2025-07-31",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 58,
-          "taskUniqueID": 36,
-          "taskName": "Fill Block Cores w/ Concrete",
-          "type": "FS",
-          "lag": "0.0d"
-        }
-      ]
-    },
-    {
-      "id": 62,
-      "uniqueID": 38,
-      "name": "Waterproofing and Drain Tile",
-      "outlineNumber": "6.14",
-      "outlineLevel": 2,
-      "start": "2025-08-01",
-      "finish": "2025-08-01",
-      "duration": "1.0d",
-      "work": "8.0h",
-      "percentComplete": 0,
-      "type": "FIXED_UNITS",
-      "constraint": "AS_SOON_AS_POSSIBLE",
-      "predecessors": [
-        {
-          "taskID": 61,
-          "taskUniqueID": 39,
-          "taskName": "Lumber Delivery",
-          "type": "FS",
-          "lag": "0.0d"
+          "lag": "0.0h"
         }
       ]
     }
   ],
   "resources": [
     {
-      "id": 0,
-      "uniqueID": 0,
-      "name": null,
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
       "id": 1,
       "uniqueID": 1,
-      "name": "Sales Department",
+      "name": "Unassigned",
       "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 2,
-      "uniqueID": 2,
-      "name": "Construction Dept.",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 3,
-      "uniqueID": 3,
-      "name": "Sales Dept.",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 4,
-      "uniqueID": 10,
-      "name": "Client",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 5,
-      "uniqueID": 13,
-      "name": "County",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 6,
-      "uniqueID": 14,
-      "name": "County Sediment Control Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 7,
-      "uniqueID": 15,
-      "name": "Sediment Control Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 8,
-      "uniqueID": 16,
-      "name": "Department of Permits & Licenses",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 9,
-      "uniqueID": 19,
-      "name": "Building Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 10,
-      "uniqueID": 20,
-      "name": "Mason",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 11,
-      "uniqueID": 21,
-      "name": "Civil Engineer",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 12,
-      "uniqueID": 22,
-      "name": "Concrete Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 13,
-      "uniqueID": 23,
-      "name": "Concrete Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 14,
-      "uniqueID": 24,
-      "name": "Excavation Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 15,
-      "uniqueID": 25,
-      "name": "Masonry Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 16,
-      "uniqueID": 26,
-      "name": "Block Masonry Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 17,
-      "uniqueID": 27,
-      "name": "Steel Supplier",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 18,
-      "uniqueID": 28,
-      "name": "Lumber Supplier",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 19,
-      "uniqueID": 29,
-      "name": "Waterproofing Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 20,
-      "uniqueID": 30,
-      "name": "Lender",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 21,
-      "uniqueID": 31,
-      "name": "Framing Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 22,
-      "uniqueID": 32,
-      "name": "Pest Control Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 23,
-      "uniqueID": 33,
-      "name": "Mechanical Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 24,
-      "uniqueID": 34,
-      "name": "Plumbing Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 25,
-      "uniqueID": 35,
-      "name": "Field Superintendent",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 26,
-      "uniqueID": 36,
-      "name": "Plumbing Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 27,
-      "uniqueID": 37,
-      "name": "Electrical Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 28,
-      "uniqueID": 38,
-      "name": "Alarm Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 29,
-      "uniqueID": 39,
-      "name": "Client's Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 30,
-      "uniqueID": 40,
-      "name": "Electrical Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 31,
-      "uniqueID": 41,
-      "name": "Roofing Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 32,
-      "uniqueID": 42,
-      "name": "Exterior Trim Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 33,
-      "uniqueID": 44,
-      "name": "Brick Masonry Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 34,
-      "uniqueID": 45,
-      "name": "Insulation Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 35,
-      "uniqueID": 46,
-      "name": "BGE Inspector",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 36,
-      "uniqueID": 47,
-      "name": "Drywall Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 37,
-      "uniqueID": 48,
-      "name": "Painting Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 38,
-      "uniqueID": 49,
-      "name": "Trim Supplier",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 39,
-      "uniqueID": 50,
-      "name": "Interior Trim Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 40,
-      "uniqueID": 51,
-      "name": "Cabinet Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 41,
-      "uniqueID": 54,
-      "name": "Deck Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 42,
-      "uniqueID": 55,
-      "name": "Driveway Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 43,
-      "uniqueID": 56,
-      "name": "Seeding Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 44,
-      "uniqueID": 57,
-      "name": "Hardware Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 45,
-      "uniqueID": 58,
-      "name": "Mirror Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 46,
-      "uniqueID": 59,
-      "name": "Tile Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 47,
-      "uniqueID": 60,
-      "name": "Hardwood Floor Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 48,
-      "uniqueID": 61,
-      "name": "Carpet Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 49,
-      "uniqueID": 62,
-      "name": "Department of Licensing & Permits",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 50,
-      "uniqueID": 63,
-      "name": "Paint Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 51,
-      "uniqueID": 64,
-      "name": "Window Cleaning Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 52,
-      "uniqueID": 65,
-      "name": "Cleaning Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 53,
-      "uniqueID": 66,
-      "name": "Superintendent",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 54,
-      "uniqueID": 67,
-      "name": "Builder",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 55,
-      "uniqueID": 68,
-      "name": "Punch Out Crew",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 56,
-      "uniqueID": 69,
-      "name": "Stucco Subcontractor",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 57,
-      "uniqueID": 70,
-      "name": "Sales Manager",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 58,
-      "uniqueID": 71,
-      "name": "Construction Manager",
-      "type": "Work",
-      "maxUnits": "10000.0%"
-    },
-    {
-      "id": 59,
-      "uniqueID": 72,
-      "name": "Project Manager",
-      "type": "Work",
-      "maxUnits": "10000.0%"
+      "maxUnits": "100%"
     }
   ],
   "assignments": [
     {
       "taskID": 2,
-      "taskUniqueID": 287,
-      "taskName": "Supply Lot Sale Agreement",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101914,
+      "taskName": "End Milestone Task SE",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 3,
-      "taskUniqueID": 273,
-      "taskName": "Supply Construction Agreement",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
-    },
-    {
-      "taskID": 4,
-      "taskUniqueID": 2,
-      "taskName": "Supply Contract Plans",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101913,
+      "taskName": "Start Milestone Task SE",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 5,
-      "taskUniqueID": 262,
-      "taskName": "Supply Contract Specifications",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101917,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 6,
-      "taskUniqueID": 3,
-      "taskName": "Supply Contract Site Plan",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101718,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 7,
-      "taskUniqueID": 289,
-      "taskName": "Secure Financing",
-      "resourceID": 4,
-      "resourceUniqueID": 10,
-      "resourceName": "Client",
-      "units": 10000
+      "taskUniqueID": 101719,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 8,
-      "taskUniqueID": 290,
-      "taskName": "Construction Loan Settlement",
-      "resourceID": 4,
-      "resourceUniqueID": 10,
-      "resourceName": "Client",
-      "units": 10000
+      "taskUniqueID": 101720,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 9,
+      "taskUniqueID": 101721,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 10,
-      "taskUniqueID": 275,
-      "taskName": "Review & Finalize Plans",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101725,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 11,
-      "taskUniqueID": 276,
-      "taskName": "Review & Finalize Specifications",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101723,
+      "taskName": "End Milestone WBS 1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 12,
-      "taskUniqueID": 277,
-      "taskName": "Review & Finalize Site Plan",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101722,
+      "taskName": "LOE1.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 13,
-      "taskUniqueID": 282,
-      "taskName": "Print Construction Drawings",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101726,
+      "taskName": "LOE1.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 14,
-      "taskUniqueID": 284,
-      "taskName": "Approve Revised Plans",
-      "resourceID": 4,
-      "resourceUniqueID": 10,
-      "resourceName": "Client",
-      "units": 10000
-    },
-    {
-      "taskID": 15,
-      "taskUniqueID": 285,
-      "taskName": "Approve Revised Specifications",
-      "resourceID": 4,
-      "resourceUniqueID": 10,
-      "resourceName": "Client",
-      "units": 10000
+      "taskUniqueID": 101863,
+      "taskName": "Start Milestone WBS 1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 16,
-      "taskUniqueID": 291,
-      "taskName": "Approve Revised Site Plan",
-      "resourceID": 4,
-      "resourceUniqueID": 10,
-      "resourceName": "Client",
-      "units": 10000
+      "taskUniqueID": 101918,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 17,
+      "taskUniqueID": 101737,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 18,
-      "taskUniqueID": 146,
-      "taskName": "Make Copies of Plans",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101738,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 19,
-      "taskUniqueID": 278,
-      "taskName": "Make Copies of Specifications",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101739,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 20,
-      "taskUniqueID": 5,
-      "taskName": "Distribute Plans & Specifications",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101740,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 21,
-      "taskUniqueID": 6,
-      "taskName": "Receive Bids",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101743,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 22,
+      "taskUniqueID": 101742,
+      "taskName": "End Milestone WBS 2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 23,
-      "taskUniqueID": 279,
-      "taskName": "Sales",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101741,
+      "taskName": "LOE2.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 24,
-      "taskUniqueID": 280,
-      "taskName": "Construction",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101744,
+      "taskName": "LOE2.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 25,
-      "taskUniqueID": 8,
-      "taskName": "Execute Subcontractor Agreements",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101909,
+      "taskName": "Start Milestone WBS 2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 27,
-      "taskUniqueID": 10,
-      "taskName": "Schedule lot stake-out",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101919,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 28,
-      "taskUniqueID": 11,
-      "taskName": "Stake lot",
-      "resourceID": 11,
-      "resourceUniqueID": 21,
-      "resourceName": "Civil Engineer",
-      "units": 10000
+      "taskUniqueID": 101747,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 29,
-      "taskUniqueID": 293,
-      "taskName": "File Grading Permit Application",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101748,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 30,
-      "taskUniqueID": 12,
-      "taskName": "File Building Permit Application",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101749,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 31,
-      "taskUniqueID": 13,
-      "taskName": "Post Lot Identification",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101750,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 32,
-      "taskUniqueID": 15,
-      "taskName": "Meet Sediment Control Inspector",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101753,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 33,
-      "taskUniqueID": 14,
-      "taskName": "Walk Lot w/ Owner",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101752,
+      "taskName": "End Milestone WBS 3",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 34,
-      "taskUniqueID": 16,
-      "taskName": "Install Construction Entrance",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101751,
+      "taskName": "LOE3.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 35,
-      "taskUniqueID": 153,
-      "taskName": "Install Sediment Controls",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101754,
+      "taskName": "LOE3.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 36,
-      "taskUniqueID": 17,
-      "taskName": "Sediment Control Insp.",
-      "resourceID": 7,
-      "resourceUniqueID": 15,
-      "resourceName": "Sediment Control Inspector",
-      "units": 10000
-    },
-    {
-      "taskID": 37,
-      "taskUniqueID": 18,
-      "taskName": "Grading Permit Issued",
-      "resourceID": 7,
-      "resourceUniqueID": 15,
-      "resourceName": "Sediment Control Inspector",
-      "units": 10000
+      "taskUniqueID": 101910,
+      "taskName": "Start Milestone WBS 3",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 38,
-      "taskUniqueID": 147,
-      "taskName": "County Permit Process",
-      "resourceID": 8,
-      "resourceUniqueID": 16,
-      "resourceName": "Department of Permits & Licenses",
-      "units": 10000
+      "taskUniqueID": 101920,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 39,
-      "taskUniqueID": 19,
-      "taskName": "Building Permit Approved",
-      "resourceID": 8,
-      "resourceUniqueID": 16,
-      "resourceName": "Department of Permits & Licenses",
-      "units": 10000
+      "taskUniqueID": 101792,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 40,
-      "taskUniqueID": 281,
-      "taskName": "Pay Permit Fees and Excise Taxes",
-      "resourceID": 54,
-      "resourceUniqueID": 67,
-      "resourceName": "Builder",
-      "units": 10000
+      "taskUniqueID": 101793,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 41,
-      "taskUniqueID": 294,
-      "taskName": "Building Permit Issued",
-      "resourceID": 8,
-      "resourceUniqueID": 16,
-      "resourceName": "Department of Permits & Licenses",
-      "units": 10000
+      "taskUniqueID": 101794,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
+    },
+    {
+      "taskID": 42,
+      "taskUniqueID": 101795,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 43,
-      "taskUniqueID": 21,
-      "taskName": "Clear Lot",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101798,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 44,
-      "taskUniqueID": 22,
-      "taskName": "Strip Topsoil & Stockpile",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101797,
+      "taskName": "End Milestone WBS 4",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 45,
-      "taskUniqueID": 23,
-      "taskName": "Stake Lot for Excavation",
-      "resourceID": 11,
-      "resourceUniqueID": 21,
-      "resourceName": "Civil Engineer",
-      "units": 10000
+      "taskUniqueID": 101796,
+      "taskName": "LOE4.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 46,
-      "taskUniqueID": 24,
-      "taskName": "Rough grade lot",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101799,
+      "taskName": "LOE4.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 47,
-      "taskUniqueID": 25,
-      "taskName": "Excavate for foundation",
-      "resourceID": 14,
-      "resourceUniqueID": 24,
-      "resourceName": "Excavation Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101911,
+      "taskName": "Start Milestone WBS 4",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 49,
-      "taskUniqueID": 27,
-      "taskName": "Layout footings",
-      "resourceID": 13,
-      "resourceUniqueID": 23,
-      "resourceName": "Concrete Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101921,
+      "taskName": "Ausfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 50,
-      "taskUniqueID": 28,
-      "taskName": "Dig Footings & Install Reinforcing",
-      "resourceID": 13,
-      "resourceUniqueID": 23,
-      "resourceName": "Concrete Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101810,
+      "taskName": "Fundament",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 51,
-      "taskUniqueID": 29,
-      "taskName": "Footing Inspection",
-      "resourceID": 9,
-      "resourceUniqueID": 19,
-      "resourceName": "Building Inspector",
-      "units": 10000
+      "taskUniqueID": 101811,
+      "taskName": "Turm",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 52,
-      "taskUniqueID": 30,
-      "taskName": "Pour footings",
-      "resourceID": 13,
-      "resourceUniqueID": 23,
-      "resourceName": "Concrete Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101812,
+      "taskName": "Gondel",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 53,
-      "taskUniqueID": 31,
-      "taskName": "Pin Footings",
-      "resourceID": 11,
-      "resourceUniqueID": 21,
-      "resourceName": "Civil Engineer",
-      "units": 10000
+      "taskUniqueID": 101813,
+      "taskName": "3x Blattmontage",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 54,
-      "taskUniqueID": 32,
-      "taskName": "Stock Block, Mortar, Sand",
-      "resourceID": 16,
-      "resourceUniqueID": 26,
-      "resourceName": "Block Masonry Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101816,
+      "taskName": "Rückfahrt",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 55,
-      "taskUniqueID": 33,
-      "taskName": "Build Block Foundation",
-      "resourceID": 16,
-      "resourceUniqueID": 26,
-      "resourceName": "Block Masonry Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101815,
+      "taskName": "End Milestone WBS 5",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 56,
-      "taskUniqueID": 35,
-      "taskName": "Foundation Certification",
-      "resourceID": 11,
-      "resourceUniqueID": 21,
-      "resourceName": "Civil Engineer",
-      "units": 10000
+      "taskUniqueID": 101814,
+      "taskName": "LOE5.1",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 57,
-      "taskUniqueID": 310,
-      "taskName": "Draw #1 (Location Survey)",
-      "resourceID": 20,
-      "resourceUniqueID": 30,
-      "resourceName": "Lender",
-      "units": 10000
+      "taskUniqueID": 101817,
+      "taskName": "LOE5.2",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     },
     {
       "taskID": 58,
-      "taskUniqueID": 36,
-      "taskName": "Fill Block Cores w/ Concrete",
-      "resourceID": 16,
-      "resourceUniqueID": 26,
-      "resourceName": "Block Masonry Subcontractor",
-      "units": 10000
-    },
-    {
-      "taskID": 59,
-      "taskUniqueID": 34,
-      "taskName": "Steel Delivery",
-      "resourceID": 17,
-      "resourceUniqueID": 27,
-      "resourceName": "Steel Supplier",
-      "units": 10000
-    },
-    {
-      "taskID": 60,
-      "taskUniqueID": 37,
-      "taskName": "Set Lintels, Bolts, Cap Block",
-      "resourceID": 16,
-      "resourceUniqueID": 26,
-      "resourceName": "Block Masonry Subcontractor",
-      "units": 10000
-    },
-    {
-      "taskID": 61,
-      "taskUniqueID": 39,
-      "taskName": "Lumber Delivery",
-      "resourceID": 18,
-      "resourceUniqueID": 28,
-      "resourceName": "Lumber Supplier",
-      "units": 10000
-    },
-    {
-      "taskID": 62,
-      "taskUniqueID": 38,
-      "taskName": "Waterproofing and Drain Tile",
-      "resourceID": 19,
-      "resourceUniqueID": 29,
-      "resourceName": "Waterproofing Subcontractor",
-      "units": 10000
+      "taskUniqueID": 101912,
+      "taskName": "Start Milestone WBS 5",
+      "resourceID": 1,
+      "resourceUniqueID": 1,
+      "resourceName": "Unassigned",
+      "units": 100
     }
   ]
 }
