@@ -89,3 +89,19 @@ input[type="date"] {
 .download-button:hover {
   background-color: #73d13d;
 }
+
+.download-button.pbit-button {
+  background-color: #52c41a;
+}
+
+.download-button.pbit-button:hover {
+  background-color: #73d13d;
+}
+
+.download-button.csv-button {
+  background-color: #722ed1;
+}
+
+.download-button.csv-button:hover {
+  background-color: #9254de;
+}

@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './FileUploader.css';
 
-// Get the API URL from the runtime configuration
-const API_BASE_URL = window.MPP_CONFIG ? window.MPP_CONFIG.API_URL : window.location.origin;
-
-console.log('FileUploader using API_BASE_URL:', API_BASE_URL);
-
+// Use window.location.origin to dynamically get the host
+//const API_BASE_URL = process.env.REACT_APP_API_URL || window.location.origin;
+const API_BASE_URL = 'http://localhost:3001';
 const FileUploader = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [startDate, setStartDate] = useState('');
   const [pbitFile, setPbitFile] = useState(null);
+  const [csvFile, setCsvFile] = useState(null);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -43,14 +42,13 @@ const FileUploader = ({ onFileUpload }) => {
     setLoading(true);
     setError('');
     setPbitFile(null);
+    setCsvFile(null);
 
     try {
       const formData = new FormData();
       formData.append('projectFile', file);
       formData.append('startDate', startDate);
 
-      console.log(`Submitting to API URL: ${API_BASE_URL}/api/parse`);
-      
       const response = await fetch(`${API_BASE_URL}/api/parse`, {
         method: 'POST',
         body: formData,
@@ -61,47 +59,20 @@ const FileUploader = ({ onFileUpload }) => {
       }
 
       const data = await response.json();
-      console.log('Raw API response:', JSON.stringify(data));
+      onFileUpload(data);
       
-      // For debugging - log the data structure before passing it up
-      console.log('API response structure:', {
-        hasProjectData: !!data.projectData,
-        hasTasks: !!(data.tasks || (data.projectData && data.projectData.tasks)),
-        hasData: !!data.data,
-        topLevelKeys: Object.keys(data)
-      });
-      
-      // Handle Docker behavior: If we receive a success message but no project data
-      if (data.message && data.message.includes("successfully") && !data.tasks && !data.projectData) {
-        console.log('Received success message without data - getting data from project-data.json');
-        try {
-          // Make a second request to fetch the project data JSON file
-          const dataResponse = await fetch(`${API_BASE_URL}/api/data`, {
-            method: 'GET',
-          });
-          
-          if (!dataResponse.ok) {
-            throw new Error('Failed to fetch project data');
-          }
-          
-          const projectData = await dataResponse.json();
-          console.log('Retrieved project data from secondary request:', projectData);
-          onFileUpload(projectData);
-        } catch (fetchError) {
-          console.error('Error fetching project data:', fetchError);
-          // If secondary request fails, still pass through the original data
-          onFileUpload(data);
+      // Extract filenames from paths
+      if (data.files) {
+        if (data.files.pbit) {
+          const pbitPath = data.files.pbit;
+          const pbitFilename = pbitPath.split('\\').pop().split('/').pop();
+          setPbitFile(pbitFilename);
         }
-      } else {
-        // Normal case - API returned the data directly
-        onFileUpload(data);
-      }
-      
-      // Extract PBIT filename from path
-      if (data.files && data.files.pbit) {
-        const pbitPath = data.files.pbit;
-        const pbitFilename = pbitPath.split('\\').pop();
-        setPbitFile(pbitFilename);
+        if (data.files.csv) {
+          const csvPath = data.files.csv;
+          const csvFilename = csvPath.split('\\').pop().split('/').pop();
+          setCsvFile(csvFilename);
+        }
       }
     } catch (err) {
       setError(`Error uploading file: ${err.message}`);
@@ -110,16 +81,10 @@ const FileUploader = ({ onFileUpload }) => {
     }
   };
 
-  const handleDownload = async () => {
-    if (!pbitFile) return;
+  const handleDownload = async (filename) => {
+    if (!filename) return;
     
     try {
-      // Extract filename from the full path
-      const filename = pbitFile.split('/').pop();
-      if (!filename) {
-        throw new Error('Could not extract filename from path');
-      }
-      // Use only the filename in the download URL
       const response = await fetch(`${API_BASE_URL}/api/download/${filename}`, {
         method: 'GET',
         headers: {
@@ -131,14 +96,11 @@ const FileUploader = ({ onFileUpload }) => {
         throw new Error('Download failed');
       }
 
-      // Create a blob from the response
       const blob = await response.blob();
-      
-      // Create a download link and click it
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = pbitFile;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -180,8 +142,22 @@ const FileUploader = ({ onFileUpload }) => {
         </button>
 
         {pbitFile && (
-          <button type="button" className="download-button" onClick={handleDownload}>
+          <button 
+            type="button" 
+            className="download-button pbit-button" 
+            onClick={() => handleDownload(pbitFile)}
+          >
             Download PBIT File
+          </button>
+        )}
+
+        {csvFile && (
+          <button 
+            type="button" 
+            className="download-button csv-button" 
+            onClick={() => handleDownload(csvFile)}
+          >
+            Download CSV File
           </button>
         )}
       </form>

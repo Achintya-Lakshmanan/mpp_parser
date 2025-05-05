@@ -53,10 +53,6 @@ try {
   logger.error('Failed to load configuration:', err);
 }
 
-// Add body parser middlewares
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
 const port = process.env.PORT || config.port || 3001;
 
 // Directories derived from configuration (fallbacks included)
@@ -135,28 +131,10 @@ app.use(cors({
     }
     
     // In development, allow localhost and replit domains
-    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://replit.com', 'https://sp.replit.com'];
-    
-    // Add Azure domains
-    const azureDomains = [
-      'https://lmtmpp-parserapp.azurewebsites.net',
-      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net',
-      'https://lmtmpp-parserapp-hqhtcpfghvavgfed.centralus-01.azurewebsites.net:443'
-    ];
-    
-    const allAllowedOrigins = [...allowedOrigins, ...azureDomains];
-    
-    if (!origin) {
-      // Allow requests with no origin (like mobile apps, curl requests, etc)
-      callback(null, true);
-    } else if (allAllowedOrigins.indexOf(origin) !== -1) {
-      // Allow specific origins
-      callback(null, true);
-    } else if (origin.endsWith('.azurewebsites.net')) {
-      // Allow any Azure websites domain
+    const allowedOrigins = ['http://localhost:3000', 'https://replit.com', 'https://sp.replit.com'];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      // Block other origins
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -165,57 +143,10 @@ app.use(cors({
   credentials: true // Allow cookies and credentials to be sent
 }));
 
-// Serve static files from the React build directory
-const staticFilesPath = path.join(__dirname, '..', 'build');
-logger.info(`Serving static files from: ${staticFilesPath}`);
-app.use(express.static(staticFilesPath));
-
 // Health-check endpoint
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
-// Add endpoint to fetch project data JSON
-app.get('/api/data', (req, res) => {
-  try {
-    // Path to the project data file
-    const dataFile = path.join(__dirname, '..', 'generator', 'project-data.json');
-    
-    // Check if file exists
-    if (!fs.existsSync(dataFile)) {
-      logger.error(`Project data file not found at: ${dataFile}`);
-      return res.status(404).json({ error: 'Project data file not found' });
-    }
-    
-    // Read and parse the file
-    const projectData = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-    logger.info('Successfully served project-data.json');
-    
-    // Send the data
-    res.json(projectData);
-  } catch (err) {
-    logger.error(`Error serving project data: ${err.message}`);
-    res.status(500).json({ error: 'Failed to read project data' });
-  }
-});
-
-//test api/parse
-//START
-app.get('/api/parse', (req, res) => {
-  const inputData = req.body;
-
-  console.log('Received data for parsing:', inputData);
-
-  // Dummy response — replace with real logic later
-  const result = {
-    success: true,
-    message: 'Data parsed successfully.',
-    parsedData: inputData
-  };
-
-  res.json(result);
-});
-
-//END
 
 // Configure multer for MPP/MPX uploads (legacy)
 const storage = multer.diskStorage({
@@ -790,7 +721,7 @@ function formatValidationErrors(errors) {
 }
 
 // API endpoint to parse project file
-app.post('/api/parse', upload.single('projectFile'), async (req, res, next) => {
+app.post('/api/parse', upload.single('projectFile'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -829,18 +760,255 @@ app.post('/api/parse', upload.single('projectFile'), async (req, res, next) => {
     const outputDir = path.join(__dirname, '..', 'generator');
     await fs.promises.mkdir(outputDir, { recursive: true });
 
+    // Generate CSV data
+    const csvRows = [];
+    csvRows.push(['L0', 'Earliest start', 'Earliest finish', 'Assigned To']);
+
+    // Group tasks by outline level
+    const tasksByLevel = {};
+    projectData.tasks.forEach(task => {
+      const level = task.outlineLevel || 0;
+      if (!tasksByLevel[level]) {
+        tasksByLevel[level] = [];
+      }
+      tasksByLevel[level].push(task);
+    });
+
+    // Find assignments for each task
+    const taskAssignments = {};
+    projectData.assignments.forEach(assignment => {
+      const taskId = assignment.taskID;
+      if (!taskAssignments[taskId]) {
+        taskAssignments[taskId] = [];
+      }
+      taskAssignments[taskId].push(assignment);
+    });
+
+    // Helper function to format date
+    const formatDate = (dateStr) => {
+      if (!dateStr) return '';
+      const date = new Date(dateStr);
+      // Format as MM/DD/YYYY
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric',
+        month: '2-digit', 
+        day: '2-digit'
+      });
+    };
+
+    // Add tasks to CSV data
+    Object.keys(tasksByLevel).forEach(level => {
+      tasksByLevel[level].forEach(task => {
+        const assignments = taskAssignments[task.id] || [];
+        const assignedTo = assignments.map(a => {
+          const resource = projectData.resources.find(r => r.id === a.resourceID);
+          return resource ? resource.name : 'Unassigned';
+        }).join(', ') || 'Unassigned';
+
+        csvRows.push([
+          task.name,
+          formatDate(task.start),
+          formatDate(task.finish),
+          assignedTo
+        ]);
+      });
+    });
+
+    // Save CSV file
+    const csvPath = path.join(outputDir, `${fileName}_${timestamp}.csv`);
+    const csvContent = csvRows.map(row => row.join(',')).join('\n');
+    await fs.promises.writeFile(csvPath, csvContent, 'utf-8');
+    logger.info(`Generated CSV file at ${csvPath}`);
+
     // Save JSON (for reference/debugging)
     const jsonPath = path.join(outputDir, 'project-data.json');
     await fs.promises.writeFile(jsonPath, JSON.stringify(projectData, null, 2), 'utf-8');
     logger.info(`Saved project data JSON to ${jsonPath}`);
 
-    res.status(200).json({ message: 'Project data parsed and saved successfully' });
-  } catch (err) {
-    logger.error('Error parsing project file:', err);
-    res.status(500).json({ error: 'Failed to parse project file' });
+    // Generate PBIT directly and create rezipped version
+    const pbitPath = path.join(outputDir, `${fileName}_${timestamp}.pbit`);
+    await generatePbit(projectData, pbitPath);
+    logger.info(`Generated PBIT file at ${pbitPath}`);
+
+    // Wait for rezipped file to be created
+    const rezippedPath = pbitPath.replace('.pbit', '_rezipped.pbit');
+    logger.info(`Expected rezipped file at ${rezippedPath}`);
+
+    // Give a small delay to ensure file is ready
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    if (!fs.existsSync(rezippedPath)) {
+      throw new Error('Rezipped file was not created successfully');
+    }
+
+    // Clean up the uploaded file
+    fs.unlinkSync(req.file.path);
+
+    // Return both JSON and rezipped PBIT paths to the client
+    res.json({
+      message: 'Project file processed successfully',
+      projectData,
+      files: {
+        json: jsonPath,
+        pbit: rezippedPath,
+        csv: csvPath
+      }
+    });
+  } catch (error) {
+    logger.error('Error processing file:', error);
+    res.status(500).json({
+      error: error.publicMessage || 'Internal Server Error',
+      details: process.env.NODE_ENV === 'prod' ? undefined : error.message,
+    });
   }
 });
 
+// Endpoint to upload and validate project JSON directly
+app.post('/api/upload-json', jsonUpload.single('jsonFile'), async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No JSON file uploaded' });
+    }
+
+    // Read and parse uploaded JSON
+    let projectData;
+    try {
+      const fileContent = await fs.promises.readFile(req.file.path, 'utf-8');
+      projectData = JSON.parse(fileContent);
+    } catch (parseErr) {
+      logger.error('Failed to parse uploaded JSON:', parseErr);
+      return res.status(400).json({ error: 'Invalid JSON file' });
+    }
+
+    // Validate against schema if available
+    if (validateProject) {
+      const valid = validateProject(projectData);
+      if (!valid) {
+        logger.warn('Uploaded JSON failed schema validation');
+        return res.status(400).json({
+          error: 'JSON validation failed',
+          details: formatValidationErrors(validateProject.errors || []),
+        });
+      }
+    }
+
+    // Save validated JSON for generator usage
+    const generatorDir = path.join(__dirname, '..', GENERATOR_DIR_REL);
+    await fs.promises.mkdir(generatorDir, { recursive: true });
+    const outputPath = path.join(generatorDir, 'project-data.json');
+    await fs.promises.writeFile(outputPath, JSON.stringify(projectData, null, 2), 'utf-8');
+    logger.info(`Saved validated JSON to ${outputPath}`);
+
+    // Clean up temp upload
+    fs.unlinkSync(req.file.path);
+
+    res.json({ message: 'JSON uploaded and validated successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Add endpoint to download files
+app.get('/api/download/:filename', (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const generatorDir = path.join(__dirname, '..', 'generator');
+    const filePath = path.join(generatorDir, filename);
+
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+
+    // Set Content-Disposition to attachment to trigger download
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+    res.setHeader('Content-Type', 'application/octet-stream');
+
+    // Stream the file
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+  } catch (error) {
+    logger.error('Error downloading file:', error);
+    res.status(500).json({ error: 'Error downloading file' });
+  }
+});
+
+// Add mock mode env support
+const MOCK_MODE = process.env.MOCK_MODE === 'true';
+const delay = require('../mock/delay');
+const mockDelayMs = parseInt(process.env.MOCK_DELAY_MS || '0', 10);
+
+// Quick route to retrieve mock scenario list
+if (MOCK_MODE) {
+  // eslint-disable-next-line global-require
+  const { listScenarios, loadMock } = require('../mock/mockLoader');
+
+  app.get('/api/mock-scenarios', (req, res) => {
+    res.json({ scenarios: listScenarios() });
+  });
+
+  app.get('/api/mock/:name', async (req, res) => {
+    try {
+      const data = loadMock(req.params.name);
+      if (mockDelayMs) await delay(mockDelayMs);
+      res.json(data);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+  });
+}
+
+// If running in Replit, also serve static files from the build directory
+if (process.env.REPL_ID) {
+  const buildPath = path.join(__dirname, '..', '..', 'build');
+  
+  // Check if the build directory exists
+  if (fs.existsSync(buildPath)) {
+    logger.info(`Serving static files from ${buildPath}`);
+    
+    // Serve static files
+    app.use(express.static(buildPath));
+    
+    // Serve index.html for all routes except /api
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api/')) {
+        return next();
+      }
+      res.sendFile(path.join(buildPath, 'index.html'));
+    });
+  } else {
+    logger.warn(`Build directory ${buildPath} not found. Static files won't be served.`);
+  }
+}
+
+// --- Global error handler ---
+// Must be after all other middlewares/routes
+/* eslint-disable no-unused-vars */
+app.use((err, req, res, _next) => {
+  // Handle Multer-specific errors first
+  if (err.name === 'MulterError') {
+    logger.warn('Multer upload error:', err);
+    let msg = err.message;
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      msg = `File exceeds limit of ${MAX_JSON_SIZE / (1024 * 1024)} MB`;
+    }
+    return res.status(400).json({ error: msg });
+  }
+
+  logger.error('Unhandled error:', err);
+  res.status(err.status || 500).json({
+    error: err.publicMessage || 'Internal Server Error',
+    details: process.env.NODE_ENV === 'prod' ? undefined : err.message,
+  });
+});
+/* eslint-enable no-unused-vars */
+
+// 404 handler for any unmatched route
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
+
+// Start the server
 app.listen(port, () => {
-  logger.info(`Server is running on port ${port}`);
+  logger.info(`Server running on port ${port}`);
 });
