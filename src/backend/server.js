@@ -13,6 +13,8 @@ const winston = require('winston');
 const Ajv = require('ajv');
 
 
+
+
 // Logger setup
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
@@ -37,6 +39,9 @@ logger.log = function(message, ...args) {
 };
 
 const app = express();
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Load environment-specific configuration
 const ENV = process.env.NODE_ENV || 'dev';
