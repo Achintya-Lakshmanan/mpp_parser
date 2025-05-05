@@ -4,7 +4,7 @@
   "description": "Microsoft Project Parser that converts MPP files to PBIT",
   "main": "src/backend/server.js",
   "scripts": {
-    "startold": "bash run.sh",
+    "start": "bash run.sh",
     "build": "npm run build:frontend",
     "build:frontend": "cd src && npm run build",
     "server": "node src/backend/server.js",

@@ -204,7 +204,8 @@ else
   
   echo "Running in local development mode"
   echo "Starting backend server on port $BACKEND_PORT..."
-  PORT=$BACKEND_PORT node src/backend/server.js &
+ # PORT=$BACKEND_PORT node src/backend/server.js &
+  node src/backend/server.js &
   BACKEND_PID=$!
   
   # Wait for backend to start

@@ -1,6 +1,5 @@
 # Stage 1: Dependencies and Build
-FROM node:18-alpine AS builder
-
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Add build arguments for API URL and build date for cache invalidation
@@ -173,4 +172,3 @@ ENV BACKEND_URL=http://localhost:3001
 
 # Define the command to run the unified server
 CMD ["node", "server.js"]
-

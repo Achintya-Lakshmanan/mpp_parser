@@ -5,38 +5,69 @@ trigger:
 
 stages:
   - stage: Build
-    displayName: 'Build and push stage'
+    displayName: 'Build and Zip'
     jobs:
       - job: Build
-        displayName: 'Build and Push'
+        displayName: 'Install, Build, Zip'
         pool:
           vmImage: 'ubuntu-latest'
+
         steps:
-          # Add explicit cleanup step to ensure fresh build
-          - script: |
-              git clean -xdf
-            displayName: 'Clean workspace'
-            
-          - task: Docker@2
-            displayName: Build and Push
+          - task: NodeTool@0
             inputs:
-              command: buildAndPush
-              repository: 'lmtmpp-parserapp'
-              dockerfile: 'Dockerfile'
-              containerRegistry: 'turingACR'
-              tags: latest
-              arguments: '--no-cache --build-arg REACT_APP_API_URL=/api --build-arg BUILD_DATE=$(date +%s) --build-arg NODE_ENV=production'
-              
+              versionSpec: '20.10.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              npm ci            
+              npm run build     
+            displayName: 'Install Dependencies and Build'
+
+          - script: |
+              mkdir -p deploy              
+              cp -r src deploy/src
+              cp run.sh deploy/run.sh 
+              cp setup-env.sh deploy/setup-env.sh
+              cp server.js deploy/server.js  
+              cp package.json package-lock.json deploy/  
+            displayName: 'Prepare Deployment Folder'
+
+          - script: |
+              cd deploy 
+              chmod +x run.sh              
+              npm install         
+            displayName: 'Install Dependencies in Deploy Folder and Start App'
+
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'deploy'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+              replaceExistingArchive: true
+            displayName: 'Create zip package'
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/app.zip'
+              ArtifactName: 'drop'
+            displayName: 'Publish Artifact'
+
   - stage: Deploy
-    displayName: 'Deploy to App Service'
+    displayName: 'Deploy to Azure App Service'
+    dependsOn: Build
     jobs:
-    - job: Deploy
-      displayName: Deploy to App Service
-      steps:
-      - task: AzureWebAppContainer@1
-        inputs:
-         ConnectionType: 'AzureRM'
-         azureSubscription: 'LMT-PRODUCTS'   
-         AppName: 'lmtmpp-parserapp'
-         containers: 'turing.azurecr.io/lmtmpp-parserapp:latest'
- 
+      - job: Deploy
+        pool:
+          vmImage: 'ubuntu-latest'
+
+        steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'LMT-PRODUCTS'
+              appType: 'webAppLinux'
+              appName: 'lmtmpp-parserapp'
+              package: '$(Pipeline.Workspace)/drop/app.zip'
