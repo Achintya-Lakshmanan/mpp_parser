@@ -147,6 +147,48 @@ app.use(cors({
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
+// Add endpoint to fetch project data JSON
+app.get('/api/data', (req, res) => {
+  try {
+    // Path to the project data file
+    const dataFile = path.join(__dirname, '..', 'generator', 'project-data.json');
+    
+    // Check if file exists
+    if (!fs.existsSync(dataFile)) {
+      logger.error(`Project data file not found at: ${dataFile}`);
+      return res.status(404).json({ error: 'Project data file not found' });
+    }
+    
+    // Read and parse the file
+    const projectData = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+    logger.info('Successfully served project-data.json');
+    
+    // Send the data
+    res.json(projectData);
+  } catch (err) {
+    logger.error(`Error serving project data: ${err.message}`);
+    res.status(500).json({ error: 'Failed to read project data' });
+  }
+});
+
+//test api/parse
+//START
+app.get('/api/parse', (req, res) => {
+  const inputData = req.body;
+
+  console.log('Received data for parsing:', inputData);
+
+  // Dummy response — replace with real logic later
+  const result = {
+    success: true,
+    message: 'Data parsed successfully.',
+    parsedData: inputData
+  };
+
+  res.json(result);
+});
+
+//END
 
 // Configure multer for MPP/MPX uploads (legacy)
 const storage = multer.diskStorage({
