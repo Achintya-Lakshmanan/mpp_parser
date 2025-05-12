@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -31,7 +32,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'window.env': JSON.stringify({
+        API_URL: process.env.API_URL || null
+      })
+    })
   ],
   devServer: {
     historyApiFallback: true,

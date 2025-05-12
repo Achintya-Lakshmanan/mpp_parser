@@ -201,20 +201,14 @@ app.get('/api/data', (req, res) => {
 //test api/parse
 //START
 app.get('/api/parse', (req, res) => {
-  const inputData = req.body;
-
-  console.log('Received data for parsing:', inputData);
-
-  // Dummy response — replace with real logic later
-  const result = {
-    success: true,
-    message: 'Data parsed successfully.',
-    parsedData: inputData
-  };
-
-  res.json(result);
+  // This endpoint is for checking if the parse API is available
+  // It doesn't process files - use POST /api/parse for file processing
+  res.json({
+    status: 'ok',
+    message: 'Parse API is available. Use POST method with projectFile and startDate to parse project files.',
+    supportedFormats: ['.mpp', '.mpx', '.mpt', '.xer']
+  });
 });
-
 //END
 
 // Configure multer for MPP/MPX uploads (legacy)
